@@ -132,7 +132,7 @@
   .orn { display: inline-block; color: var(--terracotta); }
 
   /* ===========================================================
-     Header — flat black mockup bar (intentionally minimal)
+     Header — flat black mockup bar with a small back link
      =========================================================== */
   header.site {
     position: sticky;
@@ -140,7 +140,23 @@
     z-index: 50;
     background: #000;
     height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--gutter);
   }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.7);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: color .25s, gap .25s var(--ease-out);
+    padding: 8px 0;
+  }
+  .back-link:hover { color: var(--paper); gap: 14px; }
+  .back-link .arrow { transition: transform .25s var(--ease-out); }
+  .back-link:hover .arrow { transform: translateX(-3px); }
 
   /* ===========================================================
      Hero — full-bleed earthen-wall.webp
@@ -1331,8 +1347,10 @@
 </head>
 <body>
 
-<!-- ========== HEADER (flat black mockup bar) ========== -->
-<header class="site" aria-hidden="true"></header>
+<!-- ========== HEADER — flat black bar with back link ========== -->
+<header class="site">
+  <a class="back-link" href="../"><span class="arrow">←</span> Experiences</a>
+</header>
 
 <!-- ========== FLOATING BOOKING CARD (desktop only) ========== -->
 <aside class="float-book" id="float-book" aria-label="Reserve next session">
