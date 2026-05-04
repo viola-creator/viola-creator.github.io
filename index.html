@@ -92,16 +92,36 @@ header.site {
   height: 48px;
 }
 
-/* ----- Compact intro ------------------------------------------------------- */
+/* ----- Compact intro (with shrine backdrop) -------------------------------- */
 .intro {
-  padding: clamp(56px, 7vw, 96px) 0 clamp(40px, 5vw, 64px);
-  border-bottom: 1px solid var(--rule);
+  position: relative;
+  padding: clamp(64px, 8vw, 120px) 0 clamp(56px, 7vw, 90px);
+  overflow: hidden;
+  color: var(--paper);
+  isolation: isolate;
+}
+.intro__bg {
+  position: absolute; inset: 0; z-index: -2;
+  background: url('images/intro-shrine.jpg') center center / cover no-repeat;
+  transform: scale(1.04);
+  animation: kenburns-intro 26s ease-in-out infinite alternate;
+}
+@keyframes kenburns-intro {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  100% { transform: scale(1.10) translate(-1%, -1%); }
+}
+.intro::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(20,16,12,0.55) 0%, rgba(20,16,12,0.35) 40%, rgba(20,16,12,0.78) 100%),
+    linear-gradient(0deg, rgba(20,16,12,0.18), rgba(20,16,12,0.18));
 }
 .intro__inner {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(32px, 5vw, 80px);
   align-items: end;
+  position: relative;
 }
 .intro__title h1 {
   font-size: clamp(28px, 3.6vw, 44px);
@@ -110,24 +130,28 @@ header.site {
   line-height: 1.15;
   margin: 0;
   max-width: 16ch;
+  color: var(--paper);
 }
 .intro__title h1 em { font-style: italic; }
-.intro__title .eyebrow { display: block; margin-bottom: 14px; }
+.intro__title .eyebrow { display: block; margin-bottom: 14px; color: var(--terracotta-soft); }
 .intro__copy {
   font-size: 15px;
   line-height: 1.75;
-  color: var(--ink-soft);
+  color: rgba(255,255,255,0.82);
   max-width: 56ch;
 }
 .intro__copy .kanji {
   font-family: var(--serif);
   font-style: normal;
-  color: var(--terracotta);
+  color: var(--terracotta-soft);
   font-size: 1.15em;
   margin-right: 6px;
   letter-spacing: 0.04em;
 }
-.intro__copy em { font-style: italic; color: var(--ink); }
+.intro__copy em { font-style: italic; color: var(--paper); }
+@media (prefers-reduced-motion: reduce) {
+  .intro__bg { animation: none; transform: scale(1.02); }
+}
 @media (max-width: 800px) {
   .intro__inner { grid-template-columns: 1fr; gap: 24px; align-items: start; }
   .intro__title h1 { max-width: none; }
@@ -439,8 +463,9 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
 <!-- ========== HEADER (flat black mockup bar) ========== -->
 <header class="site" aria-hidden="true"></header>
 
-<!-- ========== COMPACT INTRO ========== -->
+<!-- ========== COMPACT INTRO (with shrine backdrop) ========== -->
 <section class="intro">
+  <div class="intro__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="intro__inner">
       <div class="intro__title">
