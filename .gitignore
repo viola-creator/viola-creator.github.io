@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Local QA / preview screenshots — not part of the deployed site
+_previews/
+
+# Editor / OS clutter
+.idea/
+.vscode/
+*.swp
+*~
+Thumbs.db
+
+# Node (in case anything gets added later)
+node_modules/
