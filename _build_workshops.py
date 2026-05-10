@@ -13,10 +13,35 @@ SHARED_FACT_2 = (
     'Yours the same day',
     'You take it home the same afternoon — wrapped for travel, no fragile fuss.'
 )
+
 SHARED_FACT_3 = (
     'A piece of the season',
     'Handmade with seasonal Kyoto materials — one of a kind, made by you.'
 )
+
+# All 6 workshop cards used by the "Other experiences" grid. Each page
+# excludes its own slug from the grid.
+EXPERIENCES_CARDS = [
+    {'slug':'earthen-wall',     'title':'Earthen Wall',         'venue':'Maana Atelier',     'img':'showcase-earthen-wall.jpg',         'href':'../earthen-wall/'},
+    {'slug':'tea-dye',          'title':'Tea Dye',              'venue':'Maana Atelier',     'img':'showcase-tea-dye.jpg',              'href':'../tea-dye/'},
+    {'slug':'botanical-teas',   'title':'Botanical Teas',       'venue':'Maana Atelier',     'img':'showcase-botanical-tea.jpg',        'href':'../botanical-teas/'},
+    {'slug':'koji-fermentation','title':'Fermentation',         'venue':'Maana Atelier',     'img':'showcase-koji-fermentation.jpg',    'href':'../koji-fermentation/'},
+    {'slug':'morning-tea',      'title':'Morning Tea Ceremony', 'venue':'Private Tea House', 'img':'showcase-tea-ceremony-morning.jpg', 'href':'../morning-tea/'},
+    {'slug':'night-tea',        'title':'Night Tea Ceremony',   'venue':'Private Tea House', 'img':'showcase-tea-ceremony-night.jpg',   'href':'../night-tea/'},
+]
+
+def build_experiences_grid(current_slug):
+    """Return the HTML for the 5-card other-experiences grid, excluding current_slug."""
+    cards = []
+    for c in EXPERIENCES_CARDS:
+        if c['slug'] == current_slug: continue
+        cards.append(f"""      <a class="exp-card" href="{c['href']}">
+        <div class="photo"><img src="../_partials/images/{c['img']}" alt="" loading="lazy"/></div>
+        <div class="venue">{c['venue']}</div>
+        <div class="title">{c['title']}</div>
+      </a>""")
+    return '\n'.join(cards)
+
 
 WORKSHOPS = {
 'tea-dye': {
@@ -152,7 +177,7 @@ WORKSHOPS = {
     'title':   'Morning Tea Ceremony & Breakfast',
     'desc':    'Asa-chaji at a private Kyoto tea house. Tea Master Eriko Okubo invites you to a Zen-monk breakfast and a morning tea ceremony.',
     'h1':      'Morning Tea Ceremony<br/>&amp; Breakfast.',
-    'hero_eyebrow':'Private Tea House · Ceremony',
+    'hero_eyebrow':'Private Tea House · Excursion',
     'lede':    'Start the morning at a private tea house with a traditional tea ceremony and a Zen-monk\'s breakfast.',
     'duration':'1.5 hours', 'capacity':'Up to 6', 'price':'¥42,000',
     'price_note':'Tax included',
@@ -192,7 +217,7 @@ WORKSHOPS = {
     'title':   'Night Tea Ceremony & Dinner',
     'desc':    'A summer evening at Hekishoken — tea ceremony by candlelight followed by a seasonal multi-course meal.',
     'h1':      'Night Tea Ceremony<br/>&amp; Dinner.',
-    'hero_eyebrow':'Private Tea House · Seasonal',
+    'hero_eyebrow':'Private Tea House · Excursion',
     'lede':    'Spend a summer evening at a private tea house with a candlelit tea ceremony and a seasonal meal.',
     'duration':'2 hours', 'capacity':'Up to 6', 'price':'¥47,500',
     'price_note':'Tax included',
@@ -467,6 +492,28 @@ def build(slug, data):
     if 'sessions_h2' in data:
         html = html.replace('<h2>Earthen Wall sessions.</h2>',
                             f'<h2>{data["sessions_h2"]}</h2>')
+
+
+    # Replace the experiences grid with per-workshop cards (excludes current slug)
+    grid_html = build_experiences_grid(slug)
+    html = re.sub(
+        r'<div class="exp-grid">.*?</div>\s*</div>\s*</section>',
+        f'<div class="exp-grid">\n{grid_html}\n    </div>\n  </div>\n</section>',
+        html, count=1, flags=re.DOTALL
+    )
+
+    # Voices section: change h2 to "What people say" — or remove entire section for night-tea
+    if slug == 'night-tea':
+        html = re.sub(
+            r'<!-- ========== GUEST VOICES.*?</section>\s*',
+            '',
+            html, count=1, flags=re.DOTALL
+        )
+    else:
+        html = html.replace(
+            '<h2><em>What people carry home</em></h2>',
+            '<h2><em>What people say</em></h2>'
+        )
 
     # Write the file
     out_dir = os.path.join(ROOT, slug)
