@@ -117,19 +117,16 @@ header.site {
     linear-gradient(0deg, rgba(20,16,12,0.18), rgba(20,16,12,0.18));
 }
 .intro__inner {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: end;
   position: relative;
+  max-width: 720px;
 }
 .intro__title h1 {
-  font-size: clamp(28px, 3.6vw, 44px);
+  font-size: clamp(32px, 4.4vw, 56px);
   font-weight: 300;
   font-style: italic;
   line-height: 1.15;
   margin: 0;
-  max-width: 16ch;
+  max-width: 18ch;
   color: var(--paper);
 }
 .intro__title h1 em { font-style: italic; }
@@ -229,11 +226,11 @@ header.site {
 .feature__title .jp {
   display: block;
   font-style: normal;
-  font-size: 0.55em;
-  color: var(--terracotta-soft);
-  letter-spacing: 0.06em;
-  margin-top: 8px;
-  font-weight: 400;
+  font-size: 0.4em;
+  color: rgba(216,166,121,0.7);
+  letter-spacing: 0.22em;
+  margin-top: 14px;
+  font-weight: 300;
 }
 .feature__desc {
   color: rgba(255,255,255,0.78);
@@ -423,6 +420,193 @@ header.site {
 }
 .coming__inner p a:hover { color: var(--terracotta); border-color: var(--terracotta); }
 
+/* ----- Locations map ------------------------------------------------------- */
+.locations {
+  padding: clamp(72px, 9vw, 120px) 0;
+  background: var(--cream);
+  border-top: 1px solid var(--rule);
+}
+.locations__head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto clamp(40px, 5vw, 60px);
+}
+.locations__head .eyebrow { display: block; margin-bottom: 14px; }
+.locations__head h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 0 14px;
+}
+.locations__head p { color: var(--ink-soft); font-size: 16px; line-height: 1.7; margin: 0; }
+
+/* Google Maps embed wrapper — keeps the map within the editorial frame
+   and applies a subtle warm filter so the saturated Google palette
+   doesn't clash with the cream/ink page. */
+.map-frame {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+  aspect-ratio: 16/9;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--cream-deep);
+}
+/* Shift the iframe up to fully mask the black header band that My Maps
+   adds (title + creator name). The bottom Google attribution remains
+   visible — that's required and should not be hidden. */
+.map-frame iframe {
+  position: absolute;
+  top: -76px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 76px);
+  border: 0;
+  filter: saturate(0.78) contrast(0.95);
+}
+
+/* Legend grid */
+.locations__legend {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.loc {
+  background: var(--paper);
+  padding: 22px 24px;
+  display: flex; gap: 16px;
+  align-items: flex-start;
+  transition: background .2s;
+}
+.loc:hover { background: var(--cream); }
+.loc.is-active { background: var(--cream); box-shadow: inset 3px 0 0 var(--terracotta); }
+.loc.is-active .loc__cat { color: var(--terracotta); }
+.loc__icon {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper);
+  color: var(--ink);
+}
+.loc__icon svg { width: 18px; height: 18px; }
+.loc__body { min-width: 0; flex: 1; }
+.loc__cat {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 4px;
+}
+.loc__name {
+  font-family: var(--serif);
+  font-size: 18px;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+.loc__addr {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0 0 6px;
+}
+.loc__link {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink-mute);
+  padding-bottom: 1px;
+  transition: color .2s, border-color .2s;
+}
+.loc__link:hover { color: var(--terracotta); border-color: var(--terracotta); }
+/* Two link labels — desktop says "View on map" (focuses embedded map),
+   mobile says "Open in Maps" (deep-links to native Google Maps app). */
+.loc__link-mobile { display: none; }
+@media (max-width: 700px) {
+  .loc__link-desktop { display: none; }
+  .loc__link-mobile { display: inline; }
+  /* Embedded map is too small to be useful on mobile — hide it entirely.
+     Cards become the primary interaction, each one deep-linking to the
+     user's native Maps app. */
+  .map-frame { display: none; }
+  .locations__head { margin-bottom: 28px; }
+  /* Make cards a bit roomier on mobile */
+  .loc { padding: 24px 22px; }
+  .loc__name { font-size: 22px; margin-bottom: 6px; }
+  .loc__addr { font-size: 13px; line-height: 1.55; }
+  .loc__link { font-size: 13px; padding-bottom: 2px; }
+}
+@media (max-width: 900px) { .locations__legend { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .locations__legend { grid-template-columns: 1fr; } }
+
+/* ----- Atelier / Nishijin section ------------------------------------------ */
+.atelier {
+  padding: clamp(72px, 9vw, 120px) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+.atelier__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+}
+.atelier__media {
+  aspect-ratio: 4/5;
+  background: url('images/atelier.jpg') center/cover no-repeat;
+  border-radius: 2px;
+  min-height: 380px;
+}
+.atelier__copy { max-width: 56ch; }
+.atelier__copy .eyebrow { display: block; margin-bottom: 14px; }
+.atelier__copy h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-style: italic;
+  font-weight: 300;
+  margin: 0 0 22px;
+}
+.atelier__copy p {
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0 0 1em;
+}
+.atelier__copy p:last-of-type { margin-bottom: 0; }
+.atelier__copy p em { font-style: italic; color: var(--ink); }
+.atelier__meta {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px 22px;
+  font-size: 13px;
+}
+.atelier__meta dt {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.atelier__meta dd {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+}
+@media (max-width: 800px) {
+  .atelier__grid { grid-template-columns: 1fr; gap: 32px; }
+  .atelier__media { aspect-ratio: 4/3; min-height: 0; order: -1; }
+}
+
 /* ----- Closing ------------------------------------------------------------- */
 .closing {
   background: var(--ink);
@@ -463,19 +647,6 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
 <!-- ========== HEADER (flat black mockup bar) ========== -->
 <header class="site" aria-hidden="true"></header>
 
-<!-- ========== COMPACT INTRO (with shrine backdrop) ========== -->
-<section class="intro">
-  <div class="intro__bg" aria-hidden="true"></div>
-  <div class="container">
-    <div class="intro__inner">
-      <div class="intro__title">
-        <span class="eyebrow">Experiences · 体験</span>
-        <h1><em>A journey to unlock Japan's heritage wisdom</em></h1>
-      </div>
-      <p class="intro__copy"><span class="kanji">衣食住</span><em>Textile · food · home</em> — these pillars of living have evolved into beautiful expressions of Japanese culture. At Maana Experiences, we open a path to unveil the layers and beauty of Japan's ancient wisdom — the secret to a life lived well.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ========== SEASONAL FEATURE ========== -->
 <section class="section section--tight reveal">
@@ -493,7 +664,7 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
       </div>
       <div class="feature__body">
         <div class="feature__label">Tea Ceremony · Seasonal</div>
-        <h3 class="feature__title">Night Tea Ceremony &amp; Dinner<span class="jp">夜茶事 · 夏限定</span></h3>
+        <h3 class="feature__title">Night Tea Ceremony &amp; Dinner<span class="jp">夜茶事　／　夏季限定　／　Limited seats</span></h3>
         <p class="feature__desc">Spend a summer evening at a private tea house with a traditional tea ceremony and a seasonal meal. Thin tea and thick tea served alongside wagashi, then a multi-course dinner on the engawa as the garden settles into dusk.</p>
         <div class="feature__meta">
           <span>6:00 – 8:00 PM</span>
@@ -513,8 +684,8 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
   <div class="container">
     <div class="section__head">
       <span class="eyebrow">Year-round</span>
-      <h2>Workshops &amp; Ceremonies</h2>
-      <p>Hands-on encounters with Kyoto's living traditions — tea, craft, cuisine, and material culture. Available to Maana guests and, in some cases, outside visitors.</p>
+      <h2>All Experiences</h2>
+      <p>Hands-on encounters with Kyoto's living traditions — tea, craft, cuisine, and material culture. Open to anyone, with priority booking for Maana guests.</p>
     </div>
 
     <div class="exp-grid">
@@ -522,8 +693,9 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
       <a class="exp-card" href="./earthen-wall/">
         <div class="exp-card__media">
           <div class="exp-card__img" style="background-image:url('images/exp-003.jpg')"></div>
+          <div class="exp-card__seasonal-pill">Popular</div>
         </div>
-        <div class="exp-card__label">Craft · 土壁</div>
+        <div class="exp-card__label">Craft · 土壁 · Maana Atelier</div>
         <h3 class="exp-card__title">Earthen Wall Workshop</h3>
         <p class="exp-card__desc">Make your own art panel using <em>Tsuchikabe</em> — a traditional machiya wall material of clay, rice straw, sand, and seaweed.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
@@ -533,9 +705,9 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
         <div class="exp-card__media">
           <div class="exp-card__img" style="background-image:url('images/exp-001.jpg')"></div>
         </div>
-        <div class="exp-card__label">Craft · 茶染</div>
+        <div class="exp-card__label">Craft · 茶染 · Maana Atelier</div>
         <h3 class="exp-card__title">Tea Dye Workshop</h3>
-        <p class="exp-card__desc">Dye textiles using spent tea leaves and traditional Kyoto methods. Take home your own tea-stained cloth.</p>
+        <p class="exp-card__desc">Dye textiles using spent tea leaves and traditional methods. Take home your own tea-stained cloth.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
       </a>
 
@@ -543,9 +715,9 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
         <div class="exp-card__media">
           <div class="exp-card__img" style="background-image:url('images/exp-005.jpg')"></div>
         </div>
-        <div class="exp-card__label">Tea · 日本茶 × 草木茶</div>
+        <div class="exp-card__label">Tea · 日本茶 × 草木茶 · Maana Atelier</div>
         <h3 class="exp-card__title">Kyoto Botanical Teas Workshop</h3>
-        <p class="exp-card__desc">Make a tea blend from foraged and farmed ingredients reflecting the current microseason — and enjoy additional tastings with sweets.</p>
+        <p class="exp-card__desc">Make a tea blend from foraged and farmed ingredients reflecting the current microseason — and enjoy additional tastings with cookies.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
       </a>
 
@@ -553,7 +725,7 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
         <div class="exp-card__media">
           <div class="exp-card__img" style="background-image:url('images/exp-002.jpg')"></div>
         </div>
-        <div class="exp-card__label">Culinary · 発酵 × 保存</div>
+        <div class="exp-card__label">Culinary · 発酵 × 保存 · Maana Atelier</div>
         <h3 class="exp-card__title">Koji Fermentation Workshop</h3>
         <p class="exp-card__desc">Make two seasonal pantry staples using traditional fermentation and preservation techniques.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
@@ -563,7 +735,7 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
         <div class="exp-card__media">
           <div class="exp-card__img" style="background-image:url('images/exp-004.jpg')"></div>
         </div>
-        <div class="exp-card__label">Tea · 朝茶事</div>
+        <div class="exp-card__label">Tea · 朝茶事 · Private Tea House</div>
         <h3 class="exp-card__title">Morning Tea Ceremony &amp; Breakfast</h3>
         <p class="exp-card__desc">Start the morning in a serene private tea house, where Tea master Eriko invites you to a traditional Japanese breakfast and tea ceremony.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
@@ -574,9 +746,9 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
           <div class="exp-card__img" style="background-image:url('images/exp-008.jpg')"></div>
           <div class="exp-card__seasonal-pill">Summer</div>
         </div>
-        <div class="exp-card__label">Tea · 夜茶事 <span class="seasonal-tag">summer only</span></div>
+        <div class="exp-card__label">Tea · 夜茶事 · Private Tea House <span class="seasonal-tag">summer only</span></div>
         <h3 class="exp-card__title">Night Tea Ceremony &amp; Dinner</h3>
-        <p class="exp-card__desc">Candlelit chanoyu followed by a seasonal multi-course dinner on the engawa.</p>
+        <p class="exp-card__desc">A candlelit evening tea ceremony followed by a seasonal multi-course dinner on the engawa.</p>
         <span class="exp-card__cta">View details <span class="arrow">→</span></span>
       </a>
 
@@ -584,12 +756,25 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
   </div>
 </section>
 
-<!-- ========== CLOSING ========== -->
-<section class="closing">
-  <span class="eyebrow">Stay slow</span>
-  <h2><em>Available to Maana guests, and a few seats for outside visitors.</em></h2>
-  <p>Each experience runs at the pace of the season and the day. Reservations open one quarter ahead, with a 7-day flexible cancellation.</p>
-  <a class="btn btn--ghost-light" href="#" data-coming="Calendar">See the calendar <span class="arrow">→</span></a>
+<!-- ========== ATELIER / NISHIJIN ========== -->
+<section class="atelier reveal" id="atelier">
+  <div class="container">
+    <div class="atelier__grid">
+      <div class="atelier__media" role="img" aria-label="Inside Maana Atelier"></div>
+      <div class="atelier__copy">
+        <span class="eyebrow">Where it happens · 西陣</span>
+        <h2>A small street in Nishijin.</h2>
+        <p>Most experiences take place at <em>Maana Atelier</em>, a restored machiya on a quiet street in Nishijin — Kyoto's old textile district, where the rhythm of looms once filled every block. The morning and night tea ceremonies are held a few blocks away, at our private tea house.</p>
+        <p>Nishijin has been home to weavers for over twelve hundred years. The streets here still hold the same proportions they always have: narrow lanes, lattice fronts, the smell of mulberry and dye. We chose to be here because the neighborhood already understands what we're trying to do — keep traditional craft alive by giving it a place to work, not a place to display.</p>
+        <dl class="atelier__meta">
+          <dt>Address</dt>
+          <dd>82-3 Kamikinoshitacho, Kamigyo-ku, Kyoto, 602-0017</dd>
+          <dt>Hours</dt>
+          <dd>Open to workshop participants only.</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ========== COMING-SOON OVERLAY ========== -->
@@ -601,6 +786,104 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
     <p>This page is being prepared. In the meantime, the <a href="./earthen-wall/#sessions">earthen-wall workshop calendar</a> shows current availability across the atelier.</p>
   </div>
 </div>
+
+<!-- ========== LOCATIONS MAP ========== -->
+<section class="locations reveal" id="locations" aria-label="Maana locations in Kyoto">
+  <div class="container">
+    <div class="locations__head">
+      <span class="eyebrow">Find us · 京都</span>
+      <h2>A small constellation in Kyoto.</h2>
+      <p>Six places scattered across the city — never more than a short cab or stroll between them.</p>
+    </div>
+
+    <!-- =========================================================
+         MAP EMBED — to swap to a different My Maps (e.g. an account
+         that doesn't show your personal name as creator), replace ONLY
+         the URL inside src="…" below. The card-click interactions and
+         all other behavior keep working automatically.
+         ========================================================= -->
+    <div class="map-frame" id="locations-map">
+      <iframe
+        id="map-iframe"
+        src="https://www.google.com/maps/d/u/0/embed?mid=108wGPvH-h3BMs032VKwTQlKiUtqqf7E&ehbc=2E312F"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map of Maana locations in Kyoto"
+        allowfullscreen></iframe>
+    </div>
+
+    <!-- Legend — clicking a card pans/zooms the embedded map above
+         to that location. Atelier links through to the detail page. -->
+    <div class="locations__legend">
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=34.993240745819634,135.7681590192497" target="_blank" rel="noopener" data-lat="34.993240745819634" data-lng="135.7681590192497" data-zoom="18">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 L12 4 L21 12"/><path d="M5 11 V20 H19 V11"/><path d="M10 20 V14 H14 V20"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Stay · Maana Home</div>
+          <h3 class="loc__name">Maana Kamo</h3>
+          <p class="loc__addr">481-3 Nishitachibanacho, Higashiyama-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=34.99788713836212,135.7398533336525" target="_blank" rel="noopener" data-lat="34.99788713836212" data-lng="135.7398533336525" data-zoom="17">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 L12 4 L21 12"/><path d="M5 11 V20 H19 V11"/><path d="M10 20 V14 H14 V20"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Stay · Maana Home</div>
+          <h3 class="loc__name">Maana Kyoto</h3>
+          <p class="loc__addr">33-6 Chudoji Kitamachi, Shimogyo-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=34.99216374535345,135.77361996159672" target="_blank" rel="noopener" data-lat="34.99216374535345" data-lng="135.77361996159672" data-zoom="17">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 L12 4 L21 12"/><path d="M5 11 V20 H19 V11"/><path d="M10 20 V14 H14 V20"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Stay · Maana Home</div>
+          <h3 class="loc__name">Maana Kiyomizu</h3>
+          <p class="loc__addr">427-18 Myohoin Maekawacho, Higashiyama-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=34.99216374535345,135.77361996159672" target="_blank" rel="noopener" data-lat="34.99216374535345" data-lng="135.77361996159672" data-zoom="17">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8 H19 L18 21 H6 Z"/><path d="M9 8 V6.5 A3 3 0 0 1 15 6.5 V8"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Shop</div>
+          <h3 class="loc__name">Maana Living</h3>
+          <p class="loc__addr">427-18 Myohoin Maekawacho, Higashiyama-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=35.03530018345924,135.75701453010052" target="_blank" rel="noopener" data-lat="35.03530018345924" data-lng="135.75701453010052" data-zoom="18">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3.5 L20.5 8 L11 17.5 L5 19.5 L7 13.5 Z"/><path d="M14 5.5 L18.5 10"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Workshops</div>
+          <h3 class="loc__name">Maana Atelier</h3>
+          <p class="loc__addr">82-3 Kamikinoshitacho, Kamigyo-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+
+      <a class="loc js-loc" href="https://www.google.com/maps/?q=34.99216374535345,135.77361996159672" target="_blank" rel="noopener" data-lat="34.99216374535345" data-lng="135.77361996159672" data-zoom="17">
+        <div class="loc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9 H17 V14 A4 4 0 0 1 13 18 H9 A4 4 0 0 1 5 14 Z"/><path d="M17 11 H19.5 A2 2 0 0 1 21.5 13 V13.5 A2 2 0 0 1 19.5 15.5 H17"/><path d="M9.5 4.5 Q10.5 6 9.5 7.5"/><path d="M13 4.5 Q14 6 13 7.5"/></svg></div>
+        <div class="loc__body">
+          <div class="loc__cat">Tea house · Café</div>
+          <h3 class="loc__name">Kissa Kishin</h3>
+          <p class="loc__addr">427-18 Myohoin Maekawacho, Higashiyama-ku</p>
+          <span class="loc__link"><span class="loc__link-desktop">View on map ↑</span><span class="loc__link-mobile">Open in Maps →</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CLOSING ========== -->
+<section class="closing">
+  <h2><em>Available to everyone.</em></h2>
+  <p>Whether you're staying with us or joining for the day, each experience runs at the pace of the season — with a 7-day flexible cancellation.</p>
+  <a class="btn btn--ghost-light" href="#" data-coming="Calendar">See the calendar <span class="arrow">→</span></a>
+</section>
 
 <!-- ========== FOOTER ========== -->
 <footer class="site">
@@ -622,6 +905,32 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 document.querySelectorAll('.reveal').forEach(n => io.observe(n));
+
+/* Location cards.
+   Desktop: clicking a card pans/zooms the embedded map to that pin.
+   Mobile: the card's native href opens Google Maps app instead — the
+   embedded map is hidden under 700px because it's too small to be useful. */
+(function(){
+  const iframe = document.getElementById('map-iframe');
+  const mapFrame = document.getElementById('locations-map');
+  if (!iframe || !mapFrame) return;
+  const baseSrc = iframe.src.split('&ll=')[0].split('&z=')[0];
+  const isMobile = () => window.matchMedia('(max-width: 700px)').matches;
+  document.querySelectorAll('.js-loc').forEach(card => {
+    card.addEventListener('click', e => {
+      // On mobile, let the href open native Google Maps — don't intercept.
+      if (isMobile()) return;
+      const lat = card.dataset.lat;
+      const lng = card.dataset.lng;
+      if (!lat || !lng) return;
+      e.preventDefault();
+      const zoom = card.dataset.zoom || '17';
+      iframe.src = `${baseSrc}&ll=${lat},${lng}&z=${zoom}`;
+      document.querySelectorAll('.js-loc').forEach(c => c.classList.remove('is-active'));
+      card.classList.add('is-active');
+    });
+  });
+})();
 
 /* Coming-soon modal — any element with [data-coming] opens it,
    passing its label as the title. Close on × / overlay click / Escape. */
