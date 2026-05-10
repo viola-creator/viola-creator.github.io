@@ -28,6 +28,7 @@ WORKSHOPS = {
     'duration':'2 hours', 'capacity':'Up to 8', 'price':'¥38,000',
     'price_note':'Materials included',
     'venue':'Maana Atelier', 'venue_loc':'Nishijin, Kyoto',
+    'sessions_h2':'Tea Dye sessions.',
     'hero_bg': 'images/hero.webp',
     'craft_word':'Cha-zome',  'craft_kanji':'茶染',
     'craft_p1':'For centuries in Japan, tea has played an all-encompassing role — from the sacred and ceremonial to the modern daily ritual. Alongside that history, tea leaves have long been used to dye textiles, a quiet tradition of making the most of what nature provides.',
@@ -63,9 +64,10 @@ WORKSHOPS = {
     'h1':      'Kyoto Botanical<br/>Teas Workshop.',
     'hero_eyebrow':'Maana Atelier · Workshop',
     'lede':    'Blend your own personalized organic tea from farmed and foraged heirloom herbs of Japan.',
-    'duration':'2 hours', 'capacity':'Up to 8', 'price':'¥18,000',
+    'duration':'1.5 hours', 'capacity':'Up to 8', 'price':'¥18,000',
     'price_note':'Tax included',
     'venue':'Maana Atelier', 'venue_loc':'Nishijin, Kyoto',
+    'sessions_h2':'Botanical Teas sessions.',
     'hero_bg':'images/hero.webp',
     'craft_word':'Sōmoku-cha',  'craft_kanji':'草木茶',
     'craft_p1':'Tea in Japan is far more than the green leaf the world knows. For centuries — long before the tea plant arrived from China — the islands brewed infusions from native flora: roots, leaves, twigs, and barks gathered from forest and field.',
@@ -100,9 +102,10 @@ WORKSHOPS = {
     'h1':      'Koji Fermentation<br/>Workshop.',
     'hero_eyebrow':'Maana Atelier · Workshop',
     'lede':    'Make your own Japanese kitchen condiments from koji-fermented rice — the quiet engine of every umami flavour.',
-    'duration':'2 hours', 'capacity':'Up to 8', 'price':'¥18,000',
+    'duration':'1.5 hours', 'capacity':'Up to 8', 'price':'¥18,000',
     'price_note':'Tax included',
     'venue':'Maana Atelier', 'venue_loc':'Nishijin, Kyoto',
+    'sessions_h2':'Koji Fermentation sessions.',
     'hero_bg':'images/hero.webp',
     'craft_word':'Kōji',  'craft_kanji':'発酵',
     'craft_p1':'Miso, shoyu, mirin, pickles — the staples of the Japanese table, all built on a single quiet foundation: <em>koji</em>, the national mould of Japan. Inoculated onto rice, barley, or soy, koji is the starter that turns ingredients into the fermented umami the islands are known for.',
@@ -140,6 +143,7 @@ WORKSHOPS = {
     'duration':'1.5 hours', 'capacity':'Up to 6', 'price':'¥42,000',
     'price_note':'Tax included',
     'venue':'Hekishoken', 'venue_loc':'Private tea house, Kyoto',
+    'sessions_h2':'Morning Tea Ceremony sessions.',
     'hero_bg':'images/hero.jpg',
     'craft_word':'Asa-chaji',  'craft_kanji':'朝茶事',
     'craft_p1':'In this rare and intimate offering within the world of tea, Tea Master Eriko Okubo welcomes you to her private tea house, where the day begins with a quiet awakening of the senses.',
@@ -176,6 +180,7 @@ WORKSHOPS = {
     'duration':'2 hours', 'capacity':'Up to 6', 'price':'¥47,500',
     'price_note':'Tax included',
     'venue':'Hekishoken', 'venue_loc':'Private tea house, Kyoto',
+    'sessions_h2':'Night Tea Ceremony sessions.',
     'hero_bg':'images/hero.jpg',
     'craft_word':'Yoru-chaji',  'craft_kanji':'夜茶事',
     'craft_p1':'Tea Master Eriko Okubo invites you to a private tea house hidden in a quiet Kyoto neighbourhood. The night unfolds gently — beginning with a seasonal <em>shi-dashi</em> meal prepared in the tradition of tea, accompanied by selected Japanese saké.',
@@ -370,6 +375,22 @@ def build(slug, data):
     # The earthen-wall has its own card; we want to mark this workshop as "current"
     # but show the others. Simpler: in the experiences grid, swap which card is the "current" one.
     # Skip this for now — the grid would still show all 6, including the workshop you're on.
+
+
+    # Rewrite shared-image refs to use ../_partials/images/
+    for img in ['atelier-2.jpg','kri.jpg','summer.jpg',
+                'showcase-tea-dye.jpg','showcase-botanical-tea.jpg',
+                'showcase-koji-fermentation.jpg','showcase-earthen-wall.jpg',
+                'showcase-tea-ceremony-morning.jpg','showcase-tea-ceremony-night.jpg']:
+        html = html.replace(f"images/{img}", f"../_partials/images/{img}")
+    # Guest panels (1-12)
+    for i in range(1,13):
+        html = html.replace(f"images/guest{i}.jpg", f"../_partials/images/guest{i}.jpg")
+
+    # Sessions h2 — replace the calendar's "Earthen Wall sessions." heading
+    if 'sessions_h2' in data:
+        html = html.replace('<h2>Earthen Wall sessions.</h2>',
+                            f'<h2>{data["sessions_h2"]}</h2>')
 
     # Write the file
     out_dir = os.path.join(ROOT, slug)
