@@ -20,6 +20,9 @@ SHARED_FACT_3 = (
 
 WORKSHOPS = {
 'tea-dye': {
+    'wk_key':'tea-dye',
+    'show_img':'../_partials/images/showcase-tea-dye.jpg',
+    'sessions_data':[('2026-05-05', '12:00 PM'), ('2026-05-08', '10:00 AM'), ('2026-05-12', '3:00 PM'), ('2026-05-15', '9:00 AM'), ('2026-05-19', '10:00 AM'), ('2026-05-22', '12:00 PM'), ('2026-05-26', '9:00 AM'), ('2026-05-29', '3:00 PM'), ('2026-06-02', '10:00 AM'), ('2026-06-05', '12:00 PM'), ('2026-06-09', '9:00 AM'), ('2026-06-12', '3:00 PM')],
     'title':   'Tea Dye Workshop',
     'desc':    'Design your own drawstring bags with natural dyes from wild tea leaves and shibori patterns. At Maana Atelier, Kyoto.',
     'h1':      'Tea Dye<br/>Workshop.',
@@ -59,6 +62,9 @@ WORKSHOPS = {
     ],
 },
 'botanical-teas': {
+    'wk_key':'botanical',
+    'show_img':'../_partials/images/showcase-botanical-tea.jpg',
+    'sessions_data':[('2026-05-06', '12:00 PM'), ('2026-05-09', '10:00 AM'), ('2026-05-13', '3:00 PM'), ('2026-05-16', '9:00 AM'), ('2026-05-20', '10:00 AM'), ('2026-05-23', '12:00 PM'), ('2026-05-27', '9:00 AM'), ('2026-05-30', '3:00 PM'), ('2026-06-03', '10:00 AM'), ('2026-06-06', '12:00 PM'), ('2026-06-10', '9:00 AM'), ('2026-06-13', '3:00 PM')],
     'title':   'Kyoto Botanical Teas Workshop',
     'desc':    'Blend your own personalized organic tea from farmed and foraged Japanese herbs. At Maana Atelier, Kyoto.',
     'h1':      'Kyoto Botanical<br/>Teas Workshop.',
@@ -97,6 +103,9 @@ WORKSHOPS = {
     ],
 },
 'koji-fermentation': {
+    'wk_key':'fermentation',
+    'show_img':'../_partials/images/showcase-koji-fermentation.jpg',
+    'sessions_data':[('2026-05-07', '12:00 PM'), ('2026-05-10', '10:00 AM'), ('2026-05-14', '3:00 PM'), ('2026-05-17', '9:00 AM'), ('2026-05-21', '10:00 AM'), ('2026-05-24', '12:00 PM'), ('2026-05-28', '9:00 AM'), ('2026-05-31', '3:00 PM'), ('2026-06-04', '10:00 AM'), ('2026-06-07', '12:00 PM'), ('2026-06-11', '9:00 AM'), ('2026-06-14', '3:00 PM')],
     'title':   'Koji Fermentation Workshop',
     'desc':    'Make two seasonal pantry staples using koji-fermented rice. At Maana Atelier, Kyoto.',
     'h1':      'Koji Fermentation<br/>Workshop.',
@@ -135,6 +144,9 @@ WORKSHOPS = {
     ],
 },
 'morning-tea': {
+    'wk_key':'morning',
+    'show_img':'../_partials/images/showcase-tea-ceremony-morning.jpg',
+    'sessions_data':[('2026-05-05', '8:30 AM'), ('2026-05-09', '8:30 AM'), ('2026-05-12', '8:30 AM'), ('2026-05-16', '8:30 AM'), ('2026-05-19', '8:30 AM'), ('2026-05-23', '8:30 AM'), ('2026-05-26', '8:30 AM'), ('2026-05-30', '8:30 AM'), ('2026-06-02', '8:30 AM'), ('2026-06-06', '8:30 AM'), ('2026-06-09', '8:30 AM'), ('2026-06-13', '8:30 AM')],
     'title':   'Morning Tea Ceremony & Breakfast',
     'desc':    'Asa-chaji at a private Kyoto tea house. Tea Master Eriko Okubo invites you to a Zen-monk breakfast and a morning tea ceremony.',
     'h1':      'Morning Tea Ceremony<br/>&amp; Breakfast.',
@@ -172,6 +184,9 @@ WORKSHOPS = {
     ],
 },
 'night-tea': {
+    'wk_key':'night',
+    'show_img':'../_partials/images/showcase-tea-ceremony-night.jpg',
+    'sessions_data':[('2026-07-04', '6:00 PM'), ('2026-07-07', '6:00 PM'), ('2026-07-11', '6:00 PM'), ('2026-07-14', '6:00 PM'), ('2026-07-18', '6:00 PM'), ('2026-07-21', '6:00 PM'), ('2026-07-25', '6:00 PM'), ('2026-07-28', '6:00 PM'), ('2026-08-01', '6:00 PM'), ('2026-08-04', '6:00 PM'), ('2026-08-08', '6:00 PM'), ('2026-08-11', '6:00 PM')],
     'title':   'Night Tea Ceremony & Dinner',
     'desc':    'A summer evening at Hekishoken — tea ceremony by candlelight followed by a seasonal multi-course meal.',
     'h1':      'Night Tea Ceremony<br/>&amp; Dinner.',
@@ -376,6 +391,65 @@ def build(slug, data):
     # but show the others. Simpler: in the experiences grid, swap which card is the "current" one.
     # Skip this for now — the grid would still show all 6, including the workshop you're on.
 
+
+    # Localize the calendar JS data block to this workshop ----------------------
+    wk = data.get('wk_key','earthen')
+    show_img = data.get('show_img', '../_partials/images/showcase-earthen-wall.jpg')
+
+    # 1) Static <h3 id="ns-title"> placeholder
+    html = re.sub(
+        r'<h3 id="ns-title">[^<]*</h3>',
+        f'<h3 id="ns-title">{data["title"]}</h3>',
+        html, count=1
+    )
+
+    # 2) Drop the filter chip row entirely (single-workshop pages don't need it)
+    html = re.sub(
+        r'<div class="filter-row" id="filter-row">.*?</div>',
+        '<div class="filter-row" id="filter-row" style="display:none"></div>',
+        html, count=1, flags=re.DOTALL
+    )
+
+    # 3) Replace WORKSHOPS object with a single-entry one for this workshop
+    name = data['title'].replace(' Workshop','').replace(' & ',' &amp; ')
+    desc = data.get('lede','').replace("'", "\\'")
+    workshops_block = (
+        "const WORKSHOPS = {\n"
+        f"  '{wk}': {{ name: '{name}', cls: '', "
+        f"tint: '#ecd5bf', desc: '{desc}', "
+        f"loc: '{data.get('venue','Maana Atelier')}, {data.get('venue_loc','Kyoto')}', "
+        f"price: '{data.get('price','¥38,000')}', img: '{show_img}' }},\n"
+        "};"
+    )
+    html = re.sub(
+        r'const WORKSHOPS = \{[^}]*\}[^}]*\};',
+        workshops_block,
+        html, count=1, flags=re.DOTALL
+    )
+
+    # 4) Replace SESSIONS array
+    sess_lines = ',\n  '.join(
+        f"{{ date:'{d}', time:'{t}', wk:'{wk}' }}"
+        for d, t in data.get('sessions_data', [])
+    )
+    html = re.sub(
+        r'const SESSIONS = \[[^\]]*\];',
+        f'const SESSIONS = [\n  {sess_lines}\n];',
+        html, count=1, flags=re.DOTALL
+    )
+
+    # 5) activeFilter default
+    html = re.sub(
+        r"let activeFilter = '[^']*';",
+        f"let activeFilter = '{wk}';",
+        html, count=1
+    )
+
+    # 6) Side-panel default image
+    html = html.replace(
+        "../_partials/images/showcase-earthen-wall.jpg",
+        show_img
+    )
 
     # Rewrite shared-image refs to use ../_partials/images/
     for img in ['atelier-2.jpg','kri.jpg','summer.jpg',

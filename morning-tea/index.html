@@ -166,7 +166,7 @@
       </div>
       <div class="next-body">
         <div class="label">Next available</div>
-        <h3 id="ns-title">Earthen Wall · 10:00 AM</h3>
+        <h3 id="ns-title">Morning Tea Ceremony & Breakfast</h3>
         <div class="time-line">Maana Atelier, Nishijin · Kyoto</div>
       </div>
       <div class="cta-block">
@@ -182,14 +182,7 @@
     </button>
 
     <div class="month-region" id="month-region">
-      <div class="filter-row" id="filter-row">
-        <button class="chip active" data-filter="earthen">Earthen Wall</button>
-        <button class="chip" data-filter="all">All workshops</button>
-        <button class="chip" data-filter="tea-dye">Tea Dye</button>
-        <button class="chip" data-filter="botanical">Botanical Teas</button>
-        <button class="chip" data-filter="fermentation">Fermentation</button>
-        <button class="chip" data-filter="ceremony">Tea Ceremony</button>
-      </div>
+      <div class="filter-row" id="filter-row" style="display:none"></div>
       <div class="month-nav">
         <h3 id="month-title">May 2026</h3>
         <div class="nav-btns">
@@ -409,39 +402,18 @@ const WORKSHOPS = {
    Earthen Wall start times come from the official site:
    9:00 AM | 10:00 AM | 12:00 PM | 3:00 PM. */
 const SESSIONS = [
-  { date:'2026-05-04', time:'10:00 AM', wk:'tea-dye' },
-  { date:'2026-05-04', time:'3:00 PM',  wk:'fermentation' },
-  { date:'2026-05-05', time:'10:00 AM', wk:'botanical' },
-  { date:'2026-05-05', time:'12:00 PM', wk:'earthen' },
-  { date:'2026-05-05', time:'8:30 PM',  wk:'ceremony' },
-  { date:'2026-05-07', time:'10:00 AM', wk:'fermentation' },
-  { date:'2026-05-07', time:'3:00 PM',  wk:'tea-dye' },
-  { date:'2026-05-08', time:'10:00 AM', wk:'earthen' },
-  { date:'2026-05-08', time:'3:00 PM',  wk:'botanical' },
-  { date:'2026-05-12', time:'12:00 PM', wk:'earthen' },
-  { date:'2026-05-13', time:'10:00 AM', wk:'botanical' },
-  { date:'2026-05-13', time:'3:00 PM',  wk:'earthen' },
-  { date:'2026-05-13', time:'8:30 PM',  wk:'ceremony' },
-  { date:'2026-05-14', time:'10:00 AM', wk:'fermentation' },
-  { date:'2026-05-15', time:'9:00 AM',  wk:'earthen' },
-  { date:'2026-05-15', time:'3:00 PM',  wk:'botanical' },
-  { date:'2026-05-18', time:'10:00 AM', wk:'tea-dye' },
-  { date:'2026-05-19', time:'10:00 AM', wk:'botanical' },
-  { date:'2026-05-19', time:'12:00 PM', wk:'earthen' },
-  { date:'2026-05-19', time:'8:30 PM',  wk:'ceremony' },
-  { date:'2026-05-21', time:'10:00 AM', wk:'fermentation' },
-  { date:'2026-05-22', time:'9:00 AM',  wk:'earthen' },
-  { date:'2026-05-22', time:'3:00 PM',  wk:'botanical' },
-  { date:'2026-05-26', time:'10:00 AM', wk:'earthen' },
-  { date:'2026-05-26', time:'12:00 PM', wk:'botanical' },
-  { date:'2026-05-27', time:'12:00 PM', wk:'botanical' },
-  { date:'2026-05-28', time:'3:00 PM',  wk:'tea-dye' },
-  { date:'2026-05-29', time:'9:00 AM',  wk:'earthen' },
-  { date:'2026-05-29', time:'3:00 PM',  wk:'earthen' },
-  { date:'2026-06-02', time:'10:00 AM', wk:'earthen' },
-  { date:'2026-06-05', time:'9:00 AM',  wk:'earthen' },
-  { date:'2026-06-09', time:'12:00 PM', wk:'earthen' },
-  { date:'2026-06-12', time:'3:00 PM',  wk:'earthen' },
+  { date:'2026-05-05', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-09', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-12', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-16', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-19', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-23', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-26', time:'8:30 AM', wk:'morning' },
+  { date:'2026-05-30', time:'8:30 AM', wk:'morning' },
+  { date:'2026-06-02', time:'8:30 AM', wk:'morning' },
+  { date:'2026-06-06', time:'8:30 AM', wk:'morning' },
+  { date:'2026-06-09', time:'8:30 AM', wk:'morning' },
+  { date:'2026-06-13', time:'8:30 AM', wk:'morning' }
 ];
 
 const TODAY = new Date('2026-05-04T00:00:00+09:00');
@@ -454,7 +426,7 @@ function isPast(d) { return d < TODAY; }
 function fmtDow(d) { return DOW[d.getDay()]; }
 function fmtMo(d) { return MONTH[d.getMonth()]; }
 
-let activeFilter = 'earthen';
+let activeFilter = 'morning';
 let viewMonth = new Date('2026-05-01T00:00:00+09:00');
 
 function getNextSession(filter) {
