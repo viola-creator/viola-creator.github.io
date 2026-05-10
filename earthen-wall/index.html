@@ -197,9 +197,15 @@
     padding-bottom: clamp(40px, 6vw, 80px);
   }
   .hero-eyebrow {
-    color: rgba(255,255,255,0.85);
+    color: var(--paper);
     margin-bottom: 22px;
     display: flex; align-items: center; gap: 12px;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+  .hero-eyebrow .eyebrow {
+    color: var(--paper);
+    opacity: 1;
   }
   .hero h1 { color: var(--paper); max-width: 18ch; margin-bottom: 28px; }
   .hero .lede { color: rgba(255,255,255,0.86); max-width: 38ch; margin-bottom: 36px; }
@@ -1372,9 +1378,9 @@
     <h1>Earthen Wall<br/>Workshop.</h1>
     <p class="lede">Make your own art panel using <em>Tsuchikabe</em> — a traditional machiya wall material of clay, rice straw, sand, and seaweed.</p>
     <div class="hero-meta">
-      <div><strong>2.5 hours</strong>One session</div>
+      <div><strong>2 hours</strong>One session</div>
       <div><strong>Maana Atelier</strong>Nishijin, Kyoto</div>
-      <div><strong>Up to 6</strong>Per session</div>
+      <div><strong>Up to 8</strong>Per session</div>
       <div><strong>¥38,000</strong>Materials included</div>
     </div>
   </div>
@@ -1420,8 +1426,8 @@
           <li>
             <div class="fact-num">02</div>
             <div class="fact-body">
-              <h4>Packed for travel</h4>
-              <p>We wrap your panel in soft padding so it fits flat in checked luggage — no fragile fuss.</p>
+              <h4>Yours the same day</h4>
+              <p>Your panel dries within a day, but you take it home the same afternoon — wrapped in soft padding so it fits flat in checked luggage. No fragile fuss.</p>
             </div>
           </li>
           <li>
@@ -1444,7 +1450,7 @@
     <div class="spend-head">
       <span class="eyebrow">The session</span>
       <h2>How you'll spend it</h2>
-      <p class="spend-lede">A quiet 2.5 hours at the atelier — guided, unhurried, made for arriving without a plan.</p>
+      <p class="spend-lede">A quiet 2 hours at the atelier — guided, unhurried, made for arriving without a plan.</p>
     </div>
     <div class="spend-grid">
       <article class="spend-card">
@@ -1518,7 +1524,7 @@
         <div class="time-line">Maana Atelier, Nishijin · Kyoto</div>
       </div>
       <div class="cta-block">
-        <button class="btn-primary">Reserve →</button>
+        <button class="btn-primary">Book Now →</button>
       </div>
     </div>
 
@@ -1726,14 +1732,6 @@
 
 <!-- ========== CLOSING ========== -->
 <section class="closing">
-  <div class="orn-row" aria-hidden="true">
-    <span class="line"></span>
-    <svg class="orn" width="28" height="14" viewBox="0 0 28 14" fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
-      <path d="M2 7 Q 8 1 14 7 Q 20 13 26 7"/>
-      <circle cx="14" cy="7" r="1.5" fill="currentColor"/>
-    </svg>
-    <span class="line"></span>
-  </div>
   <h2>Make a piece of Kyoto, by hand.</h2>
   <p>¥38,000 · tax included · all materials provided · 7-day flexible cancellation.</p>
   <button class="btn-primary">Book now</button>
