@@ -226,12 +226,16 @@ header.site {
 .feature__title .jp {
   display: block;
   font-style: normal;
-  font-size: 0.4em;
-  color: rgba(216,166,121,0.7);
-  letter-spacing: 0.22em;
+  font-size: 0.42em;
+  color: rgba(216,166,121,0.95);
+  letter-spacing: 0.18em;
   margin-top: 14px;
-  font-weight: 300;
+  font-weight: 500;
+  font-family: var(--sans);
+  text-transform: uppercase;
 }
+/* Kanji needs no uppercase + a touch more spacing than the latin parts */
+.feature__title .jp::first-letter { letter-spacing: 0.05em; }
 .feature__desc {
   color: rgba(255,255,255,0.78);
   font-size: 15px;
