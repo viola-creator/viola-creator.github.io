@@ -423,30 +423,23 @@
   }
   .craft-text p { color: var(--ink-soft); font-size: 17px; line-height: 1.75; margin: 0 0 1em; }
   .craft-text p em { font-style: italic; color: var(--ink); }
-  /* (seasonal-note removed — replaced by full Kyoto section) */
-  /* Two stacked images at slightly different aspect ratios — gives
-     the section editorial heft without competing with the headline. */
+  /* Single vertical image filling the right column — clean, immersive,
+     no cropping fights with stacked rectangles. */
   .craft-imgs {
-    display: grid;
-    gap: 14px;
-    align-content: stretch;
+    /* container kept for the existing markup wrapper */
   }
   .craft-img {
+    aspect-ratio: 2/3;
     background-size: cover;
     background-position: center;
     border-radius: 2px;
     transform: scale(1.02);
     transition: transform 1.4s var(--ease-out);
   }
-  .craft-img:nth-child(1) { aspect-ratio: 4/3; }
-  /* 028 has the subject in the upper third — anchor crop to top */
-  .craft-img:nth-child(2) { aspect-ratio: 16/10; background-position: top center; }
   .craft.is-in .craft-img { transform: scale(1); }
   @media (max-width: 800px) {
     .craft-grid { grid-template-columns: 1fr; gap: 32px; }
-    .craft-imgs { grid-template-columns: 1fr 1fr; }
-    .craft-img:nth-child(1),
-    .craft-img:nth-child(2) { aspect-ratio: 3/4; }
+    .craft-img { aspect-ratio: 3/4; }
   }
 
   /* ===========================================================
@@ -1405,15 +1398,15 @@
     color: var(--terracotta);
     font-weight: 600;
   }
-  /* Method note — small italic line beneath, separated by hairline */
+  /* Method note — italic line beneath, separated by hairline */
   .extra-card__note {
-    color: var(--ink-mute);
+    color: var(--ink-soft);
     font-family: var(--serif);
     font-style: italic;
-    font-size: 13px;
-    line-height: 1.65;
+    font-size: 15px;
+    line-height: 1.7;
     margin: 0;
-    padding-top: 14px;
+    padding-top: 16px;
     border-top: 1px solid var(--rule);
   }
   @media (max-width: 700px) { .extras__grid { grid-template-columns: 1fr; } }

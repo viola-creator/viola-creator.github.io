@@ -61,7 +61,7 @@ WORKSHOPS = {
     'craft_word':'Cha-zome',  'craft_kanji':'茶染',
     'craft_p1':'For centuries in Japan, tea has played an all-encompassing role — from the sacred and ceremonial to the modern daily ritual. Alongside that history, tea leaves have long been used to dye textiles, a quiet tradition of making the most of what nature provides.',
     'craft_p2':'Dyes extracted from tea are gentle on the earth, and every batch produces subtly different hues. In this playful workshop, you\'ll explore natural colour and pattern, designing and dyeing two drawstring bags to take home.',
-    'craft_img1':'images/001.jpg',  'craft_img2':'images/002.jpg',
+    'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with two drawstring bags — known in Japan as <em>kinchaku-bukuro</em> (巾着袋) — tea-dyed and folded by your own hands.',
     'fact1':('The bags','One small + one large kinchaku-bukuro, your own pattern, your own colour.'),
     'fact2':SHARED_FACT_2,
@@ -103,7 +103,7 @@ WORKSHOPS = {
     'craft_word':'Sōmoku-cha',  'craft_kanji':'草木茶',
     'craft_p1':'Tea in Japan is far more than the green leaf the world knows. For centuries — long before the tea plant arrived from China — the islands brewed infusions from native flora: roots, leaves, twigs, and barks gathered from forest and field.',
     'craft_p2':'These botanical teas mirror the climate and the season, support physical and mental health, and tell the long story of Japanese agriculture and place. In this workshop, you\'ll smell, touch, and taste a selection of regional ingredients — and blend a tea that\'s entirely your own.',
-    'craft_img1':'images/001.jpg', 'craft_img2':'images/002.jpg',
+    'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with a personal tea blend — your hands\' work, the season\'s ingredients, ready to brew at home.',
     'fact1':('Your blend','A jar of your own personalized organic tea, sealed and labelled, ready to take home.'),
     'fact2':SHARED_FACT_2,
@@ -162,7 +162,7 @@ WORKSHOPS = {
     'craft_word':'Kōji',  'craft_kanji':'発酵',
     'craft_p1':'Miso, shoyu, mirin, pickles — the staples of the Japanese table, all built on a single quiet foundation: <em>koji</em>, the national mould of Japan. Inoculated onto rice, barley, or soy, koji is the starter that turns ingredients into the fermented umami the islands are known for.',
     'craft_p2':'In this workshop, you\'ll learn the spectrum of fermentation styles across Japan and koji\'s vital role — then make two personalized condiments for your own pantry: shoyu-koji rich with dried fruit, or shio-koji with aromatic spices.',
-    'craft_img1':'images/001.jpg', 'craft_img2':'images/002.jpg',
+    'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with two jars of your own fermented condiments — ready to settle and finish on your kitchen counter at home.',
     'fact1':('Two jars','Shoyu-koji + shio-koji, made with the koji of your choice and seasonal aromatics. Yours to keep.'),
     'fact2':('A few days to finish','Your jars are nearly there — they continue fermenting at home for 5–7 days, then keep in the fridge.'),
@@ -204,7 +204,7 @@ WORKSHOPS = {
     'craft_word':'Asa-chaji',  'craft_kanji':'朝茶事',
     'craft_p1':'In this rare and intimate offering within the world of tea, Tea Master Eriko Okubo welcomes you to her private tea house, where the day begins with a quiet awakening of the senses.',
     'craft_p2':'You start with a seasonal breakfast inspired by the mindful simplicity of Zen monastic cuisine. Then a tea ceremony — paired with <em>wagashi</em> — unfolds in the still atmosphere of the tea room. The seamless progression from breakfast to tea is known as <em>asa-chaji</em>, rarely experienced outside private circles.',
-    'craft_img1':'images/001.jpg', 'craft_img2':'images/002.jpg',
+    'craft_img':'images/002.jpg',
     'takehome_lede':'<em>Mugon</em> 無言 — through the wordlessness of the tea ceremony, body, mind, and spirit align with the natural harmony of the morning.',
     'fact1':('A still morning','Two hours that move at the pace of the tea, the breakfast, and the season outside the window.'),
     'fact2':('Authentic chanoyu','Conducted in the tradition of asa-chaji — rarely available outside invited circles.'),
@@ -244,7 +244,7 @@ WORKSHOPS = {
     'craft_word':'Yoru-chaji',  'craft_kanji':'夜茶事',
     'craft_p1':'Tea Master Eriko Okubo invites you to a private tea house hidden in a quiet Kyoto neighbourhood. The night unfolds gently — beginning with a seasonal <em>shi-dashi</em> meal prepared in the tradition of tea, accompanied by selected Japanese saké.',
     'craft_p2':'After dinner, a tea ceremony is held by candlelight — <em>wagashi</em> and matcha, served as stillness descends. This sensory journey from meal to tea forms the <em>yoru-chaji</em>, an authentic evening ritual seldom available to the public.',
-    'craft_img1':'images/001.jpg', 'craft_img2':'images/002.jpg',
+    'craft_img':'images/002.jpg',
     'takehome_lede':'<em>Yoin</em> 余韻 — in the quiet reflection of the tea ceremony, the impressions of the day settle within. We carry the lingering resonance.',
     'fact1':('A summer evening','Two hours that move at candlelight pace — meal, ceremony, then the garden settling into dusk.'),
     'fact2':('Seasonal meal','A shi-dashi meal in the tradition of tea, paired with selected Japanese saké.'),
@@ -332,8 +332,7 @@ def build(slug, data):
         <p>{data["craft_p2"]}</p>
       </div>
       <div class="craft-imgs">
-        <div class="craft-img" style="background-image:url('{data["craft_img1"]}')" role="img" aria-label="{data["craft_word"]} material"></div>
-        <div class="craft-img" style="background-image:url('{data["craft_img2"]}')" role="img" aria-label="{data["craft_word"]} process"></div>
+        <div class="craft-img" style="background-image:url('{data["craft_img"]}')" role="img" aria-label="{data["craft_word"]}"></div>
       </div>
     </div>
   </div>
