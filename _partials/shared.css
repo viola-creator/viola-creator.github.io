@@ -1377,10 +1377,43 @@
     transition: transform 1.2s var(--ease-out);
   }
   .extra-card:hover .extra-card__img { transform: scale(1.04); }
-  .extra-card__body { padding: 22px 24px 26px; }
+  .extra-card__body { padding: 24px 26px 28px; }
   .extra-card__title {
     font-family: var(--serif); font-weight: 400;
-    font-size: 22px; line-height: 1.25; margin: 0 0 10px;
+    font-size: 22px; line-height: 1.25; margin: 0 0 16px;
   }
-  .extra-card__body p { color: var(--ink-soft); font-size: 14px; line-height: 1.7; margin: 0; }
+  /* Recipe ingredient list — serif, small terracotta bullet,
+     scannable but unfussy. */
+  .extra-card__ingredients {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+  }
+  .extra-card__ingredients li {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.75;
+    position: relative;
+    padding-left: 16px;
+  }
+  .extra-card__ingredients li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    top: -2px;
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+  /* Method note — small italic line beneath, separated by hairline */
+  .extra-card__note {
+    color: var(--ink-mute);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
   @media (max-width: 700px) { .extras__grid { grid-template-columns: 1fr; } }

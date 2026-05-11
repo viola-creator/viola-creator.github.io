@@ -131,10 +131,21 @@ WORKSHOPS = {
 'koji-fermentation': {
     'wk_key':'fermentation',
     'show_img':'../_partials/images/showcase-koji-fermentation.jpg',
-    'extras_intro':('In your kitchen', 'A few simple ways to put your jars to work — from a quick marinade to a one-jar pantry staple.'),
+    'extras_intro':('In your kitchen', 'A few simple ways to put your jars to work — bright, fresh salads where shio-koji does the seasoning.'),
     'extras_cards':[
-        ('Shio-koji chicken', 'Brush a spoonful over chicken thighs the night before. Roast or grill the next day — tender, deeply savoury, with no other seasoning needed.', 'images/008.jpg'),
-        ('Shoyu-koji dressing', 'Whisk one part shoyu-koji with two parts olive oil and a splash of rice vinegar. A finishing dressing for greens, grilled vegetables, or grain bowls.', 'images/009.jpg'),
+        {
+            'title': 'Avocado salad',
+            'ingredients': ['Cubed avocado', 'Cubed cucumber', 'Crushed cashews', 'Shio-koji', 'Fresh lemon juice'],
+            'note': 'Toss and rest five minutes. The shio-koji softens the avocado and binds the cashews into a creamy dressing.',
+            'img': 'images/008.jpg',
+        },
+        {
+            'title': 'Tomato salad',
+            'ingredients': ['Sliced tomatoes', 'Shio-koji', 'Torn basil', 'Crushed walnuts', 'Fresh lemon juice'],
+            'note': 'Dress just before serving. Shio-koji draws the sweetness from the tomatoes; basil and walnuts round it out.',
+            'img': 'images/009.jpg',
+            'img_pos': 'center bottom',
+        },
     ],
     'strip_voices_gallery': True,
     'sessions_data':[('2026-05-07', '12:00 PM'), ('2026-05-10', '10:00 AM'), ('2026-05-14', '3:00 PM'), ('2026-05-17', '9:00 AM'), ('2026-05-21', '10:00 AM'), ('2026-05-24', '12:00 PM'), ('2026-05-28', '9:00 AM'), ('2026-05-31', '3:00 PM'), ('2026-06-04', '10:00 AM'), ('2026-06-07', '12:00 PM'), ('2026-06-11', '9:00 AM'), ('2026-06-14', '3:00 PM')],
@@ -526,16 +537,20 @@ def build(slug, data):
     # just before the Guest Voices section.
     if 'extras_cards' in data:
         eyebrow_label, head_title = data['extras_intro']
-        cards_html = '\n'.join(
-            f"""<article class="extra-card">
-        <div class="extra-card__media"><div class="extra-card__img" style="background-image:url('{img}')"></div></div>
+        def _card(c):
+            ing_html = '\n        '.join(f'<li>{i}</li>' for i in c['ingredients'])
+            img_pos = c.get('img_pos', 'center')
+            return f"""<article class="extra-card">
+        <div class="extra-card__media"><div class="extra-card__img" style="background-image:url('{c['img']}');background-position:{img_pos}"></div></div>
         <div class="extra-card__body">
-          <h3 class="extra-card__title">{title}</h3>
-          <p>{body}</p>
+          <h3 class="extra-card__title">{c['title']}</h3>
+          <ul class="extra-card__ingredients">
+        {ing_html}
+          </ul>
+          <p class="extra-card__note">{c['note']}</p>
         </div>
       </article>"""
-            for title, body, img in data['extras_cards']
-        )
+        cards_html = '\n'.join(_card(c) for c in data['extras_cards'])
         extras_block = f"""<!-- ========== EXTRAS (workshop-specific) ========== -->
 <section class="extras reveal" id="extras">
   <div class="container">
