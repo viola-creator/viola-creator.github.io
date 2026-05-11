@@ -131,6 +131,12 @@ WORKSHOPS = {
 'koji-fermentation': {
     'wk_key':'fermentation',
     'show_img':'../_partials/images/showcase-koji-fermentation.jpg',
+    'extras_intro':('In your kitchen', 'A few simple ways to put your jars to work — from a quick marinade to a one-jar pantry staple.'),
+    'extras_cards':[
+        ('Shio-koji chicken', 'Brush a spoonful over chicken thighs the night before. Roast or grill the next day — tender, deeply savoury, with no other seasoning needed.', 'images/008.jpg'),
+        ('Shoyu-koji dressing', 'Whisk one part shoyu-koji with two parts olive oil and a splash of rice vinegar. A finishing dressing for greens, grilled vegetables, or grain bowls.', 'images/009.jpg'),
+    ],
+    'strip_voices_gallery': True,
     'sessions_data':[('2026-05-07', '12:00 PM'), ('2026-05-10', '10:00 AM'), ('2026-05-14', '3:00 PM'), ('2026-05-17', '9:00 AM'), ('2026-05-21', '10:00 AM'), ('2026-05-24', '12:00 PM'), ('2026-05-28', '9:00 AM'), ('2026-05-31', '3:00 PM'), ('2026-06-04', '10:00 AM'), ('2026-06-07', '12:00 PM'), ('2026-06-11', '9:00 AM'), ('2026-06-14', '3:00 PM')],
     'title':   'Koji Fermentation Workshop',
     'desc':    'Make two seasonal pantry staples using koji-fermented rice. At Maana Atelier, Kyoto.',
@@ -141,7 +147,7 @@ WORKSHOPS = {
     'price_note':'Tax included',
     'venue':'Maana Atelier', 'venue_loc':'Nishijin, Kyoto',
     'sessions_h2':'Koji Fermentation sessions.',
-    'hero_bg':'images/hero.webp',
+    'hero_bg':'images/hero.jpeg',
     'craft_word':'Kōji',  'craft_kanji':'発酵',
     'craft_p1':'Miso, shoyu, mirin, pickles — the staples of the Japanese table, all built on a single quiet foundation: <em>koji</em>, the national mould of Japan. Inoculated onto rice, barley, or soy, koji is the starter that turns ingredients into the fermented umami the islands are known for.',
     'craft_p2':'In this workshop, you\'ll learn the spectrum of fermentation styles across Japan and koji\'s vital role — then make two personalized condiments for your own pantry: shoyu-koji rich with dried fruit, or shio-koji with aromatic spices.',
@@ -153,9 +159,9 @@ WORKSHOPS = {
     'takehome_img':'images/take-home.jpg',
     'spend_steps':[
         ('i.','Welcome tea','A seasonal cup of tea on arrival, and an introduction to fermentation across Japan.','images/004.jpg'),
-        ('ii.','Meet the koji','Smell, touch, and taste rice koji — the starter that drives miso, soy sauce, and saké.','images/001.jpg'),
-        ('iii.','Mix','Combine koji with salt, soy, dried fruit, or aromatics — your choice of shoyu-koji or shio-koji.','images/002.jpg'),
-        ('iv.','Bottle','Spoon your blend into a jar to finish at home. Labelled, packed, ready to travel.','images/003.jpg'),
+        ('ii.','Meet the koji','Smell, touch, and taste rice koji — the starter that drives miso, soy sauce, and saké.','images/005.jpg'),
+        ('iii.','Mix','Combine koji with salt, soy, dried fruit, or aromatics — your choice of shoyu-koji or shio-koji.','images/006.jpg'),
+        ('iv.','Bottle','Spoon your blend into a jar to finish at home. Labelled, packed, ready to travel.','images/007.jpeg'),
     ],
     'partial':'atelier',
     'sessions_intro':'Koji Fermentation runs daily at four start times.',
@@ -513,6 +519,50 @@ def build(slug, data):
         html = html.replace(
             '<h2><em>What people carry home</em></h2>',
             '<h2><em>What people say</em></h2>'
+        )
+
+
+    # If this workshop has extras_cards (e.g. koji recipes), insert a new section
+    # just before the Guest Voices section.
+    if 'extras_cards' in data:
+        eyebrow_label, head_title = data['extras_intro']
+        cards_html = '\n'.join(
+            f"""<article class="extra-card">
+        <div class="extra-card__media"><div class="extra-card__img" style="background-image:url('{img}')"></div></div>
+        <div class="extra-card__body">
+          <h3 class="extra-card__title">{title}</h3>
+          <p>{body}</p>
+        </div>
+      </article>"""
+            for title, body, img in data['extras_cards']
+        )
+        extras_block = f"""<!-- ========== EXTRAS (workshop-specific) ========== -->
+<section class="extras reveal" id="extras">
+  <div class="container">
+    <div class="extras__head">
+      <span class="eyebrow">{eyebrow_label}</span>
+      <h2><em>{head_title.split(' — ')[0] if ' — ' in head_title else 'In your kitchen'}</em></h2>
+      <p>{head_title}</p>
+    </div>
+    <div class="extras__grid">
+      {cards_html}
+    </div>
+  </div>
+</section>
+
+"""
+        html = re.sub(
+            r'(<!-- ========== GUEST VOICES)',
+            extras_block + r'\1',
+            html, count=1
+        )
+
+    # Strip the gallery marquee from voices on workshops that don't have guest photos yet
+    if data.get('strip_voices_gallery'):
+        html = re.sub(
+            r'<div class="gallery-head">.*?<div class="gallery-marquee".*?</div>\s*</div>\s*</div>',
+            '',
+            html, count=1, flags=re.DOTALL
         )
 
     # Write the file

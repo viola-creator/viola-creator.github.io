@@ -1338,3 +1338,49 @@
     transition: background .25s;
   }
   .panel-close:hover { background: rgba(0,0,0,0.7); }
+
+  /* ===========================================================
+     Extras section — workshop-specific bonus block (e.g. koji
+     recipes). Sits between the spend section and guest voices.
+     =========================================================== */
+  .extras {
+    padding: clamp(56px, 7vw, 96px) 0 clamp(64px, 8vw, 100px);
+    background: var(--cream);
+  }
+  .extras__head { max-width: 720px; margin: 0 auto clamp(40px, 5vw, 60px); text-align: center; }
+  .extras__head .eyebrow { display: block; margin-bottom: 14px; color: var(--terracotta); }
+  .extras__head h2 {
+    font-size: clamp(32px, 4vw, 48px); font-weight: 300;
+    margin: 0 0 14px; letter-spacing: -0.005em;
+  }
+  .extras__head h2 em { font-style: italic; }
+  .extras__head p { color: var(--ink-soft); font-size: 16px; line-height: 1.7; margin: 0; max-width: 56ch; margin-inline: auto; }
+  .extras__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 3vw, 40px);
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .extra-card {
+    background: var(--paper);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .35s var(--ease-out);
+  }
+  .extra-card:hover { transform: translateY(-3px); }
+  .extra-card__media { aspect-ratio: 4/3; overflow: hidden; background: var(--cream-deep); position: relative; }
+  .extra-card__img {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transition: transform 1.2s var(--ease-out);
+  }
+  .extra-card:hover .extra-card__img { transform: scale(1.04); }
+  .extra-card__body { padding: 22px 24px 26px; }
+  .extra-card__title {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 22px; line-height: 1.25; margin: 0 0 10px;
+  }
+  .extra-card__body p { color: var(--ink-soft); font-size: 14px; line-height: 1.7; margin: 0; }
+  @media (max-width: 700px) { .extras__grid { grid-template-columns: 1fr; } }
