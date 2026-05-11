@@ -57,6 +57,7 @@ WORKSHOPS = {
     'price_note':'Materials included',
     'venue':'Maana Atelier', 'venue_loc':'Nishijin, Kyoto',
     'sessions_h2':'Tea Dye sessions.',
+    'gallery_count': 9,
     'hero_bg': 'images/hero.webp',
     'craft_word':'Cha-zome',  'craft_kanji':'茶染',
     'craft_p1':'For centuries in Japan, tea has played an all-encompassing role — from the sacred and ceremonial to the modern daily ritual. Alongside that history, tea leaves have long been used to dye textiles, a quiet tradition of making the most of what nature provides.',
@@ -319,6 +320,13 @@ def build(slug, data):
         1
     )
 
+    # Spend-section lede — swap the duration so it matches each workshop
+    html = html.replace(
+        'A quiet 2 hours at the atelier',
+        f'A quiet {data["duration"]} at the atelier',
+        1
+    )
+
     # Craft section
     html = re.sub(
         r'<section class="craft reveal" aria-label="What is Tsuchikabe">.*?</section>',
@@ -571,11 +579,35 @@ def build(slug, data):
             html, count=1
         )
 
-    # Strip the gallery marquee from voices on workshops that don't have guest photos yet
-    if data.get('strip_voices_gallery'):
+    # Guest gallery handling — per workshop count
+    # gallery_count = 0 (or strip_voices_gallery)  -> remove the gallery entirely
+    # gallery_count = N                            -> rebuild the marquee with N items
+    gallery_count = data.get('gallery_count', 0)
+    if gallery_count == 0 or data.get('strip_voices_gallery'):
         html = re.sub(
             r'<div class="gallery-head">.*?<div class="gallery-marquee".*?</div>\s*</div>\s*</div>',
             '',
+            html, count=1, flags=re.DOTALL
+        )
+    else:
+        items = '\n        '.join(
+            f'<div class="gallery-item"><img src="images/guest{i}.jpg" alt="Guest panel {i}" loading="lazy"/></div>'
+            for i in range(1, gallery_count + 1)
+        )
+        items_dup = '\n        '.join(
+            f'<div class="gallery-item" aria-hidden="true"><img src="images/guest{i}.jpg" alt="" loading="lazy"/></div>'
+            for i in range(1, gallery_count + 1)
+        )
+        new_track = (
+            f'<div class="gallery-track" id="gallery-track">\n'
+            f'        {items}\n'
+            f'        <!-- duplicate set for seamless loop, hidden from screen readers -->\n'
+            f'        {items_dup}\n'
+            f'      </div>'
+        )
+        html = re.sub(
+            r'<div class="gallery-track" id="gallery-track">.*?</div>\s*(?=</div>\s*</div>\s*</section>)',
+            new_track + '\n    ',
             html, count=1, flags=re.DOTALL
         )
 
