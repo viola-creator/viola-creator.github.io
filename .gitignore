@@ -15,3 +15,4 @@ Thumbs.db
 
 # Node (in case anything gets added later)
 node_modules/
+__pycache__/

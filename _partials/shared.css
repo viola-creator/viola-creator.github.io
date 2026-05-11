@@ -159,7 +159,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('images/earthen-wall.webp') center/cover no-repeat;
+    background: url('images/hero.jpeg') center/cover no-repeat;
     transform: scale(1.08);
     /* Slow ambient ken-burns drift adds life without being distracting. */
     animation: kenburns 22s ease-in-out infinite alternate;
