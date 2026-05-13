@@ -99,7 +99,7 @@
     <div class="spend-head">
       <span class="eyebrow">The session</span>
       <h2>How you'll spend it</h2>
-      <p class="spend-lede">A quiet 2 hours at the atelier — guided, unhurried, made for arriving without a plan.</p>
+      <p class="spend-lede">A quiet 2 hours at a private tea house — guided, unhurried, made for arriving without a plan.</p>
     </div>
     <div class="spend-grid">
       <article class="spend-card">
@@ -153,6 +153,7 @@
       <div>
         <span class="eyebrow">Reserve a date</span>
         <h2>Night Tea Ceremony sessions.</h2>
+        <p class="sessions-intro">Held Tuesdays and Saturdays · July to September only. Booking closes 2 days prior.</p>
       </div>
       <div class="head-meta">All times JST · GMT+9</div>
     </div>
@@ -236,6 +237,14 @@
       <div class="faq-item">
         <button class="faq-q">Do you accommodate private sessions?<span class="plus">+</span></button>
         <div class="faq-a">Please contact atelier@maana.jp with the number of participants and the dates you'll be visiting.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">If I am running late, where should I contact?<span class="plus">+</span></button>
+        <div class="faq-a">Please contact us via email at <a href="mailto:atelier@maana.jp">atelier@maana.jp</a> or via WhatsApp using the contact details provided in your confirmation email.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can I reschedule my workshop?<span class="plus">+</span></button>
+        <div class="faq-a">Yes. You may reschedule your workshop through the link in your confirmation email up to 7 days prior to your scheduled date.</div>
       </div>
     </div>
   </div>
@@ -325,7 +334,7 @@ document.addEventListener('partials-loaded', () => {
 
 const WORKSHOPS = {
   'earthen':      { name: 'Earthen Wall',  cls: '',             tint: '#ecd5bf', desc: 'A traditional machiya wall material of clay, rice straw, sand, and seaweed.', loc: 'Maana Atelier, Nishijin', price: '¥38,000', img: '../_partials/images/showcase-earthen-wall.jpg' },
-  'tea-dye':      { name: 'Tea Dye',       cls: 'tea-dye',      tint: '#d6dde9', desc: 'Indigo and botanical dyeing traditions.',                                       loc: 'Maana Atelier, Nishijin', price: '¥38,000', img: '../_partials/images/showcase-tea-dye.jpg' },
+  'tea-dye':      { name: 'Tea Dye',       cls: 'tea-dye',      tint: '#d6dde9', desc: 'Botanical dyeing traditions.',                                       loc: 'Maana Atelier, Nishijin', price: '¥38,000', img: '../_partials/images/showcase-tea-dye.jpg' },
   'botanical':    { name: 'Botanical Teas',cls: 'botanical',    tint: '#d3dec9', desc: 'Seasonal Japanese herb infusions.',                                             loc: 'Maana Atelier, Nishijin', price: '¥28,000', img: '../_partials/images/showcase-botanical-tea.jpg' },
   'fermentation': { name: 'Fermentation',  cls: 'fermentation', tint: '#d9dec5', desc: 'Koji and fermented foundations.',                                                loc: 'Maana Atelier, Nishijin', price: '¥34,000', img: '../_partials/images/showcase-koji-fermentation.jpg' },
   'ceremony':     { name: 'Tea Ceremony',  cls: 'ceremony',     tint: '#ecd6b3', desc: 'A guided introduction to chado.',                                                loc: 'Private Tea House',         price: '¥30,000', img: '../_partials/images/showcase-tea-ceremony-morning.jpg' },

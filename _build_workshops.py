@@ -19,6 +19,15 @@ SHARED_FACT_3 = (
     'Handmade with seasonal Kyoto materials — one of a kind, made by you.'
 )
 
+# Two FAQ items that apply to every workshop / experience — auto-appended
+# to each workshop's faq list at build time.
+SHARED_FAQ_TAIL = [
+    ('If I am running late, where should I contact?',
+     'Please contact us via email at <a href="mailto:atelier@maana.jp">atelier@maana.jp</a> or via WhatsApp using the contact details provided in your confirmation email.'),
+    ('Can I reschedule my workshop?',
+     'Yes. You may reschedule your workshop through the link in your confirmation email up to 7 days prior to your scheduled date.'),
+]
+
 # All 6 workshop cards used by the "Other experiences" grid. Each page
 # excludes its own slug from the grid.
 EXPERIENCES_CARDS = [
@@ -65,8 +74,8 @@ WORKSHOPS = {
     'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with two drawstring bags — known in Japan as <em>kinchaku-bukuro</em> (巾着袋) — tea-dyed and folded by your own hands.',
     'fact1':('The bags','One small + one large kinchaku-bukuro, your own pattern, your own colour.'),
-    'fact2':SHARED_FACT_2,
-    'fact3':('Earth-friendly','Tea-dyeing uses no harmful synthetics — every drop of tea is preserved in the fabric.'),
+    'fact2':('Yours the same day','You take it home once the workshop ends — packed for travel, no fragile fuss.'),
+    'fact3':('Earth-friendly','Tea-dyeing uses no harmful synthetics, while tea\'s natural antibacterial properties make it ideal for storing everyday essentials.'),
     'takehome_img':'images/take-home.jpg',
     'spend_steps':[
         ('i.','Welcome tea','You\'re greeted at the atelier with a seasonal cup of tea and a quiet introduction to the day.','images/004.jpg'),
@@ -106,15 +115,15 @@ WORKSHOPS = {
     'craft_p2':'These botanical teas mirror the climate and the season, support physical and mental health, and tell the long story of Japanese agriculture and place. In this workshop, you\'ll smell, touch, and taste a selection of regional ingredients — and blend a tea that\'s entirely your own.',
     'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with a personal tea blend — your hands\' work, the season\'s ingredients, ready to brew at home.',
-    'fact1':('Your blend','A jar of your own personalized organic tea, sealed and labelled, ready to take home.'),
-    'fact2':SHARED_FACT_2,
+    'fact1':('Your blend','A bag of your own personalized organic tea, sealed and labelled, ready to take home.'),
+    'fact2':('Yours the same day','You take it home once the workshop ends — light for travel, easy to bring.'),
     'fact3':('Earth-friendly','Sourced from farmed and wild seasonal flora — no mono-cropping, no soil erosion.'),
     'takehome_img':'images/take-home.jpg',
     'spend_steps':[
         ('i.','Welcome tea','A seasonal cup of tea on arrival, and a quiet introduction to the day\'s ingredients.','images/004.jpg'),
         ('ii.','Smell · touch · taste','Yamato Tachibana from Nara, Kuromoji from Yamanashi, Gettou from Okinawa — meet each ingredient on its own.','images/001.jpg'),
         ('iii.','Blending','Compose your own ratio. Layer florals, roots, and citrus until the cup matches your mood.','images/002.jpg'),
-        ('iv.','Tasting · take home','Brew your blend. Share notes. Pack the rest in a jar to carry home.','images/003.jpg'),
+        ('iv.','Tasting · take home','Brew your blend. Share notes. Pack the rest in a bag to carry home.','images/003.jpg'),
     ],
     'partial':'atelier',
     'sessions_intro':'Kyoto Botanical Teas runs daily at four start times.',
@@ -162,17 +171,17 @@ WORKSHOPS = {
     'hero_bg':'images/hero.jpeg',
     'craft_word':'Kōji',  'craft_kanji':'発酵',
     'craft_p1':'Miso, shoyu, mirin, pickles — the staples of the Japanese table, all built on a single quiet foundation: <em>koji</em>, the national mould of Japan. Inoculated onto rice, barley, or soy, koji is the starter that turns ingredients into the fermented umami the islands are known for.',
-    'craft_p2':'In this workshop, you\'ll learn the spectrum of fermentation styles across Japan and koji\'s vital role — then make two personalized condiments for your own pantry: shoyu-koji rich with dried fruit, or shio-koji with aromatic spices.',
+    'craft_p2':'In this workshop, you\'ll learn the spectrum of fermentation styles across Japan and koji\'s vital role — then make two personalized condiments for your own pantry: shoyu-koji rich with dried fruit, and shio-koji with aromatic spices.',
     'craft_img':'images/001.jpg',
     'takehome_lede':'You leave with two jars of your own fermented condiments — ready to settle and finish on your kitchen counter at home.',
     'fact1':('Two jars','Shoyu-koji + shio-koji, made with the koji of your choice and seasonal aromatics. Yours to keep.'),
-    'fact2':('A few days to finish','Your jars are nearly there — they continue fermenting at home for 5–7 days, then keep in the fridge.'),
+    'fact2':('A few days to finish','Your jars are nearly there — they continue fermenting at home for 7–14 days, then keep in the fridge.'),
     'fact3':('Better cooking','One spoonful turns a bowl of rice, a piece of fish, or a dressing into something quietly transformed.'),
     'takehome_img':'images/take-home.jpg',
     'spend_steps':[
         ('i.','Welcome tea','A seasonal cup of tea on arrival, and an introduction to fermentation across Japan.','images/004.jpg'),
-        ('ii.','Meet the koji','Smell, touch, and taste rice koji — the starter that drives miso, soy sauce, and saké.','images/005.jpg'),
-        ('iii.','Mix','Combine koji with salt, soy, dried fruit, or aromatics — your choice of shoyu-koji or shio-koji.','images/006.jpg'),
+        ('ii.','Meet the koji','Smell and touch rice koji — the starter that drives miso, soy sauce, and saké. Taste a variety of koji-based seasonings.','images/005.jpg'),
+        ('iii.','Mix','Combine koji with salt, soy sauce, dried fruit, or aromatics — your choice of shoyu-koji and shio-koji.','images/006.jpg'),
         ('iv.','Bottle','Spoon your blend into a jar to finish at home. Labelled, packed, ready to travel.','images/007.jpeg'),
     ],
     'partial':'atelier',
@@ -201,15 +210,16 @@ WORKSHOPS = {
     'price_note':'Tax included',
     'venue':'Hekishoken', 'venue_loc':'Private tea house, Kyoto',
     'sessions_h2':'Morning Tea Ceremony sessions.',
+    'spend_location':'a private tea house',
     'hero_bg':'images/hero.jpeg',
     'craft_word':'Asa-chaji',  'craft_kanji':'朝茶事',
     'craft_p1':'In this rare and intimate offering within the world of tea, Tea Master Eriko Okubo welcomes you to her private tea house, where the day begins with a quiet awakening of the senses.',
     'craft_p2':'You start with a seasonal breakfast inspired by the mindful simplicity of Zen monastic cuisine. Then a tea ceremony — paired with <em>wagashi</em> — unfolds in the still atmosphere of the tea room. The seamless progression from breakfast to tea is known as <em>asa-chaji</em>, rarely experienced outside private circles.',
     'craft_img':'images/002.jpg',
     'takehome_lede':'<em>Mugon</em> 無言 — through the wordlessness of the tea ceremony, body, mind, and spirit align with the natural harmony of the morning.',
-    'fact1':('A still morning','Two hours that move at the pace of the tea, the breakfast, and the season outside the window.'),
+    'fact1':('A still morning','1.5 hours that move at the pace of the tea, the breakfast, and the season outside the window.'),
     'fact2':('Authentic chanoyu','Conducted in the tradition of asa-chaji — rarely available outside invited circles.'),
-    'fact3':('Hosted by Eriko Okubo','A Tea Master who has practised in this room for many years. The ceremony is hers to lead.'),
+    'fact3':('Hosted by Eriko Okubo','A Tea Master who has practiced tea ceremony for over 25 years. The ceremony is hers to lead.'),
     'takehome_img':'images/003.jpg',
     'spend_steps':[
         ('i.','Arrive','Step into the tea house. Remove shoes. The morning slows immediately.','images/004.jpg'),
@@ -218,7 +228,7 @@ WORKSHOPS = {
         ('iv.','Mugon','Leave in silence, the morning still ahead of you.','images/007.jpg'),
     ],
     'partial':'tea-house',
-    'sessions_intro':'Held Tuesdays and Saturdays. Booking closes 2 days prior.',
+    'sessions_intro':'Please check our calendar for the latest schedule and note that booking closes 2 days prior to the event.',
     'session_times':['8:30 AM'],
     'faq':[
       ('What is the cancellation policy?', '0% cancellation fee if canceled more than 7 days in advance. 100% cancellation fee if canceled within 7 days in advance.'),
@@ -241,6 +251,7 @@ WORKSHOPS = {
     'price_note':'Tax included',
     'venue':'Hekishoken', 'venue_loc':'Private tea house, Kyoto',
     'sessions_h2':'Night Tea Ceremony sessions.',
+    'spend_location':'a private tea house',
     'hero_bg':'images/hero.jpeg',
     'craft_word':'Yoru-chaji',  'craft_kanji':'夜茶事',
     'craft_p1':'Tea Master Eriko Okubo invites you to a private tea house hidden in a quiet Kyoto neighbourhood. The night unfolds gently — beginning with a seasonal <em>shi-dashi</em> meal prepared in the tradition of tea, accompanied by selected Japanese saké.',
@@ -320,10 +331,12 @@ def build(slug, data):
         1
     )
 
-    # Spend-section lede — swap the duration so it matches each workshop
+    # Spend-section lede — swap duration + location per workshop.
+    # Tea ceremony workshops use "a private tea house" instead of "the atelier".
+    spend_location = data.get('spend_location', 'the atelier')
     html = html.replace(
         'A quiet 2 hours at the atelier',
-        f'A quiet {data["duration"]} at the atelier',
+        f'A quiet {data["duration"]} at {spend_location}',
         1
     )
 
@@ -417,13 +430,14 @@ def build(slug, data):
     # The .hero-bg in shared.css uses the earthen wall image as fallback; we override with inline style.
     # No further action needed here.
 
-    # FAQ section — replace items
+    # FAQ section — replace items (append the two shared FAQs at the end)
+    full_faq = list(data['faq']) + SHARED_FAQ_TAIL
     faq_items = '\n      '.join(
         f'''<div class="faq-item">
         <button class="faq-q">{q}<span class="plus">+</span></button>
         <div class="faq-a">{a}</div>
       </div>'''
-        for q, a in data['faq']
+        for q, a in full_faq
     )
     html = re.sub(
         r'<div class="faq-list">.*?</div>\s*</div>\s*</section>\s*<!-- ========== OTHER',
@@ -512,10 +526,14 @@ def build(slug, data):
     for i in range(1,13):
         html = html.replace(f"images/guest{i}.jpg", f"../_partials/images/guest{i}.jpg")
 
-    # Sessions h2 — replace the calendar's "Earthen Wall sessions." heading
+    # Sessions h2 + optional intro paragraph below the heading
     if 'sessions_h2' in data:
-        html = html.replace('<h2>Earthen Wall sessions.</h2>',
-                            f'<h2>{data["sessions_h2"]}</h2>')
+        intro = data.get('sessions_intro', '')
+        intro_html = f'\n        <p class="sessions-intro">{intro}</p>' if intro else ''
+        html = html.replace(
+            '<h2>Earthen Wall sessions.</h2>',
+            f'<h2>{data["sessions_h2"]}</h2>{intro_html}'
+        )
 
 
     # Replace the experiences grid with per-workshop cards (excludes current slug)
