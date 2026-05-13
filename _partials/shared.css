@@ -121,31 +121,96 @@
   .orn { display: inline-block; color: var(--terracotta); }
 
   /* ===========================================================
-     Header — flat black mockup bar with a small back link
+     Site nav — transparent over hero, darkens (with blur) on
+     scroll. Holds logo, links, language toggle, and CTA.
      =========================================================== */
-  header.site {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: #000;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    padding: 0 var(--gutter);
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+    transition: background .4s ease, padding .4s ease, backdrop-filter .4s ease;
+    background: transparent;
   }
-  .back-link {
-    display: inline-flex; align-items: center; gap: 10px;
-    color: rgba(255,255,255,0.7);
+  .site-nav.is-scrolled {
+    background: rgba(20, 18, 16, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    padding-top: 14px; padding-bottom: 14px;
+  }
+  .site-nav__logo {
+    display: inline-flex; align-items: center;
+    line-height: 0;
+  }
+  .site-nav__logo img {
+    height: 11px;
+    width: auto;
+    /* PNG logo is dark — invert + tint to paper for dark backgrounds */
+    filter: brightness(0) invert(1);
+    opacity: 0.92;
+    transition: opacity .25s var(--ease-out);
+  }
+  .site-nav__logo:hover img { opacity: 1; }
+  .site-nav__links {
+    display: flex; align-items: center;
+    gap: clamp(18px, 2.4vw, 34px);
+  }
+  .site-nav__link {
     font-family: var(--sans);
     font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    transition: color .25s, gap .25s var(--ease-out);
-    padding: 8px 0;
+    color: rgba(245, 240, 235, 0.7);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    transition: color .25s var(--ease-out);
   }
-  .back-link:hover { color: var(--paper); gap: 14px; }
-  .back-link .arrow { transition: transform .25s var(--ease-out); }
-  .back-link:hover .arrow { transform: translateX(-3px); }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__lang {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: rgba(245, 240, 235, 0.7);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0 4px;
+    cursor: pointer;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__lang:hover { color: var(--paper); }
+  .site-nav__cta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.4);
+    background: transparent;
+    transition: background .25s, color .25s, border-color .25s;
+  }
+  .site-nav__cta:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+  @media (max-width: 800px) {
+    .site-nav { padding: 16px 18px; }
+    .site-nav__link { display: none; }
+    .site-nav__lang { padding: 0 2px; font-size: 10px; }
+    .site-nav__cta { padding: 9px 16px; font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__logo img { height: 9px; }
+  }
+
+  /* Language toggle visibility — show only the active language.
+     Default is English (html[lang="en"] or no lang attr). */
+  .lang-jp { display: none; }
+  html[lang="ja"] .lang-jp { display: inline; }
+  html[lang="ja"] .lang-en { display: none; }
+  /* Block-level overrides where needed */
+  html[lang="ja"] .lang-jp.block { display: block; }
 
   /* ===========================================================
      Hero — full-bleed earthen-wall.webp

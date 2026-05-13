@@ -1,4 +1,15 @@
-<!-- Flat black mockup bar with back link to /experiences -->
-<header class="site">
-  <a class="back-link" href="../"><span class="arrow">←</span> Experiences</a>
-</header>
+<!-- Top nav — transparent over hero, darkens on scroll. Includes language toggle. -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a href="../" class="site-nav__logo" aria-label="Maana">
+    <img src="../_partials/images/logo.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a href="https://maanahomes.com/stay" class="site-nav__link" target="_blank" rel="noopener"><span class="lang-en">Stay</span><span class="lang-jp">ご宿泊</span></a>
+    <a href="../" class="site-nav__link"><span class="lang-en">Experiences</span><span class="lang-jp">体験</span></a>
+    <a href="https://maanahomes.com/about" class="site-nav__link" target="_blank" rel="noopener"><span class="lang-en">Our Story</span><span class="lang-jp">Maana について</span></a>
+    <button class="site-nav__lang" type="button" id="lang-toggle" aria-label="Switch language">
+      <span class="lang-en">日本語</span><span class="lang-jp">English</span>
+    </button>
+    <a href="https://maanahomes.com/contact" class="site-nav__cta" target="_blank" rel="noopener"><span class="lang-en">Book Stay</span><span class="lang-jp">ご宿泊予約</span></a>
+  </div>
+</nav>
