@@ -503,11 +503,12 @@ def build(slug, data):
     )
 
     # Hero background image — change in the .hero-bg CSS reference (inside shared.css we can't, but we use the .hero-bg style)
-    # Easier: override via inline style on the hero-bg div
-    html = html.replace(
-        '<div class="hero-bg" aria-hidden="true"></div>',
+    # Hero background — match the hero-bg div whether it already has an
+    # inline style (template now does) or not.
+    html = re.sub(
+        r'<div class="hero-bg"(?:\s+style="[^"]*")?\s+aria-hidden="true"></div>',
         f'<div class="hero-bg" style="background-image:url(\'{data["hero_bg"]}\')" aria-hidden="true"></div>',
-        1
+        html, count=1
     )
 
     # Spend-section background image — workshops without their own process.jpg
@@ -751,7 +752,7 @@ def build(slug, data):
         intro_bi = bi(intro_en, intro_jp) if intro_en else ''
         intro_html = f'\n        <p class="sessions-intro">{intro_bi}</p>' if intro_en else ''
         html = re.sub(
-            r'<h2>[^<]*(?:<span[^>]*>[^<]*</span>[^<]*)*Earthen Wall sessions\.[^<]*(?:<span[^>]*>[^<]*</span>[^<]*)*</h2>',
+            r'<h2><span class="lang-en">Earthen Wall sessions\.</span><span class="lang-jp">[^<]+</span></h2>',
             f'<h2>{bi_data(data, "sessions_h2")}</h2>{intro_html}',
             html, count=1
         )
