@@ -93,7 +93,7 @@ WORKSHOPS = {
     'sessions_h2':'Tea Dye sessions.',
     'sessions_h2_jp': '茶染ワークショップの日程。',
     'gallery_count': 9,
-    'hero_bg': 'images/hero.png',
+    'hero_bg': 'images/hero.jpeg',
     'craft_word':'Cha-zome',  'craft_kanji':'茶染',
     'craft_p1':'For centuries in Japan, tea has played an all-encompassing role, from the sacred and ceremonial to the modern daily ritual. Alongside that history, tea leaves have long been used to dye textiles, a quiet tradition of making the most of what nature provides.',
     'craft_p1_jp': 'お茶は何世紀にもわたり、日本の暮らしのあらゆる場面に寄り添ってきました。神聖な儀礼から日々の習わしまで。その歴史と並んで、茶葉は布を染める素材としても古くから用いられ、自然の恵みを大切に使い切る、静かな伝統が受け継がれてきました。',
