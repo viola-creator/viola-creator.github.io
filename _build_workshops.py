@@ -125,6 +125,11 @@ WORKSHOPS = {
     'sessions_intro':'Tea Dye Workshop runs daily at four start times.',
     'sessions_intro_jp': '茶染ワークショップは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
+    'voices_quotes':[
+        {'text': 'I had the most wonderful time. Using Japanese tea leaves and traditional dyeing techniques, I was able to create my own dyed bags — therapeutic, relaxing, and inspiring.', 'name': 'Juan Allison'},
+        {'text': 'Learn from traditional Japanese living experts how to dye your own bags using ancestral techniques. Choose your patterns, steep your fabric in simmered Japanese black tea. Add a delicious welcome tea and a beautiful renovated machiya environment, and you\'ll leave with a deeper understanding of Japanese culture — and two unique hand-dyed bags to take home.', 'name': 'Elsa Derrez'},
+        {'text': 'Maana Atelierで、古くから日本で行われてきた自然染色のひとつ「茶染め」のワークショップを体験しました。染め上がった巾着は、自然な温かみのある色合いで、世界にひとつだけの特別な作品になりました。', 'name': 'Rika', 'lang': 'ja'},
+    ],
     'faq':[
       ('What is the cancellation policy?', '100% refund if canceled more than 7 days before the workshop date. No refund possible within 7 days of the workshop date.'),
       ('What is your policy on children attending the workshop?', 'Children aged 6 and older are welcome to join. They will be charged the standard fee. At least one adult must accompany children under 13 years old.'),
@@ -195,6 +200,11 @@ WORKSHOPS = {
     'sessions_intro':'Kyoto Botanical Teas runs daily at four start times.',
     'sessions_intro_jp': '京都ボタニカルティーは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
+    'voices_quotes':[
+        {'text': 'The Botanical Tea Workshop was inspiring. The instructors were knowledgeable, and we learned about different plants and tea, their properties, and how to blend them for specific benefits.', 'name': 'Sherry Chan'},
+        {'text': 'The Botanical Teas workshop was simply amazing — the location, the vibe, the whole experience. Through a journey of senses you\'ll create your own personal blend that reflects your true personality and tastes.', 'name': 'Benedetta Mennini'},
+        {'text': 'The tea workshop was absolutely amazing! The instructor was knowledgeable and passionate. I learned so much about different teas and flavors, and every detail was thoughtfully arranged. The place itself calms you down.', 'name': 'yvonne wigger'},
+    ],
     'faq':[
       ('What is the cancellation policy?', '100% refund if canceled more than 7 days before the workshop date. No refund possible within 7 days of the workshop date.'),
       ('What is your policy on children attending the workshop?', 'Children aged 6 and older are welcome to join. They will be charged the standard fee. At least one adult must accompany children under 13 years old.'),
@@ -282,6 +292,11 @@ WORKSHOPS = {
     'sessions_intro':'Koji Fermentation runs daily at four start times.',
     'sessions_intro_jp': 'コウジ発酵ワークショップは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
+    'voices_quotes':[
+        {'text': 'One of the highlights of my stay in Kyoto. Our teacher\'s background in anthropology and food science gave context to the cooking, and her warmth and enthusiasm were a pleasure. The setting was stunning.', 'name': 'Laura George'},
+        {'text': 'Such a warm welcome at Maana Atelier. A thorough explanation of the different products, followed by a tasting session, then we made our own two koji cultures. Beautiful surroundings, focused atmosphere — we\'d recommend it to everyone.', 'name': 'Lorenzo De Block'},
+        {'text': 'We did the fermented koji workshop and learned so much we can do in our own kitchen, while finding a deep appreciation for the art and tastes of fermented ingredients in Japanese cuisine. The workshop space was peaceful and stunning.', 'name': 'Michelle Pietrzak-Wegner'},
+    ],
     'faq':[
       ('What is the cancellation policy?', '100% refund if canceled more than 7 days before the workshop date. No refund possible within 7 days of the workshop date.'),
       ('What is your policy on children attending the workshop?', 'Children aged 6 and older are welcome to join. They will be charged the standard fee. At least one adult must accompany children under 13 years old.'),
@@ -747,8 +762,9 @@ def build(slug, data):
         html, count=1, flags=re.DOTALL
     )
 
-    # Voices section: change h2 to "What people say" — or remove entire section for night-tea
-    if slug == 'night-tea':
+    # Voices section: change h2 to "What people say" — or remove entire section for
+    # night-tea + morning-tea (ceremony workshops are out of scope for this release).
+    if slug in ('night-tea', 'morning-tea'):
         html = re.sub(
             r'<!-- ========== GUEST VOICES.*?</section>\s*',
             '',
@@ -829,6 +845,29 @@ def build(slug, data):
         html = re.sub(
             r'<div class="gallery-track" id="gallery-track">.*?</div>\s*(?=</div>\s*</div>\s*</section>)',
             new_track + '\n    ',
+            html, count=1, flags=re.DOTALL
+        )
+
+    # Voices quotes — per workshop. Each entry: dict with `text`, `name`,
+    # optional `attribution` (defaults to "Google review"), and optional
+    # `lang` ("ja" to skip lang-en/lang-jp wrapping for a JP-only quote).
+    if data.get('voices_quotes'):
+        def _quote(q):
+            attribution = q.get('attribution', 'Google review')
+            if q.get('lang') == 'ja':
+                # Japanese review — render as-is in both language modes.
+                body = f'<p>{q["text"]}</p>'
+            else:
+                body = f'<p>{q["text"]}</p>'
+            return f'''<article class="quote-card">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        {body}
+        <div class="quote-attr"><strong>{q["name"]}</strong> · {attribution}</div>
+      </article>'''
+        quote_html = '\n      '.join(_quote(q) for q in data['voices_quotes'])
+        html = re.sub(
+            r'<div class="quote-grid">.*?</div>\s*(?=\s*<div class="gallery-head"|\s*</div>\s*</section>)',
+            f'<div class="quote-grid">\n      {quote_html}\n    </div>\n    ',
             html, count=1, flags=re.DOTALL
         )
 
