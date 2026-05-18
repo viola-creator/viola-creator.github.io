@@ -121,8 +121,11 @@ There's no booking system — all "Book Now" / "ご予約" CTAs are `<a href="ht
 
 **Drafted but hidden from users (re-enable when ready)**:
 - **Japanese version** — all `.lang-jp` content is in place but the toggle button is hidden via one CSS rule. To re-enable, **delete the `#lang-toggle { display: none; }` rule** in two places: `_partials/shared.css` and the inline `<style>` block in `index.html`.
-- **Morning Tea + Night Tea Ceremony pages** — `/morning-tea/` and `/night-tea/` exist in the repo but aren't linked. The seasonal feature card and the two ceremony cards on the hub, plus the "Other experiences" carousel on every workshop, currently link out to `https://maanahomes.com/experiences` (a placeholder). To bring the new pages live, find/replace `https://maanahomes.com/experiences` back to `./morning-tea/` / `./night-tea/` (and `../morning-tea/` / `../night-tea/` for the workshop "Other experiences" links and the `EXPERIENCES_CARDS` list in `_build_workshops.py`), then re-run `python3 _build_workshops.py`.
-- Until then, replace `https://maanahomes.com/experiences` with the actual existing ceremony page URLs on maanahomes.com once those are confirmed.
+- **Morning Tea + Night Tea Ceremony pages** — `/morning-tea/` and `/night-tea/` exist in the repo but aren't linked. The seasonal feature card and the two ceremony cards on the hub, plus the "Other experiences" carousel on every workshop, currently link out to the existing ceremony pages on the live Maana site:
+  - Morning → `https://www.maana.jp/experiences/tea-ceremony`
+  - Night → `https://www.maana.jp/experiences/tea-ceremony-night`
+  
+  To bring the new internal pages live, find/replace those URLs back to `./morning-tea/` / `./night-tea/` (and `../morning-tea/` / `../night-tea/` for the workshop "Other experiences" links and the `EXPERIENCES_CARDS` list in `_build_workshops.py`), then re-run `python3 _build_workshops.py`.
 
 ## Known gaps / handoff notes
 

@@ -55,8 +55,8 @@ EXPERIENCES_CARDS = [
     {'slug':'tea-dye',          'title':'Tea Dye',              'title_jp':'茶染',           'venue':'Maana Atelier',     'venue_jp':'Maana アトリエ',     'img':'showcase-tea-dye.jpg',              'href':'../tea-dye/'},
     {'slug':'botanical-teas',   'title':'Botanical Teas',       'title_jp':'ボタニカルティー','venue':'Maana Atelier',    'venue_jp':'Maana アトリエ',     'img':'showcase-botanical-tea.jpg',        'href':'../botanical-teas/'},
     {'slug':'koji-fermentation','title':'Fermentation',         'title_jp':'コウジ発酵',     'venue':'Maana Atelier',     'venue_jp':'Maana アトリエ',     'img':'showcase-koji-fermentation.jpg',    'href':'../koji-fermentation/'},
-    {'slug':'morning-tea',      'title':'Morning Tea Ceremony', 'title_jp':'朝の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-morning.jpg', 'href':'https://maanahomes.com/experiences'},
-    {'slug':'night-tea',        'title':'Night Tea Ceremony',   'title_jp':'夜の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-night.jpeg',   'href':'https://maanahomes.com/experiences'},
+    {'slug':'morning-tea',      'title':'Morning Tea Ceremony', 'title_jp':'朝の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-morning.jpg', 'href':'https://www.maana.jp/experiences/tea-ceremony'},
+    {'slug':'night-tea',        'title':'Night Tea Ceremony',   'title_jp':'夜の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-night.jpeg',   'href':'https://www.maana.jp/experiences/tea-ceremony-night'},
 ]
 
 def build_experiences_grid(current_slug):
