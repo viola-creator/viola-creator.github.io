@@ -528,9 +528,9 @@ def build(slug, data):
     en_lede = f'Spend {dur_en} at {spend_location_en} with your teacher, guided from start to finish.'
     jp_lede = f'{spend_location_jp}で過ごす{dur_jp}。講師がはじめから終わりまで丁寧にご案内いたします。'
     html = re.sub(
-        r'<span class="lang-en">A quiet 2 hours at the atelier — guided, unhurried, made for arriving without a plan\.</span>\s*<span class="lang-jp">[^<]*</span>',
-        f'<span class="lang-en">{en_lede}</span><span class="lang-jp">{jp_lede}</span>',
-        html, count=1
+        r'<p class="spend-lede">.*?</p>',
+        f'<p class="spend-lede">\n        <span class="lang-en">{en_lede}</span>\n        <span class="lang-jp">{jp_lede}</span>\n      </p>',
+        html, count=1, flags=re.DOTALL
     )
 
     # Craft section
