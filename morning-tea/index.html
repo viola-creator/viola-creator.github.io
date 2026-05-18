@@ -174,7 +174,7 @@
         <div class="time-line">Maana Atelier, Nishijin · Kyoto</div>
       </div>
       <div class="cta-block">
-        <button class="btn-primary"><span class="lang-en">Book Now →</span><span class="lang-jp">ご予約 →</span></button>
+        <button class="btn-primary" id="ns-book"><span class="lang-en">Book Now →</span><span class="lang-jp">ご予約 →</span></button>
       </div>
     </div>
 
@@ -417,6 +417,14 @@ function renderNextSession() {
   document.getElementById('m-nx-date').textContent = `${dowFull}, ${MONTH_LONG[s._d.getMonth()].slice(0,3)} ${s._d.getDate()} · ${s.time}`;
   document.getElementById('closing-next').textContent =
     `Next session: ${dowFull}, ${MONTH_LONG[s._d.getMonth()].slice(0,3)} ${s._d.getDate()} · ${s.time} JST`;
+
+  // Wire the "Book Now" button on the next-available card to open the
+  // side panel pre-loaded with this session (same flow as clicking a
+  // session preview below).
+  const nsBook = document.getElementById('ns-book');
+  if (nsBook) {
+    nsBook.onclick = () => openPanel(s);
+  }
 }
 
 function renderUpcoming() {
