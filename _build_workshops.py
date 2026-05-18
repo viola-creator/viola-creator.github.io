@@ -322,6 +322,7 @@ WORKSHOPS = {
     'sessions_h2':'Morning Tea Ceremony sessions.',
     'sessions_h2_jp': '朝の茶事の日程。',
     'spend_location':'a private tea house',
+    'spend_bg':'images/atelier-2.jpg',
     'hero_bg':'images/hero.jpeg',
     'craft_word':'Asa-chaji',  'craft_kanji':'朝茶事',
     'craft_p1':'In this rare and intimate offering within the world of tea, Tea Master Eriko Okubo welcomes you to her private tea house, where the day begins with a quiet awakening of the senses.',
@@ -390,6 +391,7 @@ WORKSHOPS = {
     'sessions_h2':'Night Tea Ceremony sessions.',
     'sessions_h2_jp': '夜の茶事の日程。',
     'spend_location':'a private tea house',
+    'spend_bg':'images/atelier-2.jpg',
     'hero_bg':'images/hero.jpeg',
     'craft_word':'Yoru-chaji',  'craft_kanji':'夜茶事',
     'craft_p1':'Tea Master Eriko Okubo invites you to a private tea house hidden in a quiet Kyoto neighbourhood. The night unfolds gently — beginning with a seasonal <em>shi-dashi</em> meal prepared in the tradition of tea, accompanied by selected Japanese saké.',
@@ -490,6 +492,15 @@ def build(slug, data):
     html = html.replace(
         '<div class="hero-bg" aria-hidden="true"></div>',
         f'<div class="hero-bg" style="background-image:url(\'{data["hero_bg"]}\')" aria-hidden="true"></div>',
+        1
+    )
+
+    # Spend-section background image — workshops without their own process.jpg
+    # fall back to a shared image (atelier or tea-house).
+    spend_bg = data.get('spend_bg', 'images/process.jpg')
+    html = html.replace(
+        "<div class=\"spend-bg\" style=\"background-image:url('images/process.jpg')\"",
+        f"<div class=\"spend-bg\" style=\"background-image:url('{spend_bg}')\"",
         1
     )
 

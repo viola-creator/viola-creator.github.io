@@ -471,13 +471,13 @@
   /* Kanji sits inline with the title, sharing color and roughly the
      same optical size so the two halves of the heading feel like a pair. */
   .kanji-accent {
-    font-family: var(--serif);
+    font-family: 'Noto Serif JP', var(--serif);
     font-style: normal;
-    font-size: 0.7em;
+    font-size: 0.42em;
     letter-spacing: 0.04em;
     color: var(--ink);
-    margin-left: 0.45em;
-    font-weight: 400;
+    margin-left: 0.6em;
+    font-weight: 300;
     opacity: 0.55;
     /* small optical baseline tweak so the strokes balance the latin descenders */
     position: relative;
@@ -599,13 +599,13 @@
     background-position: center;
     z-index: 0;
     transform: scale(1.08);
-    filter: brightness(0.5);
+    filter: brightness(0.75);
     transition: transform 1.8s var(--ease-out);
   }
   .spend-section.in-view .spend-bg { transform: scale(1); }
   .spend-section::before {
     content:''; position:absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(20,16,12,0.55) 0%, rgba(20,16,12,0.78) 60%, rgba(20,16,12,0.7) 100%);
+    background: linear-gradient(180deg, rgba(20,16,12,0.35) 0%, rgba(20,16,12,0.55) 60%, rgba(20,16,12,0.45) 100%);
     z-index: 1;
   }
   .spend-section .container { position: relative; z-index: 2; }
