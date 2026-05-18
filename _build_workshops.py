@@ -742,15 +742,18 @@ def build(slug, data):
     for i in range(1,13):
         html = html.replace(f"images/guest{i}.jpg", f"../_partials/images/guest{i}.jpg")
 
-    # Sessions h2 + optional intro paragraph below the heading
+    # Sessions h2 + optional intro paragraph below the heading.
+    # Match structurally so it works whether or not the template has
+    # been wrapped in lang-en/lang-jp spans.
     if 'sessions_h2' in data:
         intro_en = data.get('sessions_intro', '')
         intro_jp = data.get('sessions_intro_jp')
         intro_bi = bi(intro_en, intro_jp) if intro_en else ''
         intro_html = f'\n        <p class="sessions-intro">{intro_bi}</p>' if intro_en else ''
-        html = html.replace(
-            '<h2>Earthen Wall sessions.</h2>',
-            f'<h2>{bi_data(data, "sessions_h2")}</h2>{intro_html}'
+        html = re.sub(
+            r'<h2>[^<]*(?:<span[^>]*>[^<]*</span>[^<]*)*Earthen Wall sessions\.[^<]*(?:<span[^>]*>[^<]*</span>[^<]*)*</h2>',
+            f'<h2>{bi_data(data, "sessions_h2")}</h2>{intro_html}',
+            html, count=1
         )
 
 
