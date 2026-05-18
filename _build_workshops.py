@@ -56,7 +56,7 @@ EXPERIENCES_CARDS = [
     {'slug':'botanical-teas',   'title':'Botanical Teas',       'title_jp':'ボタニカルティー','venue':'Maana Atelier',    'venue_jp':'Maana アトリエ',     'img':'showcase-botanical-tea.jpg',        'href':'../botanical-teas/'},
     {'slug':'koji-fermentation','title':'Fermentation',         'title_jp':'コウジ発酵',     'venue':'Maana Atelier',     'venue_jp':'Maana アトリエ',     'img':'showcase-koji-fermentation.jpg',    'href':'../koji-fermentation/'},
     {'slug':'morning-tea',      'title':'Morning Tea Ceremony', 'title_jp':'朝の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-morning.jpg', 'href':'../morning-tea/'},
-    {'slug':'night-tea',        'title':'Night Tea Ceremony',   'title_jp':'夜の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-night.jpg',   'href':'../night-tea/'},
+    {'slug':'night-tea',        'title':'Night Tea Ceremony',   'title_jp':'夜の茶事',       'venue':'Private Tea House', 'venue_jp':'貸切茶室',           'img':'showcase-tea-ceremony-night.jpeg',   'href':'../night-tea/'},
 ]
 
 def build_experiences_grid(current_slug):
@@ -93,7 +93,7 @@ WORKSHOPS = {
     'sessions_h2':'Tea Dye sessions.',
     'sessions_h2_jp': '茶染ワークショップの日程。',
     'gallery_count': 9,
-    'hero_bg': 'images/hero.jpeg',
+    'hero_bg': 'images/hero.png',
     'craft_word':'Cha-zome',  'craft_kanji':'茶染',
     'craft_p1':'For centuries in Japan, tea has played an all-encompassing role — from the sacred and ceremonial to the modern daily ritual. Alongside that history, tea leaves have long been used to dye textiles, a quiet tradition of making the most of what nature provides.',
     'craft_p1_jp': 'お茶は何世紀にもわたり、日本の暮らしのあらゆる場面に寄り添ってきました。神聖な儀礼から日々の習わしまで。その歴史と並んで、茶葉は布を染める素材としても古くから用いられ、自然の恵みを大切に使い切る、静かな伝統が受け継がれてきました。',
@@ -372,7 +372,7 @@ WORKSHOPS = {
 },
 'night-tea': {
     'wk_key':'night',
-    'show_img':'../_partials/images/showcase-tea-ceremony-night.jpg',
+    'show_img':'../_partials/images/showcase-tea-ceremony-night.jpeg',
     'sessions_data':[('2026-07-04', '6:00 PM'), ('2026-07-07', '6:00 PM'), ('2026-07-11', '6:00 PM'), ('2026-07-14', '6:00 PM'), ('2026-07-18', '6:00 PM'), ('2026-07-21', '6:00 PM'), ('2026-07-25', '6:00 PM'), ('2026-07-28', '6:00 PM'), ('2026-08-01', '6:00 PM'), ('2026-08-04', '6:00 PM'), ('2026-08-08', '6:00 PM'), ('2026-08-11', '6:00 PM')],
     'title':   'Night Tea Ceremony & Dinner',
     'desc':    'A summer evening at Hekishoken — tea ceremony by candlelight followed by a seasonal multi-course meal.',
@@ -721,7 +721,7 @@ def build(slug, data):
     for img in ['atelier-2.jpg','kri.jpg','summer.jpg','summer.png',
                 'showcase-tea-dye.jpg','showcase-botanical-tea.jpg',
                 'showcase-koji-fermentation.jpg','showcase-earthen-wall.jpg',
-                'showcase-tea-ceremony-morning.jpg','showcase-tea-ceremony-night.jpg']:
+                'showcase-tea-ceremony-morning.jpg','showcase-tea-ceremony-night.jpeg']:
         html = html.replace(f"images/{img}", f"../_partials/images/{img}")
     # Guest panels (1-12)
     for i in range(1,13):
