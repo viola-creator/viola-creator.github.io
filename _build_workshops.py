@@ -122,8 +122,6 @@ WORKSHOPS = {
         ('iv.','ほどく','結びをほどき、模様が現れる瞬間。旅にお持ち帰りいただきやすいよう包んでお渡しいたします。',''),
     ],
     'partial':'atelier',
-    'sessions_intro':'Tea Dye Workshop runs daily at four start times.',
-    'sessions_intro_jp': '茶染ワークショップは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
     'voices_quotes':[
         {'text': 'I had the most wonderful time. Using Japanese tea leaves and traditional dyeing techniques, I was able to create my own dyed bags — therapeutic, relaxing, and inspiring.', 'name': 'Juan Allison'},
@@ -197,8 +195,6 @@ WORKSHOPS = {
         ('iv.','味わう ・ お持ち帰り','淹れて味わい、感想を分かち合います。残りは袋に詰めてお持ち帰りに。',''),
     ],
     'partial':'atelier',
-    'sessions_intro':'Kyoto Botanical Teas runs daily at four start times.',
-    'sessions_intro_jp': '京都ボタニカルティーは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
     'voices_quotes':[
         {'text': 'The Botanical Tea Workshop was inspiring. The instructors were knowledgeable, and we learned about different plants and tea, their properties, and how to blend them for specific benefits.', 'name': 'Sherry Chan'},
@@ -289,8 +285,6 @@ WORKSHOPS = {
         ('iv.','瓶詰め','コンパクトなガラス瓶に材料を詰めて軽く振り、素材同士を馴染ませます。ラベルを貼って、旅にお持ち帰りいただける仕様にお包みします。',''),
     ],
     'partial':'atelier',
-    'sessions_intro':'Koji Fermentation runs daily at four start times.',
-    'sessions_intro_jp': 'コウジ発酵ワークショップは毎日4つの開始時間からお選びいただけます。',
     'session_times':['9:00 AM','10:00 AM','12:00 PM','3:00 PM'],
     'voices_quotes':[
         {'text': 'One of the highlights of my stay in Kyoto. Our teacher\'s background in anthropology and food science gave context to the cooking, and her warmth and enthusiasm were a pleasure. The setting was stunning.', 'name': 'Laura George'},
