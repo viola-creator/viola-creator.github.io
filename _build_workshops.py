@@ -707,7 +707,7 @@ def build(slug, data):
     )
 
     # Rewrite shared-image refs to use ../_partials/images/
-    for img in ['atelier-2.jpg','kri.jpg','summer.jpg',
+    for img in ['atelier-2.jpg','kri.jpg','summer.jpg','summer.png',
                 'showcase-tea-dye.jpg','showcase-botanical-tea.jpg',
                 'showcase-koji-fermentation.jpg','showcase-earthen-wall.jpg',
                 'showcase-tea-ceremony-morning.jpg','showcase-tea-ceremony-night.jpg']:
