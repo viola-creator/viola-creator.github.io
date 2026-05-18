@@ -231,7 +231,6 @@
     </div>
     <div class="gallery-head">
       <div class="label"><span class="lang-en">Guest panels</span><span class="lang-jp">参加者の作品</span></div>
-      <div class="scroll-hint"><span class="lang-en">Hover to pause · drag to scroll</span><span class="lang-jp">ホバーで停止 ・ ドラッグでスクロール</span></div>
     </div>
     <div class="gallery-marquee" aria-label="Guest panels gallery">
       <div class="gallery-track" id="gallery-track">
@@ -378,6 +377,12 @@
 
 <!-- ===== Mobile CTA (loaded from ../_partials/mobile-cta.html) ===== -->
 <div data-include="../_partials/mobile-cta.html"></div>
+
+<!-- ========== GUEST PANELS LIGHTBOX ========== -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close">×</button>
+  <img class="lightbox__img" id="lightbox-img" src="" alt=""/>
+</div>
 
 <!-- ========== SIDE PANEL ========== --> ========== -->
 <div class="panel-overlay" id="panel-overlay"></div>
@@ -685,6 +690,39 @@ function renderAll() {
   renderMonth();
 }
 renderAll();
+
+/* ===========================================================
+   Guest panels lightbox — click any panel to open it at full size.
+   =========================================================== */
+(function () {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  const close = document.getElementById('lightbox-close');
+  if (!lb || !img) return;
+  function open(src, alt) {
+    img.src = src;
+    img.alt = alt || '';
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function shut() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // Clear src after the transition so we don't briefly show the previous image next open
+    setTimeout(() => { if (!lb.classList.contains('is-open')) img.src = ''; }, 320);
+  }
+  document.querySelectorAll('.gallery-item img').forEach(i => {
+    i.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(i.src, i.alt);
+    });
+  });
+  lb.addEventListener('click', (e) => { if (e.target === lb || e.target === img) shut(); });
+  close && close.addEventListener('click', shut);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') shut(); });
+})();
 
 });
 </script>
