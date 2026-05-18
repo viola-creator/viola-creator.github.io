@@ -180,6 +180,9 @@
     transition: color .25s var(--ease-out);
   }
   .site-nav__lang:hover { color: var(--paper); }
+  /* JP translations are drafted but awaiting native review.
+     Hide the language toggle for now — remove this rule to re-enable. */
+  #lang-toggle { display: none; }
   .site-nav__cta {
     font-family: var(--sans);
     font-size: 11px;
