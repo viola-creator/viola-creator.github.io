@@ -10,12 +10,10 @@
 <style>
   :root {
     --cream: #f1e9d8;
-    --cream-deep: #e7dcc6;
     --paper: #faf5ea;
     --ink: #1a1714;
     --ink-soft: #5a524a;
     --ink-mute: #8b8074;
-    --rule: #ddd2bc;
     --terracotta: #b3744a;
     --terracotta-soft: #d8a679;
     --serif: 'Cormorant Garamond', Georgia, serif;
@@ -23,39 +21,37 @@
     --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; height: 100%; }
   body {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
     font-family: var(--sans);
     font-weight: 400;
-    line-height: 1.6;
-    font-size: 16px;
     -webkit-font-smoothing: antialiased;
+    overflow: hidden;
   }
   a { color: inherit; text-decoration: none; }
   button { font-family: inherit; cursor: pointer; }
-  img { display: block; max-width: 100%; }
 
-  /* ============== TOP NAV (matches the workshop redesign) ============== */
+  /* ============== TOP NAV ============== */
   .site-nav {
     position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 50;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 18px clamp(24px, 4vw, 48px);
-    background: rgba(20, 18, 16, 0.94);
-    backdrop-filter: blur(20px);
+    padding: 22px clamp(24px, 4vw, 48px);
   }
   .site-nav__logo {
     font-family: var(--sans); font-weight: 500;
     font-size: 11px; letter-spacing: 0.35em;
     color: var(--paper);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
   }
   .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
   .site-nav__link {
     font-family: var(--sans);
     font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
     color: rgba(245, 240, 235, 0.7);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     transition: color .25s var(--ease-out);
   }
   .site-nav__link:hover { color: var(--paper); }
@@ -63,234 +59,207 @@
     font-family: var(--sans);
     font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--paper);
-    padding: 10px 20px;
-    border: 1px solid rgba(245, 240, 235, 0.4);
-  }
-  .site-nav__cta--active { background: var(--paper); color: var(--ink); border-color: var(--paper); }
-
-  /* ============== PAGE HEAD ============== */
-  .page-head {
-    padding: 130px clamp(20px, 4vw, 56px) 36px;
-    max-width: 1400px; margin: 0 auto;
-  }
-  .page-head .eyebrow {
-    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--terracotta);
-    display: block; margin-bottom: 14px;
-  }
-  .page-head h1 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-style: italic;
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.1;
-    margin: 0 0 14px;
-    letter-spacing: -0.01em;
-  }
-  .page-head p {
-    color: var(--ink-soft); font-size: 16px; line-height: 1.7;
-    max-width: 56ch; margin: 0;
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.5);
+    background: rgba(0,0,0,0.18);
   }
 
-  /* ============== TWO-COL LAYOUT ============== */
-  .layout {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 24px clamp(20px, 4vw, 56px) clamp(60px, 8vw, 110px);
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
-    gap: clamp(28px, 4vw, 56px);
-    align-items: start;
-  }
-
-  /* ============== IMAGE GRID (LEFT) ============== */
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: 130px;
-    gap: 14px;
-  }
-  .tile {
+  /* ============== STAGE ============== */
+  .stage {
     position: relative;
+    height: 100vh;
+    min-height: 700px;
     overflow: hidden;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: transform .8s var(--ease-out);
   }
-  .tile__img {
+  .stage__slides { position: absolute; inset: 0; }
+  .slide {
     position: absolute; inset: 0;
     background-size: cover;
     background-position: center;
-    transition: transform 1.4s var(--ease-out);
+    opacity: 0;
+    transition: opacity 1.8s var(--ease-out), transform 10s var(--ease-out);
+    transform: scale(1.04);
   }
-  .tile:hover .tile__img { transform: scale(1.05); }
-  .tile__shade {
+  .slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    animation: kenburns 14s ease-in-out forwards;
+  }
+  @keyframes kenburns {
+    0%   { transform: scale(1.0) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-1.5%, -0.8%); }
+  }
+  .stage::after {
+    /* atmospheric gradient — keeps text and booker readable */
+    content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(20,16,12,0) 40%, rgba(20,16,12,0.72) 100%);
+    background:
+      linear-gradient(180deg,
+        rgba(20,16,12,0.42) 0%,
+        rgba(20,16,12,0.18) 25%,
+        rgba(20,16,12,0.20) 55%,
+        rgba(20,16,12,0.78) 100%);
+    pointer-events: none;
   }
-  .tile__tag {
-    position: absolute; left: 16px; bottom: 14px; right: 16px;
+
+  /* ============== CENTERED HEADLINE ============== */
+  .stage__title {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -58%);
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 900px;
+  }
+  .stage__title .eyebrow {
+    display: block;
     font-family: var(--sans);
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: rgba(245,240,235,0.92);
-  }
-  .tile__tag em {
-    font-style: normal; color: var(--terracotta-soft);
-    margin-right: 8px;
-  }
-
-  /* Tile spans for a calm editorial mosaic */
-  .tile--A { grid-column: span 3; grid-row: span 2; }   /* big left */
-  .tile--B { grid-column: span 3; grid-row: span 1; }   /* top right */
-  .tile--C { grid-column: span 2; grid-row: span 1; }
-  .tile--D { grid-column: span 1; grid-row: span 1; }
-  .tile--E { grid-column: span 3; grid-row: span 2; }   /* bottom right */
-  .tile--F { grid-column: span 2; grid-row: span 2; }   /* tall narrow */
-  .tile--G { grid-column: span 1; grid-row: span 1; }
-  .tile--H { grid-column: span 3; grid-row: span 1; }
-
-  /* ============== SIDEBAR (RIGHT) ============== */
-  .booker {
-    position: sticky;
-    top: 100px;
-    background: var(--cream);
-    border-radius: 4px;
-    padding: 28px;
-    box-shadow: 0 30px 60px -32px rgba(20,16,12,0.18);
-  }
-  .booker__eyebrow {
-    font-size: 10px; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 10px;
-  }
-  .booker__title {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-style: italic;
-    font-size: 28px; line-height: 1.2;
-    margin: 0 0 22px;
-  }
-
-  /* Toggle (Staying with us / Day visit only) */
-  .toggle {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--paper);
-    border-radius: 2px;
-    padding: 4px;
+    font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--terracotta-soft);
     margin-bottom: 22px;
-    border: 1px solid var(--rule);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
   }
-  .toggle button {
+  .stage__title h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--paper);
+    text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  }
+  .stage__title p {
+    margin: 22px auto 0;
+    max-width: 48ch;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245,240,235,0.78);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* ============== BOOKER BAR (anchored low) ============== */
+  .booker {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(40px, 6vh, 80px);
+    transform: translateX(-50%);
+    z-index: 3;
+    width: min(940px, calc(100% - 48px));
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(245,240,235,0.18);
+    border-radius: 2px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    gap: 0;
+    align-items: stretch;
+  }
+  .booker__toggle {
+    display: flex; align-items: center; gap: 6px;
+    padding-right: 18px;
+    margin-right: 8px;
+    border-right: 1px solid rgba(245,240,235,0.16);
+  }
+  .booker__toggle button {
     background: transparent;
     border: 0;
-    padding: 10px 12px;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--ink-soft);
-    border-radius: 2px;
+    padding: 8px 12px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(245,240,235,0.55);
+    border-radius: 100px;
+    transition: color .2s, background .2s;
   }
-  .toggle button.is-active {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  /* Dates */
-  .dates {
-    display: grid; grid-template-columns: 1fr 1fr;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  .dates__field { padding: 14px 16px; background: var(--paper); }
-  .dates__field + .dates__field { border-left: 1px solid var(--rule); }
-  .dates__label {
-    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 6px;
-  }
-  .dates__value {
-    font-family: var(--serif);
-    font-style: italic; font-size: 19px; line-height: 1.2;
+  .booker__toggle button.is-active {
     color: var(--ink);
-  }
-
-  /* Mini calendar peek */
-  .cal {
     background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    padding: 14px 16px;
-    margin-bottom: 22px;
   }
-  .cal__head {
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: var(--serif); font-size: 15px;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .cal__nav { color: var(--ink-mute); cursor: pointer; }
-  .cal__dow {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 6px;
-  }
-  .cal__dow span { text-align: center; padding: 3px 0; }
-  .cal__grid {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    font-size: 12px; color: var(--ink);
-  }
-  .cal__grid span {
-    text-align: center;
-    padding: 6px 0;
-    border-radius: 2px;
-  }
-  .cal__grid .past { color: var(--ink-mute); opacity: 0.4; }
-  .cal__grid .pick-start { background: var(--ink); color: var(--paper); }
-  .cal__grid .pick-range { background: var(--cream-deep); }
-  .cal__grid .pick-end { background: var(--ink); color: var(--paper); }
-  .cal__grid .has-event { position: relative; }
-  .cal__grid .has-event::after {
-    content:''; position: absolute; left: 50%; bottom: 3px;
-    transform: translateX(-50%);
-    width: 3px; height: 3px;
-    border-radius: 50%;
-    background: var(--terracotta);
-  }
-
-  /* Submit */
-  .booker__cta {
-    width: 100%;
-    background: var(--ink);
+  .booker__field {
+    padding: 6px 18px;
     color: var(--paper);
+    border-right: 1px solid rgba(245,240,235,0.10);
+    text-align: left;
+  }
+  .booker__label {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,240,235,0.55);
+    margin-bottom: 4px;
+  }
+  .booker__value {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--paper);
+  }
+  .booker__cta {
+    background: var(--paper);
+    color: var(--ink);
     border: 0;
-    padding: 14px;
+    padding: 0 28px;
     font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
     border-radius: 2px;
+    margin-left: 8px;
+    transition: background .25s;
   }
-  .booker__cta:hover { background: #000; }
-  .booker__hint {
-    margin-top: 14px;
-    font-size: 12px; color: var(--ink-mute); line-height: 1.6;
+  .booker__cta:hover { background: #fff; }
+  .booker__cta .arrow { margin-left: 6px; }
+  @media (max-width: 800px) {
+    .booker {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    .booker__toggle {
+      grid-column: span 2;
+      border-right: 0;
+      border-bottom: 1px solid rgba(245,240,235,0.16);
+      padding: 4px 0 12px;
+      margin: 0;
+    }
+    .booker__field {
+      padding: 6px 12px;
+      border-right: 0;
+      border: 1px solid rgba(245,240,235,0.10);
+    }
+    .booker__cta {
+      grid-column: span 2;
+      padding: 14px;
+      margin: 4px 0 0;
+    }
   }
-  .booker__hint strong { color: var(--ink); font-weight: 500; }
 
-  /* ============== RESPONSIVE ============== */
-  @media (max-width: 980px) {
-    .layout { grid-template-columns: 1fr; }
-    .booker { position: static; }
-    .image-grid { grid-auto-rows: 110px; }
+  /* ============== SLIDE INDICATORS ============== */
+  .stage__dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    z-index: 3;
   }
-  @media (max-width: 640px) {
-    .site-nav { padding: 12px 16px; }
-    .site-nav__link { display: none; }
-    .image-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 100px; }
-    .tile--A, .tile--E, .tile--F { grid-column: span 4; grid-row: span 2; }
-    .tile--B, .tile--H { grid-column: span 4; }
-    .tile--C, .tile--D, .tile--G { grid-column: span 2; }
+  .stage__dots span {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(245,240,235,0.32);
+    transition: background .3s, transform .3s;
+  }
+  .stage__dots span.is-active {
+    background: var(--paper);
+    transform: scale(1.3);
+  }
+
+  /* ============== SCROLL HINT ============== */
+  .stage__hint {
+    position: absolute;
+    bottom: 12px; right: 24px;
+    z-index: 2;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,240,235,0.4);
   }
 </style>
 </head>
@@ -303,129 +272,66 @@
     <a class="site-nav__link" href="#">Stay</a>
     <a class="site-nav__link" href="#">Experiences</a>
     <a class="site-nav__link" href="#">Our Story</a>
-    <a class="site-nav__cta site-nav__cta--active" href="#">Book Now</a>
+    <a class="site-nav__cta" href="#">Book Now</a>
   </div>
 </nav>
 
-<!-- =========================== PAGE HEAD ========================= -->
-<section class="page-head">
-  <span class="eyebrow">Book your visit</span>
-  <h1>When are you visiting Kyoto?</h1>
-  <p>Pick your dates and we'll show you what's available — stays across our three machiyas, and the workshops happening on the days you're with us.</p>
-</section>
+<!-- =========================== STAGE ============================ -->
+<section class="stage">
 
-<!-- =========================== MAIN ============================== -->
-<div class="layout">
-
-  <!-- LEFT — editorial imagery grid -->
-  <div class="image-grid">
-
-    <!-- A: big hero — atelier interior -->
-    <div class="tile tile--A">
-      <div class="tile__img" style="background-image:url('../../_partials/images/atelier-2.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Workshops ·</em> Maana Atelier, Nishijin</div>
-    </div>
-
-    <!-- B: showcase tea dye -->
-    <div class="tile tile--B">
-      <div class="tile__img" style="background-image:url('../../_partials/images/showcase-tea-dye.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Experience ·</em> Tea Dye</div>
-    </div>
-
-    <!-- C: showcase koji -->
-    <div class="tile tile--C">
-      <div class="tile__img" style="background-image:url('../../_partials/images/showcase-koji-fermentation.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Experience ·</em> Koji Fermentation</div>
-    </div>
-
-    <!-- D: archive (KRI) -->
-    <div class="tile tile--D">
-      <div class="tile__img" style="background-image:url('../../_partials/images/kri.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Archive ·</em> Materials</div>
-    </div>
-
-    <!-- E: large bottom-right — summer Kyoto -->
-    <div class="tile tile--E">
-      <div class="tile__img" style="background-image:url('../../_partials/images/summer.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Kyoto ·</em> A reason to come</div>
-    </div>
-
-    <!-- F: tall narrow — night tea ceremony (archival / experience) -->
-    <div class="tile tile--F">
-      <div class="tile__img" style="background-image:url('../../_partials/images/showcase-tea-ceremony-night.jpeg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Experience ·</em> Night Tea Ceremony</div>
-    </div>
-
-    <!-- G: archive small -->
-    <div class="tile tile--G">
-      <div class="tile__img" style="background-image:url('../../_partials/images/showcase-earthen-wall.jpg')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Experience ·</em> Earthen Wall</div>
-    </div>
-
-    <!-- H: stay -->
-    <div class="tile tile--H">
-      <div class="tile__img" style="background-image:url('../../earthen-wall/images/takehome-panel.png')"></div>
-      <div class="tile__shade"></div>
-      <div class="tile__tag"><em>Stay ·</em> Maana Kamo, Higashiyama</div>
-    </div>
-
+  <!-- Slowly rotating imagery -->
+  <div class="stage__slides" id="slides">
+    <div class="slide is-active" style="background-image:url('../../_partials/images/atelier-2.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/summer.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-tea-ceremony-night.jpeg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-tea-dye.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-koji-fermentation.jpg')"></div>
   </div>
 
-  <!-- RIGHT — sticky booker -->
-  <aside class="booker">
-    <div class="booker__eyebrow">Choose your dates</div>
-    <h2 class="booker__title">What's available?</h2>
+  <!-- Centered headline -->
+  <div class="stage__title">
+    <span class="eyebrow">Book your visit</span>
+    <h1>When are you<br/>visiting Kyoto?</h1>
+    <p>Pick your dates. We'll show you the stays available, and the workshops happening on the days you're with us.</p>
+  </div>
 
-    <div class="toggle">
+  <!-- Floating booker bar -->
+  <div class="booker">
+    <div class="booker__toggle">
       <button class="is-active">Staying with us</button>
       <button>Day visit only</button>
     </div>
-
-    <div class="dates">
-      <div class="dates__field">
-        <div class="dates__label">Arrive</div>
-        <div class="dates__value">May 18</div>
-      </div>
-      <div class="dates__field">
-        <div class="dates__label">Depart</div>
-        <div class="dates__value">May 21</div>
-      </div>
+    <div class="booker__field">
+      <div class="booker__label">Arrive</div>
+      <div class="booker__value">May 18</div>
     </div>
-
-    <div class="cal">
-      <div class="cal__head">
-        <span class="cal__nav">←</span>
-        <span>May 2026</span>
-        <span class="cal__nav">→</span>
-      </div>
-      <div class="cal__dow">
-        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
-      </div>
-      <div class="cal__grid">
-        <span></span><span></span><span></span><span></span><span></span><span class="past">1</span><span class="past">2</span>
-        <span class="past">3</span><span class="past">4</span><span class="past">5</span><span class="past">6</span><span class="past">7</span><span class="past">8</span><span class="past">9</span>
-        <span class="past">10</span><span class="past">11</span><span class="past">12</span><span class="past">13</span><span class="past">14</span><span class="past">15</span><span class="past">16</span>
-        <span>17</span><span class="pick-start">18</span><span class="pick-range has-event">19</span><span class="pick-range has-event">20</span><span class="pick-end">21</span><span>22</span><span class="has-event">23</span>
-        <span>24</span><span class="has-event">25</span><span>26</span><span class="has-event">27</span><span>28</span><span class="has-event">29</span><span>30</span>
-        <span>31</span>
-      </div>
+    <div class="booker__field">
+      <div class="booker__label">Depart</div>
+      <div class="booker__value">May 21</div>
     </div>
+    <button class="booker__cta">See availability <span class="arrow">→</span></button>
+  </div>
 
-    <button class="booker__cta">See what's available →</button>
+  <!-- Slide indicators -->
+  <div class="stage__dots" id="dots">
+    <span class="is-active"></span><span></span><span></span><span></span><span></span>
+  </div>
 
-    <p class="booker__hint">
-      <strong>3 nights</strong> across our three machiyas, plus <strong>5 workshop sessions</strong> happening during your stay.
-    </p>
-  </aside>
+  <div class="stage__hint">Scroll for more ↓</div>
+</section>
 
-</div>
-
+<script>
+  /* Slow cross-fade through the imagery */
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('#dots span');
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove('is-active');
+    dots[i].classList.remove('is-active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-active');
+    dots[i].classList.add('is-active');
+  }, 6500);
+</script>
 </body>
 </html>
