@@ -674,7 +674,7 @@
   </a>
   <div class="site-nav__links">
     <a class="site-nav__link" href="../Stay/index.html">Stay</a>
-    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Experiences/index.html">Experiences</a>
     <a class="site-nav__link" href="../Shop/index.html">Shop</a>
     <a class="site-nav__cta is-active" href="index.html">Book Now</a>
   </div>
@@ -1083,7 +1083,7 @@
       const empty = document.createElement('div');
       empty.className = 'empty';
       empty.innerHTML = '<p>No workshops fall inside these dates.</p>'
-        + '<p><a href="../Workshop/earthen-wall-redesign/index.html">See the full workshop calendar →</a></p>';
+        + '<p><a href="../Experiences/index.html">See the full workshop calendar →</a></p>';
       grid.appendChild(empty);
     } else {
       const cardTpl = document.getElementById('ws-card');
@@ -1092,7 +1092,7 @@
         const d = ws.date;
         card.querySelector('.dow') || (() => {})();  // safety
         const dateAnchors = card.querySelectorAll('[data-ws-link]');
-        const wsHref = '../Workshop/earthen-wall-redesign/' + ws.slug + '/index.html'
+        const wsHref = '../Experiences/' + ws.slug + '/index.html'
           + '?date=' + d.toISOString().slice(0,10);
         dateAnchors.forEach(a => a.setAttribute('href', wsHref));
 
@@ -1104,7 +1104,7 @@
         dateBlock.setAttribute('href', wsHref);
 
         card.querySelector('.ws-card__media img').src =
-          '../Workshop/earthen-wall-redesign/' + ws.slug + '/images/hero.jpeg';
+          '../Experiences/' + ws.slug + '/images/hero.jpeg';
         card.querySelector('.ws-card__media img').alt = ws.name;
 
         card.querySelector('.ws-card__name').textContent = ws.name;

@@ -1,6 +1,6 @@
 # Maana Experiences
 
-Static site for the experiences hub + six workshop pages, deployed to GitHub Pages at **[viola-creator.github.io/experiences/](https://viola-creator.github.io/experiences/)**.
+Static site for the experiences hub + six workshop pages, deployed to GitHub Pages at **[viola-creator.github.io/experiences/Experiences/](https://viola-creator.github.io/experiences/Experiences/)**. Lives at top level of the sandbox alongside `Stay/`, `Shop/`, and `Book/`.
 
 No framework, no backend, no DB. Vanilla HTML + CSS + a small JS toggle, plus a Python build script that generates 5 of the 6 workshop pages from a single template.
 
