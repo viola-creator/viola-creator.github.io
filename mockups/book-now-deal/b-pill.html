@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book Now (mockup) — Maana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* ============== TOP NAV ============== */
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 11px; letter-spacing: 0.35em;
+    color: var(--paper);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.7);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__cta {
+    font-family: var(--sans);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.5);
+    background: rgba(0,0,0,0.18);
+  }
+
+  /* ============== STAGE ============== */
+  .stage {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+  }
+  .stage__slides { position: absolute; inset: 0; }
+  .slide {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s var(--ease-out), transform 10s var(--ease-out);
+    transform: scale(1.04);
+  }
+  .slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    animation: kenburns 14s ease-in-out forwards;
+  }
+  @keyframes kenburns {
+    0%   { transform: scale(1.0) translate(0, 0); }
+    100% { transform: scale(1.08) translate(-1.5%, -0.8%); }
+  }
+  .stage::after {
+    /* atmospheric gradient — keeps text and booker readable */
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(20,16,12,0.42) 0%,
+        rgba(20,16,12,0.18) 25%,
+        rgba(20,16,12,0.20) 55%,
+        rgba(20,16,12,0.78) 100%);
+    pointer-events: none;
+  }
+
+  /* ============== CENTERED HEADLINE ============== */
+  .stage__title {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -58%);
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 900px;
+  }
+  .stage__title .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px; letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--terracotta-soft);
+    margin-bottom: 22px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+  .stage__title h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--paper);
+    text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  }
+  .stage__title p {
+    margin: 22px auto 0;
+    max-width: 48ch;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(245,240,235,0.78);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* ============== BOOKER BAR (anchored low) ============== */
+  .booker {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(40px, 6vh, 80px);
+    transform: translateX(-50%);
+    z-index: 3;
+    width: min(940px, calc(100% - 48px));
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(245,240,235,0.18);
+    border-radius: 2px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  /* ============== VARIANT B: PILL + SUB-LINE ============== */
+  .booker__deal-pill {
+    position: absolute;
+    top: -13px;
+    left: 24px;
+    background: var(--terracotta);
+    color: var(--paper);
+    padding: 5px 14px 6px;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(20,16,12,0.35);
+  }
+  .booker__deal-pill em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    color: #fff;
+    margin: 0 4px;
+    vertical-align: -1px;
+  }
+  .booker__deal-sub {
+    position: absolute;
+    bottom: -28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--terracotta-soft);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+  @media (max-width: 720px) {
+    .booker__deal-pill {
+      left: 16px;
+      font-size: 8px;
+      padding: 4px 10px 5px;
+      letter-spacing: 0.2em;
+    }
+    .booker__deal-pill em { font-size: 11px; }
+    .booker__deal-sub { font-size: 11px; bottom: -22px; }
+  }
+  .booker__toggle {
+    display: flex; align-items: center; gap: 6px;
+    padding-right: 18px;
+    margin-right: 8px;
+    border-right: 1px solid rgba(245,240,235,0.16);
+  }
+  .booker__toggle button {
+    background: transparent;
+    border: 0;
+    padding: 8px 12px;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(245,240,235,0.55);
+    border-radius: 100px;
+    transition: color .2s, background .2s;
+  }
+  .booker__toggle button.is-active {
+    color: var(--ink);
+    background: var(--paper);
+  }
+  .booker__field {
+    padding: 6px 18px;
+    color: var(--paper);
+    border-right: 1px solid rgba(245,240,235,0.10);
+    text-align: left;
+  }
+  .booker__label {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,240,235,0.55);
+    margin-bottom: 4px;
+  }
+  .booker__value {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--paper);
+  }
+  .booker__cta {
+    background: var(--paper);
+    color: var(--ink);
+    border: 0;
+    padding: 0 28px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    border-radius: 2px;
+    margin-left: 8px;
+    transition: background .25s;
+  }
+  .booker__cta:hover { background: #fff; }
+  .booker__cta .arrow { margin-left: 6px; }
+  @media (max-width: 800px) {
+    .booker {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    .booker__toggle {
+      grid-column: span 2;
+      border-right: 0;
+      border-bottom: 1px solid rgba(245,240,235,0.16);
+      padding: 4px 0 12px;
+      margin: 0;
+    }
+    .booker__field {
+      padding: 6px 12px;
+      border-right: 0;
+      border: 1px solid rgba(245,240,235,0.10);
+    }
+    .booker__cta {
+      grid-column: span 2;
+      padding: 14px;
+      margin: 4px 0 0;
+    }
+  }
+
+  /* ============== SLIDE INDICATORS ============== */
+  .stage__dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+    z-index: 3;
+  }
+  .stage__dots span {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(245,240,235,0.32);
+    transition: background .3s, transform .3s;
+  }
+  .stage__dots span.is-active {
+    background: var(--paper);
+    transform: scale(1.3);
+  }
+
+  /* ============== SCROLL HINT ============== */
+  .stage__hint {
+    position: absolute;
+    bottom: 12px; right: 24px;
+    z-index: 2;
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245,240,235,0.4);
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================== TOP NAV =========================== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="/">M A A N A</a>
+  <div class="site-nav__links">
+    <a class="site-nav__link" href="#">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="#">Our Story</a>
+    <a class="site-nav__cta" href="#">Book Now</a>
+  </div>
+</nav>
+
+<!-- =========================== STAGE ============================ -->
+<section class="stage">
+
+  <!-- Slowly rotating imagery -->
+  <div class="stage__slides" id="slides">
+    <div class="slide is-active" style="background-image:url('../../_partials/images/atelier-2.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/summer.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-tea-ceremony-night.jpeg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-tea-dye.jpg')"></div>
+    <div class="slide"           style="background-image:url('../../_partials/images/showcase-koji-fermentation.jpg')"></div>
+  </div>
+
+  <!-- Centered headline -->
+  <div class="stage__title">
+    <span class="eyebrow">Book your visit</span>
+    <h1>When are you<br/>visiting Kyoto?</h1>
+    <p>Pick your dates. We'll show you the stays available, and the workshops happening on the days you're with us.</p>
+  </div>
+
+  <!-- Floating booker bar (with deal pill) -->
+  <div class="booker">
+    <span class="booker__deal-pill">Summer <em>·</em> 4th night free</span>
+    <div class="booker__toggle">
+      <button class="is-active">Staying with us</button>
+      <button>Day visit only</button>
+    </div>
+    <div class="booker__field">
+      <div class="booker__label">Arrive</div>
+      <div class="booker__value">May 18</div>
+    </div>
+    <div class="booker__field">
+      <div class="booker__label">Depart</div>
+      <div class="booker__value">May 21</div>
+    </div>
+    <button class="booker__cta">See availability <span class="arrow">→</span></button>
+    <div class="booker__deal-sub">Stay 3+ nights, your 4th is on us. Workshops 10% off with your stay.</div>
+  </div>
+
+  <!-- Slide indicators -->
+  <div class="stage__dots" id="dots">
+    <span class="is-active"></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="stage__hint">Scroll for more ↓</div>
+</section>
+
+<script>
+  /* Slow cross-fade through the imagery */
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('#dots span');
+  let i = 0;
+  setInterval(() => {
+    slides[i].classList.remove('is-active');
+    dots[i].classList.remove('is-active');
+    i = (i + 1) % slides.length;
+    slides[i].classList.add('is-active');
+    dots[i].classList.add('is-active');
+  }, 6500);
+</script>
+</body>
+</html>
