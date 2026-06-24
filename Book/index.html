@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book your visit · Maana</title>
+<meta name="description" content="Choose your dates and we'll show you stays and workshops happening while you're with us in Kyoto." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; min-height: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+
+  /* ============== NAV (matches the rest of the site) ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo { display: inline-flex; align-items: center; height: 18px; }
+  .site-nav__logo img { height: 100%; width: auto; filter: brightness(0) invert(1); }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__link.is-active { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); letter-spacing: 0.26em; }
+
+  /* ============== BOOKER HERO ============== */
+  .booker-hero {
+    background: var(--paper);
+    padding: clamp(56px, 9vh, 110px) 0 60px;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+  }
+  .booker-hero__top {
+    text-align: center;
+    margin-bottom: clamp(28px, 4vh, 50px);
+  }
+  .booker-hero__eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .booker-hero__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(28px, 3.6vw, 46px);
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+  }
+  @media (max-width: 540px) {
+    .booker-hero__title {
+      font-size: clamp(22px, 5.5vw, 32px);
+      white-space: normal;
+    }
+  }
+
+  /* ============== BOOKER BAR ============== */
+  .booker {
+    position: relative;
+    margin: 0 auto;
+    max-width: 920px;
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 30px 60px rgba(20, 16, 12, 0.06);
+    display: grid;
+    grid-template-columns: auto 1fr 1fr auto;
+    align-items: stretch;
+  }
+  .booker__toggle {
+    display: flex; align-items: center; gap: 4px;
+    padding: 14px 16px;
+    border-right: 1px solid var(--rule);
+  }
+  .booker__toggle button {
+    background: transparent;
+    border: 0;
+    padding: 9px 14px;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    border-radius: 100px;
+    transition: color .2s, background .2s;
+  }
+  .booker__toggle button.is-active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .booker__toggle button:hover:not(.is-active) { color: var(--ink); }
+
+  .booker__field {
+    position: relative;
+    padding: 16px 22px;
+    border: 0;
+    border-right: 1px solid var(--rule);
+    background: transparent;
+    text-align: left;
+    transition: background .2s;
+    color: var(--ink);
+  }
+  .booker__field:hover { background: var(--cream); }
+  .booker__field.is-active { background: var(--cream); }
+  .booker__label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .booker__value {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .booker__value--empty { color: var(--ink-mute); font-style: italic; }
+
+  .booker__cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 0;
+    padding: 0 32px;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .booker__cta:hover { background: var(--terracotta); letter-spacing: 0.3em; }
+
+  @media (max-width: 800px) {
+    .booker { grid-template-columns: 1fr 1fr; gap: 0; }
+    .booker__toggle {
+      grid-column: span 2;
+      border-right: 0;
+      border-bottom: 1px solid var(--rule);
+      justify-content: center;
+    }
+    .booker__field { border-right: 0; }
+    .booker__field:first-of-type { border-right: 1px solid var(--rule); }
+    .booker__field:nth-of-type(2) { border-bottom: 1px solid var(--rule); }
+    .booker__field:first-of-type { border-bottom: 1px solid var(--rule); }
+    .booker__cta { grid-column: span 2; padding: 16px; justify-content: center; }
+  }
+
+  /* ============== CALENDAR POPUP ============== */
+  .calendar {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0; right: 0;
+    margin: 0 auto;
+    max-width: 380px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 40px 80px rgba(20, 16, 12, 0.20);
+    padding: 22px;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+  }
+  .calendar.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .calendar__head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .calendar__nav {
+    background: transparent;
+    border: 1px solid var(--rule);
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    color: var(--ink);
+    font-size: 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background .25s, border-color .25s, color .25s;
+  }
+  .calendar__nav:hover:not(:disabled) {
+    background: var(--ink); color: var(--paper); border-color: var(--ink);
+  }
+  .calendar__nav:disabled { opacity: 0.3; cursor: not-allowed; }
+  .calendar__month {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+  .calendar__weekdays,
+  .calendar__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .calendar__weekdays span {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    padding: 6px 0;
+    font-weight: 500;
+  }
+  .calendar__day {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    aspect-ratio: 1/1;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink);
+    border-radius: 50%;
+    text-align: center;
+    transition: background .15s, color .15s;
+  }
+  .calendar__day:hover:not(:disabled):not(.calendar__day--arrive):not(.calendar__day--depart) {
+    background: var(--cream);
+  }
+  .calendar__day:disabled { color: var(--rule); cursor: not-allowed; }
+  .calendar__day--out { color: var(--rule); }
+  .calendar__day--in-range {
+    background: var(--cream-deep);
+    border-radius: 0;
+  }
+  .calendar__day--arrive,
+  .calendar__day--depart {
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .calendar__day--arrive { border-radius: 50% 0 0 50%; }
+  .calendar__day--depart { border-radius: 0 50% 50% 0; }
+  .calendar__day--arrive.calendar__day--depart { border-radius: 50%; }
+  .calendar__day--today {
+    box-shadow: inset 0 0 0 1px var(--terracotta);
+  }
+  .calendar__hint {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .calendar__hint strong { color: var(--terracotta); font-weight: 500; }
+
+  /* ============== BOTTOM (browse fallback) ============== */
+  .booker-foot {
+    margin-top: auto;
+    padding-top: clamp(48px, 8vh, 100px);
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 13px;
+  }
+  .booker-foot p { margin: 0; }
+  .booker-foot a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-mute);
+    padding-bottom: 2px;
+    transition: color .25s, border-color .25s;
+  }
+  .booker-foot a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 36px 0;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== MOBILE NAV ============== */
+  @media (max-width: 800px) {
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 16px; }
+    .site-nav__links { gap: 12px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV (consistent with Stay/Shop) ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link" href="../Stay/index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Shop/index.html">Shop</a>
+    <a class="site-nav__cta is-active" href="index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== BOOKER HERO ============== -->
+<main class="booker-hero">
+  <div class="container">
+    <div class="booker-hero__top">
+      <span class="booker-hero__eyebrow">Book your visit</span>
+      <h1 class="booker-hero__title">When are you visiting Kyoto?</h1>
+    </div>
+
+    <div class="booker" id="booker">
+      <div class="booker__toggle" role="tablist" aria-label="Booking type">
+        <button type="button" data-mode="stay" class="is-active" role="tab" aria-selected="true">Staying with us</button>
+        <button type="button" data-mode="workshop" role="tab" aria-selected="false">Workshop only</button>
+      </div>
+
+      <button type="button" class="booker__field" id="arriveField" data-field="arrive" aria-label="Choose arrival date">
+        <span class="booker__label">Arrive</span>
+        <span class="booker__value" id="arriveValue">Pick a date</span>
+      </button>
+
+      <button type="button" class="booker__field" id="departField" data-field="depart" aria-label="Choose departure date">
+        <span class="booker__label">Depart</span>
+        <span class="booker__value" id="departValue">Pick a date</span>
+      </button>
+
+      <button type="button" class="booker__cta" id="bookerCta">
+        See availability <span aria-hidden="true">→</span>
+      </button>
+
+      <!-- Calendar popup -->
+      <div class="calendar" id="calendar" role="dialog" aria-label="Calendar">
+        <div class="calendar__head">
+          <button class="calendar__nav" id="calPrev" type="button" aria-label="Previous month">←</button>
+          <span class="calendar__month" id="calMonth"></span>
+          <button class="calendar__nav" id="calNext" type="button" aria-label="Next month">→</button>
+        </div>
+        <div class="calendar__weekdays" aria-hidden="true">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+        <div class="calendar__days" id="calDays"></div>
+        <div class="calendar__hint" id="calHint"><strong>Pick</strong> your arrival</div>
+      </div>
+    </div>
+
+    <div class="booker-foot">
+      <p>Not sure yet? <a href="../Stay/index.html">Browse our properties →</a></p>
+    </div>
+  </div>
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+(function() {
+  /* ---------- elements ---------- */
+  const arriveField  = document.getElementById('arriveField');
+  const departField  = document.getElementById('departField');
+  const arriveValue  = document.getElementById('arriveValue');
+  const departValue  = document.getElementById('departValue');
+  const calendar     = document.getElementById('calendar');
+  const calMonth     = document.getElementById('calMonth');
+  const calDays      = document.getElementById('calDays');
+  const calPrev      = document.getElementById('calPrev');
+  const calNext      = document.getElementById('calNext');
+  const calHint      = document.getElementById('calHint');
+  const bookerCta    = document.getElementById('bookerCta');
+  const toggleBtns   = document.querySelectorAll('.booker__toggle button');
+
+  /* ---------- state ---------- */
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  // Defaults: about a month out, 3 nights
+  let arrive = new Date(today); arrive.setDate(arrive.getDate() + 30);
+  let depart = new Date(today); depart.setDate(depart.getDate() + 33);
+  let viewMonth = new Date(arrive.getFullYear(), arrive.getMonth(), 1);
+  let picking = 'arrive';
+  let mode = 'stay';
+
+  /* ---------- helpers ---------- */
+  const monthName = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const shortMo   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmtField  = d => d ? shortMo[d.getMonth()] + ' ' + d.getDate() : 'Pick a date';
+  const fmtMonth  = d => monthName[d.getMonth()] + ' ' + d.getFullYear();
+  const stripTime = d => { const x = new Date(d); x.setHours(0,0,0,0); return x; };
+  const sameDay   = (a, b) => a && b && a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  const between   = (d, a, b) => a && b && d > a && d < b;
+
+  /* ---------- field labels ---------- */
+  function updateFields() {
+    arriveValue.textContent = fmtField(arrive);
+    departValue.textContent = fmtField(depart);
+    arriveValue.classList.toggle('booker__value--empty', !arrive);
+    departValue.classList.toggle('booker__value--empty', !depart);
+  }
+
+  /* ---------- calendar render ---------- */
+  function renderCalendar() {
+    calMonth.textContent = fmtMonth(viewMonth);
+    const firstOfMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), 1);
+    const startDow = firstOfMonth.getDay();
+    const daysInMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 0).getDate();
+    const daysInPrev = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), 0).getDate();
+
+    calDays.innerHTML = '';
+
+    // Don't allow navigating before current month
+    const isCurrentOrBefore = viewMonth.getFullYear() < today.getFullYear() ||
+      (viewMonth.getFullYear() === today.getFullYear() && viewMonth.getMonth() <= today.getMonth());
+    calPrev.disabled = isCurrentOrBefore;
+
+    for (let i = 0; i < 42; i++) {
+      const dayIdx = i - startDow + 1;
+      let date, isOut = false;
+
+      if (dayIdx < 1) {
+        date = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, daysInPrev + dayIdx);
+        isOut = true;
+      } else if (dayIdx > daysInMonth) {
+        date = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, dayIdx - daysInMonth);
+        isOut = true;
+      } else {
+        date = new Date(viewMonth.getFullYear(), viewMonth.getMonth(), dayIdx);
+      }
+      date = stripTime(date);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'calendar__day';
+      btn.textContent = date.getDate();
+
+      if (isOut) btn.classList.add('calendar__day--out');
+      if (date < today) btn.disabled = true;
+      if (sameDay(date, today)) btn.classList.add('calendar__day--today');
+      if (sameDay(date, arrive)) btn.classList.add('calendar__day--arrive');
+      if (sameDay(date, depart)) btn.classList.add('calendar__day--depart');
+      if (between(date, arrive, depart)) btn.classList.add('calendar__day--in-range');
+
+      btn.addEventListener('click', e => { e.stopPropagation(); selectDate(date); });
+      calDays.appendChild(btn);
+    }
+  }
+
+  /* ---------- open/close ---------- */
+  function openCalendar(which) {
+    picking = which;
+    arriveField.classList.toggle('is-active', which === 'arrive');
+    departField.classList.toggle('is-active', which === 'depart');
+    calHint.innerHTML = which === 'arrive'
+      ? '<strong>Pick</strong> your arrival'
+      : '<strong>Pick</strong> your departure';
+    // Snap to the relevant month
+    const anchor = which === 'arrive' ? (arrive || today) : (depart || arrive || today);
+    viewMonth = new Date(anchor.getFullYear(), anchor.getMonth(), 1);
+    renderCalendar();
+    calendar.classList.add('is-open');
+  }
+  function closeCalendar() {
+    calendar.classList.remove('is-open');
+    arriveField.classList.remove('is-active');
+    departField.classList.remove('is-active');
+  }
+
+  /* ---------- selection ---------- */
+  function selectDate(date) {
+    if (picking === 'arrive') {
+      arrive = date;
+      // If depart is now invalid, push it forward (default 3-night stay)
+      if (!depart || depart <= arrive) {
+        depart = new Date(arrive); depart.setDate(depart.getDate() + 3);
+      }
+      updateFields();
+      renderCalendar();
+      // Auto-advance to depart picking
+      picking = 'depart';
+      arriveField.classList.remove('is-active');
+      departField.classList.add('is-active');
+      calHint.innerHTML = '<strong>Pick</strong> your departure';
+    } else {
+      if (date <= arrive) {
+        // Earlier than arrive — treat as new arrive
+        arrive = date;
+        depart = new Date(arrive); depart.setDate(depart.getDate() + 3);
+      } else {
+        depart = date;
+      }
+      updateFields();
+      renderCalendar();
+      setTimeout(closeCalendar, 220);
+    }
+  }
+
+  /* ---------- field clicks ---------- */
+  arriveField.addEventListener('click', e => {
+    e.stopPropagation();
+    if (calendar.classList.contains('is-open') && picking === 'arrive') closeCalendar();
+    else openCalendar('arrive');
+  });
+  departField.addEventListener('click', e => {
+    e.stopPropagation();
+    if (calendar.classList.contains('is-open') && picking === 'depart') closeCalendar();
+    else openCalendar('depart');
+  });
+
+  /* ---------- calendar nav ---------- */
+  calPrev.addEventListener('click', e => {
+    e.stopPropagation();
+    viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() - 1, 1);
+    renderCalendar();
+  });
+  calNext.addEventListener('click', e => {
+    e.stopPropagation();
+    viewMonth = new Date(viewMonth.getFullYear(), viewMonth.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+  /* ---------- click outside closes ---------- */
+  document.addEventListener('click', e => {
+    if (!calendar.contains(e.target) &&
+        !arriveField.contains(e.target) &&
+        !departField.contains(e.target)) {
+      closeCalendar();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeCalendar();
+  });
+
+  /* ---------- toggle ---------- */
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      mode = btn.dataset.mode;
+    });
+  });
+
+  /* ---------- CTA → availability results page ---------- */
+  bookerCta.addEventListener('click', () => {
+    const params = new URLSearchParams({
+      arrive: arrive ? arrive.toISOString().slice(0,10) : '',
+      depart: depart ? depart.toISOString().slice(0,10) : '',
+      mode: mode
+    });
+    window.location.href = 'availability.html?' + params.toString();
+  });
+
+  /* ---------- read URL params on load (so "Change dates" round-trips) ---------- */
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramArrive = urlParams.get('arrive');
+  const paramDepart = urlParams.get('depart');
+  const paramMode = urlParams.get('mode');
+  if (paramArrive) { const d = new Date(paramArrive + 'T00:00:00'); if (!isNaN(d)) arrive = d; }
+  if (paramDepart) { const d = new Date(paramDepart + 'T00:00:00'); if (!isNaN(d)) depart = d; }
+  if (paramMode === 'workshop') {
+    toggleBtns.forEach(b => {
+      b.classList.toggle('is-active', b.dataset.mode === 'workshop');
+      b.setAttribute('aria-selected', b.dataset.mode === 'workshop' ? 'true' : 'false');
+    });
+    mode = 'workshop';
+  }
+  if (arrive) viewMonth = new Date(arrive.getFullYear(), arrive.getMonth(), 1);
+
+  /* ---------- initial ---------- */
+  updateFields();
+})();
+</script>
+</body>
+</html>

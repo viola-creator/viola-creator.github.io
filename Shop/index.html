@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maana Living — The Shop</title>
+<meta name="description" content="Maana Living is a small shop in Kyoto's Higashiyama district carrying ceramics, candles, antiques, and homeware from craftsmen across Japan. Opened September 2025 within Maana Atelier. Named one of TIME's World's Greatest Places 2026. Open daily 10am to 5pm." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- Structured data for AI search and crawlers -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Maana Living",
+  "alternateName": "Maana Living Shop",
+  "description": "A small shop within Maana Atelier in Kyoto's Higashiyama district, carrying ceramics, candles, antiques, and homeware from craftsmen across Japan.",
+  "foundingDate": "2025-09",
+  "url": "https://www.maana.jp/shop",
+  "image": "https://www.maana.jp/shop/og.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Higashiyama Ward",
+    "addressLocality": "Kyoto",
+    "addressRegion": "Kyoto",
+    "addressCountry": "JP"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "10:00",
+    "closes": "17:00"
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "Maana",
+    "url": "https://www.maana.jp"
+  },
+  "award": [
+    "Named one of TIME's World's Greatest Places 2026"
+  ]
+}
+</script>
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.55;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* Wide container — matches the hero's 7vw side padding so all sections line up. */
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+  .container-narrow { max-width: 1000px; margin: 0 auto; padding: 0 clamp(28px, 7vw, 140px); }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* ============== NAV ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo {
+    display: inline-flex; align-items: center;
+    height: 22px;
+  }
+  .site-nav__logo img {
+    height: 100%; width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); }
+
+  /* ============== HERO (simple video, no scroll animation) ============== */
+  .hero-flow {
+    position: relative;
+    height: 100vh;
+    background: var(--ink);
+    margin-top: -74px;
+    overflow: hidden;
+  }
+  .hero-flow__sticky {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+  }
+  .hero-flow__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .hero-flow__media video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .hero-flow__media::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(20,16,12,1);
+    opacity: calc(0.42 * (1 - var(--p)));
+    pointer-events: none;
+  }
+  /* Title overlay — centred on the video, no scroll animation */
+  .hero-flow__title {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: var(--paper);
+    z-index: 4;
+    pointer-events: none;
+    padding: 0 24px;
+    width: min(1100px, calc(100% - 48px));
+  }
+  .hero-flow__title-initial {
+    /* always visible */
+  }
+  .hero-flow__title-initial .wordmark {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--terracotta-soft);
+    margin-bottom: 28px;
+  }
+  .hero-flow__title-initial h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-shadow: 0 4px 28px rgba(0,0,0,0.35);
+  }
+  .hero-flow__title-initial .cats {
+    display: block;
+    margin-top: 36px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(245,240,235,0.85);
+  }
+  .hero-flow__title-initial .cats em {
+    font-style: normal;
+    color: var(--terracotta-soft);
+    margin: 0 8px;
+  }
+  /* Scroll hint at bottom */
+  .hero-flow__hint {
+    position: absolute;
+    bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(245,240,235,0.7);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    z-index: 4;
+  }
+  /* Summer Kyoto state removed entirely — no scroll animation. */
+  .hero-flow__title-final { display: none; }
+
+  /* ============== BRAND STORY (photo + text side-by-side) ============== */
+  .story {
+    background: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0 clamp(48px, 5vw, 90px);
+  }
+  .story__inner {
+    display: grid;
+    grid-template-columns: 0.95fr 1fr;
+    gap: clamp(40px, 5vw, 90px);
+    align-items: center;
+  }
+  .story__img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    width: 100%;
+  }
+  .story__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .story__accolade {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 7px 14px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--terracotta);
+    border: 1px solid var(--terracotta);
+    border-radius: 100px;
+    line-height: 1.3;
+  }
+  .story__text p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(20px, 1.9vw, 28px);
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0 0 18px;
+    max-width: 42ch;
+  }
+  .story__text p.note {
+    font-size: clamp(14px, 1.1vw, 16px);
+    color: var(--ink-mute);
+    max-width: 42ch;
+    line-height: 1.6;
+    margin: 22px 0 28px;
+  }
+  .story__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .story__link .arrow {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    transition: background .25s, color .25s;
+  }
+  .story__link:hover .arrow { background: var(--ink); color: var(--paper); }
+
+  /* ============== FEATURED ARTIST ============== */
+  .artist {
+    background: var(--paper);
+    padding: clamp(48px, 5vw, 80px) 0 clamp(40px, 4vw, 70px);
+  }
+  /* Section header above the studio image — matches Our favourites pattern */
+  .artist__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: clamp(28px, 3.4vw, 44px);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .artist__header h2 {
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(40px, 4.4vw, 60px);
+    margin: 0;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .artist__header .sub {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: block;
+  }
+  .artist__header .sub .kanji {
+    text-transform: none;
+    letter-spacing: 0.15em;
+    margin: 0 2px;
+  }
+  .artist__header .sub .dot {
+    margin: 0 8px;
+    color: var(--rule);
+  }
+  .artist__hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    min-height: 480px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .artist__hero img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+  .artist__hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(95deg, rgba(20,16,12,0.66) 0%, rgba(20,16,12,0.28) 55%, rgba(20,16,12,0.05) 100%);
+    pointer-events: none;
+  }
+  .artist__overlay {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: clamp(28px, 6vw, 90px);
+    right: clamp(28px, 6vw, 90px);
+    transform: translateY(-50%);
+    color: #fff;
+    max-width: 640px;
+  }
+  /* Refined editorial title — Cormorant Garamond at regular weight,
+     no italic, gentle hierarchy. Less Bauhaus, more masthead. */
+  .artist__overlay h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(54px, 6.2vw, 96px);
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-transform: none;
+    margin: 0 0 22px;
+    color: #fff;
+  }
+  .artist__overlay h2 .last {
+    font-weight: 300;
+    display: block;
+  }
+  .artist__overlay .meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+  }
+  .artist__overlay .meta .rule {
+    flex: 0 0 36px;
+    height: 1px;
+    background: rgba(255,255,255,0.55);
+  }
+  .artist__overlay .meta .kanji {
+    text-transform: none;
+    letter-spacing: 0.15em;
+    margin: 0 2px;
+  }
+  .artist__overlay .meta .dot {
+    color: rgba(255,255,255,0.35);
+    margin: 0 2px;
+  }
+  .artist__overlay p {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(14px, 1.15vw, 16px);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.92);
+    margin: 0 0 14px;
+    max-width: 50ch;
+  }
+  .artist__overlay p:last-child { margin-bottom: 0; }
+  /* Carousel sits below the hero overlay */
+  .artist__carousel-wrap {
+    margin-top: clamp(40px, 4vw, 64px);
+  }
+
+  /* Photo carousel — arrow controlled, NOT scroll-driven */
+  .carousel {
+    position: relative;
+  }
+  .carousel__head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 22px;
+  }
+  .carousel__label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .carousel__controls {
+    display: flex; gap: 10px;
+    align-items: center;
+  }
+  .carousel__counter {
+    font-size: 11px;
+    color: var(--ink-mute);
+    font-family: var(--serif);
+    font-style: italic;
+    min-width: 50px;
+    text-align: center;
+  }
+  .carousel__btn {
+    width: 38px; height: 38px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    transition: background .25s, border-color .25s, color .25s;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .carousel__btn:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .carousel__btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .carousel__viewport {
+    overflow: hidden;
+  }
+  .carousel__track {
+    display: flex;
+    gap: clamp(14px, 1.6vw, 22px);
+    transition: transform .7s var(--ease-out);
+    will-change: transform;
+  }
+  /* Show 3 items plus a peek of the 4th, so users know there's more. */
+  .carousel__item {
+    flex: 0 0 calc((100% - 3 * clamp(14px, 1.6vw, 22px)) / 3.35);
+    margin: 0;
+  }
+  .carousel__item-img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .carousel__item-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+  .carousel__item:hover .carousel__item-img img { transform: scale(1.04); }
+  .carousel__cap {
+    margin-top: 12px;
+  }
+  .carousel__cap .name {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    display: block;
+  }
+  .carousel__cap .desc {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    display: block;
+  }
+
+  /* Sign-off after artist body — sans-serif, no italic, to match Bauhaus mode */
+  .artist__signoff {
+    text-align: center;
+    margin-top: clamp(40px, 4vw, 64px);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(14px, 1.1vw, 17px);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .artist__signoff a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-mute);
+  }
+  .artist__signoff a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== SCROLL-TRIGGERED REVEAL — more pronounced ============== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+
+  /* Staggered children — favourites cards rise in sequence */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1.3s var(--ease-out), transform 1.3s var(--ease-out);
+  }
+  .stagger.is-visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(2) { transition-delay: 0.18s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(3) { transition-delay: 0.36s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(4) { transition-delay: 0.54s; opacity: 1; transform: translateY(0); }
+
+  /* MASAKO HERO: constant slow ken-burns for cinematic feel */
+  .artist__hero img {
+    transition: transform 1.4s var(--ease-out);
+    animation: ken-burns 22s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+  @keyframes ken-burns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.06) translate(-1.2%, -0.8%); }
+  }
+  /* Hover pauses the drift and locks zoom in */
+  .artist__hero:hover img { animation-play-state: paused; }
+
+  /* Mini-workshop hover: image zooms + card lifts slightly */
+  .mini-workshop {
+    transition: transform .45s var(--ease-out);
+  }
+  .mini-workshop:hover { transform: translateY(-4px); }
+  .mini-workshop__thumb img { transition: transform 1.4s var(--ease-out); }
+  .mini-workshop:hover .mini-workshop__thumb img { transform: scale(1.08); }
+  .mini-workshop__cap .name { transition: color .3s; }
+  .mini-workshop:hover .mini-workshop__cap .name { color: var(--terracotta-soft); }
+
+  /* Favourites cards — image zooms, caption lifts a touch */
+  .fav { transition: transform .4s var(--ease-out); }
+  .fav:hover { transform: translateY(-4px); }
+  .fav__img img { transition: transform 1.6s var(--ease-out); }
+  .fav:hover .fav__img img { transform: scale(1.05); }
+
+  /* Atelier feature image slow zoom on hover */
+  .atelier__feature-img img { transition: transform 1.6s var(--ease-out); }
+  .atelier__feature-img:hover img { transform: scale(1.04); }
+
+  /* Atelier badge gentle lift */
+  .atelier__badge {
+    transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+  }
+  .atelier__feature-img:hover .atelier__badge {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(20, 16, 12, 0.28);
+  }
+
+  /* Story link circle arrow — slide + invert */
+  .story__link .arrow {
+    transition: background .3s var(--ease-out), color .3s var(--ease-out), transform .4s var(--ease-out);
+  }
+  .story__link:hover .arrow { transform: translateX(8px); }
+
+  /* Nav cta micro — letter-spacing breath on hover */
+  .site-nav__cta { transition: background .25s, color .25s, letter-spacing .25s; }
+  .site-nav__cta:hover { letter-spacing: 0.26em; }
+
+  /* Page-load fade-in for the hero text */
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translate(-50%, calc(-50% + 24px)); }
+    to   { opacity: 1; transform: translate(-50%, -50%); }
+  }
+  .hero-flow__title-initial {
+    animation: hero-rise 1.6s var(--ease-out) 0.3s both;
+  }
+  @keyframes hint-fade {
+    from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+    to   { opacity: 0.7; transform: translateX(-50%) translateY(0); }
+  }
+  .hero-flow__hint {
+    animation: hint-fade 1.4s var(--ease-out) 1.2s both;
+  }
+
+  /* See-all and inline links — soft hover */
+  .favs__head .see-all,
+  .availability a,
+  .atelier__feature-text .link {
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .favs__head .see-all:hover,
+  .availability a:hover,
+  .atelier__feature-text .link:hover {
+    letter-spacing: 0.3em;
+  }
+
+  /* Hidden bento grid styles preserved below in case useful */
+  .artist__objects {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+  .obj-card { position: relative; overflow: hidden; }
+  .obj-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+  .obj-card:hover img { transform: scale(1.04); }
+  .obj-card__cap {
+    margin-top: 14px;
+  }
+  .obj-card__cap .name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink);
+    display: block;
+  }
+  .obj-card__cap .desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    margin-top: 4px;
+    display: block;
+  }
+  .obj-card__cap .maker {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    display: block;
+  }
+  .obj-card.wrapper { display: flex; flex-direction: column; }
+
+  /* Masako bento spans */
+  .span-5 { grid-column: span 5; }
+  .span-7 { grid-column: span 7; }
+  .span-4 { grid-column: span 4; }
+  .span-6 { grid-column: span 6; }
+  .span-8 { grid-column: span 8; }
+  .span-3 { grid-column: span 3; }
+  .tall-1 { aspect-ratio: 4/5; }
+  .tall-2 { aspect-ratio: 5/6; }
+  .wide-1 { aspect-ratio: 5/4; }
+  .wide-2 { aspect-ratio: 6/4; }
+  .square { aspect-ratio: 1/1; }
+
+  /* ============== BROWSE / OTHER OBJECTS ============== */
+  /* ============== OUR FAVOURITES (Provider-store-style cards) ============== */
+  .favs {
+    padding: clamp(48px, 5vw, 90px) 0;
+    background: var(--paper);
+  }
+  .favs__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: clamp(40px, 5vw, 64px);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .favs__head h2 {
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(40px, 4.4vw, 60px);
+    margin: 0;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .favs__head .sub {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: block;
+  }
+  .favs__head .see-all {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color .25s, border-color .25s;
+  }
+  .favs__head .see-all:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* Grid: equal image heights, varied column widths.
+     Images are bigger so columns fill space instead of leaving gaps. */
+  .favs__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1.3fr;
+    gap: clamp(22px, 2.4vw, 36px);
+    align-items: start;
+  }
+  .fav { display: flex; flex-direction: column; }
+  .fav__img {
+    height: clamp(440px, 58vw, 680px);   /* taller — less cropping, less empty space below */
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .fav__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .fav:hover .fav__img img { transform: scale(1.04); }
+  .fav__body { padding: 22px 0 0; }
+  .fav__label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .fav__name {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .fav__desc {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* ============== AT THE ATELIER — WORKSHOPS CROSS-LINK ============== */
+  .atelier {
+    padding: 0 0 clamp(56px, 6vw, 90px);
+    background: var(--paper);
+  }
+  .atelier__header {
+    border-top: 1px solid var(--rule);
+    padding-top: clamp(40px, 5vw, 70px);
+    margin-bottom: clamp(32px, 4vw, 56px);
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .atelier__header h2 {
+    font-family: var(--serif);
+    font-style: normal;
+    font-weight: 400;
+    font-size: clamp(40px, 4.4vw, 60px);
+    margin: 0;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .atelier__header .sub {
+    display: none;
+  }
+
+  /* Featured workshop block — Koji */
+  .atelier__feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(36px, 4vw, 70px);
+    align-items: center;
+  }
+  .atelier__feature-img {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+  .atelier__feature-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 2s var(--ease-out);
+  }
+  .atelier__feature-img:hover img { transform: scale(1.03); }
+
+  /* The "tux" — small decorated badge sitting on the corner of the block.
+     Mostly a label, with a thin terracotta accent line. */
+  .atelier__badge {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: var(--paper);
+    padding: 14px 18px 12px;
+    box-shadow: 0 8px 24px rgba(20, 16, 12, 0.18);
+    max-width: 220px;
+    border-left: 3px solid var(--terracotta);
+  }
+  .atelier__badge .pct {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .atelier__badge .body {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+  .atelier__badge .note {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin-top: 8px;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  /* Right-side text block */
+  .atelier__feature-text .eyebrow {
+    display: block;
+    margin-bottom: 14px;
+    color: var(--terracotta);
+  }
+  .atelier__feature-text h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(30px, 3.6vw, 46px);
+    line-height: 1.05;
+    margin: 0 0 22px;
+    color: var(--ink);
+    max-width: 18ch;
+  }
+  .atelier__feature-text p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 20px);
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 44ch;
+    margin: 0 0 16px;
+  }
+  .atelier__feature-text p em { font-style: italic; color: var(--terracotta); }
+  .atelier__feature-text .link {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color .25s, border-color .25s;
+  }
+  .atelier__feature-text .link:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* Related workshops — bigger image cards with overlay text */
+  .atelier__related {
+    margin-top: clamp(40px, 4vw, 64px);
+    padding-top: clamp(28px, 3vw, 44px);
+    border-top: 1px solid var(--rule);
+  }
+  .atelier__related-head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 22px;
+    display: block;
+  }
+  .atelier__related-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;                   /* very close together */
+  }
+  .mini-workshop {
+    position: relative;
+    display: block;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--ink);
+    color: #fff;
+  }
+  .mini-workshop__thumb {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+  .mini-workshop__thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .mini-workshop:hover .mini-workshop__thumb img { transform: scale(1.05); }
+  .mini-workshop::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.78) 100%);
+    pointer-events: none;
+  }
+  .mini-workshop__cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    z-index: 2;
+    padding: 20px 18px;
+  }
+  .mini-workshop__cap .name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(20px, 1.7vw, 24px);
+    color: #fff;
+    display: block;
+    line-height: 1.15;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+  }
+  .mini-workshop__cap .sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(255,255,255,0.86);
+    line-height: 1.45;
+    display: block;
+    margin-top: 6px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+  }
+
+  /* ============== SEARCH MOMENT ============== */
+  .search {
+    background: var(--cream);
+    padding: clamp(48px, 6vw, 90px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+  .search .eyebrow { display: block; margin-bottom: 14px; }
+  .search h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(36px, 5vw, 60px);
+    margin: 0 0 26px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .search p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.55;
+    max-width: 48ch;
+    margin: 0 auto 36px;
+    color: var(--ink-soft);
+  }
+  .search__form {
+    display: flex; justify-content: center;
+    max-width: 520px;
+    margin: 0 auto 24px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .search__form input {
+    flex: 1;
+    border: 0;
+    background: transparent;
+    padding: 14px 6px;
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--ink);
+    outline: none;
+  }
+  .search__form input::placeholder {
+    color: var(--ink-mute);
+    font-style: italic;
+  }
+  .search__form button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 0 14px;
+    color: var(--ink);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: 500;
+  }
+  .search__cta {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 14px 36px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-family: var(--sans);
+    font-weight: 500;
+    transition: background .25s;
+  }
+  .search__cta:hover { background: var(--terracotta); }
+
+  /* ============== VISIT / LOCATION ============== */
+  .visit {
+    padding: clamp(56px, 6vw, 100px) 0;
+    background: var(--paper);
+  }
+  .visit__inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(40px, 5vw, 80px);
+    align-items: stretch;
+  }
+  .visit__text .eyebrow { display: block; margin-bottom: 14px; }
+  .visit__text h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(36px, 5vw, 60px);
+    margin: 0 0 28px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .visit__details {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: grid;
+    gap: 24px;
+  }
+  .visit__details dt {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .visit__details dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--ink);
+    line-height: 1.45;
+  }
+  .visit__neighbors {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .visit__neighbors a {
+    border-bottom: 1px solid var(--ink-mute);
+    transition: border-color .25s, color .25s;
+  }
+  .visit__neighbors a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+  .visit__map {
+    background: var(--cream-deep);
+    aspect-ratio: 1/1;
+    min-height: 380px;
+    overflow: hidden;
+  }
+  .visit__map iframe {
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  /* ============== CLOSING / GEO ============== */
+  .closing {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0;
+    text-align: center;
+  }
+  .closing .eyebrow { color: var(--terracotta-soft); display: block; margin-bottom: 20px; }
+  .closing p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(19px, 2vw, 26px);
+    line-height: 1.55;
+    max-width: 56ch;
+    margin: 0 auto;
+    color: rgba(245, 240, 235, 0.88);
+  }
+  .closing p em {
+    font-style: italic;
+    color: var(--terracotta-soft);
+  }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 40px 0;
+    border-top: 1px solid rgba(245, 240, 235, 0.1);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 800px) {
+    .site-nav { padding: 18px 20px; }
+    .site-nav__links { gap: 14px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 9px 14px; }
+
+    .hero-flow { height: 100vh; }
+    .hero-flow__title-initial h1 { font-size: clamp(46px, 12vw, 78px); }
+
+    /* Artist hero: scale down, ensure text fits */
+    .artist__hero { aspect-ratio: 4/5; min-height: 540px; }
+    .artist__hero img { object-position: center 30%; }
+    .artist__hero::after {
+      background: linear-gradient(180deg, rgba(20,16,12,0.18) 30%, rgba(20,16,12,0.78) 100%);
+    }
+    .artist__overlay {
+      top: auto; bottom: 28px;
+      left: 24px; right: 24px;
+      transform: none;
+    }
+    .artist__overlay h2 { font-size: clamp(36px, 9vw, 56px); }
+    .artist__overlay .meta { gap: 8px; font-size: 9px; letter-spacing: 0.2em; flex-wrap: wrap; }
+    .artist__overlay .meta .rule { display: none; }
+
+    .visit__inner { grid-template-columns: 1fr; }
+    .favs__grid { grid-template-columns: 1fr; gap: 40px; }
+    .fav__img { height: clamp(280px, 70vw, 460px); }
+    .story__inner { grid-template-columns: 1fr; gap: 28px; }
+    .story__img { aspect-ratio: 16/11; }
+    .atelier__feature { grid-template-columns: 1fr; gap: 28px; }
+    .atelier__feature-img { aspect-ratio: 4/3; }
+    .atelier__badge { padding: 12px 14px; max-width: 180px; }
+    .atelier__badge .pct { font-size: 22px; }
+    .atelier__related-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .mini-workshop__cap { padding: 14px 12px; }
+    .mini-workshop__cap .name { font-size: 17px; }
+    .mini-workshop__cap .sub { font-size: 10px; }
+    .visit__map { min-height: 280px; aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="#" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link" href="../Stay/index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="#" style="color: var(--paper);">Shop</a>
+    <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== HERO (simple video, no scroll animation) ============== -->
+<section class="hero-flow" id="heroFlow">
+  <div class="hero-flow__sticky">
+
+    <div class="hero-flow__media">
+      <video autoplay muted loop playsinline preload="auto" poster="Products/shop vibe.jpg">
+        <source src="shop vibe.MOV" type="video/quicktime" />
+        <source src="shop vibe.MOV" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="hero-flow__title hero-flow__title-initial">
+      <span class="wordmark">Maana Living</span>
+      <h1>Lived in <em>aesthetics</em>.</h1>
+      <span class="cats">Homeware <em>·</em> Furniture <em>·</em> Antiques</span>
+    </div>
+
+    <span class="hero-flow__hint">Scroll ↓</span>
+
+  </div>
+</section>
+
+<!-- ============== BRAND STORY (photo + text side-by-side) ============== -->
+<section class="story reveal">
+  <div class="container">
+    <div class="story__inner">
+      <div class="story__img">
+        <img src="Products/shop vibe 2.jpg" alt="Inside Maana Living" />
+      </div>
+      <div class="story__text">
+        <p>Maana Living opened in September 2025, a small shop within the Maana Atelier in Kyoto's Higashiyama. We bring together pieces from craftsmen across Japan whose stories moved us — objects made to slow down a day, not fill a cart.</p>
+        <p class="note">In 2026, Maana was named one of TIME's World's Greatest Places. Each piece in the shop is chosen by hand and rotated with the season.</p>
+        <a class="story__link" href="#">
+          Read our story
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FEATURED ARTIST ============== -->
+<section class="artist reveal">
+  <div class="container">
+
+    <!-- Section header — matches Our favourites pattern -->
+    <header class="artist__header">
+      <div>
+        <h2>Featured Artist</h2>
+      </div>
+    </header>
+
+    <!-- Studio image with editorial text overlaid -->
+    <div class="artist__hero">
+      <img src="Masako Nakagami/Masako studio.jpg" alt="Masako Nakagami in her studio" />
+      <div class="artist__overlay">
+        <h2>Masako<span class="last">Nakagami</span></h2>
+        <p>Her teapots and tea caddies are part of every Maana room — handmade from clay gathered in the mountains outside Kyoto.</p>
+        <p>We're grateful to carry Masako-san's work at Maana Living, alongside pieces by Japanese artists and makers whose work rarely travels beyond Japan.</p>
+      </div>
+    </div>
+
+    <!-- Arrow-driven carousel for her work -->
+    <div class="artist__carousel-wrap carousel" id="masakoCarousel">
+      <div class="carousel__head">
+        <span class="carousel__label">Her work</span>
+        <div class="carousel__controls">
+          <span class="carousel__counter" id="masakoCounter">1 / 2</span>
+          <button class="carousel__btn" id="masakoPrev" aria-label="Previous">←</button>
+          <button class="carousel__btn" id="masakoNext" aria-label="Next">→</button>
+        </div>
+      </div>
+      <div class="carousel__viewport">
+        <div class="carousel__track" id="masakoTrack">
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Teapot.jpg" alt="Stoneware teapot" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Teapot</span>
+              <span class="desc">Wheel-thrown stoneware.</span>
+            </figcaption>
+          </figure>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Pitcher.jpg" alt="Stoneware pitcher" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Pitcher</span>
+              <span class="desc">Wide spout, comfortable handle.</span>
+            </figcaption>
+          </figure>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Serving Bowl.jpg" alt="Iron-slip serving bowl" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Serving bowl</span>
+              <span class="desc">Iron slip.</span>
+            </figcaption>
+          </figure>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Soy Sauce Cruet.jpg" alt="Soy sauce cruet" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Soy sauce cruet</span>
+              <span class="desc">Weighted base, pours without drip.</span>
+            </figcaption>
+          </figure>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Container.jpg" alt="Lidded container" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Tea caddy</span>
+              <span class="desc">For leaves, salt, things kept dry.</span>
+            </figcaption>
+          </figure>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Masako Nakagami/Container top.jpeg" alt="Lid detail" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Lid detail</span>
+              <span class="desc">The same form, with a fitted lid.</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== BROWSE / OTHER OBJECTS ============== -->
+<!-- ============== OUR FAVOURITES (Provider-store-style) ============== -->
+<section class="favs">
+  <div class="container">
+
+    <div class="favs__head reveal">
+      <div>
+        <h2>Our favourites</h2>
+      </div>
+      <a class="see-all" href="all.html">View all ↗</a>
+    </div>
+
+    <div class="favs__grid stagger">
+
+      <article class="fav">
+        <div class="fav__img">
+          <img src="Products/大與 Daiyo candle.jpg" alt="Haze tree wax candles by Daiyo" />
+        </div>
+        <div class="fav__body">
+          <span class="fav__label">Candles</span>
+          <h3 class="fav__name">Daiyo haze wax candles</h3>
+          <p class="fav__desc">Made from the wax of the haze tree, a Japanese tradition that goes back centuries. Cleaner burn, softer flame. We keep a few scents at a time, rotating with the season.</p>
+        </div>
+      </article>
+
+      <article class="fav">
+        <div class="fav__img">
+          <img src="Products/銀猫 Ginneko utensils.jpg" alt="Brass kitchen tools by Ginneko" />
+        </div>
+        <div class="fav__body">
+          <span class="fav__label">Tableware</span>
+          <h3 class="fav__name">Brass kitchen tools by Ginneko</h3>
+          <p class="fav__desc">Spoons, scoops, and small ladles cast in Toyama. The weight is the point. They become habits in the hand.</p>
+        </div>
+      </article>
+
+      <article class="fav">
+        <div class="fav__img">
+          <img src="Products/冨部咲喜子 Sakiko Tomibe.jpg" alt="Porcelain vessels by Sakiko Tomibe" />
+        </div>
+        <div class="fav__body">
+          <span class="fav__label">Antiques and vessels</span>
+          <h3 class="fav__name">Pieces by Japanese makers</h3>
+          <p class="fav__desc">Hand-built porcelain by Sakiko Tomibe, stoneware by Katsuhisa Kobayashi, and a small rotation of antiques we've gathered from Kyoto and beyond.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== AT THE ATELIER — WORKSHOPS CROSS-LINK ============== -->
+<section class="atelier reveal">
+  <div class="container">
+
+    <header class="atelier__header">
+      <div>
+        <h2>From the atelier</h2>
+      </div>
+    </header>
+
+    <!-- Featured workshop: Koji Fermentation -->
+    <div class="atelier__feature">
+      <div class="atelier__feature-img">
+        <img src="Masako Nakagami/149.jpg" alt="Koji fermentation workshop at Maana Atelier" />
+        <!-- "Tux" — small decorated badge -->
+        <aside class="atelier__badge">
+          <span class="pct">15% off</span>
+          <span class="body">your workshop</span>
+          <span class="note">When you shop at Maana Living.</span>
+        </aside>
+      </div>
+      <div class="atelier__feature-text">
+        <span class="eyebrow">From Maana Atelier · 麹</span>
+        <h3>Koji Fermentation Workshop</h3>
+        <p>Spend an afternoon at Maana Atelier learning <em>shio-koji</em> and <em>shoyu-koji</em> from one of our teachers, and take home two labeled jars of your own to bring this small ritual into your own kitchen.</p>
+        <a class="link" href="#">About the workshop →</a>
+      </div>
+    </div>
+
+    <!-- Related workshops — bigger overlay cards -->
+    <div class="atelier__related">
+      <span class="atelier__related-head">Also food and table</span>
+      <div class="atelier__related-grid">
+
+        <a class="mini-workshop" href="#">
+          <div class="mini-workshop__thumb">
+            <img src="../Workshop/earthen-wall-redesign/botanical-teas/images/hero.jpeg" alt="" />
+          </div>
+          <div class="mini-workshop__cap">
+            <span class="name">Botanical Teas</span>
+            <span class="sub">Blend a personal tea with seasonal Kyoto botanicals.</span>
+          </div>
+        </a>
+
+        <a class="mini-workshop" href="#">
+          <div class="mini-workshop__thumb">
+            <img src="../Workshop/earthen-wall-redesign/_partials/images/showcase-tea-ceremony-morning.jpg" alt="" />
+          </div>
+          <div class="mini-workshop__cap">
+            <span class="name">Morning Tea Ceremony</span>
+            <span class="sub">Asa-chaji, with a Zen monk's breakfast.</span>
+          </div>
+        </a>
+
+        <a class="mini-workshop" href="#">
+          <div class="mini-workshop__thumb">
+            <img src="../Workshop/earthen-wall-redesign/_partials/images/showcase-tea-ceremony-night.jpeg" alt="" />
+          </div>
+          <div class="mini-workshop__cap">
+            <span class="name">Night Tea Ceremony</span>
+            <span class="sub">Yo-chaji, by candlelight. Seasonal, limited seats.</span>
+          </div>
+        </a>
+
+        <a class="mini-workshop" href="#">
+          <div class="mini-workshop__thumb">
+            <img src="../Workshop/earthen-wall-redesign/koji-fermentation/images/process.jpg" alt="" />
+          </div>
+          <div class="mini-workshop__cap">
+            <span class="name">Koji Fermentation</span>
+            <span class="sub">The full afternoon, hands-on.</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== SEARCH MOMENT ============== -->
+<section class="search reveal">
+  <div class="container-narrow">
+    <span class="eyebrow">Or</span>
+    <h2>Looking for something specific?</h2>
+    <p>Most of what we carry doesn't make it to the website. The shop holds objects that change with the season. If you have something in mind, write to us before you visit and we'll set it aside.</p>
+    <form class="search__form" onsubmit="event.preventDefault(); window.location='mailto:info@maana.jp?subject=' + encodeURIComponent('Maana Living inquiry: ' + this.querySelector('input').value);">
+      <input type="text" placeholder="e.g. a tea bowl for a small kitchen…" aria-label="What you're looking for" />
+      <button type="submit">Ask →</button>
+    </form>
+    <a class="search__cta" href="mailto:info@maana.jp?subject=Maana%20Living%20inquiry">Send us a message</a>
+  </div>
+</section>
+
+<!-- ============== VISIT ============== -->
+<section class="visit reveal">
+  <div class="container">
+    <div class="visit__inner">
+      <div class="visit__text">
+        <span class="eyebrow">Where to find us</span>
+        <h2>Visit Maana Living</h2>
+        <dl class="visit__details">
+          <div>
+            <dt>Hours</dt>
+            <dd>Daily, 10am to 5pm</dd>
+          </div>
+          <div>
+            <dt>Address</dt>
+            <dd>Higashiyama Ward, Kyoto<br/>Next door to Maana Kiyomizu</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd>info@maana.jp</dd>
+          </div>
+        </dl>
+        <div class="visit__neighbors">
+          Right beside <a href="https://www.maana.jp/kiyomizu">Maana Kiyomizu</a> suites and <a href="https://www.maana.jp/dine">Kissa Kishin</a>, our morning kissa. Easy walk from Kiyomizu-dera and the Kamogawa river.
+        </div>
+      </div>
+      <div class="visit__map">
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Maana+Living+Kyoto&output=embed"
+          title="Maana Living location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CLOSING / GEO ============== -->
+<section class="closing reveal">
+  <div class="container-narrow">
+    <span class="eyebrow">About Maana Living</span>
+    <p>
+      <em>Maana Living</em> is a soulful collection of art, antiques, and everyday objects we love. The shop opened in September 2025 in Kyoto's Higashiyama district, within the Maana Atelier. It is inspired by the homes and quiet lifestyles of craftsmen around Japan – where living in harmony with nature and devotion to craft feel so natural and deeply human. Effortless. Tasteful.
+    </p>
+    <p style="margin-top: 1.5em;">
+      Their stories moved us, and their pieces remind us everyday to be present. This is our way of sharing that inspiration—through objects that invite you to slow down, return to yourself, and discover beauty in the present moment.
+    </p>
+    <p style="margin-top: 1.5em;">
+      In 2026, Maana was named one of TIME's World's Greatest Places.
+    </p>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+  /* Scroll-triggered fade-in for .reveal and .stagger */
+  const revealEls = document.querySelectorAll('.reveal, .stagger');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach((el) => obs.observe(el));
+
+  /* Hero scroll animation disabled — video plays in a static 100vh hero. */
+
+  /* =============================================================
+     Masako carousel: arrow-button driven, NOT scroll-tied.
+     User can flip through her work without disrupting page scroll.
+     ============================================================= */
+  (function() {
+    const track = document.getElementById('masakoTrack');
+    const prev = document.getElementById('masakoPrev');
+    const next = document.getElementById('masakoNext');
+    const counter = document.getElementById('masakoCounter');
+    if (!track || !prev || !next) return;
+
+    const items = track.children.length;
+
+    function visiblePerPage() {
+      if (window.matchMedia('(max-width: 560px)').matches) return 1;
+      if (window.matchMedia('(max-width: 900px)').matches) return 2;
+      return 3;
+    }
+
+    function pageCount() { return Math.max(1, Math.ceil(items / visiblePerPage())); }
+
+    /* Page shift = (item width + gap) × visible-per-page. Uses the actual
+       rendered item width, so the peek-of-4th layout still snaps cleanly. */
+    function getPageShift() {
+      const cs = getComputedStyle(track);
+      const gap = parseFloat(cs.gap || cs.columnGap || '0');
+      const firstItem = track.children[0];
+      if (!firstItem) return 0;
+      const itemW = firstItem.getBoundingClientRect().width;
+      return (itemW + gap) * visiblePerPage();
+    }
+
+    let page = 0;
+    function update() {
+      const maxPage = pageCount() - 1;
+      if (page > maxPage) page = maxPage;
+      track.style.transform = `translateX(-${page * getPageShift()}px)`;
+      prev.disabled = page === 0;
+      next.disabled = page === maxPage;
+      counter.textContent = (page + 1) + ' / ' + pageCount();
+    }
+
+    prev.addEventListener('click', () => { page = Math.max(0, page - 1); update(); });
+    next.addEventListener('click', () => { page = Math.min(pageCount() - 1, page + 1); update(); });
+    window.addEventListener('resize', () => { update(); });
+    update();
+  })();
+</script>
+
+</body>
+</html>

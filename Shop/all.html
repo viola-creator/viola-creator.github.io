@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All objects — Maana Living</title>
+<meta name="description" content="Browse the full selection at Maana Living — ceramics, candles, antiques, and everyday objects from craftsmen across Japan. Visit us in Kyoto." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+
+  /* ============== NAV (matches main shop page) ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo {
+    display: inline-flex; align-items: center;
+    height: 22px;
+  }
+  .site-nav__logo img {
+    height: 100%; width: auto;
+    filter: brightness(0) invert(1);
+  }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); letter-spacing: 0.26em; }
+
+  /* ============== PAGE HEADER ============== */
+  .page-head {
+    padding: clamp(56px, 6vw, 100px) 0 clamp(32px, 4vw, 56px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-head__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .page-head .back {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+    transition: color .2s;
+  }
+  .page-head .back:hover { color: var(--terracotta); }
+  .page-head h1 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 4.8vw, 64px);
+    margin: 0 0 14px;
+    line-height: 1;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .page-head .sub {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: block;
+  }
+  .page-head .count {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .page-head .count strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ============== PRODUCT GRID ============== */
+  .products {
+    padding: clamp(40px, 5vw, 70px) 0 clamp(60px, 7vw, 110px);
+  }
+  .products__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(24px, 2.4vw, 40px) clamp(18px, 1.8vw, 28px);
+  }
+  .product {
+    display: flex;
+    flex-direction: column;
+  }
+  .product__img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--cream);
+    margin-bottom: 14px;
+  }
+  .product__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .product:hover .product__img img { transform: scale(1.04); }
+  .product__name {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    margin: 0 0 4px;
+    line-height: 1.35;
+  }
+  .product__maker {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    margin: 0 0 8px;
+    line-height: 1.45;
+  }
+  .product__price {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============== AVAILABILITY NOTE ============== */
+  .availability {
+    margin-top: clamp(48px, 6vw, 90px);
+    padding: clamp(28px, 3vw, 44px) clamp(28px, 3vw, 44px);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .availability p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(17px, 1.5vw, 21px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin: 0 auto 14px;
+  }
+  .availability a {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    font-weight: 500;
+  }
+  .availability a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 40px 0;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 1100px) {
+    .products__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .products__grid { grid-template-columns: repeat(2, 1fr); }
+    .site-nav { padding: 18px 20px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 9px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="index.html" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link" href="../Stay/index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="index.html" style="color: var(--paper);">Shop</a>
+    <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== PAGE HEADER ============== -->
+<header class="page-head">
+  <div class="container">
+    <a class="back" href="index.html">← Maana Living</a>
+    <div class="page-head__inner">
+      <div>
+        <h1>All objects.</h1>
+        <span class="sub">A view of what's in the shop right now</span>
+      </div>
+      <span class="count"><strong>13</strong> pieces</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============== PRODUCT GRID ============== -->
+<section class="products">
+  <div class="container">
+    <div class="products__grid">
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Teapot.jpg" alt="Stoneware teapot" /></div>
+        <h3 class="product__name">Stoneware teapot</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥28,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Pitcher.jpg" alt="Stoneware pitcher" /></div>
+        <h3 class="product__name">Stoneware pitcher</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥22,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Serving Bowl.jpg" alt="Iron-slip serving bowl" /></div>
+        <h3 class="product__name">Iron-slip serving bowl</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥16,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Soy Sauce Cruet.jpg" alt="Soy sauce cruet" /></div>
+        <h3 class="product__name">Soy sauce cruet</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥9,800</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Container.jpg" alt="Lidded container" /></div>
+        <h3 class="product__name">Lidded container</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥18,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Masako Nakagami/Container top.jpeg" alt="Tea caddy" /></div>
+        <h3 class="product__name">Tea caddy</h3>
+        <p class="product__maker">Masako Nakagami</p>
+        <p class="product__price">¥19,500</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/大與 Daiyo candle.jpg" alt="Haze wax candle" /></div>
+        <h3 class="product__name">Haze wax candle</h3>
+        <p class="product__maker">大與 Daiyo</p>
+        <p class="product__price">¥6,200</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/大與 Daiyo candle2.jpeg" alt="Haze wax candle, second scent" /></div>
+        <h3 class="product__name">Haze wax candle · cedar</h3>
+        <p class="product__maker">大與 Daiyo</p>
+        <p class="product__price">¥6,400</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/銀猫 Ginneko utensils.jpg" alt="Brass kitchen tools" /></div>
+        <h3 class="product__name">Brass kitchen tools</h3>
+        <p class="product__maker">銀猫 Ginneko</p>
+        <p class="product__price">¥7,500</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/冨部咲喜子 Sakiko Tomibe.jpg" alt="Porcelain vessel" /></div>
+        <h3 class="product__name">Porcelain vessel</h3>
+        <p class="product__maker">冨部 咲喜子 Sakiko Tomibe</p>
+        <p class="product__price">¥24,800</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/Katsuhisa Kobayashi .jpeg" alt="Stoneware jar" /></div>
+        <h3 class="product__name">Stoneware jar</h3>
+        <p class="product__maker">Katsuhisa Kobayashi</p>
+        <p class="product__price">¥21,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/vase.jpg" alt="Single-stem vase" /></div>
+        <h3 class="product__name">Single-stem vase</h3>
+        <p class="product__maker">Japan</p>
+        <p class="product__price">¥14,000</p>
+      </article>
+
+      <article class="product">
+        <div class="product__img"><img src="Products/Japanese Binding Notebook.jpg" alt="Hand-bound notebook" /></div>
+        <h3 class="product__name">Hand-bound notebook</h3>
+        <p class="product__maker">Kyoto paper mill</p>
+        <p class="product__price">¥3,800</p>
+      </article>
+
+    </div>
+
+    <!-- Availability note -->
+    <div class="availability">
+      <p>What's online is only part of what's in the shop. Selection changes with the season.</p>
+      <a href="index.html#visit">Visit Maana Living →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+</body>
+</html>

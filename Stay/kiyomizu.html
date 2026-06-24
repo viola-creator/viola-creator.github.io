@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maana Kiyomizu · Three machiya suites in Higashiyama</title>
+<meta name="description" content="Maana Kiyomizu: three individual machiya suites in Kyoto's Higashiyama district, next door to Kissa Kishin café and the Maana Living shop. Near Kiyomizu-dera. Choose your suite, 2 to 4 guests." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 130px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+  .container-narrow {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 56px);
+  }
+
+  /* ============== NAV ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo { display: inline-flex; align-items: center; height: 18px; }
+  .site-nav__logo img { height: 100%; width: auto; filter: brightness(0) invert(1); }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__link.is-active { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); letter-spacing: 0.26em; }
+
+  /* ============== STICKY SUB-NAV ============== */
+  .subnav {
+    position: sticky;
+    top: 74px;
+    z-index: 40;
+    background: rgba(250, 245, 234, 0.94);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 0;
+  }
+  .subnav__inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px; flex-wrap: nowrap;
+  }
+  .subnav__links {
+    display: flex; gap: clamp(18px, 2.4vw, 36px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .subnav__links::-webkit-scrollbar { display: none; }
+  .subnav__link {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color .2s;
+  }
+  .subnav__link:hover { color: var(--ink); }
+  .subnav__link.is-active { color: var(--ink); border-bottom: 1px solid var(--terracotta); padding-bottom: 4px; }
+
+  /* ============== BACK BAR ============== */
+  .back-bar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+  }
+  .back-bar__inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    transition: gap .25s, color .25s;
+  }
+  .back-link:hover { color: var(--terracotta); gap: 16px; }
+  .back-link .arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    font-size: 14px;
+    transition: background .25s, color .25s, border-color .25s;
+  }
+  .back-link:hover .arrow { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .breadcrumb {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .breadcrumb a {
+    border-bottom: 1px solid var(--ink-mute);
+    transition: color .25s, border-color .25s;
+  }
+  .breadcrumb a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== HERO — three-suite collage ============== */
+  /* Different from Kyoto/Kamo: hero is a triptych of the 3 suites stacked
+     horizontally, with a single title overlaid at the bottom. */
+  .hero {
+    position: relative;
+    height: clamp(540px, 78vh, 760px);
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .hero__triptych {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .hero__cell {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .hero__cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 6s var(--ease-out);
+  }
+  .hero__cell:hover img { transform: scale(1.04); }
+  .hero__cell-label {
+    position: absolute;
+    top: 24px; left: 24px;
+    z-index: 2;
+    background: rgba(20,16,12,0.7);
+    color: #fff;
+    padding: 6px 12px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 50%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.85) 100%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero__overlay {
+    position: absolute;
+    bottom: clamp(36px, 5vw, 72px);
+    left: clamp(28px, 7vw, 140px);
+    right: clamp(28px, 7vw, 140px);
+    z-index: 3;
+    color: var(--paper);
+  }
+  .hero__eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    padding: 8px 14px;
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .hero__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(56px, 7vw, 110px);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    margin: 0 0 16px;
+    color: var(--paper);
+    text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  }
+  .hero__sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: rgba(245, 240, 235, 0.88);
+    max-width: 64ch;
+  }
+
+  /* ============== SECTION HEAD (shared) ============== */
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: clamp(28px, 3vw, 44px);
+    gap: 24px; flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(34px, 3.8vw, 48px);
+    line-height: 1;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .section-head .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+
+  /* ============== STORY ============== */
+  .story {
+    background: var(--paper);
+    padding: clamp(64px, 7vw, 100px) 0 clamp(48px, 6vw, 80px);
+  }
+  .story p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .story p:last-child { margin-bottom: 0; }
+
+  /* ============== THREE SUITES (the heart of this page) ============== */
+  .suites {
+    background: var(--cream);
+    padding: clamp(64px, 7vw, 110px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .suites__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 2vw, 36px);
+  }
+  .suite-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    display: flex; flex-direction: column;
+    transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out), border-color .35s;
+  }
+  .suite-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(20, 16, 12, 0.10);
+    border-color: var(--terracotta-soft);
+  }
+  .suite-card__img {
+    position: relative;
+    aspect-ratio: 5/6;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .suite-card__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease-out);
+  }
+  .suite-card:hover .suite-card__img img { transform: scale(1.04); }
+  .suite-card__num {
+    position: absolute;
+    top: 18px; left: 18px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 14px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 2;
+  }
+  .suite-card__body {
+    padding: 22px 26px 26px;
+    display: flex; flex-direction: column;
+    flex: 1;
+    gap: 14px;
+  }
+  .suite-card__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 2.2vw, 30px);
+    line-height: 1;
+    margin: 0;
+    color: var(--ink);
+  }
+  .suite-card__stats {
+    display: flex; flex-wrap: wrap;
+    gap: 6px 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .suite-card__stats .sep { color: var(--rule); }
+  .suite-card__sig {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0;
+  }
+  .suite-card__sig em { font-style: italic; color: var(--terracotta); }
+  .suite-card__cta {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    align-self: flex-start;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .suite-card__cta:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.3em; }
+  @media (max-width: 900px) {
+    .suites__grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ============== SUITE DETAIL SECTIONS (deep-link targets) ============== */
+  .suite-detail {
+    padding: clamp(72px, 8vw, 130px) 0;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+  .suite-detail--alt { background: var(--cream); }
+  .suite-detail__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(40px, 5vw, 90px);
+    align-items: center;
+  }
+  .suite-detail--right .suite-detail__media { order: 2; }
+  .suite-detail--right .suite-detail__text { order: 1; }
+  .suite-detail__media {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  /* ----- Carousel (used inside .suite-detail__media) ----- */
+  .carousel__slides { position: absolute; inset: 0; }
+  .carousel__slide {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity .9s var(--ease-out);
+  }
+  .carousel__slide.is-active { opacity: 1; z-index: 1; }
+  .carousel__slide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .25s, background .25s, transform .25s;
+  }
+  .carousel:hover .carousel__btn,
+  .carousel:focus-within .carousel__btn { opacity: 1; }
+  .carousel__btn:hover { background: rgba(20, 16, 12, 0.82); }
+  .carousel__btn--prev { left: 14px; }
+  .carousel__btn--next { right: 14px; }
+  .carousel__dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    display: flex;
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(20, 16, 12, 0.32);
+    border-radius: 100px;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .carousel__dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    transition: background .25s, transform .25s, width .25s;
+  }
+  .carousel__dot.is-active {
+    background: var(--paper);
+    width: 18px;
+    border-radius: 100px;
+  }
+  .carousel__count {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 4;
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: var(--paper);
+    padding: 5px 10px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  /* Single-slide carousels hide all controls */
+  .carousel--single .carousel__btn,
+  .carousel--single .carousel__dots,
+  .carousel--single .carousel__count { display: none; }
+  .suite-detail__tag {
+    position: absolute;
+    top: 22px; left: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .suite-detail__text .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+  .suite-detail__text h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 4.2vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 24px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .suite-detail__text p {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 16px;
+    max-width: 48ch;
+  }
+  .suite-detail__text p em { font-style: italic; color: var(--terracotta); }
+  .suite-detail__specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0 24px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .suite-detail__specs dt {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .suite-detail__specs dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .suite-detail__feats {
+    display: flex; flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 28px;
+  }
+  .suite-detail__feats span {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 7px 12px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    font-weight: 500;
+  }
+  .suite-detail--alt .suite-detail__feats span { background: rgba(250, 245, 234, 0.6); border-color: rgba(217, 207, 184, 0.7); }
+  .suite-detail__cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 28px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .suite-detail__cta:hover { background: var(--terracotta); letter-spacing: 0.3em; }
+  @media (max-width: 900px) {
+    .suite-detail__inner { grid-template-columns: 1fr; gap: 28px; }
+    .suite-detail--right .suite-detail__media { order: 0; }
+    .suite-detail--right .suite-detail__text { order: 0; }
+    .suite-detail__specs { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .suite-detail__specs dd { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .suite-detail__specs { grid-template-columns: 1fr; gap: 14px; padding: 18px 0; }
+  }
+
+  /* ============== BREAKFAST AT KISSA KISHIN (unique to Kiyomizu) ============== */
+  .breakfast {
+    background: var(--paper);
+    padding: clamp(72px, 8vw, 130px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .breakfast__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(40px, 5vw, 90px);
+    align-items: center;
+  }
+  .breakfast__media {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1.3fr 1fr;
+    gap: 6px;
+    aspect-ratio: 4/5;
+  }
+  .breakfast__media-cell {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .breakfast__media-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 6s var(--ease-out);
+  }
+  .breakfast__media-cell:hover img { transform: scale(1.04); }
+  .breakfast__media-tag {
+    position: absolute;
+    top: 22px; left: 22px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .breakfast__text .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+  .breakfast__text h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 4.2vw, 56px);
+    line-height: 1.05;
+    margin: 0 0 24px;
+    color: var(--ink);
+    max-width: 14ch;
+  }
+  .breakfast__text p {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 18px;
+    max-width: 44ch;
+  }
+  .breakfast__text p em { font-style: italic; color: var(--terracotta); }
+  .breakfast__details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 28px;
+    margin: 26px 0 30px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .breakfast__details dt {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .breakfast__details dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .breakfast__text .link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .breakfast__text .link:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.32em; }
+  @media (max-width: 900px) {
+    .breakfast__inner { grid-template-columns: 1fr; gap: 28px; }
+    .breakfast__details { grid-template-columns: 1fr; gap: 14px; }
+  }
+
+  /* ============== LOCATION ============== */
+  .location {
+    background: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .location__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: clamp(36px, 5vw, 80px);
+    align-items: stretch;
+  }
+  .location__details dl {
+    margin: 0;
+    display: grid;
+    gap: 24px;
+  }
+  .location__details dt {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .location__details dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .location__map {
+    background: var(--cream-deep);
+    min-height: 380px;
+    overflow: hidden;
+  }
+  .location__map iframe { width: 100%; height: 100%; border: 0; }
+  @media (max-width: 800px) {
+    .location__grid { grid-template-columns: 1fr; }
+    .location__map { min-height: 280px; aspect-ratio: 4/3; }
+  }
+
+  /* ============== STAY + WORKSHOP ============== */
+  .stay-workshop {
+    background: var(--cream);
+    padding: clamp(56px, 6vw, 100px) 0;
+    border-top: 1px solid var(--rule);
+  }
+  .stay-workshop__head {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: 28px; flex-wrap: wrap;
+    margin-bottom: clamp(28px, 3.5vw, 56px);
+  }
+  .stay-workshop__head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(34px, 3.8vw, 48px);
+    line-height: 1;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .stay-workshop__head p {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 42ch;
+    margin: 0;
+  }
+  .stay-workshop__head .perk {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 6px 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    border: 1px solid var(--terracotta);
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .stay-workshop__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .workshop-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--ink);
+    color: #fff;
+  }
+  .workshop-card img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .workshop-card:hover img { transform: scale(1.06); }
+  .workshop-card::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.82) 100%);
+    pointer-events: none;
+  }
+  .workshop-card__cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 18px 16px;
+    z-index: 2;
+  }
+  .workshop-card__cap .name {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: #fff;
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .workshop-card__cap .sub {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: rgba(255,255,255,0.78);
+    margin-top: 4px;
+    line-height: 1.4;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
+  .stay-workshop__foot {
+    margin-top: clamp(32px, 4vw, 56px);
+    text-align: center;
+  }
+  .stay-workshop__foot a {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .stay-workshop__foot a:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.32em; }
+
+  /* ============== OTHER PROPERTIES ============== */
+  .others {
+    background: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0;
+  }
+  .others__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+  .other {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    transition: transform .4s var(--ease-out);
+  }
+  .other:hover { transform: translateY(-4px); }
+  .other__img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    position: relative;
+  }
+  .other__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .other:hover .other__img img { transform: scale(1.06); }
+  .other__img::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.75) 100%);
+  }
+  .other__cap {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 22px;
+    color: #fff;
+    z-index: 2;
+  }
+  .other__cap .name {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .other__cap .sig {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.45;
+  }
+  .other__cap .status {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--terracotta-soft);
+    color: var(--ink);
+    padding: 4px 10px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  @media (max-width: 800px) {
+    .others__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============== FLOATING BOOK WIDGET ============== */
+  .book-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 60;
+    width: 320px;
+    background: rgba(250, 245, 234, 0.96);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--rule);
+    box-shadow: 0 20px 50px rgba(20, 16, 12, 0.18);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity .35s var(--ease-out), transform .35s var(--ease-out);
+  }
+  .book-widget.is-visible {
+    opacity: 1; transform: translateY(0); pointer-events: auto;
+  }
+  .book-widget__banner {
+    background: var(--terracotta);
+    color: #fff;
+    padding: 8px 16px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .book-widget__banner em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 4px;
+  }
+  .book-widget__body { padding: 16px 20px 18px; }
+  .book-widget__body .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .book-widget__body .name {
+    display: block;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.1;
+  }
+  .book-widget__btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    background: var(--ink);
+    color: #fff;
+    padding: 13px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .book-widget__btn:hover { background: var(--terracotta); letter-spacing: 0.3em; }
+
+  /* ============== REVEAL ============== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1.4s var(--ease-out), transform 1.4s var(--ease-out);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 40px 0;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== MOBILE ============== */
+  @media (max-width: 800px) {
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 16px; }
+    .site-nav__links { gap: 12px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 8px 12px; }
+
+    .subnav { top: 56px; padding: 10px 0; }
+    .subnav__link { font-size: 10px; letter-spacing: 0.18em; }
+
+    .back-bar { padding: 12px 0; }
+    .back-link { font-size: 13px; }
+    .back-link .arrow { width: 26px; height: 26px; font-size: 12px; }
+    .breadcrumb { font-size: 12px; }
+
+    .hero { height: clamp(440px, 70vh, 600px); }
+    .hero__triptych { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); }
+    .hero__cell-label { font-size: 9px; padding: 5px 10px; }
+    .hero__overlay { left: 22px; right: 22px; bottom: 28px; }
+    .hero__title { font-size: clamp(42px, 12vw, 64px); }
+    .hero__sub { font-size: 13px; }
+
+    .story p { font-size: 16px; }
+
+    .stay-workshop__grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .workshop-card__cap { padding: 14px 12px; }
+    .workshop-card__cap .name { font-size: 16px; }
+    .workshop-card__cap .sub { font-size: 11px; }
+
+    /* Floating widget becomes sticky bottom on mobile */
+    .book-widget {
+      right: 0; left: 0; bottom: 0;
+      width: auto;
+      box-shadow: 0 -8px 24px rgba(20, 16, 12, 0.15);
+    }
+    .book-widget__banner { padding: 6px 14px; font-size: 9px; letter-spacing: 0.22em; }
+    .book-widget__banner em { font-size: 13px; }
+    .book-widget__body { padding: 10px 14px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .book-widget__body .name { font-size: 17px; margin-bottom: 0; }
+    .book-widget__body .lbl { display: none; }
+    .book-widget__btn { width: auto; padding: 11px 18px; font-size: 10px; letter-spacing: 0.2em; white-space: nowrap; }
+
+    body { padding-bottom: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link is-active" href="index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Shop/index.html">Shop</a>
+    <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== BACK BAR ============== -->
+<div class="back-bar">
+  <div class="container">
+    <div class="back-bar__inner">
+      <a class="back-link" href="index.html">
+        <span class="arrow">←</span>
+        All properties
+      </a>
+      <span class="breadcrumb">
+        <a href="index.html">Stay</a>
+        &nbsp;·&nbsp;
+        Maana Kiyomizu
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ============== HERO (triptych — three suites side by side) ============== -->
+<section class="hero" id="top">
+  <div class="hero__triptych">
+    <a class="hero__cell" href="#suite1">
+      <img src="images/kiyomizu/suite1/hero.jpg" alt="Suite 1 at Maana Kiyomizu" />
+      <span class="hero__cell-label">Suite 1</span>
+    </a>
+    <a class="hero__cell" href="#suite2">
+      <img src="images/kiyomizu/suite2/hero.jpg" alt="Suite 2 at Maana Kiyomizu" />
+      <span class="hero__cell-label">Suite 2</span>
+    </a>
+    <a class="hero__cell" href="#suite3">
+      <img src="images/kiyomizu/suite3/hero.jpg" alt="Suite 3 at Maana Kiyomizu" />
+      <span class="hero__cell-label">Suite 3</span>
+    </a>
+  </div>
+  <div class="hero__overlay">
+    <span class="hero__eyebrow">Three Machiya Suites · Higashiyama</span>
+    <h1 class="hero__title">Maana Kiyomizu</h1>
+    <p class="hero__sub">Three light-filled suites in eastern Kyoto, each its own machiya. Side by side with our Kissa Kishin café and the Maana Living shop, with a short, quiet walk to Kiyomizu-dera.</p>
+  </div>
+</section>
+
+<!-- ============== STICKY SUB-NAV ============== -->
+<nav class="subnav">
+  <div class="container">
+    <div class="subnav__inner">
+      <div class="subnav__links">
+        <a class="subnav__link" href="#story">About</a>
+        <a class="subnav__link" href="#suites">Suites</a>
+        <a class="subnav__link" href="#breakfast">Breakfast</a>
+        <a class="subnav__link" href="#location">Location</a>
+        <a class="subnav__link" href="#workshops">Workshops</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== STORY ============== -->
+<section class="story reveal" id="story">
+  <div class="container-narrow">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">About the property</span>
+        <h2>A small boutique, three ways</h2>
+      </div>
+    </div>
+    <p>Tucked away in a quiet neighbourhood in eastern Kyoto, Maana Kiyomizu is a gem surrounded by ancient heritage sites, tranquil gardens, and cosy cafés. Each suite is its own machiya: serene, light-filled, and artfully intimate, with antiques and modern crafts living in harmony.</p>
+    <p>An unexpected approach to machiya stays: comfortable seating areas, deep relaxation tubs, and queen-size western beds for modern travel. All three suites carry POJ Studio's bespoke Japanese crafts, organic Senshu towels, an artisan tea set, and a seasonal bath ritual.</p>
+    <p>Above all, Kiyomizu is small. Coming home means walking past <em>Kissa Kishin</em>, our morning kissa, and the Maana Living shop. All three suites are next door.</p>
+  </div>
+</section>
+
+<!-- ============== THREE SUITES ============== -->
+<section class="suites reveal" id="suites">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Choose your suite</span>
+        <h2>Three machiyas, side by side</h2>
+      </div>
+    </div>
+    <div class="suites__grid">
+
+      <article class="suite-card">
+        <div class="suite-card__img">
+          <img src="images/kiyomizu/suite1/hero.jpg" alt="Suite 1" />
+          <span class="suite-card__num">Suite 1</span>
+        </div>
+        <div class="suite-card__body">
+          <h3 class="suite-card__name">Suite One</h3>
+          <div class="suite-card__stats">
+            <span>23 m²</span><span class="sep">·</span>
+            <span>1 Bedroom</span><span class="sep">·</span>
+            <span>Sleeps 2</span>
+          </div>
+          <p class="suite-card__sig">A studio suite on the second floor, with a deep <em>soaking tub</em> and views of Toyokuni Shrine's thatched rooftops. Ideal for couples who travel light.</p>
+          <a class="suite-card__cta" href="#suite1">View Suite 1 →</a>
+        </div>
+      </article>
+
+      <article class="suite-card">
+        <div class="suite-card__img">
+          <img src="images/kiyomizu/suite2/hero.jpg" alt="Suite 2" />
+          <span class="suite-card__num">Suite 2</span>
+        </div>
+        <div class="suite-card__body">
+          <h3 class="suite-card__name">Suite Two</h3>
+          <div class="suite-card__stats">
+            <span>63 m²</span><span class="sep">·</span>
+            <span>2 Bedrooms</span><span class="sep">·</span>
+            <span>Sleeps 4</span>
+          </div>
+          <p class="suite-card__sig">The largest. A contemporary machiya layout with a modern <em>tokonoma</em>, hand-wrapped tatami guest room, and a Shigaraki ceramic bathtub.</p>
+          <a class="suite-card__cta" href="#suite2">View Suite 2 →</a>
+        </div>
+      </article>
+
+      <article class="suite-card">
+        <div class="suite-card__img">
+          <img src="images/kiyomizu/suite3/hero.jpg" alt="Suite 3" />
+          <span class="suite-card__num">Suite 3</span>
+        </div>
+        <div class="suite-card__body">
+          <h3 class="suite-card__name">Suite Three</h3>
+          <div class="suite-card__stats">
+            <span>60 m²</span><span class="sep">·</span>
+            <span>2 Bedrooms</span><span class="sep">·</span>
+            <span>Sleeps 3</span>
+          </div>
+          <p class="suite-card__sig">A two-bedroom machiya for small groups. Calm interiors, a moody reading nook, and a walk-in shower with a hand-built tub.</p>
+          <a class="suite-card__cta" href="#suite3">View Suite 3 →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== SUITE 1 DETAIL ============== -->
+<section class="suite-detail reveal" id="suite1">
+  <div class="container">
+    <div class="suite-detail__inner">
+      <div class="suite-detail__media carousel carousel--single">
+        <div class="carousel__slides">
+          <div class="carousel__slide is-active"><img src="images/kiyomizu/suite1/hero.jpg" alt="Suite One at Maana Kiyomizu" /></div>
+        </div>
+        <span class="suite-detail__tag">Suite 1</span>
+      </div>
+      <div class="suite-detail__text">
+        <span class="eyebrow">Studio · Second floor</span>
+        <h3>Suite One</h3>
+        <p>A compact studio above the lane. Wake up to morning light filtered through the old wooden lattice, and the slow movement across <em>Toyokuni Shrine's</em> thatched rooftops in the distance.</p>
+        <p>The room curves around a deep soaking tub, the kind you sink into and don't want to leave. Antique woodblock prints, a small writing desk for letters home, and a queen-size bed dressed in organic Senshu linens.</p>
+        <dl class="suite-detail__specs">
+          <div><dt>Size</dt><dd>23 m²</dd></div>
+          <div><dt>Bedrooms</dt><dd>1</dd></div>
+          <div><dt>Sleeps</dt><dd>2</dd></div>
+        </dl>
+        <div class="suite-detail__feats">
+          <span>Deep soaking tub</span>
+          <span>Queen bed</span>
+          <span>Shrine view</span>
+          <span>Writing desk</span>
+        </div>
+        <a class="suite-detail__cta" href="../Book/index.html">Reserve Suite One →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SUITE 2 DETAIL ============== -->
+<section class="suite-detail suite-detail--alt suite-detail--right reveal" id="suite2">
+  <div class="container">
+    <div class="suite-detail__inner">
+      <div class="suite-detail__media carousel">
+        <div class="carousel__slides">
+          <div class="carousel__slide is-active"><img src="images/kiyomizu/suite2/hero.jpg" alt="Suite Two at Maana Kiyomizu" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite2/bath.jpg" alt="Shigaraki bathtub at Suite Two" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite2/detail1.jpg" alt="Suite Two interior detail" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite2/detail2.jpg" alt="Suite Two interior detail" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite2/CM_S2_IMG_9041.jpg" alt="Suite Two interior detail" /></div>
+        </div>
+        <button class="carousel__btn carousel__btn--prev" aria-label="Previous photo">←</button>
+        <button class="carousel__btn carousel__btn--next" aria-label="Next photo">→</button>
+        <div class="carousel__dots">
+          <button class="carousel__dot is-active" aria-label="Photo 1"></button>
+          <button class="carousel__dot" aria-label="Photo 2"></button>
+          <button class="carousel__dot" aria-label="Photo 3"></button>
+          <button class="carousel__dot" aria-label="Photo 4"></button>
+          <button class="carousel__dot" aria-label="Photo 5"></button>
+        </div>
+        <span class="carousel__count">1 / 5</span>
+        <span class="suite-detail__tag">Suite 2</span>
+      </div>
+      <div class="suite-detail__text">
+        <span class="eyebrow">Largest · Two bedrooms</span>
+        <h3>Suite Two</h3>
+        <p>The largest of the three. A contemporary machiya layout that resolves an old form for modern travel: a modern <em>tokonoma</em> holding a single seasonal flower, an open kitchen running the length of the entry, and a hand-wrapped tatami guest room that feels softer underfoot.</p>
+        <p>The bathtub is a single sculpted piece in Shigaraki ware, glazed in a deep ash. Two bedrooms sleeping four, with room to spread out. The right choice for small families and couples traveling together.</p>
+        <dl class="suite-detail__specs">
+          <div><dt>Size</dt><dd>63 m²</dd></div>
+          <div><dt>Bedrooms</dt><dd>2</dd></div>
+          <div><dt>Sleeps</dt><dd>4</dd></div>
+        </dl>
+        <div class="suite-detail__feats">
+          <span>Modern tokonoma</span>
+          <span>Shigaraki bathtub</span>
+          <span>Tatami guest room</span>
+          <span>Open kitchen</span>
+          <span>Queen + 2 singles</span>
+        </div>
+        <a class="suite-detail__cta" href="../Book/index.html">Reserve Suite Two →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SUITE 3 DETAIL ============== -->
+<section class="suite-detail reveal" id="suite3">
+  <div class="container">
+    <div class="suite-detail__inner">
+      <div class="suite-detail__media carousel">
+        <div class="carousel__slides">
+          <div class="carousel__slide is-active"><img src="images/kiyomizu/suite3/hero.jpg" alt="Suite Three at Maana Kiyomizu" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite3/detail1.jpg" alt="Suite Three reading nook" /></div>
+          <div class="carousel__slide"><img src="images/kiyomizu/suite3/detail2.jpg" alt="Suite Three interior detail" /></div>
+        </div>
+        <button class="carousel__btn carousel__btn--prev" aria-label="Previous photo">←</button>
+        <button class="carousel__btn carousel__btn--next" aria-label="Next photo">→</button>
+        <div class="carousel__dots">
+          <button class="carousel__dot is-active" aria-label="Photo 1"></button>
+          <button class="carousel__dot" aria-label="Photo 2"></button>
+          <button class="carousel__dot" aria-label="Photo 3"></button>
+        </div>
+        <span class="carousel__count">1 / 3</span>
+        <span class="suite-detail__tag">Suite 3</span>
+      </div>
+      <div class="suite-detail__text">
+        <span class="eyebrow">Two bedrooms · Quiet</span>
+        <h3>Suite Three</h3>
+        <p>A two-bedroom machiya with a moody <em>reading nook</em> tucked under the staircase. Low ceiling, a single tatami, a small reading lamp on a brass base. The kind of corner you find yourself returning to in the late afternoon, with a book and a cup of tea.</p>
+        <p>Dark cedar finishes throughout, a walk-in shower next to a hand-built tub, and a low chabudai for slow meals on the floor. Designed for three: ideal for a small family or three friends sharing space gently.</p>
+        <dl class="suite-detail__specs">
+          <div><dt>Size</dt><dd>60 m²</dd></div>
+          <div><dt>Bedrooms</dt><dd>2</dd></div>
+          <div><dt>Sleeps</dt><dd>3</dd></div>
+        </dl>
+        <div class="suite-detail__feats">
+          <span>Reading nook</span>
+          <span>Hand-built tub</span>
+          <span>Walk-in shower</span>
+          <span>Cedar finishes</span>
+          <span>Queen + single</span>
+        </div>
+        <a class="suite-detail__cta" href="../Book/index.html">Reserve Suite Three →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== BREAKFAST AT KISSA KISHIN ============== -->
+<section class="breakfast reveal" id="breakfast">
+  <div class="container">
+    <div class="breakfast__inner">
+      <div class="breakfast__media">
+        <div class="breakfast__media-cell">
+          <img src="images/kiyomizu/kissa-food.jpg" alt="Seasonal breakfast plate at Kissa Kishin" />
+          <span class="breakfast__media-tag">Kissa Kishin</span>
+        </div>
+        <div class="breakfast__media-cell">
+          <img src="images/kiyomizu/kissa-shop.jpg" alt="Kissa Kishin storefront" />
+        </div>
+      </div>
+      <div class="breakfast__text">
+        <span class="eyebrow">Your morning table · 喫茶</span>
+        <h2>Breakfast at Kissa Kishin</h2>
+        <p>Your morning kissa, one door over. <em>Kissa Kishin</em> is a modern homage to the traditional kissaten, Japan's classic coffeehouse, serving soulful seasonal breakfasts drawn from Kyoto's farms.</p>
+        <p>Coffee, matcha, pastries, and a hearty seasonal plate. Sit at the counter or by the window. The team behind the original Kishin in Gion runs the kitchen here, exploring traditional ingredients in modern, soft ways.</p>
+        <dl class="breakfast__details">
+          <div>
+            <dt>Opens</dt>
+            <dd>Daily, 7:30am to 1pm<br/>Closed Tuesday &amp; Wednesday</dd>
+          </div>
+          <div>
+            <dt>For guests</dt>
+            <dd>A seasonal breakfast plate is included with every suite stay.</dd>
+          </div>
+        </dl>
+        <a class="link" href="../Shop/index.html#visit">About Kissa Kishin →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== LOCATION ============== -->
+<section class="location reveal" id="location">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Where you'll be</span>
+        <h2>Higashiyama, near Kiyomizu-dera</h2>
+      </div>
+    </div>
+    <div class="location__grid">
+      <div class="location__details">
+        <dl>
+          <div>
+            <dt>Address</dt>
+            <dd>427-18 Myohoin Maekawacho<br/>Higashiyama Ward, Kyoto 605-0932</dd>
+          </div>
+          <div>
+            <dt>From Kyoto Station</dt>
+            <dd>Taxi · 12 min<br/>Bus · 22 min</dd>
+          </div>
+          <div>
+            <dt>On the block</dt>
+            <dd>Kissa Kishin café and Maana Living shop sit alongside the suites. A short walk takes you to Kiyomizu-dera, Toyokuni Shrine, and the lanes of eastern Kyoto.</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="location__map">
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=427-18+Myohoin+Maekawacho+Higashiyama+Kyoto&output=embed"
+          title="Maana Kiyomizu location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STAY + WORKSHOP ============== -->
+<section class="stay-workshop reveal" id="workshops">
+  <div class="container">
+    <div class="stay-workshop__head">
+      <div>
+        <h2>Stay and make something</h2>
+        <p>Maana Atelier is a short ride away. Book a workshop during your stay: tea-dyeing, koji fermentation, earthen wall, or a botanical tea session. Bring a small piece of Kyoto home with you.</p>
+        <span class="perk">★ 15% off any workshop with your stay</span>
+      </div>
+    </div>
+    <div class="stay-workshop__grid">
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/koji-fermentation/index.html">
+        <img src="../Workshop/earthen-wall-redesign/koji-fermentation/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Koji Fermentation</span>
+          <span class="sub">An afternoon · 2 jars to take home</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/tea-dye/index.html">
+        <img src="../Workshop/earthen-wall-redesign/tea-dye/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Tea Dye</span>
+          <span class="sub">Hand-dyed bags with natural tea pigments</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/botanical-teas/index.html">
+        <img src="../Workshop/earthen-wall-redesign/botanical-teas/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Botanical Teas</span>
+          <span class="sub">Blend your own from seasonal Kyoto botanicals</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/earthen-wall/index.html">
+        <img src="../Workshop/earthen-wall-redesign/earthen-wall/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Earthen Wall</span>
+          <span class="sub">Make a small panel from Kyoto clay</span>
+        </div>
+      </a>
+    </div>
+    <div class="stay-workshop__foot">
+      <a href="#">All experiences at Maana Atelier ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== OTHER PROPERTIES ============== -->
+<section class="others reveal" id="others">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Or stay at</span>
+        <h2>Our other homes</h2>
+      </div>
+      <a class="back-link" href="index.html">
+        Back to all properties
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+    <div class="others__grid">
+
+      <a class="other" href="kyoto.html">
+        <div class="other__img">
+          <img src="images/kyoto/card.jpg" alt="Maana Kyoto" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Kyoto</span>
+          <p class="sig">The original Maana machiya. Restored by Uoya Shigenori.</p>
+        </div>
+      </a>
+
+      <a class="other" href="kamo.html">
+        <div class="other__img">
+          <img src="images/kamo/hero.PNG" alt="Maana Kamo" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Kamo</span>
+          <p class="sig">A house designed around the bathtub. Shadow-lit, urushi-lacquered.</p>
+        </div>
+      </a>
+
+      <a class="other" href="#">
+        <div class="other__img">
+          <img src="images/annex/hero.png" alt="Maana Annex" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Annex</span>
+          <p class="sig">Our first new-build. Designed with Norm Architects &amp; KAD.</p>
+          <span class="status">Opening Dec 2026</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============== FLOATING BOOK WIDGET — "Choose a suite" ============== -->
+<aside class="book-widget" id="bookWidget" aria-label="Choose a suite at Maana Kiyomizu">
+  <div class="book-widget__banner">
+    Summer offer <em>·</em> Stay 3, Pay 2
+  </div>
+  <div class="book-widget__body">
+    <div>
+      <span class="lbl">Three suites available</span>
+      <span class="name">Maana Kiyomizu</span>
+    </div>
+    <a class="book-widget__btn" href="#suites">
+      Choose a suite <span>→</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+  /* Reveal on scroll */
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach((el) => obs.observe(el));
+
+  /* Floating widget visibility */
+  const widget = document.getElementById('bookWidget');
+  const hero = document.querySelector('.hero');
+  if (widget && hero) {
+    const widgetObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) widget.classList.add('is-visible');
+        else widget.classList.remove('is-visible');
+      });
+    }, { threshold: 0.1 });
+    widgetObs.observe(hero);
+  }
+
+  /* Carousels (suite media) */
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const slides = carousel.querySelectorAll('.carousel__slide');
+    if (slides.length <= 1) return;
+    const dots = carousel.querySelectorAll('.carousel__dot');
+    const prev = carousel.querySelector('.carousel__btn--prev');
+    const next = carousel.querySelector('.carousel__btn--next');
+    const count = carousel.querySelector('.carousel__count');
+    let idx = 0;
+    function go(i) {
+      slides[idx].classList.remove('is-active');
+      if (dots[idx]) dots[idx].classList.remove('is-active');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add('is-active');
+      if (dots[idx]) dots[idx].classList.add('is-active');
+      if (count) count.textContent = (idx + 1) + ' / ' + slides.length;
+    }
+    if (prev) prev.addEventListener('click', () => go(idx - 1));
+    if (next) next.addEventListener('click', () => go(idx + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+    /* Keyboard arrows when carousel is focused */
+    carousel.setAttribute('tabindex', '0');
+    carousel.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1); }
+    });
+  });
+
+  /* Scroll-spy */
+  const sections = ['story', 'suites', 'breakfast', 'location', 'workshops']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const links = document.querySelectorAll('.subnav__link');
+  const idToLink = {};
+  links.forEach(link => {
+    const id = link.getAttribute('href').replace('#', '');
+    idToLink[id] = link;
+  });
+  const spyObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = idToLink[entry.target.id];
+      if (link && entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-130px 0px -65% 0px' });
+  sections.forEach(s => spyObs.observe(s));
+</script>
+
+</body>
+</html>

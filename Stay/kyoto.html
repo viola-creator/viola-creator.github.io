@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maana Kyoto — A restored machiya in Shimogyo</title>
+<meta name="description" content="Maana Kyoto: the original Maana machiya. 89 m², 2 bedrooms, sleeps 5. Restored by Kyoto architect Uoya Shigenori. In Shimogyo Ward, near Kyoto Station." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  /* Section anchors offset from the sticky nav + subnav stack */
+  section[id] { scroll-margin-top: 130px; }
+  .subnav__link.is-active { color: var(--ink); border-bottom: 1px solid var(--terracotta); padding-bottom: 4px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+  .container-narrow {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 5vw, 56px);
+  }
+
+  /* ============== NAV ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo { display: inline-flex; align-items: center; height: 18px; }
+  .site-nav__logo img { height: 100%; width: auto; filter: brightness(0) invert(1); }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__link.is-active { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); letter-spacing: 0.26em; }
+
+  /* ============== STICKY SUB-NAV ============== */
+  .subnav {
+    position: sticky;
+    top: 74px;   /* sits under the main nav */
+    z-index: 40;
+    background: rgba(250, 245, 234, 0.94);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 0;
+  }
+  .subnav__inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px; flex-wrap: nowrap;
+  }
+  .subnav__links {
+    display: flex; gap: clamp(18px, 2.4vw, 36px);
+    overflow-x: auto;
+    -ms-overflow-style: none; scrollbar-width: none;
+  }
+  .subnav__links::-webkit-scrollbar { display: none; }
+  .subnav__link {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color .2s;
+  }
+  .subnav__link:hover { color: var(--ink); }
+  .subnav__cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .subnav__cta:hover { background: var(--terracotta); letter-spacing: 0.26em; }
+  .subnav__cta .label-short { display: none; }
+  @media (max-width: 700px) {
+    .subnav__links { gap: 18px; }
+    .subnav__link { font-size: 10px; letter-spacing: 0.18em; }
+    .subnav__cta { font-size: 10px; padding: 9px 12px; letter-spacing: 0.18em; }
+    .subnav__cta .label-long { display: none; }
+    .subnav__cta .label-short { display: inline; }
+  }
+
+  /* ============== BACK BAR ============== */
+  .back-bar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+  }
+  .back-bar__inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+  }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    transition: gap .25s, color .25s;
+  }
+  .back-link:hover { color: var(--terracotta); gap: 16px; }
+  .back-link .arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    font-size: 14px;
+    transition: background .25s, color .25s, border-color .25s;
+  }
+  .back-link:hover .arrow { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .breadcrumb {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+  }
+  .breadcrumb a {
+    border-bottom: 1px solid var(--ink-mute);
+    transition: color .25s, border-color .25s;
+  }
+  .breadcrumb a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== HERO ============== */
+  .hero {
+    position: relative;
+    height: clamp(560px, 80vh, 780px);
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .hero__img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    animation: ken-burns 22s ease-in-out infinite alternate;
+  }
+  @keyframes ken-burns {
+    0%   { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.06) translate(-1.2%, -0.8%); }
+  }
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(20,16,12,0.18) 0%, rgba(20,16,12,0) 30%, rgba(20,16,12,0.45) 100%);
+    pointer-events: none;
+  }
+  .hero__overlay {
+    position: absolute;
+    bottom: clamp(36px, 5vw, 72px);
+    left: clamp(28px, 7vw, 140px);
+    right: clamp(28px, 7vw, 140px);
+    z-index: 2;
+    color: var(--paper);
+  }
+  .hero__eyebrow {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.36em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(20, 16, 12, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    padding: 8px 14px;
+    margin-bottom: 22px;
+    font-weight: 500;
+  }
+  .hero__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(56px, 7vw, 110px);
+    line-height: 0.95;
+    letter-spacing: -0.005em;
+    margin: 0 0 16px;
+    color: var(--paper);
+    text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  }
+  .hero__sub {
+    font-family: var(--sans);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: rgba(245, 240, 235, 0.85);
+    max-width: 56ch;
+  }
+
+  /* ============== QUICK-LOOK BAR ============== */
+  .quicklook {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: clamp(28px, 3vw, 44px) 0;
+  }
+  .quicklook__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(24px, 3vw, 48px);
+  }
+  .quicklook__cell {
+    text-align: center;
+  }
+  .quicklook__cell .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .quicklook__cell .val {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .quicklook__cell .val small {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+    display: block;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 800px) {
+    .quicklook__grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  }
+
+  /* ============== SECTION HEAD — unified across all sections ============== */
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    margin-bottom: clamp(28px, 3vw, 44px);
+    gap: 24px; flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(34px, 3.8vw, 48px);
+    line-height: 1;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .section-head .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+
+  /* ============== STORY ============== */
+  .story {
+    background: var(--paper);
+    padding: clamp(64px, 7vw, 100px) 0 clamp(40px, 5vw, 70px);
+  }
+  .story p {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 22px;
+  }
+  .story p:last-child { margin-bottom: 0; }
+
+  /* ============== DESIGN HIGHLIGHTS ============== */
+  .design {
+    background: var(--paper);
+    padding: clamp(60px, 7vw, 110px) 0;
+  }
+  .design__row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(36px, 4vw, 70px);
+    align-items: center;
+    margin-bottom: clamp(56px, 6vw, 90px);
+  }
+  .design__row:nth-child(even) { grid-template-columns: 1fr 1.1fr; direction: rtl; }
+  .design__row:nth-child(even) > * { direction: ltr; }
+  .design__row:last-child { margin-bottom: 0; }
+  .design__img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+  .design__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease-out);
+  }
+  .design__img:hover img { transform: scale(1.04); }
+  .design__text { padding: 0 clamp(0px, 1vw, 18px); }
+  .design__text .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+  /* Unified with section-head h2 — same family, weight, scaled down for h3 */
+  .design__text h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(26px, 2.8vw, 36px);
+    line-height: 1.1;
+    margin: 0 0 22px;
+    color: var(--ink);
+    letter-spacing: -0.003em;
+  }
+  .design__text p {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  @media (max-width: 960px) {
+    .design__row {
+      grid-template-columns: 1fr !important;
+      direction: ltr !important;
+      gap: 24px;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .design__img {
+      aspect-ratio: 4/5;
+      width: 100%;
+      max-width: 100%;
+    }
+    .design__text { padding: 0; }
+  }
+
+  /* ----- Detail mosaic (close-ups) ----- */
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(14px, 1.6vw, 24px);
+    margin-top: clamp(40px, 4vw, 64px);
+  }
+  .mosaic__cell {
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: var(--cream);
+  }
+  .mosaic__cell--wide { aspect-ratio: 5/4; }
+  .mosaic__cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .mosaic__cell:hover img { transform: scale(1.04); }
+  .mosaic__col {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: clamp(14px, 1.6vw, 24px);
+  }
+  @media (max-width: 800px) {
+    .mosaic { grid-template-columns: 1fr; }
+  }
+
+  /* ============== AMENITIES — photo cards + icons + lists ============== */
+  .amenities {
+    background: var(--cream);
+    padding: clamp(60px, 7vw, 110px) 0;
+  }
+
+  /* Category photo cards (Kitchen, Bath, Coffee & Tea) */
+  .amenities__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.4vw, 36px);
+    margin-bottom: clamp(40px, 5vw, 70px);
+  }
+  .amen-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    display: flex; flex-direction: column;
+    transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+  }
+  .amen-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(20, 16, 12, 0.08);
+  }
+  .amen-card__img {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--cream-deep);
+  }
+  .amen-card__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .amen-card:hover .amen-card__img img { transform: scale(1.04); }
+  .amen-card__body {
+    padding: 22px 24px 26px;
+  }
+  .amen-card__title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+    display: block;
+    font-weight: 500;
+  }
+  .amen-card ul {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .amen-card li {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.4;
+    padding-left: 14px;
+    position: relative;
+  }
+  .amen-card li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 5px; height: 1px;
+    background: var(--ink-mute);
+  }
+
+  /* Quick essentials — six icons, 3-col × 2-row on desktop */
+  .amenities__icons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 2vw, 32px) clamp(20px, 2.6vw, 36px);
+    padding: clamp(24px, 3vw, 36px) 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .amen-icon {
+    display: flex; align-items: center; gap: 16px;
+    padding: 4px 8px;
+  }
+  .amen-icon svg {
+    flex: 0 0 36px;
+    width: 36px; height: 36px;
+    stroke: var(--terracotta);
+    stroke-width: 1.4;
+    fill: none;
+  }
+  .amen-icon .label {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .amen-icon .label small {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-mute);
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* Others row */
+  .amenities__others {
+    display: flex; flex-wrap: wrap;
+    gap: 10px 14px;
+    align-items: center;
+  }
+  .amenities__others-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-right: 8px;
+  }
+  .amenities__others .item {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 8px 14px;
+    border-radius: 100px;
+  }
+
+  @media (max-width: 800px) {
+    .amenities__cards { grid-template-columns: 1fr; }
+    .amenities__icons { grid-template-columns: 1fr; }
+  }
+
+  /* ============== LOCATION ============== */
+  .location {
+    background: var(--paper);
+    padding: clamp(48px, 6vw, 90px) 0;
+  }
+  .location__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: clamp(36px, 5vw, 80px);
+    align-items: stretch;
+  }
+  .location__details dl {
+    margin: 0;
+    display: grid;
+    gap: 24px;
+  }
+  .location__details dt {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .location__details dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .location__map {
+    background: var(--cream-deep);
+    min-height: 380px;
+    overflow: hidden;
+  }
+  .location__map iframe {
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  @media (max-width: 800px) {
+    .location__grid { grid-template-columns: 1fr; }
+    .location__map { min-height: 280px; aspect-ratio: 4/3; }
+  }
+
+  /* ============== EXTERIOR — parting shot ============== */
+  .exterior {
+    position: relative;
+    height: clamp(440px, 70vh, 720px);
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .exterior img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    animation: ken-burns 28s ease-in-out infinite alternate;
+  }
+  .exterior::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.55) 100%);
+    pointer-events: none;
+  }
+  .exterior__cap {
+    position: absolute;
+    bottom: clamp(28px, 4vw, 56px);
+    left: clamp(28px, 7vw, 140px);
+    right: clamp(28px, 7vw, 140px);
+    z-index: 2;
+    color: var(--paper);
+  }
+  .exterior__cap .eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta-soft);
+    margin-bottom: 12px;
+  }
+  .exterior__cap h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(34px, 4vw, 52px);
+    margin: 0;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    color: var(--paper);
+    max-width: 24ch;
+  }
+
+  /* ============== BOOK CTA ============== */
+  .bookcta {
+    background: var(--ink);
+    color: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0;
+    text-align: center;
+  }
+  .bookcta h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 4.6vw, 60px);
+    line-height: 1.05;
+    margin: 0 0 16px;
+    color: var(--paper);
+  }
+  .bookcta p {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: rgba(245, 240, 235, 0.78);
+    max-width: 56ch;
+    margin: 0 auto 32px;
+  }
+  .bookcta__btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .bookcta__btn:hover { background: var(--terracotta-soft); letter-spacing: 0.32em; }
+
+  /* ============== OTHER PROPERTIES ============== */
+  .others {
+    background: var(--paper);
+    padding: clamp(56px, 6vw, 100px) 0;
+  }
+  .others__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+  .other {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    transition: transform .4s var(--ease-out);
+  }
+  .other:hover { transform: translateY(-4px); }
+  .other__img {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    position: relative;
+  }
+  .other__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.6s var(--ease-out);
+  }
+  .other:hover .other__img img { transform: scale(1.06); }
+  .other__img::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.75) 100%);
+  }
+  .other__cap {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 22px;
+    color: #fff;
+    z-index: 2;
+  }
+  .other__cap .brand {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 6px;
+  }
+  .other__cap .name {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .other__cap .sig {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.45;
+  }
+  .other__cap .status {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--terracotta-soft);
+    color: var(--ink);
+    padding: 4px 10px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  @media (max-width: 800px) {
+    .others__grid { grid-template-columns: 1fr; }
+  }
+
+  /* ============== SCROLL REVEAL ============== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1.4s var(--ease-out), transform 1.4s var(--ease-out);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ============== STAY + WORKSHOP CROSS-SECTION ============== */
+  .stay-workshop {
+    background: var(--cream);
+    padding: clamp(56px, 6vw, 100px) 0 clamp(56px, 6vw, 100px);
+    border-top: 1px solid var(--rule);
+  }
+  .stay-workshop__head {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: 28px; flex-wrap: wrap;
+    margin-bottom: clamp(28px, 3.5vw, 56px);
+  }
+  .stay-workshop__head h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(34px, 3.8vw, 48px);
+    line-height: 1;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .stay-workshop__head p {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    max-width: 42ch;
+    margin: 0;
+  }
+  .stay-workshop__head .perk {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 6px 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    border: 1px solid var(--terracotta);
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .stay-workshop__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .workshop-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--ink);
+    color: #fff;
+  }
+  .workshop-card img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.4s var(--ease-out);
+  }
+  .workshop-card:hover img { transform: scale(1.06); }
+  .workshop-card::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.82) 100%);
+    pointer-events: none;
+  }
+  .workshop-card__cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 18px 16px;
+    z-index: 2;
+  }
+  .workshop-card__cap .name {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: #fff;
+    line-height: 1.15;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .workshop-card__cap .sub {
+    display: block;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: rgba(255,255,255,0.78);
+    margin-top: 4px;
+    line-height: 1.4;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+  }
+  .stay-workshop__foot {
+    margin-top: clamp(32px, 4vw, 56px);
+    text-align: center;
+  }
+  .stay-workshop__foot a {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .stay-workshop__foot a:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.32em; }
+
+  /* ============== FLOATING BOOK CTA (desktop bottom-right / mobile sticky) ============== */
+  .book-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 60;
+    width: 320px;
+    background: rgba(250, 245, 234, 0.96);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--rule);
+    box-shadow: 0 20px 50px rgba(20, 16, 12, 0.18);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity .35s var(--ease-out), transform .35s var(--ease-out);
+  }
+  .book-widget.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .book-widget__banner {
+    background: var(--terracotta);
+    color: #fff;
+    padding: 8px 16px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .book-widget__banner em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 4px;
+  }
+  .book-widget__body {
+    padding: 16px 20px 18px;
+  }
+  .book-widget__body .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .book-widget__body .name {
+    display: block;
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.1;
+  }
+  .book-widget__btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    background: var(--ink);
+    color: #fff;
+    padding: 13px 18px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .book-widget__btn:hover { background: var(--terracotta); letter-spacing: 0.3em; }
+
+  @media (max-width: 800px) {
+    .book-widget {
+      right: 0; left: 0; bottom: 0;
+      width: auto;
+      border-left: 0; border-right: 0; border-bottom: 0;
+      box-shadow: 0 -8px 24px rgba(20, 16, 12, 0.15);
+    }
+    .book-widget__banner { padding: 6px 14px; font-size: 9px; letter-spacing: 0.22em; }
+    .book-widget__banner em { font-size: 13px; }
+    .book-widget__body { padding: 10px 14px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .book-widget__body .name { font-size: 17px; margin-bottom: 0; }
+    .book-widget__body .lbl { display: none; }
+    .book-widget__btn { width: auto; padding: 11px 18px; font-size: 10px; letter-spacing: 0.2em; white-space: nowrap; }
+  }
+
+  /* Extra bottom padding on body so floating widget doesn't cover content */
+  body { padding-bottom: 0; }
+  @media (max-width: 800px) {
+    body { padding-bottom: 80px; }
+  }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 40px 0;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== MOBILE FIXES ============== */
+  @media (max-width: 800px) {
+    /* Top nav: compress, allow scroll within if needed */
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 16px; }
+    .site-nav__links { gap: 12px; }
+    .site-nav__link { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { font-size: 10px; padding: 8px 12px; letter-spacing: 0.16em; }
+
+    /* Back bar */
+    .back-bar { padding: 12px 0; }
+    .back-link { font-size: 13px; }
+    .back-link .arrow { width: 26px; height: 26px; font-size: 12px; }
+    .breadcrumb { font-size: 12px; }
+
+    /* Sticky subnav sits under shorter main nav on mobile */
+    .subnav { top: 56px; padding: 10px 0; }
+
+    /* Hero */
+    .hero { height: clamp(440px, 70vh, 600px); }
+    .hero__overlay {
+      left: 22px; right: 22px;
+      bottom: 28px;
+    }
+    .hero__title { font-size: clamp(42px, 12vw, 64px); }
+    .hero__sub { font-size: 13px; }
+
+    /* Quick-look bar — 2 per row on mobile, "Best for" spans full width */
+    .quicklook__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px 18px;
+    }
+    .quicklook__cell .val { font-size: clamp(20px, 6vw, 26px); }
+    .quicklook__cell .val small { font-size: 12px; }
+    .quicklook__cell .lbl { font-size: 9px; letter-spacing: 0.24em; }
+    .quicklook__cell:last-child { grid-column: span 2; }
+
+    /* Story */
+    .story p { font-size: 16px; }
+
+    /* Mosaic stacks */
+    .mosaic { grid-template-columns: 1fr; }
+    .mosaic__col { grid-template-rows: 1fr 1fr; }
+
+    /* Amenities cards stack */
+    .amenities__cards { grid-template-columns: 1fr; gap: 16px; }
+    .amenities__icons { grid-template-columns: repeat(2, 1fr); gap: 12px 14px; padding: 18px 0; }
+    .amen-icon svg { flex: 0 0 28px; width: 28px; height: 28px; }
+    .amen-icon .label { font-size: 13px; }
+    .amen-icon .label small { font-size: 11px; }
+
+    /* Exterior */
+    .exterior { height: clamp(320px, 50vh, 480px); }
+    .exterior__cap h2 { font-size: clamp(26px, 7vw, 38px); }
+    .exterior__cap { left: 22px; right: 22px; }
+
+    /* Workshop grid stacks to 2 cols on mobile */
+    .stay-workshop__grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .workshop-card__cap { padding: 14px 12px; }
+    .workshop-card__cap .name { font-size: 16px; }
+    .workshop-card__cap .sub { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link is-active" href="index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Shop/index.html">Shop</a>
+    <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== BACK BAR ============== -->
+<div class="back-bar">
+  <div class="container">
+    <div class="back-bar__inner">
+      <a class="back-link" href="index.html">
+        <span class="arrow">←</span>
+        All properties
+      </a>
+      <span class="breadcrumb">
+        <a href="index.html">Stay</a>
+        &nbsp;·&nbsp;
+        Maana Kyoto
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top">
+  <img class="hero__img" src="images/kyoto/hero.jpg" alt="Maana Kyoto, a restored machiya in Shimogyo" />
+  <div class="hero__overlay">
+    <span class="hero__eyebrow">Whole Machiya · The Original</span>
+    <h1 class="hero__title">Maana Kyoto</h1>
+    <p class="hero__sub">A restored machiya in Shimogyo Ward, near Kyoto Station. The first Maana home — quiet, timeless, and cared for by the people who made it.</p>
+  </div>
+</section>
+
+<!-- ============== STICKY SUB-NAV (scroll to section + book cta) ============== -->
+<nav class="subnav">
+  <div class="container">
+    <div class="subnav__inner">
+      <div class="subnav__links">
+        <a class="subnav__link" href="#story">About</a>
+        <a class="subnav__link" href="#design">Design</a>
+        <a class="subnav__link" href="#amenities">Amenities</a>
+        <a class="subnav__link" href="#location">Location</a>
+        <a class="subnav__link" href="#others">Other homes</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== QUICK-LOOK BAR ============== -->
+<section class="quicklook">
+  <div class="container">
+    <div class="quicklook__grid">
+      <div class="quicklook__cell">
+        <span class="lbl">Type</span>
+        <span class="val">Machiya<small>Whole house</small></span>
+      </div>
+      <div class="quicklook__cell">
+        <span class="lbl">Size</span>
+        <span class="val">89 m²<small>~ 958 sq ft</small></span>
+      </div>
+      <div class="quicklook__cell">
+        <span class="lbl">Bedrooms</span>
+        <span class="val">2<small>1 queen + tatami</small></span>
+      </div>
+      <div class="quicklook__cell">
+        <span class="lbl">Sleeps</span>
+        <span class="val">Up to 5<small>3 futons in tatami</small></span>
+      </div>
+      <div class="quicklook__cell">
+        <span class="lbl">Best for</span>
+        <span class="val">Slow weeks<small>Couples · Small families</small></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STORY ============== -->
+<section class="story reveal" id="story">
+  <div class="container-narrow">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">About the home</span>
+        <h2>The original Maana</h2>
+      </div>
+    </div>
+    <p>The streetscapes and landscapes of Kyoto first caught our attention, but it is the city's never-ending layers of surprises that had us completely in love. Something about this city awakens your senses and leads you to a journey within.</p>
+    <p>Maana Kyoto was the first home we restored. We worked with Kyoto architect Uoya Shigenori, an expert in machiya restoration, to capture the house's original character — not to change for the sake of change, but to evolve it into a comfortable home with modern luxuries.</p>
+    <p>The original wood beams and parts of the clay wall construction are exposed to showcase the traditional craft of these houses. A skylight and open staircase flood the home with natural light. The centerpiece is a commissioned hikizome dye work by local fabric-dye artist Nakajima Takeshi.</p>
+  </div>
+</section>
+
+<!-- ============== DESIGN HIGHLIGHTS ============== -->
+<section class="design reveal" id="design">
+  <div class="container">
+
+    <!-- Row 1: Architecture -->
+    <div class="design__row">
+      <div class="design__img">
+        <img src="images/kyoto/detail1.jpg" alt="Original wood beams and clay walls" />
+      </div>
+      <div class="design__text">
+        <span class="eyebrow">Architecture · 建築</span>
+        <h3>Restored by Uoya Shigenori</h3>
+        <p>Kyoto architect Uoya Shigenori is an expert in machiya restoration. The original wood beams and parts of the clay wall construction are exposed throughout the home — traditional craft, kept visible.</p>
+        <p>A skylight and open staircase were added to flood the home with natural light, evolving the house from a darker pre-war typology into something brighter without breaking its frame.</p>
+      </div>
+    </div>
+
+    <!-- Row 2: Interior (image swaps to the other side) -->
+    <div class="design__row">
+      <div class="design__img">
+        <img src="images/kyoto/detail2.jpg" alt="Living and kitchen interior" />
+      </div>
+      <div class="design__text">
+        <span class="eyebrow">Interior · 室内</span>
+        <h3>Cozy, timeless, unforced</h3>
+        <p>We don't want our homes to be defined by a particular style. Design here is not about being edgy or loud — we want the home to feel cozy and timeless, the kind of place you'd want to stay for a week.</p>
+        <p>The centerpiece is a commissioned hikizome work by Kyoto fabric-dye artist Nakajima Takeshi, who uses traditional Japanese dyeing to mimic expressive brushstrokes.</p>
+      </div>
+    </div>
+
+    <!-- Detail mosaic — close-ups, no big text, just visual punctuation -->
+    <div class="mosaic">
+      <div class="mosaic__cell">
+        <img src="images/kyoto/detail3.JPG" alt="Detail of the home" />
+      </div>
+      <div class="mosaic__col">
+        <div class="mosaic__cell mosaic__cell--wide">
+          <img src="images/kyoto/detail4.jpg" alt="Detail of the home" />
+        </div>
+        <div class="mosaic__cell mosaic__cell--wide">
+          <img src="images/kyoto/vibe.jpg" alt="A moment from inside the home" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== AMENITIES ============== -->
+<section class="amenities reveal" id="amenities">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Amenities</span>
+        <h2>What's in the house</h2>
+      </div>
+    </div>
+
+    <!-- Category photo cards -->
+    <div class="amenities__cards">
+
+      <article class="amen-card">
+        <div class="amen-card__img">
+          <img src="images/kyoto/kitchen.jpg" alt="Kitchen at Maana Kyoto" />
+        </div>
+        <div class="amen-card__body">
+          <span class="amen-card__title">Kitchen</span>
+          <ul>
+            <li>Fully-equipped kitchen</li>
+            <li>Toaster oven</li>
+            <li>Microwave</li>
+            <li>Electric kettle</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="amen-card">
+        <div class="amen-card__img">
+          <img src="images/kyoto/bath.jpg" alt="Bath at Maana Kyoto" />
+        </div>
+        <div class="amen-card__body">
+          <span class="amen-card__title">Bath</span>
+          <ul>
+            <li>Toiletries</li>
+            <li>Toothbrush set</li>
+            <li>Cotton set</li>
+            <li>Hair dryer</li>
+            <li>Seasonal bath salt</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="amen-card">
+        <div class="amen-card__img">
+          <img src="images/kyoto/coffee.jpg" alt="Coffee and tea at Maana Kyoto" />
+        </div>
+        <div class="amen-card__body">
+          <span class="amen-card__title">Coffee &amp; Tea</span>
+          <ul>
+            <li>Coffee drip bags from a local Kyoto shop</li>
+            <li>Organic green tea from Kirokuen</li>
+            <li>Bottled water, refilled daily</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Icon row — six quick essentials, 3-col × 2-row on desktop -->
+    <div class="amenities__icons">
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 26.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="var(--terracotta)" stroke="none"/>
+          <path d="M9 19.5a10 10 0 0 1 14 0M5.5 15a15 15 0 0 1 21 0M2 10.5a20 20 0 0 1 28 0"/>
+        </svg>
+        <span class="label">
+          High-speed WiFi
+          <small>Throughout the house</small>
+        </span>
+      </div>
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="6" y="5" width="20" height="22" rx="1.5"/>
+          <circle cx="16" cy="17" r="6"/>
+          <circle cx="16" cy="17" r="2.5"/>
+          <line x1="10" y1="9" x2="13" y2="9"/>
+        </svg>
+        <span class="label">
+          Washer &amp; dryer
+          <small>In-unit, full size</small>
+        </span>
+      </div>
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M5 21c2-7 9-9 14-7s7 6 6 9-4 4-7 4H8c-2 0-3-2-3-3z"/>
+          <path d="M9 19c2-2 5-3 8-3"/>
+        </svg>
+        <span class="label">
+          Indoor slippers
+          <small>For every guest</small>
+        </span>
+      </div>
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 23h24v2H4z"/>
+          <path d="M8 23a8 8 0 0 1 8-8h7c1.5 0 2.5 1 3 2.5L28 23"/>
+          <line x1="15" y1="13" x2="23" y2="8"/>
+          <circle cx="23.5" cy="7.5" r="1.5"/>
+        </svg>
+        <span class="label">
+          Iron &amp; ironing board
+          <small>For longer stays</small>
+        </span>
+      </div>
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <ellipse cx="16" cy="20" rx="11" ry="3.5"/>
+          <line x1="5" y1="20" x2="5" y2="13"/>
+          <line x1="27" y1="20" x2="27" y2="13"/>
+          <ellipse cx="16" cy="13" rx="11" ry="3.5"/>
+        </svg>
+        <span class="label">
+          Yoga mats
+          <small>Two, rolled in the closet</small>
+        </span>
+      </div>
+
+      <div class="amen-icon">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="10" y="4" width="12" height="24" rx="1.5"/>
+          <circle cx="16" cy="11" r="2.2"/>
+          <circle cx="16" cy="20" r="3.4"/>
+          <circle cx="16" cy="20" r="1"/>
+        </svg>
+        <span class="label">
+          Wireless speaker
+          <small>Bluetooth-ready</small>
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== LOCATION ============== -->
+<section class="location reveal" id="location">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Where you'll be</span>
+        <h2>Shimogyo Ward</h2>
+      </div>
+    </div>
+    <div class="location__grid">
+      <div class="location__details">
+        <dl>
+          <div>
+            <dt>Address</dt>
+            <dd>33-6 Chudoji Kitamachi<br/>Shimogyo Ward, Kyoto 600-8812</dd>
+          </div>
+          <div>
+            <dt>From Kyoto Station</dt>
+            <dd>Taxi · 8 min<br/>Walk · 22 min</dd>
+          </div>
+          <div>
+            <dt>Neighbourhood</dt>
+            <dd>Quiet residential streets in central Kyoto, with walking access to Nishiki Market, the Kyoto Imperial Palace, and the train lines that fan out to Arashiyama and Uji.</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="location__map">
+        <iframe
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=33-6+Chudoji+Kitamachi+Shimogyo+Kyoto&output=embed"
+          title="Maana Kyoto location map">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== STAY + WORKSHOP — book a workshop while you stay ============== -->
+<section class="stay-workshop reveal">
+  <div class="container">
+    <div class="stay-workshop__head">
+      <div>
+        <h2>Stay and make something</h2>
+        <p>Maana Atelier sits a short ride from Kyoto. Book a workshop during your stay — tea-dyeing, koji fermentation, earthen wall, or a botanical tea blending session — and bring a small piece of Kyoto home with you.</p>
+        <span class="perk">★ 15% off any workshop with your stay</span>
+      </div>
+    </div>
+    <div class="stay-workshop__grid">
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/koji-fermentation/index.html">
+        <img src="../Workshop/earthen-wall-redesign/koji-fermentation/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Koji Fermentation</span>
+          <span class="sub">An afternoon · 2 jars to take home</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/tea-dye/index.html">
+        <img src="../Workshop/earthen-wall-redesign/tea-dye/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Tea Dye</span>
+          <span class="sub">Hand-dyed bags with natural tea pigments</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/botanical-teas/index.html">
+        <img src="../Workshop/earthen-wall-redesign/botanical-teas/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Botanical Teas</span>
+          <span class="sub">Blend your own from seasonal Kyoto botanicals</span>
+        </div>
+      </a>
+      <a class="workshop-card" href="../Workshop/earthen-wall-redesign/earthen-wall/index.html">
+        <img src="../Workshop/earthen-wall-redesign/earthen-wall/images/hero.jpeg" alt="" />
+        <div class="workshop-card__cap">
+          <span class="name">Earthen Wall</span>
+          <span class="sub">Make a small panel from Kyoto clay</span>
+        </div>
+      </a>
+    </div>
+    <div class="stay-workshop__foot">
+      <a href="#">All experiences at Maana Atelier ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EXTERIOR — parting shot before booking ============== -->
+<section class="exterior reveal">
+  <img src="images/kyoto/exterior.jpeg" alt="Maana Kyoto from the street, Shimogyo" />
+  <div class="exterior__cap">
+    <span class="eyebrow">From the street · Shimogyo</span>
+    <h2>A quiet block in central Kyoto</h2>
+  </div>
+</section>
+
+<!-- ============== BOOK CTA ============== -->
+<section class="bookcta" id="book">
+  <div class="container-narrow">
+    <h2>Stay at Maana Kyoto</h2>
+    <p>Pick your dates and see live availability. Booking is direct, with a flexible cancellation window and our team to message if you have any questions.</p>
+    <a class="bookcta__btn" href="../Book/index.html">
+      See availability →
+    </a>
+  </div>
+</section>
+
+<!-- ============== OTHER PROPERTIES ============== -->
+<section class="others reveal" id="others">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Or stay at</span>
+        <h2>Our other homes</h2>
+      </div>
+      <a class="back-link" href="index.html">
+        Back to all properties
+        <span class="arrow">↗</span>
+      </a>
+    </div>
+    <div class="others__grid">
+
+      <a class="other" href="kamo.html">
+        <div class="other__img">
+          <img src="images/kamo/hero.PNG" alt="Maana Kamo" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Kamo</span>
+          <p class="sig">A house designed around the bathtub. Shadow-lit, urushi-lacquered.</p>
+        </div>
+      </a>
+
+      <a class="other" href="kiyomizu.html">
+        <div class="other__img">
+          <img src="images/kiyomizu/suite1/hero.jpg" alt="Maana Kiyomizu" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Kiyomizu</span>
+          <p class="sig">Three machiya suites, next door to Kissa Kishin café.</p>
+        </div>
+      </a>
+
+      <a class="other" href="#">
+        <div class="other__img">
+          <img src="images/annex/hero.png" alt="Maana Annex" />
+        </div>
+        <div class="other__cap">
+          <span class="name">Maana Annex</span>
+          <p class="sig">Our first new-build. Designed with Norm Architects &amp; KAD.</p>
+          <span class="status">Opening Dec 2026</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== FLOATING BOOK WIDGET (desktop bottom-right / mobile sticky bottom) ============== -->
+<aside class="book-widget" id="bookWidget" aria-label="Book Maana Kyoto">
+  <div class="book-widget__banner">
+    Summer offer <em>·</em> Stay 3, Pay 2
+  </div>
+  <div class="book-widget__body">
+    <div>
+      <span class="lbl">Direct booking</span>
+      <span class="name">Maana Kyoto</span>
+    </div>
+    <a class="book-widget__btn" href="#book">
+      Book your stay <span>→</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+  /* Reveal on scroll */
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach((el) => obs.observe(el));
+
+  /* Floating book widget: show after scrolling past the hero */
+  const widget = document.getElementById('bookWidget');
+  const hero = document.querySelector('.hero');
+  if (widget && hero) {
+    const widgetObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // entry.target is the hero; widget shows when hero is mostly out of view
+        if (!entry.isIntersecting) {
+          widget.classList.add('is-visible');
+        } else {
+          widget.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    widgetObs.observe(hero);
+  }
+
+  /* Scroll-spy: highlight the active sub-nav link */
+  const sections = ['story', 'design', 'amenities', 'location', 'others']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const links = document.querySelectorAll('.subnav__link');
+  const idToLink = {};
+  links.forEach(link => {
+    const id = link.getAttribute('href').replace('#', '');
+    idToLink[id] = link;
+  });
+  const spyObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = idToLink[entry.target.id];
+      if (link && entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('is-active'));
+        link.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-130px 0px -65% 0px' });
+  sections.forEach(s => spyObs.observe(s));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maana Website Redesign — Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f1e9d8; --cream-deep:#e7dcc6; --paper:#faf5ea;
+    --ink:#1a1714; --ink-soft:#5a524a; --ink-mute:#8b8074;
+    --rule:#ddd2bc; --terracotta:#b3744a; --terracotta-soft:#d8a679;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink-soft);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased;padding:clamp(28px,5vw,64px)}
+  .wrap{max-width:1180px;margin:0 auto}
+  .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.28em;color:var(--terracotta);font-weight:600}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5vw,54px);color:var(--ink);
+    line-height:1.05;margin:.35em 0 .15em}
+  h1 em{font-style:italic}
+  .sub{font-size:15px;color:var(--ink-mute);max-width:60ch}
+  .deadline{display:inline-block;margin-top:18px;padding:7px 16px;border:1px solid var(--terracotta);
+    border-radius:30px;color:var(--terracotta);font-size:12.5px;font-weight:600;letter-spacing:.02em}
+
+  .section-label{font-family:var(--serif);font-style:italic;font-weight:400;font-size:24px;color:var(--ink);
+    margin:54px 0 18px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+
+  /* workflow gates */
+  .gates{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+  .gate{flex:1;min-width:150px;background:var(--cream);border:1px solid var(--rule);border-radius:10px;
+    padding:14px 14px 13px;position:relative}
+  .gate .g{font-family:var(--serif);font-size:22px;color:var(--terracotta);line-height:1}
+  .gate .t{font-weight:600;color:var(--ink);font-size:13.5px;margin:6px 0 3px}
+  .gate .who{font-size:11.5px;color:var(--ink-mute)}
+  .gate .arrow{position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--terracotta-soft);
+    font-size:18px;z-index:2}
+  .gate:last-child .arrow{display:none}
+
+  /* phase timeline */
+  .phase{display:grid;grid-template-columns:170px 1fr;gap:0;border:1px solid var(--rule);
+    border-radius:12px;overflow:hidden;margin-bottom:14px;background:#fff}
+  .phase .meta{background:var(--cream);padding:20px 18px;border-right:1px solid var(--rule)}
+  .phase .pnum{font-family:var(--serif);font-size:30px;color:var(--ink);font-weight:300;line-height:1}
+  .phase .pname{font-weight:600;color:var(--ink);font-size:14px;margin:7px 0 8px}
+  .phase .dates{font-size:11.5px;color:var(--terracotta);font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+  .phase .body{padding:20px 22px}
+  .phase .goal{color:var(--ink);font-size:14px;font-weight:500;margin-bottom:10px}
+  .phase ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px;margin-bottom:12px}
+  .phase li{font-size:12px;background:var(--paper);border:1px solid var(--rule);border-radius:20px;
+    padding:4px 11px;color:var(--ink-soft)}
+  .phase .out{font-size:12.5px;color:var(--ink-mute);border-top:1px dashed var(--rule);padding-top:9px}
+  .phase .out b{color:var(--terracotta);font-weight:600}
+  .phase .out .review{color:var(--ink-soft)}
+
+  .bg-track{background:var(--cream-deep)}
+  .bg-track .meta{background:var(--cream-deep)}
+
+  /* deps */
+  .deps{background:var(--ink);color:var(--cream);border-radius:12px;padding:22px 24px;font-size:13px}
+  .deps b{color:var(--terracotta-soft)}
+  .deps .chain{font-family:var(--sans);line-height:2;color:var(--cream-deep)}
+  .deps .crit{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14);color:#fff;font-size:12.5px}
+
+  .legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;font-size:11.5px;color:var(--ink-mute)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:13px;height:13px;border-radius:3px;border:1px solid var(--rule)}
+  .foot{margin-top:46px;padding-top:16px;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-mute)}
+  @media (max-width:680px){.phase{grid-template-columns:1fr}.phase .meta{border-right:none;border-bottom:1px solid var(--rule)}.gate .arrow{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Maana · Kyoto</div>
+  <h1>Website Redesign <em>Roadmap</em></h1>
+  <p class="sub">Full English site redesign, sequenced by dependency and run through one repeatable loop: design, mockup, review with the team, hand to Sol, deploy, test together.</p>
+  <div class="deadline">◇ Target: English site live by September 30, 2026</div>
+
+  <div class="section-label">The working loop — every page passes these six gates</div>
+  <div class="gates">
+    <div class="gate"><div class="g">G1</div><div class="t">Design concept</div><div class="who">Viola · wireframe &amp; spec</div><div class="arrow">→</div></div>
+    <div class="gate"><div class="g">G2</div><div class="t">Clickable mockup</div><div class="who">Viola · sandbox HTML</div><div class="arrow">→</div></div>
+    <div class="gate"><div class="g">G3</div><div class="t">Stakeholder review</div><div class="who">Hana &amp; Irene + area owner + Tomomi</div><div class="arrow">→</div></div>
+    <div class="gate"><div class="g">G4</div><div class="t">Handoff to Sol</div><div class="who">port to maana-web · branch + PR</div><div class="arrow">→</div></div>
+    <div class="gate"><div class="g">G5</div><div class="t">Deploy to staging</div><div class="who">Sol · preview.maana.jp</div><div class="arrow">→</div></div>
+    <div class="gate"><div class="g">G6</div><div class="t">Joint test → prod</div><div class="who">Viola + Sol · maana.jp</div></div>
+  </div>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--cream)"></span> Core phase (critical path)</span>
+    <span><span class="sw" style="background:var(--cream-deep)"></span> Background track (non-blocking)</span>
+    <span><span class="sw" style="background:var(--terracotta)"></span> Review / sign-off gate</span>
+  </div>
+
+  <div class="section-label">Dependency spine</div>
+  <div class="deps">
+    <div class="chain">
+      <b>Nav + design tokens</b> &nbsp;→&nbsp; lock first, build once, affects every page<br>
+      <b>Stay template</b> &nbsp;→&nbsp; Stay 1 &nbsp;→&nbsp; Stays 2 &amp; 3 &nbsp;→&nbsp; <b>Book Now</b> (date-first funnel)<br>
+      Workshop availability (Acuity) + Stays availability (PMS, TBC) + Stripe Elements &nbsp;→&nbsp; <b>Book Now</b><br>
+      Retreats URL decision &nbsp;→&nbsp; Artist content &nbsp;→&nbsp; product display &nbsp;→&nbsp; <b>Artist Story</b> page<br>
+      FAQ + Access + Contact &nbsp;→&nbsp; one IA cluster (shared location / hours / policy)
+    </div>
+    <div class="crit">⚑ <b style="color:#fff">Critical path:</b> Nav/tokens → Stay template → Stay 1 → Stays 2/3 → <b style="color:var(--terracotta-soft)">Book Now</b> → Launch. Book Now is the longest pole and highest risk — keep it isolated so the rest can launch even if it lags.</div>
+  </div>
+
+  <div class="section-label">Phases</div>
+
+  <div class="phase">
+    <div class="meta"><div class="pnum">0</div><div class="pname">Foundation</div><div class="dates">June · wk 1–2</div></div>
+    <div class="body">
+      <div class="goal">Lock the global layer + answer the open decisions so everything else runs in parallel.</div>
+      <ul><li>IA audit</li><li>Nav concept → mockup</li><li>Design tokens review</li><li>Stay template wireframes</li><li>Book Now spec</li><li>Artist Story concept</li><li>Home audit</li><li>Resolve 8 open decisions</li></ul>
+      <div class="out"><span class="review">Gate: founders sign off on direction + nav · Sol confirms feasibility.</span> &nbsp;→&nbsp; <b>Output:</b> approved nav, template wireframes, Book Now spec, decisions made.</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="meta"><div class="pnum">1</div><div class="pname">Nav + Stay template + Stay 1</div><div class="dates">June wk3 → mid-Jul</div></div>
+    <div class="body">
+      <div class="goal">New nav live everywhere; first canonical stay page shipped end-to-end (proves the whole loop).</div>
+      <ul><li>Nav build + adopt across pages</li><li>Stay template in Next.js</li><li>Pick canonical stay (Atelier / Kiyomizu)</li><li>Stay 1 content collection</li><li>Stay 1 mockup → review → ship</li><li>Reviews + cross-links</li><li>QA</li></ul>
+      <div class="out"><span class="review">Gate: founders + stays team approve Stay 1 · Tomomi copy.</span> &nbsp;→&nbsp; <b>Output:</b> nav live on all pages, Stay 1 in staging.</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="meta"><div class="pnum">2</div><div class="pname">Stays 2/3 + Book Now</div><div class="dates">mid-Jul → mid-Aug</div></div>
+    <div class="body">
+      <div class="goal">All three stays live; Book Now wired into the date-first funnel. Hardest, highest-risk phase.</div>
+      <ul><li>Stays 2 &amp; 3 content + parallel builds</li><li>Book Now refine from learnings</li><li>Merged stays + workshops results</li><li>Stripe Elements in-panel checkout</li><li>PMS + Acuity write + reconciliation</li><li>Full-funnel QA</li></ul>
+      <div class="out"><span class="review">Gate: founders + Sol (architecture) · Tomomi copy · extra scrutiny on payment/booking sync.</span> &nbsp;→&nbsp; <b>Output:</b> 3 stays + Book Now in staging, funnel testable.</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="meta"><div class="pnum">3</div><div class="pname">Artist Story + Info layer + Home</div><div class="dates">mid-Aug → early Sep</div></div>
+    <div class="body">
+      <div class="goal">Replace Retreats with Artist Story; consolidate FAQ/Access/Contact; refresh Home.</div>
+      <ul><li>Artist content + product-display decision</li><li>Artist Story build</li><li>Retreats 301 / swap + sitemap</li><li>FAQ + Access + Contact reorg (GEO-aware)</li><li>Home updates</li></ul>
+      <div class="out"><span class="review">Gate: founders + area owners per page · Tomomi copy.</span> &nbsp;→&nbsp; <b>Output:</b> Artist Story live, info layer reorganized, Home refreshed.</div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="meta"><div class="pnum">4</div><div class="pname">Launch prep</div><div class="dates">Sep · wk 2–3</div></div>
+    <div class="body">
+      <div class="goal">Polish, QA, performance, clean launch.</div>
+      <ul><li>Cross-browser + mobile</li><li>Lighthouse every page</li><li>Broken-link + 404/redirect audit</li><li>Image optimization</li><li>Schema validation</li><li>hreflang check</li><li>Launch sign-off</li><li>Prod deploy + 48h monitor</li></ul>
+      <div class="out"><span class="review">Gate: launch sign-off — Viola, Sol, Tomomi + founders.</span> &nbsp;→&nbsp; <b>Output:</b> English site live at maana.jp.</div>
+    </div>
+  </div>
+
+  <div class="phase bg-track">
+    <div class="meta"><div class="pnum">A</div><div class="pname">About Us</div><div class="dates">Background · ships when ready</div></div>
+    <div class="body">
+      <div class="goal">Content-blocked, no hard deadline (possible October). Never gates launch.</div>
+      <ul><li>Founder story</li><li>Team bios + photos</li><li>Values / mission</li><li>Wireframe → build → soft launch</li></ul>
+      <div class="out"><b>Owner:</b> Viola coordinates · Tomomi writes · Sol builds when content lands.</div>
+    </div>
+  </div>
+
+  <div class="phase bg-track">
+    <div class="meta"><div class="pnum">B</div><div class="pname">GEO content</div><div class="dates">Background · ongoing</div></div>
+    <div class="body">
+      <div class="goal">Make Maana the cited answer in AI search. Ordered by impact-per-effort.</div>
+      <ul><li>AggregateRating + Review schema</li><li>Course schema per workshop</li><li>FAQ expansion (Tomomi voice)</li><li>Teacher bios</li><li>Explainer pages (tsuchikabe, shio-koji…)</li><li>Press page</li><li>Place / geo schema</li><li>Event JSON-LD</li></ul>
+      <div class="out"><b>Owner:</b> other AI agent · Tomomi copy · Sol merges schema PRs.</div>
+    </div>
+  </div>
+
+  <div class="phase bg-track">
+    <div class="meta"><div class="pnum">5</div><div class="pname">JP localization</div><div class="dates">Oct → end Dec</div></div>
+    <div class="body">
+      <div class="goal">Japanese version of every page, native-reviewed. Starts only after EN content is locked.</div>
+      <ul><li>AI-translate ja.json</li><li>Native review (page by page)</li><li>Re-enable JP toggle</li><li>hreflang verify</li><li>JP schema (inLanguage)</li><li>JP announcement</li></ul>
+      <div class="out"><b>Needs:</b> budget for a native reviewer.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Watch these</div>
+  <div class="gates" style="gap:12px">
+    <div class="gate" style="min-width:200px"><div class="t">⚑ Sol is one engineer</div><div class="who">~one major area per sprint; blocks cascade. Keep Book Now isolated.</div></div>
+    <div class="gate" style="min-width:200px"><div class="t">⚑ Content, not code</div><div class="who">Stay photos, room copy, artist bios are people-dependent. Confirm photographer in Phase 0.</div></div>
+    <div class="gate" style="min-width:200px"><div class="t">⚑ Tomomi is a recurring gate</div><div class="who">Book her copy time every phase, not at the end.</div></div>
+    <div class="gate" style="min-width:200px"><div class="t">⚑ Payment ↔ booking sync</div><div class="who">Stripe + Acuity + PMS must stay in agreement. Reconciliation + alerts.</div></div>
+  </div>
+
+  <div class="foot">Companion to <b>MAANA_REDESIGN_PROJECT_PLAN.md</b> · grounded in PROJECT_HARNESS.md, GEO_HARNESS.md, REDESIGN_PLAN.md · Dates are a sketch — sanity-check with Sol before committing.</div>
+
+</div>
+</body>
+</html>

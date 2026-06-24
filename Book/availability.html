@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Available for your dates · Maana</title>
+<meta name="description" content="Stays and workshops available for your dates in Kyoto. Homes are booked through Airhost. Workshops are booked directly with us." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 6vw, 80px);
+  }
+
+  /* ============== NAV ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo { display: inline-flex; align-items: center; height: 18px; }
+  .site-nav__logo img { height: 100%; width: auto; filter: brightness(0) invert(1); }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta.is-active { background: var(--paper); color: var(--ink); }
+
+  /* ============== TRIP SUMMARY ============== */
+  .summary {
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+    padding: clamp(28px, 4vw, 44px) 0;
+  }
+  .summary__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .summary__eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .summary__dates {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.005em;
+  }
+  .summary__dates .sep {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--terracotta);
+    font-size: 0.6em;
+    margin: 0 0.18em;
+    vertical-align: 0.15em;
+  }
+  .summary__meta {
+    display: flex; flex-wrap: wrap; gap: 6px 16px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    align-items: center;
+  }
+  .summary__meta .pill {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 12px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .summary__change {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 500;
+    border: 1px solid var(--ink);
+    padding: 11px 18px;
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .summary__change:hover {
+    background: var(--ink); color: var(--paper);
+    letter-spacing: 0.26em;
+  }
+  @media (max-width: 700px) {
+    .summary__inner { grid-template-columns: 1fr; }
+    .summary__change { justify-self: start; }
+  }
+
+  /* ============== RESULTS COUNT (small ticker) ============== */
+  .ticker {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .ticker strong {
+    color: var(--ink); font-weight: 600;
+  }
+  .ticker .sep {
+    margin: 0 12px; color: var(--ink-mute);
+  }
+
+  /* ============== SECTIONS ============== */
+  .results {
+    padding: clamp(56px, 6vw, 90px) 0;
+  }
+  .results + .results { padding-top: 0; }
+  .results-section__head {
+    margin-bottom: clamp(28px, 3.2vw, 44px);
+    max-width: 720px;
+  }
+  .results-section__eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .results-section__eyebrow .dot {
+    color: var(--ink-mute);
+    margin: 0 0.4em;
+    font-weight: 300;
+  }
+  .results-section__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(32px, 3.6vw, 46px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .results-section__lede {
+    font-family: var(--sans);
+    font-size: clamp(14px, 1.1vw, 16px);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .results-section__lede em {
+    font-style: normal;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* ============== STAY CARD ============== */
+  .stay-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+  .stay-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    transition: border-color .35s, box-shadow .35s, transform .35s var(--ease-out);
+  }
+  .stay-card:hover {
+    border-color: var(--terracotta-soft);
+    box-shadow: 0 20px 50px rgba(20, 16, 12, 0.08);
+    transform: translateY(-2px);
+  }
+  .stay-card__media {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+    min-height: 240px;
+  }
+  .stay-card__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 2s var(--ease-out);
+  }
+  .stay-card:hover .stay-card__media img { transform: scale(1.04); }
+  .stay-card__tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7px 12px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 2;
+  }
+  .stay-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px 28px;
+  }
+  .stay-card__info { display: flex; flex-direction: column; gap: 8px; }
+  .stay-card__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(24px, 2vw, 28px);
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+  }
+  .stay-card__loc {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin: 0;
+    letter-spacing: 0.04em;
+  }
+  .stay-card__stats {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: flex; flex-wrap: wrap; gap: 4px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .stay-card__stats li { position: relative; }
+  .stay-card__stats li:not(:last-child)::after {
+    content: '·';
+    position: absolute;
+    right: -10px;
+    color: var(--rule);
+  }
+  /* What's included — compact 6-icon row inside the card */
+  .stay-card__includes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .stay-card__includes-lbl {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .stay-card__includes-row {
+    display: flex; flex-wrap: wrap;
+    gap: 10px 22px;
+  }
+  .stay-card__includes-row .ic {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .stay-card__includes-row .ic svg {
+    width: 18px; height: 18px;
+    stroke: var(--terracotta);
+    stroke-width: 1.4;
+    fill: none;
+    flex: 0 0 18px;
+  }
+
+  /* Bottom row — price left, actions stacked right */
+  .stay-card__bottom {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+  .stay-card__price {
+    font-family: var(--serif);
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .stay-card__price .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .stay-card__price .val {
+    font-size: 26px;
+    font-weight: 400;
+  }
+  .stay-card__price .per {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-left: 4px;
+  }
+  .stay-card__actions {
+    display: flex; flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    min-width: 220px;
+  }
+  .stay-card__more {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+    border-bottom: 1px solid var(--ink-mute);
+    padding-bottom: 3px;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .stay-card__more:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.24em; }
+
+  /* ============== WORKSHOP CARD ============== */
+  .ws-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(14px, 1.6vw, 22px);
+  }
+  .ws-card {
+    display: grid;
+    grid-template-columns: 92px 220px 1fr;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    transition: border-color .35s, box-shadow .35s, transform .35s var(--ease-out);
+  }
+  .ws-card:hover {
+    border-color: var(--terracotta-soft);
+    box-shadow: 0 20px 50px rgba(20, 16, 12, 0.08);
+    transform: translateY(-2px);
+  }
+  .ws-card__date {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: var(--cream);
+    border-right: 1px solid var(--rule);
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .ws-card__date .dow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .ws-card__date .day {
+    font-family: var(--serif);
+    font-size: 38px;
+    line-height: 1;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .ws-card__date .mon {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-top: 6px;
+  }
+  .ws-card__media {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+    min-height: 200px;
+  }
+  .ws-card__media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 2s var(--ease-out);
+  }
+  .ws-card:hover .ws-card__media img { transform: scale(1.04); }
+  .ws-card__body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    padding: 22px 26px;
+    align-items: center;
+  }
+  .ws-card__info { display: flex; flex-direction: column; gap: 6px; }
+  .ws-card__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(22px, 1.9vw, 26px);
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+  }
+  .ws-card__blurb {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.5;
+    max-width: 52ch;
+  }
+  .ws-card__meta {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex; flex-wrap: wrap; gap: 4px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+  .ws-card__meta li { position: relative; }
+  .ws-card__meta li:not(:last-child)::after {
+    content: '·';
+    position: absolute;
+    right: -10px;
+    color: var(--rule);
+  }
+  .ws-card__action {
+    display: flex; flex-direction: column;
+    align-items: flex-end;
+    gap: 14px;
+    min-width: 180px;
+  }
+  .ws-card__price {
+    text-align: right;
+    line-height: 1.15;
+    font-family: var(--serif);
+    color: var(--ink);
+  }
+  .ws-card__price .val { font-size: 22px; font-weight: 400; }
+  .ws-card__price .disc {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--terracotta);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ============== CTA BUTTONS (the differentiator) ============== */
+  /* External / Airhost — neutral ink, "leaves site" */
+  .cta-external,
+  .cta-internal {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: 0;
+    cursor: pointer;
+    transition: background .25s, letter-spacing .25s, transform .25s;
+    white-space: nowrap;
+  }
+  .cta-external {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .cta-external:hover {
+    background: #2a2622;
+    letter-spacing: 0.28em;
+  }
+  .cta-external svg { width: 14px; height: 14px; }
+
+  /* Internal / Workshop — brand terracotta, "stays on site" */
+  .cta-internal {
+    background: var(--terracotta);
+    color: var(--paper);
+  }
+  .cta-internal:hover {
+    background: #9c6440;
+    letter-spacing: 0.28em;
+  }
+  .cta-internal .arr {
+    display: inline-block;
+    transition: transform .25s var(--ease-out);
+  }
+  .cta-internal:hover .arr { transform: translateX(4px); }
+
+  /* ============== EMPTY STATE ============== */
+  .empty {
+    padding: clamp(40px, 5vw, 64px);
+    border: 1px dashed var(--rule);
+    text-align: center;
+    background: var(--cream);
+  }
+  .empty p {
+    margin: 0 0 16px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+  .empty a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-mute);
+    transition: color .25s, border-color .25s;
+  }
+  .empty a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 36px 0;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 900px) {
+    .stay-card { grid-template-columns: 1fr; }
+    .stay-card__media { min-height: 240px; aspect-ratio: 4/3; }
+    .stay-card__body { padding: 22px 24px; }
+    .stay-card__bottom { grid-template-columns: 1fr; gap: 16px; }
+    .stay-card__actions { align-items: stretch; min-width: 0; }
+    .stay-card__more { text-align: center; align-self: center; }
+    .cta-external, .cta-internal { justify-content: center; }
+
+    .ws-card { grid-template-columns: 80px 1fr; grid-template-rows: auto auto; }
+    .ws-card__date { grid-column: 1; grid-row: 1 / span 2; }
+    .ws-card__media { grid-column: 2; grid-row: 1; aspect-ratio: 3/2; min-height: 0; }
+    .ws-card__body { grid-column: 2; grid-row: 2; grid-template-columns: 1fr; gap: 18px; padding: 18px 22px; }
+    .ws-card__action { align-items: stretch; min-width: 0; }
+    .ws-card__price { text-align: left; }
+  }
+  @media (max-width: 540px) {
+    .ws-card { grid-template-columns: 1fr; }
+    .ws-card__date {
+      flex-direction: row; justify-content: flex-start;
+      gap: 12px; padding: 12px 18px;
+      border-right: 0; border-bottom: 1px solid var(--rule);
+    }
+    .ws-card__date .day { font-size: 24px; }
+    .ws-card__date .dow, .ws-card__date .mon { margin: 0; }
+    .ws-card__media { grid-column: 1; grid-row: auto; }
+    .ws-card__body { grid-column: 1; grid-row: auto; }
+  }
+  @media (max-width: 800px) {
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 16px; }
+    .site-nav__links { gap: 12px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== SVG SYMBOLS (referenced by stay cards) ============== -->
+<svg style="display:none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-wifi" viewBox="0 0 32 32">
+    <path d="M16 26.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" fill="currentColor" stroke="none"/>
+    <path d="M9 19.5a10 10 0 0 1 14 0M5.5 15a15 15 0 0 1 21 0M2 10.5a20 20 0 0 1 28 0"/>
+  </symbol>
+  <symbol id="i-washer" viewBox="0 0 32 32">
+    <rect x="6" y="5" width="20" height="22" rx="1.5"/>
+    <circle cx="16" cy="17" r="6"/>
+    <circle cx="16" cy="17" r="2.5"/>
+    <line x1="10" y1="9" x2="13" y2="9"/>
+  </symbol>
+  <symbol id="i-slippers" viewBox="0 0 32 32">
+    <path d="M5 21c2-7 9-9 14-7s7 6 6 9-4 4-7 4H8c-2 0-3-2-3-3z"/>
+    <path d="M9 19c2-2 5-3 8-3"/>
+  </symbol>
+  <symbol id="i-iron" viewBox="0 0 32 32">
+    <path d="M4 23h24v2H4z"/>
+    <path d="M8 23a8 8 0 0 1 8-8h7c1.5 0 2.5 1 3 2.5L28 23"/>
+    <line x1="15" y1="13" x2="23" y2="8"/>
+    <circle cx="23.5" cy="7.5" r="1.5"/>
+  </symbol>
+  <symbol id="i-yoga" viewBox="0 0 32 32">
+    <ellipse cx="16" cy="20" rx="11" ry="3.5"/>
+    <line x1="5" y1="20" x2="5" y2="13"/>
+    <line x1="27" y1="20" x2="27" y2="13"/>
+    <ellipse cx="16" cy="13" rx="11" ry="3.5"/>
+  </symbol>
+  <symbol id="i-speaker" viewBox="0 0 32 32">
+    <rect x="10" y="4" width="12" height="24" rx="1.5"/>
+    <circle cx="16" cy="11" r="2.2"/>
+    <circle cx="16" cy="20" r="3.4"/>
+    <circle cx="16" cy="20" r="1"/>
+  </symbol>
+</svg>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link" href="../Stay/index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Shop/index.html">Shop</a>
+    <a class="site-nav__cta is-active" href="index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== TRIP SUMMARY ============== -->
+<section class="summary">
+  <div class="container">
+    <div class="summary__inner">
+      <div>
+        <span class="summary__eyebrow">Your trip</span>
+        <h1 class="summary__dates" id="dateRange">
+          Jun 24 <span class="sep">to</span> Jun 27
+        </h1>
+        <div class="summary__meta">
+          <span id="nightsText">3 nights</span>
+          <span class="pill" id="modePill">Staying with us</span>
+        </div>
+      </div>
+      <a class="summary__change" href="index.html" id="changeLink">
+        <span>← Change dates</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== RESULTS TICKER ============== -->
+<div class="ticker">
+  <div class="container">
+    <strong id="stayCount">5</strong> homes
+    <span class="sep">·</span>
+    <strong id="workshopCount">3</strong> workshops
+    available for these dates
+  </div>
+</div>
+
+<!-- ============== RESULTS (populated by JS in mode-driven order) ============== -->
+<div id="resultsRoot"></div>
+
+<!-- ============== SECTION TEMPLATES (rendered into resultsRoot) ============== -->
+
+<template id="stays-section">
+  <section class="results">
+    <div class="container">
+      <header class="results-section__head">
+        <span class="results-section__eyebrow">Stays <span class="dot">·</span> Booked via Airhost</span>
+        <h2 class="results-section__title">Homes available for your dates</h2>
+      </header>
+      <div class="stay-grid">
+
+        <!-- MAANA KYOTO -->
+        <article class="stay-card">
+          <div class="stay-card__media">
+            <img src="../Stay/images/kyoto/card.jpg" alt="Maana Kyoto" />
+            <span class="stay-card__tag">Whole Home · Machiya</span>
+          </div>
+          <div class="stay-card__body">
+            <div class="stay-card__info">
+              <h3 class="stay-card__name">Maana Kyoto</h3>
+              <p class="stay-card__loc">Shimogyo Ward, near Kyoto Station</p>
+              <ul class="stay-card__stats">
+                <li>89 m²</li>
+                <li>2 bedrooms</li>
+                <li>Sleeps 5</li>
+              </ul>
+            </div>
+            <div class="stay-card__includes">
+              <span class="stay-card__includes-lbl">What's included</span>
+              <div class="stay-card__includes-row">
+                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
+                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
+                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
+                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
+                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
+                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
+              </div>
+            </div>
+            <div class="stay-card__bottom">
+              <div class="stay-card__price">
+                <span class="lbl">From</span>
+                <span class="val">¥85,000</span><span class="per">/ night</span>
+              </div>
+              <div class="stay-card__actions">
+                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kyoto" target="_blank" rel="noopener">
+                  Reserve on Airhost
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a class="stay-card__more" href="../Stay/kyoto.html">See more →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- MAANA KAMO -->
+        <article class="stay-card">
+          <div class="stay-card__media">
+            <img src="../Stay/images/kamo/hero.PNG" alt="Maana Kamo" />
+            <span class="stay-card__tag">Whole Home · Machiya</span>
+          </div>
+          <div class="stay-card__body">
+            <div class="stay-card__info">
+              <h3 class="stay-card__name">Maana Kamo</h3>
+              <p class="stay-card__loc">Higashiyama Ward, near Kamogawa</p>
+              <ul class="stay-card__stats">
+                <li>83 m²</li>
+                <li>2 bedrooms</li>
+                <li>Sleeps 5</li>
+              </ul>
+            </div>
+            <div class="stay-card__includes">
+              <span class="stay-card__includes-lbl">What's included</span>
+              <div class="stay-card__includes-row">
+                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
+                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
+                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
+                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
+                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
+                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
+              </div>
+            </div>
+            <div class="stay-card__bottom">
+              <div class="stay-card__price">
+                <span class="lbl">From</span>
+                <span class="val">¥95,000</span><span class="per">/ night</span>
+              </div>
+              <div class="stay-card__actions">
+                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kamo" target="_blank" rel="noopener">
+                  Reserve on Airhost
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a class="stay-card__more" href="../Stay/kamo.html">See more →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- KIYOMIZU SUITE 1 -->
+        <article class="stay-card">
+          <div class="stay-card__media">
+            <img src="../Stay/images/kiyomizu/suite1/hero.jpg" alt="Kiyomizu Suite One" />
+            <span class="stay-card__tag">Suite · Studio</span>
+          </div>
+          <div class="stay-card__body">
+            <div class="stay-card__info">
+              <h3 class="stay-card__name">Kiyomizu Suite One</h3>
+              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
+              <ul class="stay-card__stats">
+                <li>23 m²</li>
+                <li>1 bedroom</li>
+                <li>Sleeps 2</li>
+              </ul>
+            </div>
+            <div class="stay-card__includes">
+              <span class="stay-card__includes-lbl">What's included</span>
+              <div class="stay-card__includes-row">
+                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
+                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
+                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
+                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
+                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
+                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
+              </div>
+            </div>
+            <div class="stay-card__bottom">
+              <div class="stay-card__price">
+                <span class="lbl">From</span>
+                <span class="val">¥80,000</span><span class="per">/ night</span>
+              </div>
+              <div class="stay-card__actions">
+                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-1" target="_blank" rel="noopener">
+                  Reserve on Airhost
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite1">See more →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- KIYOMIZU SUITE 2 -->
+        <article class="stay-card">
+          <div class="stay-card__media">
+            <img src="../Stay/images/kiyomizu/suite2/hero.jpg" alt="Kiyomizu Suite Two" />
+            <span class="stay-card__tag">Suite · Two Bedroom</span>
+          </div>
+          <div class="stay-card__body">
+            <div class="stay-card__info">
+              <h3 class="stay-card__name">Kiyomizu Suite Two</h3>
+              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
+              <ul class="stay-card__stats">
+                <li>63 m²</li>
+                <li>2 bedrooms</li>
+                <li>Sleeps 4</li>
+              </ul>
+            </div>
+            <div class="stay-card__includes">
+              <span class="stay-card__includes-lbl">What's included</span>
+              <div class="stay-card__includes-row">
+                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
+                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
+                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
+                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
+                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
+                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
+              </div>
+            </div>
+            <div class="stay-card__bottom">
+              <div class="stay-card__price">
+                <span class="lbl">From</span>
+                <span class="val">¥125,000</span><span class="per">/ night</span>
+              </div>
+              <div class="stay-card__actions">
+                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-2" target="_blank" rel="noopener">
+                  Reserve on Airhost
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite2">See more →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- KIYOMIZU SUITE 3 -->
+        <article class="stay-card">
+          <div class="stay-card__media">
+            <img src="../Stay/images/kiyomizu/suite3/hero.jpg" alt="Kiyomizu Suite Three" />
+            <span class="stay-card__tag">Suite · Two Bedroom</span>
+          </div>
+          <div class="stay-card__body">
+            <div class="stay-card__info">
+              <h3 class="stay-card__name">Kiyomizu Suite Three</h3>
+              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
+              <ul class="stay-card__stats">
+                <li>60 m²</li>
+                <li>2 bedrooms</li>
+                <li>Sleeps 3</li>
+              </ul>
+            </div>
+            <div class="stay-card__includes">
+              <span class="stay-card__includes-lbl">What's included</span>
+              <div class="stay-card__includes-row">
+                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
+                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
+                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
+                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
+                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
+                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
+              </div>
+            </div>
+            <div class="stay-card__bottom">
+              <div class="stay-card__price">
+                <span class="lbl">From</span>
+                <span class="val">¥110,000</span><span class="per">/ night</span>
+              </div>
+              <div class="stay-card__actions">
+                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-3" target="_blank" rel="noopener">
+                  Reserve on Airhost
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                </a>
+                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite3">See more →</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</template>
+
+<template id="workshops-section">
+  <section class="results">
+    <div class="container">
+      <header class="results-section__head">
+        <span class="results-section__eyebrow">Workshops <span class="dot">·</span> Booked directly</span>
+        <h2 class="results-section__title" id="wsTitle">Workshops while you're here</h2>
+        <p class="results-section__lede">All workshops are booked directly on our site. <em>Stay with us and get 15% off any workshop.</em></p>
+      </header>
+      <div class="ws-grid" id="wsGrid"></div>
+    </div>
+  </section>
+</template>
+
+<!-- One workshop card template, cloned per scheduled session -->
+<template id="ws-card">
+  <article class="ws-card">
+    <a class="ws-card__date" data-ws-link></a>
+    <a class="ws-card__media" data-ws-link>
+      <img alt="" />
+    </a>
+    <div class="ws-card__body">
+      <div class="ws-card__info">
+        <h3 class="ws-card__name"></h3>
+        <p class="ws-card__blurb"></p>
+        <ul class="ws-card__meta"></ul>
+      </div>
+      <div class="ws-card__action">
+        <div class="ws-card__price">
+          <span class="val"></span>
+          <span class="disc"></span>
+        </div>
+        <a class="cta-internal" data-ws-link>
+          Book directly
+          <span class="arr" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </article>
+</template>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+(function() {
+  /* ---------- read URL params ---------- */
+  const params = new URLSearchParams(window.location.search);
+  let arriveStr = params.get('arrive');
+  let departStr = params.get('depart');
+  let mode = params.get('mode') || 'stay';
+
+  /* Defaults if missing */
+  const today = new Date(); today.setHours(0,0,0,0);
+  if (!arriveStr) {
+    const d = new Date(today); d.setDate(d.getDate() + 30);
+    arriveStr = d.toISOString().slice(0,10);
+  }
+  if (!departStr) {
+    const d = new Date(arriveStr + 'T00:00:00'); d.setDate(d.getDate() + 3);
+    departStr = d.toISOString().slice(0,10);
+  }
+
+  const arrive = new Date(arriveStr + 'T00:00:00');
+  const depart = new Date(departStr + 'T00:00:00');
+  const nights = Math.max(1, Math.round((depart - arrive) / (1000*60*60*24)));
+
+  /* ---------- format helpers ---------- */
+  const monthShort = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const monthLong  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dowShort   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  function fmtShort(d) { return monthShort[d.getMonth()] + ' ' + d.getDate(); }
+
+  /* ---------- summary ---------- */
+  document.getElementById('dateRange').innerHTML =
+    fmtShort(arrive) + ' <span class="sep">to</span> ' + fmtShort(depart);
+  document.getElementById('nightsText').textContent =
+    nights + (nights === 1 ? ' night' : ' nights');
+  document.getElementById('modePill').textContent =
+    mode === 'workshop' ? 'Workshop only' : 'Staying with us';
+
+  /* Round-trip params on the "Change dates" link so the booker pre-fills */
+  document.getElementById('changeLink').href =
+    'index.html?' + params.toString();
+
+  /* ---------- workshop schedule (by weekday) ---------- */
+  /* day index: 0 Sun, 1 Mon, 2 Tue, 3 Wed, 4 Thu, 5 Fri, 6 Sat */
+  const workshopByDow = {
+    1: { slug: 'tea-dye',           name: 'Tea Dye',           blurb: 'Hand-dye a small piece using natural tea pigments.',                     start: '10:30am', duration: '2 hr',     group: 'Up to 8 guests', price: 9800,  discounted: 8330  },
+    2: { slug: 'koji-fermentation', name: 'Koji Fermentation', blurb: 'Make miso, koji, and shio koji to take home in two jars.',                start: '2:00pm',  duration: '2.5 hr',   group: 'Up to 6 guests', price: 12000, discounted: 10200 },
+    3: { slug: 'botanical-teas',    name: 'Botanical Teas',    blurb: 'Blend your own tea from seasonal Kyoto botanicals.',                      start: '11:00am', duration: '1.5 hr',   group: 'Up to 8 guests', price: 8500,  discounted: 7225  },
+    4: { slug: 'earthen-wall',      name: 'Earthen Wall',      blurb: 'Make a small panel from Kyoto clay, finished by hand.',                   start: '1:00pm',  duration: '3 hr',     group: 'Up to 6 guests', price: 14000, discounted: 11900 },
+    5: { slug: 'tea-dye',           name: 'Tea Dye',           blurb: 'Hand-dye a small piece using natural tea pigments.',                     start: '10:30am', duration: '2 hr',     group: 'Up to 8 guests', price: 9800,  discounted: 8330  },
+    6: { slug: 'koji-fermentation', name: 'Koji Fermentation', blurb: 'Make miso, koji, and shio koji to take home in two jars.',                start: '2:00pm',  duration: '2.5 hr',   group: 'Up to 6 guests', price: 12000, discounted: 10200 }
+    /* Sunday (0) closed */
+  };
+
+  /* Walk the date range (arrive → day before depart) and collect workshops */
+  function workshopsInRange() {
+    const out = [];
+    const cursor = new Date(arrive);
+    while (cursor < depart) {
+      const ws = workshopByDow[cursor.getDay()];
+      if (ws) out.push({ date: new Date(cursor), ...ws });
+      cursor.setDate(cursor.getDate() + 1);
+    }
+    return out;
+  }
+
+  const workshops = workshopsInRange();
+  document.getElementById('workshopCount').textContent = workshops.length;
+
+  /* ---------- render sections in mode-driven order ---------- */
+  const root = document.getElementById('resultsRoot');
+
+  function renderStays() {
+    const tpl = document.getElementById('stays-section').content.cloneNode(true);
+    root.appendChild(tpl);
+  }
+
+  function renderWorkshops() {
+    const tpl = document.getElementById('workshops-section').content.cloneNode(true);
+    const grid = tpl.getElementById('wsGrid');
+    const title = tpl.getElementById('wsTitle');
+    const whichVisit = (mode === 'workshop') ? 'visit' : 'stay';
+    title.textContent = workshops.length === 1
+      ? '1 experience during your ' + whichVisit
+      : workshops.length + ' experiences during your ' + whichVisit;
+
+    if (workshops.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.innerHTML = '<p>No workshops fall inside these dates.</p>'
+        + '<p><a href="../Workshop/earthen-wall-redesign/index.html">See the full workshop calendar →</a></p>';
+      grid.appendChild(empty);
+    } else {
+      const cardTpl = document.getElementById('ws-card');
+      workshops.forEach(ws => {
+        const card = cardTpl.content.cloneNode(true);
+        const d = ws.date;
+        card.querySelector('.dow') || (() => {})();  // safety
+        const dateAnchors = card.querySelectorAll('[data-ws-link]');
+        const wsHref = '../Workshop/earthen-wall-redesign/' + ws.slug + '/index.html'
+          + '?date=' + d.toISOString().slice(0,10);
+        dateAnchors.forEach(a => a.setAttribute('href', wsHref));
+
+        const dateBlock = card.querySelector('.ws-card__date');
+        dateBlock.innerHTML =
+          '<span class="dow">' + dowShort[d.getDay()] + '</span>' +
+          '<span class="day">' + d.getDate() + '</span>' +
+          '<span class="mon">' + monthShort[d.getMonth()] + '</span>';
+        dateBlock.setAttribute('href', wsHref);
+
+        card.querySelector('.ws-card__media img').src =
+          '../Workshop/earthen-wall-redesign/' + ws.slug + '/images/hero.jpeg';
+        card.querySelector('.ws-card__media img').alt = ws.name;
+
+        card.querySelector('.ws-card__name').textContent = ws.name;
+        card.querySelector('.ws-card__blurb').textContent = ws.blurb;
+
+        const meta = card.querySelector('.ws-card__meta');
+        meta.innerHTML =
+          '<li>' + ws.start + '</li>' +
+          '<li>' + ws.duration + '</li>' +
+          '<li>' + ws.group + '</li>';
+
+        card.querySelector('.ws-card__price .val').textContent =
+          '¥' + ws.price.toLocaleString();
+        card.querySelector('.ws-card__price .disc').textContent =
+          '¥' + ws.discounted.toLocaleString() + ' with stay';
+
+        grid.appendChild(card);
+      });
+    }
+    root.appendChild(tpl);
+  }
+
+  if (mode === 'workshop') {
+    renderWorkshops();
+    renderStays();
+  } else {
+    renderStays();
+    renderWorkshops();
+  }
+
+  /* ---------- decorate stay links with date params ---------- */
+  /* Airhost booking URL params: ?check_in=YYYY-MM-DD&check_out=YYYY-MM-DD */
+  document.querySelectorAll('[data-airhost]').forEach(a => {
+    const url = new URL(a.dataset.airhost);
+    url.searchParams.set('check_in', arriveStr);
+    url.searchParams.set('check_out', departStr);
+    a.href = url.toString();
+  });
+
+})();
+</script>
+</body>
+</html>

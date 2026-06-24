@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stay · Maana</title>
+<meta name="description" content="Four boutique homes and suites in Kyoto. Compare Maana Kyoto, Maana Kamo, Maana Kiyomizu, and the new Maana Annex (opening December 2026)." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f1e9d8;
+    --cream-deep: #ebe1c8;
+    --paper: #faf5ea;
+    --ink: #1a1714;
+    --ink-soft: #5a524a;
+    --ink-mute: #8b8074;
+    --rule: #d9cfb8;
+    --terracotta: #b3744a;
+    --terracotta-soft: #d8a679;
+    --highlight: #c4956a;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .container {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+
+  /* ============== NAV ============== */
+  .site-nav {
+    position: sticky; top: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px clamp(24px, 4vw, 48px);
+  }
+  .site-nav__logo { display: inline-flex; align-items: center; height: 18px; }
+  .site-nav__logo img { height: 100%; width: auto; filter: brightness(0) invert(1); }
+  .site-nav__links { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 34px); }
+  .site-nav__link {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(245, 240, 235, 0.75);
+    transition: color .25s var(--ease-out);
+  }
+  .site-nav__link:hover { color: var(--paper); }
+  .site-nav__link.is-active { color: var(--paper); }
+  .site-nav__cta {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--paper);
+    padding: 11px 22px;
+    border: 1px solid rgba(245, 240, 235, 0.55);
+    transition: background .25s, color .25s, letter-spacing .25s;
+  }
+  .site-nav__cta:hover { background: var(--paper); color: var(--ink); letter-spacing: 0.26em; }
+
+  /* ============== PAGE HEADER ============== */
+  .page-head {
+    padding: clamp(56px, 6vw, 100px) 0 clamp(36px, 4vw, 56px);
+  }
+  /* Two-column grid: title left, intro starts at horizontal centre */
+  .page-head__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 64px);
+    align-items: end;
+  }
+  .page-head h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(36px, 4.4vw, 60px);
+    margin: 0;
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .page-head h1 .dot {
+    color: var(--terracotta);
+    margin: 0 0.16em;
+    font-weight: 300;
+  }
+  .page-head__intro {
+    font-family: var(--sans);
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 44ch;
+  }
+  .page-head__intro p { margin: 0; }
+  @media (max-width: 800px) {
+    .page-head__top { grid-template-columns: 1fr; gap: 20px; }
+    .page-head h1 { font-size: clamp(36px, 9vw, 52px); }
+    .page-head__intro { max-width: 100%; }
+  }
+
+  /* ============== COMPARE TOGGLE (legend) ============== */
+  .legend {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+  }
+  .legend__cell {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .legend__cell .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--terracotta);
+  }
+  .legend__cell strong {
+    color: var(--ink); font-weight: 500;
+  }
+  @media (max-width: 800px) {
+    .legend { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+
+  /* ============== PROPERTY GRID ============== */
+  .properties {
+    padding: clamp(40px, 5vw, 80px) 0 clamp(60px, 7vw, 100px);
+  }
+  /* 3-col grid. All cards same size. Kyoto · Kamo · Kiyomizu on row 1
+     (open). Annex on row 2 (coming soon). */
+  .properties__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 1.8vw, 28px);
+  }
+  @media (max-width: 1000px) {
+    .properties__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .properties__grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  /* ----- Property card ----- */
+  .prop {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    display: flex; flex-direction: column;
+    transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out), border-color .35s;
+    cursor: pointer;
+  }
+  .prop:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(20, 16, 12, 0.10);
+    border-color: var(--terracotta-soft);
+  }
+  /* Invisible full-card link makes the entire card clickable */
+  .prop__link {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    text-indent: -9999px;
+    overflow: hidden;
+  }
+  /* Inner CTAs and the suite thumbnails need to sit above the full-card link */
+  .prop__body, .prop__suites-strip, .prop__suites-panel { position: relative; }
+  .prop__cta-row, .prop__suites-strip a, .prop__more a, .prop__suites-panel a { position: relative; z-index: 5; }
+  /* Coming-soon card has no full-card link, but still feels like a card */
+  .prop--coming { cursor: default; }
+
+  /* Kiyomizu suite strip — three thumbnails beneath the body so visitors
+     see at a glance that there are three individual suites. */
+  .prop__suites-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 0 18px 18px;
+    background: var(--paper);
+  }
+  .prop__suites-strip .thumb {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--cream);
+    transition: transform .3s var(--ease-out);
+  }
+  .prop__suites-strip .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+  .prop__suites-strip .thumb:hover { transform: translateY(-2px); }
+  .prop__suites-strip .thumb:hover img { transform: scale(1.06); }
+  .prop__suites-strip .thumb::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 55%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.7) 100%);
+    pointer-events: none;
+  }
+  .prop__suites-strip .label {
+    position: absolute;
+    bottom: 6px; left: 8px;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+
+  /* ------- Wide Kiyomizu: same image+body as the other cards on the left,
+     a suites panel as an extra section on the right. ------- */
+  .prop--wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .prop--wide .prop__img-wrap { grid-column: 1; grid-row: 1; }
+  .prop--wide .prop__body { grid-column: 1; grid-row: 2; }
+  .prop--wide .prop__suites-panel {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 26px;
+    border-left: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .prop__suites-panel__head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .suite-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: transform .3s var(--ease-out);
+  }
+  .suite-row:last-child { border-bottom: 0; }
+  .suite-row:hover { transform: translateX(4px); }
+  .suite-row__img {
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .suite-row__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out);
+  }
+  .suite-row:hover .suite-row__img img { transform: scale(1.06); }
+  .suite-row__info { display: flex; flex-direction: column; gap: 4px; }
+  .suite-row__name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .suite-row__meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    line-height: 1.4;
+  }
+  .prop__suites-panel__foot {
+    margin-top: auto;
+    padding-top: 16px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .prop__suites-panel__foot a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink-mute);
+    transition: color .25s, border-color .25s;
+  }
+  .prop__suites-panel__foot a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* Wide card stacks on small screens — suites panel drops below body */
+  @media (max-width: 900px) {
+    .prop--wide {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .prop--wide .prop__img-wrap,
+    .prop--wide .prop__body,
+    .prop--wide .prop__suites-panel { grid-column: 1; grid-row: auto; }
+    .prop--wide .prop__suites-panel { border-left: 0; border-top: 1px solid var(--rule); }
+  }
+  /* Image is portrait but more compact — easier to compare side-by-side */
+  .prop__img-wrap {
+    position: relative;
+    aspect-ratio: 5/6;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .prop__img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1.8s var(--ease-out);
+  }
+  .prop:hover .prop__img { transform: scale(1.04); }
+  /* Gradient darkens the bottom half of the image so overlay text reads */
+  .prop__img-wrap::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 58%;
+    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.78) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Type pill on the image — solid background for legibility on bright photos */
+  .prop__pill {
+    position: absolute;
+    top: 20px; left: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(20, 16, 12, 0.25);
+  }
+
+  /* Coming-soon color-block for Annex (image is not filtered) */
+  .prop__status {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: var(--highlight);
+    color: var(--ink);
+    padding: 10px 16px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    z-index: 3;
+  }
+
+  /* Overlay block at the bottom of the image — white text */
+  .prop__overlay {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0 22px 18px;
+    color: #fff;
+    z-index: 2;
+  }
+  .prop__overlay .brand { display: none; }   /* M A A N A wordmark dropped from overlays */
+  .prop__overlay .name-line {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(22px, 2.1vw, 28px);
+    line-height: 1.1;
+    margin: 0 0 10px;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+  }
+  .prop__overlay .name-line .sep {
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0.3em;
+    font-weight: 300;
+  }
+  .prop__overlay .name-line .loc {
+    font-family: var(--sans);
+    font-size: clamp(12px, 0.95vw, 14px);
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 400;
+    text-transform: none;
+    vertical-align: 0.08em;
+  }
+  .prop__overlay .stat-line {
+    display: flex; flex-wrap: wrap;
+    gap: 4px 10px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+  }
+  .prop__overlay .stat-line .sep {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Body content (below the image — compact, comparison-friendly) */
+  .prop__body {
+    padding: 18px 22px 20px;
+    display: flex; flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+  /* Legacy classes — kept hidden in case any sub-element still references them */
+  .prop__title, .prop__name, .prop__neighborhood { display: none; }
+  .prop__stats { display: none; }
+  .prop__stat .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .prop__stat .val {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  /* Signature feature — the differentiator (compact) */
+  .prop__signature .lbl {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+  }
+  .prop__signature .body {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* Best-for tag */
+  .prop__bestfor {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .prop__bestfor strong {
+    font-weight: 500; color: var(--ink);
+  }
+
+  /* CTA row */
+  .prop__cta-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  .prop__cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: color .25s, border-color .25s, letter-spacing .25s;
+  }
+  .prop__cta:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.3em; }
+  .prop__cta.is-disabled {
+    color: var(--ink-mute); border-color: var(--ink-mute);
+    cursor: not-allowed;
+  }
+  .prop__more {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink-mute);
+  }
+  .prop__more a {
+    border-bottom: 1px solid var(--ink-mute);
+    transition: color .25s, border-color .25s;
+  }
+  .prop__more a:hover { color: var(--terracotta); border-color: var(--terracotta); }
+
+  /* ============== COMPARE TABLE (alternative view) ============== */
+  .compare-cta {
+    margin-top: clamp(40px, 5vw, 80px);
+    text-align: center;
+    padding: clamp(28px, 3vw, 44px) clamp(28px, 4vw, 56px);
+    background: var(--cream);
+    border: 1px solid var(--rule);
+  }
+  .compare-cta h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(24px, 2.4vw, 32px);
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .compare-cta p {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+    max-width: 54ch;
+    margin-left: auto; margin-right: auto;
+  }
+  .compare-cta__btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 32px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .compare-cta__btn:hover { background: var(--terracotta); letter-spacing: 0.3em; }
+
+  /* ============== SCROLL REVEAL ============== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 1.4s var(--ease-out), transform 1.4s var(--ease-out);
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .stagger > * {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  }
+  .stagger.is-visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(3) { transition-delay: 0.30s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(4) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+
+  /* ============== FOOTER ============== */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(245, 240, 235, 0.6);
+    padding: 40px 0;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(245, 240, 235, 0.7);
+    margin: 0 14px;
+    transition: color .2s;
+  }
+  .site-footer a:hover { color: var(--paper); }
+
+  /* ============== RESPONSIVE ============== */
+  @media (max-width: 800px) {
+    /* Top nav compresses */
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 16px; }
+    .site-nav__links { gap: 12px; }
+    .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
+    .site-nav__cta { padding: 8px 12px; }
+  }
+  @media (max-width: 700px) {
+    .prop__stats { grid-template-columns: repeat(3, 1fr); }
+    .prop__body { padding: 22px 22px 24px; gap: 14px; }
+    .prop__title { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .prop__neighborhood { text-align: left; }
+    .prop__pill { font-size: 10px; padding: 8px 12px; letter-spacing: 0.22em; }
+    .prop__multi-strip { padding: 12px 22px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<nav class="site-nav">
+  <a class="site-nav__logo" href="../" aria-label="Maana">
+    <img src="../Logo med.png" alt="Maana" />
+  </a>
+  <div class="site-nav__links">
+    <a class="site-nav__link is-active" href="index.html">Stay</a>
+    <a class="site-nav__link" href="#">Experiences</a>
+    <a class="site-nav__link" href="../Shop/index.html">Shop</a>
+    <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
+  </div>
+</nav>
+
+<!-- ============== PAGE HEADER ============== -->
+<header class="page-head">
+  <div class="container">
+    <div class="page-head__top">
+      <h1>Stay with us<span class="dot">·</span>Kyoto</h1>
+      <div class="page-head__intro">
+        <p>Four ways to wake up in Kyoto. Each home shaped around a different way of staying. Pick by feeling, by feature, or by where you want to be in the city.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<!-- ============== PROPERTY GRID ============== -->
+<section class="properties">
+  <div class="container">
+    <div class="properties__grid stagger">
+
+      <!-- ===== MAANA KYOTO ===== -->
+      <article class="prop">
+        <a class="prop__link" href="kyoto.html" aria-label="View Maana Kyoto">View Maana Kyoto</a>
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/kyoto/card.jpg" alt="Inside Maana Kyoto" />
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Maana Kyoto<span class="sep">·</span><span class="loc">Shimogyo Ward, near Kyoto Station</span>
+            </h2>
+            <div class="stat-line">
+              <span>89 m²</span><span class="sep">·</span>
+              <span>2 Bedrooms</span><span class="sep">·</span>
+              <span>Sleeps 5</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__signature">
+            <p class="body">The original Maana machiya. Restored by master architect Uoya Shigenori, with original wood beams and clay walls exposed.</p>
+          </div>
+          <div class="prop__bestfor">
+            <strong>Best for</strong> first-time visitors who want the foundational Maana experience, cozy, timeless, unforced.
+          </div>
+          <div class="prop__cta-row">
+            <a class="prop__cta" href="kyoto.html">View property →</a>
+            <span class="prop__more"><a href="kyoto.html#book">See availability</a></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== MAANA KAMO ===== -->
+      <article class="prop">
+        <a class="prop__link" href="kamo.html" aria-label="View Maana Kamo">View Maana Kamo</a>
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/kamo/hero.PNG" alt="Inside Maana Kamo" />
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Maana Kamo<span class="sep">·</span><span class="loc">Higashiyama Ward, near Kamogawa</span>
+            </h2>
+            <div class="stat-line">
+              <span>83 m²</span><span class="sep">·</span>
+              <span>2 Bedrooms</span><span class="sep">·</span>
+              <span>Sleeps 5</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__signature">
+            <p class="body">A house designed around the bathtub. An oversized onsen-style soaking tub anchors the home, with the urushi-lacquered kitchen and shadow-lit living shaped around it.</p>
+          </div>
+          <div class="prop__bestfor">
+            <strong>Best for</strong> design lovers and slow travelers who want dramatic light, sleek lines, and a long soak.
+          </div>
+          <div class="prop__cta-row">
+            <a class="prop__cta" href="kamo.html">View property →</a>
+            <span class="prop__more"><a href="kamo.html#book">See availability</a></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== MAANA KIYOMIZU — same card + 3-suite preview strip ===== -->
+      <article class="prop">
+        <a class="prop__link" href="kiyomizu.html" aria-label="View Maana Kiyomizu">View Maana Kiyomizu</a>
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/kiyomizu/suite1/hero.jpg" alt="Maana Kiyomizu, near Kiyomizu-dera" />
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Maana Kiyomizu<span class="sep">·</span><span class="loc">Higashiyama Ward, near Kiyomizu-dera</span>
+            </h2>
+            <div class="stat-line">
+              <span>3 Suite Machiyas</span><span class="sep">·</span>
+              <span>23 to 63 m²</span><span class="sep">·</span>
+              <span>Sleeps 2 to 4 per suite</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__signature">
+            <p class="body">Three individual machiya suites, side by side with our Maana Living shop and <em>Kissa Kishin</em> café. Daily breakfast steps away.</p>
+          </div>
+          <div class="prop__bestfor">
+            <strong>Best for</strong> guests who want a small, light-filled retreat next door to coffee, breakfast, and a walk to Kiyomizu-dera.
+          </div>
+          <div class="prop__cta-row">
+            <a class="prop__cta" href="kiyomizu.html">View property →</a>
+            <span class="prop__more"><a href="kiyomizu.html#suites">See suites</a></span>
+          </div>
+        </div>
+        <!-- 3-suite preview strip → deep-links into Kiyomizu page sections -->
+        <div class="prop__suites-strip">
+          <a class="thumb" href="kiyomizu.html#suite1">
+            <img src="images/kiyomizu/suite1/hero.jpg" alt="Suite 1" />
+            <span class="label">Suite 1</span>
+          </a>
+          <a class="thumb" href="kiyomizu.html#suite2">
+            <img src="images/kiyomizu/suite2/hero.jpg" alt="Suite 2" />
+            <span class="label">Suite 2</span>
+          </a>
+          <a class="thumb" href="kiyomizu.html#suite3">
+            <img src="images/kiyomizu/suite3/hero.jpg" alt="Suite 3" />
+            <span class="label">Suite 3</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- ===== MAANA ANNEX — first new-build, opening December 2026 ===== -->
+      <article class="prop prop--coming">
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/annex/hero.png" alt="Maana Annex, opening December 2026" />
+          <span class="prop__status">Opening · December 2026</span>
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Maana Annex<span class="sep">·</span><span class="loc">Kyoto, location revealed soon</span>
+            </h2>
+            <div class="stat-line">
+              <span>New Build</span><span class="sep">·</span>
+              <span>Norm + KAD</span><span class="sep">·</span>
+              <span>Recycled Tsuchikabe</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__signature">
+            <p class="body">Eight years of conversations with friends in Copenhagen about how well-made things age. Our first new-build, designed with Norm Architects and Keiji Ashizawa (KAD), built with recycled tsuchikabe.</p>
+          </div>
+          <div class="prop__bestfor">
+            <strong>Best for</strong> guests who want to be among the first to stay in Maana's newest chapter.
+          </div>
+          <div class="prop__cta-row">
+            <span class="prop__cta is-disabled">Opening December →</span>
+            <span class="prop__more"><a href="#">Join the list</a></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="site-footer">
+  <a href="#">FAQs</a> ·
+  <a href="#">Access</a> ·
+  <a href="#">Contact</a> ·
+  <a href="#">maana.jp</a>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal, .stagger');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  revealEls.forEach((el) => obs.observe(el));
+</script>
+
+</body>
+</html>
