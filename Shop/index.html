@@ -415,7 +415,8 @@
   }
   .artist__overlay p:last-child { margin-bottom: 0; }
   /* Carousel sits below the hero overlay */
-  .artist__carousel-wrap {
+  .artist__carousel-wrap,
+  .favs__carousel-wrap {
     margin-top: clamp(40px, 4vw, 64px);
   }
 
@@ -1328,8 +1329,7 @@
   </div>
 </section>
 
-<!-- ============== BROWSE / OTHER OBJECTS ============== -->
-<!-- ============== OUR FAVOURITES (Provider-store-style) ============== -->
+<!-- ============== OUR FAVOURITES (arrow carousel — same treatment as Her work) ============== -->
 <section class="favs">
   <div class="container">
 
@@ -1337,45 +1337,80 @@
       <div>
         <h2>Our favourites</h2>
       </div>
-      <a class="see-all" href="all.html">View all ↗</a>
     </div>
 
-    <div class="favs__grid stagger">
+    <div class="favs__carousel-wrap carousel" id="favsCarousel">
+      <div class="carousel__head">
+        <span class="carousel__label">A rotating selection</span>
+        <div class="carousel__controls">
+          <span class="carousel__counter" id="favsCounter">1 / 3</span>
+          <button class="carousel__btn" id="favsPrev" aria-label="Previous">←</button>
+          <button class="carousel__btn" id="favsNext" aria-label="Next">→</button>
+        </div>
+      </div>
+      <div class="carousel__viewport">
+        <div class="carousel__track" id="favsTrack">
 
-      <article class="fav">
-        <div class="fav__img">
-          <img src="Products/大與 Daiyo candle.jpg" alt="Haze tree wax candles by Daiyo" />
-        </div>
-        <div class="fav__body">
-          <span class="fav__label">Candles</span>
-          <h3 class="fav__name">Daiyo haze wax candles</h3>
-          <p class="fav__desc">Made from the wax of the haze tree, a Japanese tradition that goes back centuries. Cleaner burn, softer flame. We keep a few scents at a time, rotating with the season.</p>
-        </div>
-      </article>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/大與 Daiyo candle.jpg" alt="Haze wax candle by Daiyo" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Haze wax candle</span>
+              <span class="desc">Daiyo · centuries-old wax tradition.</span>
+            </figcaption>
+          </figure>
 
-      <article class="fav">
-        <div class="fav__img">
-          <img src="Products/銀猫 Ginneko utensils.jpg" alt="Brass kitchen tools by Ginneko" />
-        </div>
-        <div class="fav__body">
-          <span class="fav__label">Tableware</span>
-          <h3 class="fav__name">Brass kitchen tools by Ginneko</h3>
-          <p class="fav__desc">Spoons, scoops, and small ladles cast in Toyama. The weight is the point. They become habits in the hand.</p>
-        </div>
-      </article>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/大與 Daiyo candle2.jpeg" alt="Haze wax candle, second scent" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Haze candle · cedar</span>
+              <span class="desc">Daiyo · quiet, woody.</span>
+            </figcaption>
+          </figure>
 
-      <article class="fav">
-        <div class="fav__img">
-          <img src="Products/冨部咲喜子 Sakiko Tomibe.jpg" alt="Porcelain vessels by Sakiko Tomibe" />
-        </div>
-        <div class="fav__body">
-          <span class="fav__label">Antiques and vessels</span>
-          <h3 class="fav__name">Pieces by Japanese makers</h3>
-          <p class="fav__desc">Hand-built porcelain by Sakiko Tomibe, stoneware by Katsuhisa Kobayashi, and a small rotation of antiques we've gathered from Kyoto and beyond.</p>
-        </div>
-      </article>
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/銀猫 Ginneko utensils.jpg" alt="Brass kitchen tools by Ginneko" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Brass kitchen tools</span>
+              <span class="desc">Ginneko · cast in Toyama.</span>
+            </figcaption>
+          </figure>
 
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/冨部咲喜子 Sakiko Tomibe.jpg" alt="Porcelain vessel by Sakiko Tomibe" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Porcelain vessel</span>
+              <span class="desc">Sakiko Tomibe · hand-built.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/Katsuhisa Kobayashi .jpeg" alt="Stoneware jar by Katsuhisa Kobayashi" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Stoneware jar</span>
+              <span class="desc">Katsuhisa Kobayashi · Shigaraki clay.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/vase.jpg" alt="Single-stem vase" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Single-stem vase</span>
+              <span class="desc">For one good flower.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="carousel__item">
+            <div class="carousel__item-img"><img src="Products/Japanese Binding Notebook.jpg" alt="Hand-bound notebook" /></div>
+            <figcaption class="carousel__cap">
+              <span class="name">Hand-bound notebook</span>
+              <span class="desc">Kyoto paper mill.</span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1393,12 +1428,6 @@
     <div class="atelier__feature">
       <div class="atelier__feature-img">
         <img src="Masako Nakagami/149.jpg" alt="Koji fermentation workshop at Maana Atelier" />
-        <!-- "Tux" — small decorated badge -->
-        <aside class="atelier__badge">
-          <span class="pct">15% off</span>
-          <span class="body">your workshop</span>
-          <span class="note">When you shop at Maana Living.</span>
-        </aside>
       </div>
       <div class="atelier__feature-text">
         <span class="eyebrow">From Maana Atelier · 麹</span>
@@ -1572,6 +1601,49 @@
 
     /* Page shift = (item width + gap) × visible-per-page. Uses the actual
        rendered item width, so the peek-of-4th layout still snaps cleanly. */
+    function getPageShift() {
+      const cs = getComputedStyle(track);
+      const gap = parseFloat(cs.gap || cs.columnGap || '0');
+      const firstItem = track.children[0];
+      if (!firstItem) return 0;
+      const itemW = firstItem.getBoundingClientRect().width;
+      return (itemW + gap) * visiblePerPage();
+    }
+
+    let page = 0;
+    function update() {
+      const maxPage = pageCount() - 1;
+      if (page > maxPage) page = maxPage;
+      track.style.transform = `translateX(-${page * getPageShift()}px)`;
+      prev.disabled = page === 0;
+      next.disabled = page === maxPage;
+      counter.textContent = (page + 1) + ' / ' + pageCount();
+    }
+
+    prev.addEventListener('click', () => { page = Math.max(0, page - 1); update(); });
+    next.addEventListener('click', () => { page = Math.min(pageCount() - 1, page + 1); update(); });
+    window.addEventListener('resize', () => { update(); });
+    update();
+  })();
+
+  /* =============================================================
+     "Our favourites" carousel — same arrow-driven pattern.
+     ============================================================= */
+  (function() {
+    const track = document.getElementById('favsTrack');
+    const prev = document.getElementById('favsPrev');
+    const next = document.getElementById('favsNext');
+    const counter = document.getElementById('favsCounter');
+    if (!track || !prev || !next) return;
+
+    const items = track.children.length;
+
+    function visiblePerPage() {
+      if (window.matchMedia('(max-width: 560px)').matches) return 1;
+      if (window.matchMedia('(max-width: 900px)').matches) return 2;
+      return 3;
+    }
+    function pageCount() { return Math.max(1, Math.ceil(items / visiblePerPage())); }
     function getPageShift() {
       const cs = getComputedStyle(track);
       const gap = parseFloat(cs.gap || cs.columnGap || '0');
