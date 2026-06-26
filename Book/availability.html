@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Available for your dates · Maana</title>
-<meta name="description" content="Stays and workshops available for your dates in Kyoto. Homes are booked through Airhost. Workshops are booked directly with us." />
+<meta name="description" content="Stays and workshops available for your dates in Kyoto." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -208,6 +208,105 @@
     font-style: normal;
     color: var(--terracotta);
     font-weight: 500;
+  }
+
+  /* ============== STAY STRIP (compact Airhost handoff with thumbnail peek) ============== */
+  .results--compact { padding: clamp(28px, 3.5vw, 48px) 0; }
+  .stay-strip {
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    padding: clamp(20px, 2.4vw, 30px) clamp(22px, 2.8vw, 36px);
+  }
+  .stay-strip__head {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .stay-strip__title-block {
+    display: flex; flex-direction: column;
+    gap: 4px;
+  }
+  .stay-strip__eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  .stay-strip__title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: normal;
+    font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin: 0;
+    color: var(--ink);
+  }
+  /* Date chip — quietly confirms what they picked */
+  .stay-strip__dates {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 7px 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .stay-strip__body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .stay-strip__thumbs {
+    display: flex; gap: 8px;
+  }
+  .stay-strip__thumb {
+    display: block;
+    width: clamp(56px, 7vw, 78px);
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--paper);
+    border: 1px solid rgba(217, 207, 184, 0.6);
+    position: relative;
+    transition: transform .35s var(--ease-out);
+  }
+  .stay-strip__thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1s var(--ease-out);
+  }
+  .stay-strip__thumb:hover { transform: translateY(-3px); }
+  .stay-strip__thumb:hover img { transform: scale(1.08); }
+  .stay-strip__cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 22px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background .25s, letter-spacing .25s;
+  }
+  .stay-strip__cta:hover { background: #2a2622; letter-spacing: 0.28em; }
+  .stay-strip__cta svg { width: 12px; height: 12px; }
+  @media (max-width: 760px) {
+    .stay-strip__body { grid-template-columns: 1fr; gap: 18px; }
+    .stay-strip__cta { justify-content: center; padding: 13px 20px; }
+  }
+  @media (max-width: 480px) {
+    .stay-strip__thumbs { gap: 6px; }
+    .stay-strip__thumb { width: 18vw; }
+    .stay-strip__head { gap: 10px; }
   }
 
   /* ============== STAY CARD ============== */
@@ -704,10 +803,9 @@
 <!-- ============== RESULTS TICKER ============== -->
 <div class="ticker">
   <div class="container">
-    <strong id="stayCount">5</strong> homes
+    <strong id="workshopCount">3</strong> workshops happening during your dates
     <span class="sep">·</span>
-    <strong id="workshopCount">3</strong> workshops
-    available for these dates
+    5 Maana Homes for your stay
   </div>
 </div>
 
@@ -717,230 +815,48 @@
 <!-- ============== SECTION TEMPLATES (rendered into resultsRoot) ============== -->
 
 <template id="stays-section">
-  <section class="results">
+  <section class="results results--compact">
     <div class="container">
-      <header class="results-section__head">
-        <span class="results-section__eyebrow">Stays <span class="dot">·</span> Booked via Airhost</span>
-        <h2 class="results-section__title">Homes available for your dates</h2>
-      </header>
-      <div class="stay-grid">
 
-        <!-- MAANA KYOTO -->
-        <article class="stay-card">
-          <div class="stay-card__media">
-            <img src="../Stay/images/kyoto/card.jpg" alt="Maana Kyoto" />
-            <span class="stay-card__tag">Whole Home · Machiya</span>
+      <div class="stay-strip">
+        <div class="stay-strip__head">
+          <div class="stay-strip__title-block">
+            <span class="stay-strip__eyebrow">5 Maana Homes</span>
+            <h3 class="stay-strip__title">See your homes</h3>
           </div>
-          <div class="stay-card__body">
-            <div class="stay-card__info">
-              <h3 class="stay-card__name">Maana Kyoto</h3>
-              <p class="stay-card__loc">Shimogyo Ward, near Kyoto Station</p>
-              <ul class="stay-card__stats">
-                <li>89 m²</li>
-                <li>2 bedrooms</li>
-                <li>Sleeps 5</li>
-              </ul>
-            </div>
-            <div class="stay-card__includes">
-              <span class="stay-card__includes-lbl">What's included</span>
-              <div class="stay-card__includes-row">
-                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
-                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
-                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
-                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
-                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
-                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
-              </div>
-            </div>
-            <div class="stay-card__bottom">
-              <div class="stay-card__price">
-                <span class="lbl">From</span>
-                <span class="val">¥85,000</span><span class="per">/ night</span>
-              </div>
-              <div class="stay-card__actions">
-                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kyoto" target="_blank" rel="noopener">
-                  Reserve on Airhost
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
-                <a class="stay-card__more" href="../Stay/kyoto.html">See more →</a>
-              </div>
-            </div>
-          </div>
-        </article>
+          <span class="stay-strip__dates" id="stayStripDates">Aug 23 to Aug 25</span>
+        </div>
 
-        <!-- MAANA KAMO -->
-        <article class="stay-card">
-          <div class="stay-card__media">
-            <img src="../Stay/images/kamo/hero.PNG" alt="Maana Kamo" />
-            <span class="stay-card__tag">Whole Home · Machiya</span>
+        <div class="stay-strip__body">
+          <!-- Peek at the 5 homes (image-only, intriguing) -->
+          <div class="stay-strip__thumbs">
+            <a class="stay-strip__thumb" id="airhostThumb1" target="_blank" rel="noopener" aria-label="Maana Kyoto">
+              <img src="../Stay/images/kyoto/card.jpg" alt="Maana Kyoto" />
+            </a>
+            <a class="stay-strip__thumb" id="airhostThumb2" target="_blank" rel="noopener" aria-label="Maana Kamo">
+              <img src="../Stay/images/kamo/hero.PNG" alt="Maana Kamo" />
+            </a>
+            <a class="stay-strip__thumb" id="airhostThumb3" target="_blank" rel="noopener" aria-label="Kiyomizu Suite One">
+              <img src="../Stay/images/kiyomizu/suite1/hero.jpg" alt="Kiyomizu Suite One" />
+            </a>
+            <a class="stay-strip__thumb" id="airhostThumb4" target="_blank" rel="noopener" aria-label="Kiyomizu Suite Two">
+              <img src="../Stay/images/kiyomizu/suite2/hero.jpg" alt="Kiyomizu Suite Two" />
+            </a>
+            <a class="stay-strip__thumb" id="airhostThumb5" target="_blank" rel="noopener" aria-label="Kiyomizu Suite Three">
+              <img src="../Stay/images/kiyomizu/suite3/hero.jpg" alt="Kiyomizu Suite Three" />
+            </a>
           </div>
-          <div class="stay-card__body">
-            <div class="stay-card__info">
-              <h3 class="stay-card__name">Maana Kamo</h3>
-              <p class="stay-card__loc">Higashiyama Ward, near Kamogawa</p>
-              <ul class="stay-card__stats">
-                <li>83 m²</li>
-                <li>2 bedrooms</li>
-                <li>Sleeps 5</li>
-              </ul>
-            </div>
-            <div class="stay-card__includes">
-              <span class="stay-card__includes-lbl">What's included</span>
-              <div class="stay-card__includes-row">
-                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
-                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
-                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
-                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
-                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
-                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
-              </div>
-            </div>
-            <div class="stay-card__bottom">
-              <div class="stay-card__price">
-                <span class="lbl">From</span>
-                <span class="val">¥95,000</span><span class="per">/ night</span>
-              </div>
-              <div class="stay-card__actions">
-                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kamo" target="_blank" rel="noopener">
-                  Reserve on Airhost
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
-                <a class="stay-card__more" href="../Stay/kamo.html">See more →</a>
-              </div>
-            </div>
-          </div>
-        </article>
 
-        <!-- KIYOMIZU SUITE 1 -->
-        <article class="stay-card">
-          <div class="stay-card__media">
-            <img src="../Stay/images/kiyomizu/suite1/hero.jpg" alt="Kiyomizu Suite One" />
-            <span class="stay-card__tag">Suite · Studio</span>
-          </div>
-          <div class="stay-card__body">
-            <div class="stay-card__info">
-              <h3 class="stay-card__name">Kiyomizu Suite One</h3>
-              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
-              <ul class="stay-card__stats">
-                <li>23 m²</li>
-                <li>1 bedroom</li>
-                <li>Sleeps 2</li>
-              </ul>
-            </div>
-            <div class="stay-card__includes">
-              <span class="stay-card__includes-lbl">What's included</span>
-              <div class="stay-card__includes-row">
-                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
-                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
-                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
-                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
-                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
-                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
-              </div>
-            </div>
-            <div class="stay-card__bottom">
-              <div class="stay-card__price">
-                <span class="lbl">From</span>
-                <span class="val">¥80,000</span><span class="per">/ night</span>
-              </div>
-              <div class="stay-card__actions">
-                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-1" target="_blank" rel="noopener">
-                  Reserve on Airhost
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
-                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite1">See more →</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- KIYOMIZU SUITE 2 -->
-        <article class="stay-card">
-          <div class="stay-card__media">
-            <img src="../Stay/images/kiyomizu/suite2/hero.jpg" alt="Kiyomizu Suite Two" />
-            <span class="stay-card__tag">Suite · Two Bedroom</span>
-          </div>
-          <div class="stay-card__body">
-            <div class="stay-card__info">
-              <h3 class="stay-card__name">Kiyomizu Suite Two</h3>
-              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
-              <ul class="stay-card__stats">
-                <li>63 m²</li>
-                <li>2 bedrooms</li>
-                <li>Sleeps 4</li>
-              </ul>
-            </div>
-            <div class="stay-card__includes">
-              <span class="stay-card__includes-lbl">What's included</span>
-              <div class="stay-card__includes-row">
-                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
-                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
-                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
-                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
-                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
-                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
-              </div>
-            </div>
-            <div class="stay-card__bottom">
-              <div class="stay-card__price">
-                <span class="lbl">From</span>
-                <span class="val">¥125,000</span><span class="per">/ night</span>
-              </div>
-              <div class="stay-card__actions">
-                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-2" target="_blank" rel="noopener">
-                  Reserve on Airhost
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
-                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite2">See more →</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- KIYOMIZU SUITE 3 -->
-        <article class="stay-card">
-          <div class="stay-card__media">
-            <img src="../Stay/images/kiyomizu/suite3/hero.jpg" alt="Kiyomizu Suite Three" />
-            <span class="stay-card__tag">Suite · Two Bedroom</span>
-          </div>
-          <div class="stay-card__body">
-            <div class="stay-card__info">
-              <h3 class="stay-card__name">Kiyomizu Suite Three</h3>
-              <p class="stay-card__loc">Higashiyama Ward, near Kiyomizu-dera</p>
-              <ul class="stay-card__stats">
-                <li>60 m²</li>
-                <li>2 bedrooms</li>
-                <li>Sleeps 3</li>
-              </ul>
-            </div>
-            <div class="stay-card__includes">
-              <span class="stay-card__includes-lbl">What's included</span>
-              <div class="stay-card__includes-row">
-                <span class="ic"><svg><use href="#i-wifi"/></svg>WiFi</span>
-                <span class="ic"><svg><use href="#i-washer"/></svg>Washer/Dryer</span>
-                <span class="ic"><svg><use href="#i-slippers"/></svg>Slippers</span>
-                <span class="ic"><svg><use href="#i-iron"/></svg>Iron</span>
-                <span class="ic"><svg><use href="#i-yoga"/></svg>Yoga mats</span>
-                <span class="ic"><svg><use href="#i-speaker"/></svg>Speaker</span>
-              </div>
-            </div>
-            <div class="stay-card__bottom">
-              <div class="stay-card__price">
-                <span class="lbl">From</span>
-                <span class="val">¥110,000</span><span class="per">/ night</span>
-              </div>
-              <div class="stay-card__actions">
-                <a class="cta-external" data-airhost="https://book.airhost.co/maana-kiyomizu-suite-3" target="_blank" rel="noopener">
-                  Reserve on Airhost
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-                </a>
-                <a class="stay-card__more" href="../Stay/kiyomizu.html#suite3">See more →</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
+          <a class="stay-strip__cta" id="airhostCta" target="_blank" rel="noopener">
+            See availabilities
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+        </div>
       </div>
+
     </div>
   </section>
 </template>
@@ -1067,6 +983,9 @@
 
   function renderStays() {
     const tpl = document.getElementById('stays-section').content.cloneNode(true);
+    // Show the picked dates on the chip
+    const datesEl = tpl.getElementById('stayStripDates');
+    if (datesEl) datesEl.textContent = fmtShort(arrive) + ' to ' + fmtShort(depart);
     root.appendChild(tpl);
   }
 
@@ -1135,14 +1054,26 @@
     renderWorkshops();
   }
 
-  /* ---------- decorate stay links with date params ---------- */
-  /* Airhost booking URL params: ?check_in=YYYY-MM-DD&check_out=YYYY-MM-DD */
-  document.querySelectorAll('[data-airhost]').forEach(a => {
-    const url = new URL(a.dataset.airhost);
-    url.searchParams.set('check_in', arriveStr);
-    url.searchParams.set('check_out', departStr);
-    a.href = url.toString();
-  });
+  /* ---------- Airhost handoff URLs ----------
+     Confirmed pattern (per Sol):
+       https://maanahomes.airhost.co/en/houses?start_date=YYYY-MM-DD&end_date=YYYY-MM-DD&rooms=1&guests=N
+     Dates carry across; Airhost handles availability + checkout. */
+  function buildAirhostUrl() {
+    const u = new URL('https://maanahomes.airhost.co/en/houses');
+    u.searchParams.set('start_date', arriveStr);
+    u.searchParams.set('end_date', departStr);
+    u.searchParams.set('rooms', '1');
+    u.searchParams.set('guests', '2');  // default; Airhost lets guest adjust
+    return u.toString();
+  }
+  const airhostHref = buildAirhostUrl();
+
+  // Main CTA + all 5 thumbnail peeks land on the same dated search page.
+  ['airhostCta','airhostThumb1','airhostThumb2','airhostThumb3','airhostThumb4','airhostThumb5']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = airhostHref;
+    });
 
 })();
 </script>
