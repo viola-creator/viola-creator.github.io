@@ -300,11 +300,31 @@
 
   /* ---------- Workshop info ---------- */
   .workshop { background: var(--paper); }
-  .workshop__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(36px, 6vw, 90px); align-items: start; margin-bottom: clamp(48px, 6vw, 76px); }
+  .workshop__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 90px); align-items: center; margin-bottom: clamp(48px, 6vw, 76px); }
+  .workshop__lede { margin-bottom: clamp(32px, 4vw, 48px); max-width: 60ch; }
   .workshop__specs { border-top: 1px solid var(--rule); }
   .workshop__spec { display: flex; justify-content: space-between; gap: 24px; padding: 15px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
   .workshop__spec .k { color: var(--ink-mute); letter-spacing: 0.08em; }
   .workshop__spec .v { color: var(--ink); text-align: right; }
+  /* Illustration slot (left column of the grid) */
+  .workshop__illustration {
+    margin: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+  }
+  .workshop__illustration img {
+    display: block;
+    max-width: min(80%, 320px);
+    width: 100%;
+    height: auto;
+  }
+  .workshop__illustration figcaption {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+  }
   .workshop__sched-title { font-family: var(--serif); font-weight: 300; font-size: 28px; margin-bottom: 8px; }
   .workshop__sched-sub { font-size: 13px; color: var(--ink-mute); margin-bottom: 30px; max-width: 52ch; }
   .sched { border-top: 1px solid var(--rule); max-width: 760px; }
@@ -395,6 +415,9 @@
     .ibasho__grid { grid-template-columns: 1fr; gap: 44px; }
     .ibasho__kanji { writing-mode: horizontal-tb; font-size: 44px; }
     .artists__grid, .workshop__grid, .stay__grid, .visit__grid { grid-template-columns: 1fr; }
+    /* Mobile trims: keep Price / Duration / Includes; hide the secondary spec rows */
+    .workshop__spec--extra { display: none; }
+    .workshop__illustration img { max-width: min(66%, 240px); }
     .cine { min-height: 74vh; }
     /* Mosaic layout: photo 1 spans both columns as a hero, photos 2 & 3 sit as a pair below.
        No orphan on line two, all three photos preserved. */
@@ -567,17 +590,26 @@
 
 <section class="workshop">
   <div class="container">
+
+    <!-- Lede sits above the grid so the visual moment (illustration + specs) reads clean -->
+    <div class="reveal">
+      <p class="body-copy workshop__lede">You will take home an azuma bag dyed by your own hands, and raise a glass of sake with the artists to finish. Sessions run through the exhibition, mornings on weekends, mornings and afternoons on weekdays.</p>
+    </div>
+
     <div class="workshop__grid">
       <div class="reveal">
-        <p class="body-copy">You will take home an azuma bag dyed by your own hands, and raise a glass of sake with the artists to finish. Sessions run through the exhibition, mornings on weekends, mornings and afternoons on weekdays.</p>
+        <figure class="workshop__illustration">
+          <img src="images/azuma-illustration.jpeg" alt="Hand-drawn illustration of a shibori-dyed azuma bag" loading="lazy" />
+          <figcaption>(Take-home Azuma bag, hand-dyed during session)</figcaption>
+        </figure>
       </div>
       <div class="reveal reveal-2">
         <div class="workshop__specs">
           <div class="workshop__spec"><span class="k">Price</span><span class="v">¥30,000 per person</span></div>
           <div class="workshop__spec"><span class="k">Duration</span><span class="v">2 hours</span></div>
           <div class="workshop__spec"><span class="k">Includes</span><span class="v">Azuma bag, sake tasting, tea and snacks</span></div>
-          <div class="workshop__spec"><span class="k">Group size</span><span class="v">Small sessions, seats are limited</span></div>
-          <div class="workshop__spec"><span class="k">Language</span><span class="v">Japanese and English supported</span></div>
+          <div class="workshop__spec workshop__spec--extra"><span class="k">Group size</span><span class="v">Small sessions, seats are limited</span></div>
+          <div class="workshop__spec workshop__spec--extra"><span class="k">Language</span><span class="v">Japanese and English supported</span></div>
         </div>
       </div>
     </div>
