@@ -106,12 +106,57 @@
   .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
 
   /* ---------- Facts strip ---------- */
+  /* ---------- Facts strip: two clearly distinct panels ---------- */
   .facts { border-bottom: 1px solid var(--rule); padding: 0; }
-  .facts__grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .facts__cell { padding: 26px 18px; text-align: center; border-left: 1px solid var(--rule); }
-  .facts__cell:first-child { border-left: none; }
-  .facts__k { font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-mute); display: block; margin-bottom: 7px; }
-  .facts__v { font-family: var(--serif); font-size: 20px; color: var(--ink); }
+  .facts__grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .facts__panel {
+    padding: clamp(24px, 3vw, 36px) clamp(24px, 3.5vw, 44px);
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative;
+  }
+  .facts__panel + .facts__panel { border-left: 1px solid var(--rule); }
+  .facts__panel--exhibition { background: var(--cream); }
+  .facts__panel--workshop { background: color-mix(in srgb, var(--indigo) 6%, var(--cream)); }
+  .facts__panel-label {
+    font-size: 10.5px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .facts__panel--exhibition .facts__panel-label { color: var(--ink); }
+  .facts__panel--workshop .facts__panel-label { color: var(--indigo); }
+  .facts__panel-label::before {
+    content: ''; display: inline-block; width: 22px; height: 1.5px;
+  }
+  .facts__panel--exhibition .facts__panel-label::before { background: var(--ink); }
+  .facts__panel--workshop .facts__panel-label::before { background: var(--indigo); }
+  .facts__lines { display: flex; flex-direction: column; gap: 6px; }
+  .facts__v {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2.2vw, 24px);
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .facts__k {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  /* Text-only emphasis — same information, no button feel */
+  .facts__accent {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(15px, 1.6vw, 18px);
+    line-height: 1.4;
+    margin-top: 2px;
+    letter-spacing: 0.005em;
+  }
+  .facts__panel--exhibition .facts__accent { color: var(--ink); }
+  .facts__panel--workshop .facts__accent { color: var(--indigo); }
 
   /* ---------- Ibasho ---------- */
   .ibasho__grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(40px, 7vw, 110px); align-items: start; }
@@ -198,8 +243,11 @@
     /* ---------- Stay section: image becomes the background, text lives on top ---------- */
     .stay {
       position: relative;
-      background:
-        var(--ink) url('../Stay/images/kyoto/hero.jpg') center/cover no-repeat;
+      background-color: var(--ink);
+      background-image: url('../Stay/images/kyoto/hero.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       padding: clamp(88px, 14vh, 140px) 0;
       isolation: isolate;
     }
@@ -207,9 +255,9 @@
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(180deg,
-        rgba(16, 20, 32, 0.55) 0%,
-        rgba(16, 20, 32, 0.78) 55%,
-        rgba(16, 20, 32, 0.92) 100%);
+        rgba(16, 20, 32, 0.25) 0%,
+        rgba(16, 20, 32, 0.50) 45%,
+        rgba(16, 20, 32, 0.78) 100%);
       z-index: 0;
     }
     .stay > .container { position: relative; z-index: 1; }
@@ -330,10 +378,8 @@
   .float-cta .btn { display: block; width: 100%; }
 
   @media (max-width: 860px) {
-    .facts__grid { grid-template-columns: repeat(2, 1fr); }
-    .facts__cell { border-left: none; border-top: 1px solid var(--rule); }
-    .facts__cell:nth-child(-n+2) { border-top: none; }
-    .facts__cell:nth-child(even) { border-left: 1px solid var(--rule); }
+    .facts__grid { grid-template-columns: 1fr; }
+    .facts__panel + .facts__panel { border-left: none; border-top: 1px solid var(--rule); }
     .ibasho__grid { grid-template-columns: 1fr; gap: 44px; }
     .ibasho__kanji { writing-mode: horizontal-tb; font-size: 44px; }
     .artists__grid, .workshop__grid, .stay__grid, .visit__grid { grid-template-columns: 1fr; }
@@ -388,10 +434,10 @@
   <div class="hero__img"><img src="images/hero.webp" alt="Shibori-dyed indigo textile resting in water" /></div>
   <div class="hero__content">
     <div class="container">
-      <span class="hero__eyebrow">Maana Atelier · Kyoto</span>
+      <span class="hero__eyebrow">Exhibition + Workshop · Maana Atelier, Kyoto</span>
       <h1 class="hero__title"><span>SLOW FABRIC</span><span>Indigo Exhibition</span></h1>
       <p class="hero__kanji">藍染展 居場所 IBASHO</p>
-      <p class="hero__meta">2026.8.1 Sat – 8.13 Thu · 10:00 – 17:00 · Free entry</p>
+      <p class="hero__meta">August 1 to 13, 2026 · Free exhibition + bookable workshops</p>
       <div class="hero__ctas">
         <a class="btn btn--indigo" href="https://app.acuityscheduling.com/schedule/0a5bcc4d?appointmentTypeIds%5B%5D=65676906" target="_blank" rel="noopener">Book the workshop</a>
         <a class="btn btn--ghost" href="#visit">Plan your visit</a>
@@ -402,10 +448,27 @@
 
 <div class="facts">
   <div class="facts__grid">
-    <div class="facts__cell"><span class="facts__k">Dates</span><span class="facts__v">August 1 to 13</span></div>
-    <div class="facts__cell"><span class="facts__k">Gallery hours</span><span class="facts__v">10:00 to 17:00 daily</span></div>
-    <div class="facts__cell"><span class="facts__k">Entry</span><span class="facts__v">Free</span></div>
-    <div class="facts__cell"><span class="facts__k">Cafe pop-up</span><span class="facts__v">Weekends 15:00 to 21:00</span></div>
+
+    <!-- Panel 1: FREE EXHIBITION — just walk in -->
+    <div class="facts__panel facts__panel--exhibition">
+      <span class="facts__panel-label">The Exhibition</span>
+      <div class="facts__lines">
+        <span class="facts__v">Aug 1 to 13 · 10:00 to 17:00 daily</span>
+        <span class="facts__k">Wander in freely and stay for tea. The cafe pops up on weekends, 15:00 to 21:00.</span>
+      </div>
+      <span class="facts__accent">Free entry · No booking</span>
+    </div>
+
+    <!-- Panel 2: PAID WORKSHOP — booking required -->
+    <div class="facts__panel facts__panel--workshop">
+      <span class="facts__panel-label">The Workshop</span>
+      <div class="facts__lines">
+        <span class="facts__v">Sessions Aug 1, 3, 5, 7, 9, 11, 13</span>
+        <span class="facts__k">Two-hour indigo dyeing session with the artists. Small groups, take home your own azuma bag.</span>
+      </div>
+      <span class="facts__accent">¥30,000 · Booking required</span>
+    </div>
+
   </div>
 </div>
 
