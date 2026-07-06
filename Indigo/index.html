@@ -378,8 +378,20 @@
   .float-cta .btn { display: block; width: 100%; }
 
   @media (max-width: 860px) {
+    /* Mobile: kill the colored panels so they don't read as another stack of buttons under the hero.
+       Keep the labels + italic notes for the exhibition-vs-workshop distinction. */
+    .facts { background: var(--paper); padding-top: clamp(32px, 6vw, 48px); }
     .facts__grid { grid-template-columns: 1fr; }
-    .facts__panel + .facts__panel { border-left: none; border-top: 1px solid var(--rule); }
+    .facts__panel--exhibition,
+    .facts__panel--workshop { background: transparent; }
+    .facts__panel {
+      padding: 0 clamp(20px, 4vw, 48px) clamp(28px, 4vw, 36px);
+    }
+    .facts__panel + .facts__panel {
+      border-left: none;
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(28px, 4vw, 36px);
+    }
     .ibasho__grid { grid-template-columns: 1fr; gap: 44px; }
     .ibasho__kanji { writing-mode: horizontal-tb; font-size: 44px; }
     .artists__grid, .workshop__grid, .stay__grid, .visit__grid { grid-template-columns: 1fr; }
