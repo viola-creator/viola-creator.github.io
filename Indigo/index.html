@@ -194,6 +194,26 @@
     .breath__kanji { font-size: 32vw; top: -50px; }
     .breath__caption { max-width: 100%; text-align: left; }
     .breath__poem { justify-content: flex-start; }
+
+    /* ---------- Stay section: image becomes the background, text lives on top ---------- */
+    .stay {
+      position: relative;
+      background:
+        var(--ink) url('../Stay/images/kyoto/hero.jpg') center/cover no-repeat;
+      padding: clamp(88px, 14vh, 140px) 0;
+      isolation: isolate;
+    }
+    .stay::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(16, 20, 32, 0.55) 0%,
+        rgba(16, 20, 32, 0.78) 55%,
+        rgba(16, 20, 32, 0.92) 100%);
+      z-index: 0;
+    }
+    .stay > .container { position: relative; z-index: 1; }
+    .stay__img { display: none; }
   }
 
   /* ---------- Artists ---------- */
@@ -318,8 +338,31 @@
     .ibasho__kanji { writing-mode: horizontal-tb; font-size: 44px; }
     .artists__grid, .workshop__grid, .stay__grid, .visit__grid { grid-template-columns: 1fr; }
     .cine { min-height: 74vh; }
-    .exhibition__band { grid-template-columns: repeat(2, 1fr); }
-    .exhibition__ph:nth-child(3) { display: none; }
+    /* Mosaic layout: photo 1 spans both columns as a hero, photos 2 & 3 sit as a pair below.
+       No orphan on line two, all three photos preserved. */
+    .exhibition__band {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "hero hero"
+        "pair-a pair-b";
+      gap: clamp(14px, 2.5vw, 22px);
+    }
+    .exhibition__ph:nth-child(1) {
+      grid-area: hero;
+      aspect-ratio: 4 / 5;
+      margin-top: 0;
+    }
+    .exhibition__ph:nth-child(2) {
+      grid-area: pair-a;
+      aspect-ratio: 3 / 4;
+      margin-top: 0;
+    }
+    .exhibition__ph:nth-child(3) {
+      grid-area: pair-b;
+      display: block;
+      aspect-ratio: 3 / 4;
+      margin-top: 0;
+    }
     .exhibition__tama { grid-template-columns: 1fr; gap: 26px; }
     .sched__row { grid-template-columns: 78px 1fr auto; gap: 12px; }
     .sched__meta { flex-direction: column; gap: 3px; }
