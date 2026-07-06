@@ -53,8 +53,18 @@
   .container { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
   section { padding: clamp(64px, 9vw, 130px) 0; }
 
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out); }
+  /* Global scroll-reveal: longer, softer, more atmospheric */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 1.4s var(--ease-out), transform 1.4s var(--ease-out);
+    will-change: opacity, transform;
+  }
   .reveal.is-visible { opacity: 1; transform: none; }
+  /* Stagger utilities — stack children of the same section */
+  .reveal-2 { transition-delay: 0.12s; }
+  .reveal-3 { transition-delay: 0.24s; }
+  .reveal-4 { transition-delay: 0.36s; }
 
   /* ---------- Nav ---------- */
   .site-nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; background: var(--ink); color: var(--paper); padding: 14px clamp(20px, 4vw, 48px); }
@@ -75,9 +85,18 @@
   .btn--paper:hover { background: var(--paper); color: var(--ink); }
 
   /* ---------- Hero ---------- */
-  .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: var(--paper); }
+  .hero { position: relative; min-height: 86vh; display: flex; align-items: flex-end; color: var(--paper); overflow: hidden; }
   .hero__img { position: absolute; inset: 0; }
-  .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(16, 20, 32, 0.78) 0%, rgba(16, 20, 32, 0.25) 45%, rgba(16, 20, 32, 0.30) 100%); }
+  .hero__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    animation: heroBreath 26s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    transform-origin: center 55%;
+  }
+  @keyframes heroBreath {
+    0%   { transform: scale(1.02); }
+    100% { transform: scale(1.12); }
+  }
+  .hero__img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(16, 20, 32, 0.78) 0%, rgba(16, 20, 32, 0.25) 45%, rgba(16, 20, 32, 0.30) 100%); z-index: 1; }
   .hero__content { position: relative; z-index: 2; width: 100%; padding-bottom: clamp(48px, 7vw, 90px); }
   .hero__eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(250, 245, 234, 0.85); display: block; margin-bottom: 26px; }
   .hero__title { font-size: clamp(46px, 7vw, 100px); letter-spacing: 0.01em; }
@@ -102,9 +121,80 @@
   .ibasho__jp { max-width: 58ch; padding-top: 30px; border-top: 1px solid var(--rule); }
 
   /* ---------- Breath image ---------- */
-  .breath { padding: 0; }
-  .breath__img { height: clamp(320px, 55vw, 620px); }
-  .breath__caption { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 18px; letter-spacing: 0.02em; color: var(--ink-mute); text-align: right; padding: 14px clamp(20px, 4vw, 48px) 0; }
+  .breath { padding: 0; position: relative; }
+  .breath__img {
+    height: clamp(320px, 55vw, 620px);
+    overflow: hidden;
+    position: relative;
+  }
+  .breath__img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.02);
+    transition: transform 12s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .breath.is-visible .breath__img img { transform: scale(1.1); }
+  /* Soft cream veil at the bottom edge so the image dissolves into the page */
+  .breath__img::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 30%;
+    background: linear-gradient(to bottom, transparent 0%, var(--paper) 100%);
+    pointer-events: none;
+  }
+  .breath__poem {
+    position: relative;
+    padding: 6px clamp(20px, 4vw, 48px) clamp(20px, 3vw, 34px);
+    display: flex; justify-content: flex-end;
+  }
+  /* Ghost kanji floating behind the caption */
+  .breath__kanji {
+    position: absolute;
+    left: clamp(20px, 4vw, 48px);
+    top: -80px;
+    font-family: var(--jp);
+    font-weight: 300;
+    font-size: clamp(120px, 16vw, 220px);
+    line-height: 1;
+    color: rgba(36, 59, 103, 0.07);  /* faint indigo watermark */
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: 0.02em;
+  }
+  .breath__caption {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(20px, 2.3vw, 30px);
+    letter-spacing: 0.005em;
+    color: var(--ink-soft);
+    text-align: right;
+    line-height: 1.35;
+    max-width: 26ch;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s,
+                transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s;
+  }
+  .breath.is-visible .breath__caption { opacity: 1; transform: translateY(0); }
+  .breath__caption .line { display: block; }
+  .breath__caption .line--second {
+    font-style: normal;
+    font-size: 0.5em;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--indigo);
+    margin-top: 14px;
+    font-weight: 500;
+    opacity: 0.75;
+  }
+  /* Pull the artists section a touch closer so the fabric and Miura's hands feel continuous */
+  .breath + .artists { padding-top: clamp(20px, 3vw, 40px); }
+  @media (max-width: 720px) {
+    .breath__kanji { font-size: 32vw; top: -50px; }
+    .breath__caption { max-width: 100%; text-align: left; }
+    .breath__poem { justify-content: flex-start; }
+  }
 
   /* ---------- Artists ---------- */
   .artists { background: var(--paper); }
@@ -292,7 +382,14 @@
 
 <div class="breath reveal">
   <div class="breath__img"><img src="images/concept.jpg" alt="White cloth bound and stitched for shibori dyeing" loading="lazy" /></div>
-  <p class="breath__caption">Shibori, the cloth remembers where it was held</p>
+  <div class="breath__poem">
+    <span class="breath__kanji" aria-hidden="true">絞</span>
+    <p class="breath__caption">
+      <span class="line">The cloth remembers</span>
+      <span class="line">where it was held.</span>
+      <span class="line line--second">Shibori</span>
+    </p>
+  </div>
 </div>
 
 <section class="artists">
@@ -301,7 +398,7 @@
       <div class="reveal">
         <div class="artists__portrait"><img src="images/artist-1.jpg" alt="Artist stitching shibori patterns by hand" loading="lazy" /></div>
       </div>
-      <div class="artists__body reveal">
+      <div class="artists__body reveal reveal-2">
         <span class="eyebrow">The artists</span>
         <h2>Yusuke Miura and Takuma Shimada</h2>
         <p class="body-copy">SLOW FABRIC is an indigo dye studio based in Shiga. Working with natural indigo and the traditional resist technique of shibori, Miura and Shimada explore new expression in an old craft: cloth that is bound, stitched, dipped and opened, carrying the traces of every hand that shaped it.</p>
@@ -322,8 +419,8 @@
     </div>
     <div class="exhibition__band">
       <div class="exhibition__ph reveal"><img src="images/pattern-1.jpg" alt="Indigo shibori textile with fine stitched pattern" loading="lazy" /></div>
-      <div class="exhibition__ph reveal"><img src="images/cloth.webp" alt="Hands opening a freshly dyed indigo cloth" loading="lazy" /></div>
-      <div class="exhibition__ph reveal"><img src="images/hank.webp" alt="A hank of indigo-dyed thread held in dyed hands" loading="lazy" /></div>
+      <div class="exhibition__ph reveal reveal-2"><img src="images/cloth.webp" alt="Hands opening a freshly dyed indigo cloth" loading="lazy" /></div>
+      <div class="exhibition__ph reveal reveal-3"><img src="images/hank.webp" alt="A hank of indigo-dyed thread held in dyed hands" loading="lazy" /></div>
     </div>
     <div class="exhibition__tama reveal">
       <div class="exhibition__tama-img"><img src="images/tama.jpg" alt="Tama's seasonal parfait, layered with Kyoto fruit" loading="lazy" /></div>
@@ -356,7 +453,7 @@
       <div class="reveal">
         <p class="body-copy">You will take home an azuma bag dyed by your own hands, and raise a glass of sake with the artists to finish. Sessions run through the exhibition, mornings on weekends, mornings and afternoons on weekdays.</p>
       </div>
-      <div class="reveal">
+      <div class="reveal reveal-2">
         <div class="workshop__specs">
           <div class="workshop__spec"><span class="k">Price</span><span class="v">¥30,000 per person</span></div>
           <div class="workshop__spec"><span class="k">Duration</span><span class="v">2 hours</span></div>
@@ -406,7 +503,7 @@
           <a class="btn btn--paper" href="https://www.maana.jp/" target="_blank" rel="noopener">Browse our homes</a>
         </div>
       </div>
-      <div class="stay__img reveal"><img src="../Stay/images/kyoto/hero.jpg" alt="Interior of a restored Maana machiya home" loading="lazy" /></div>
+      <div class="stay__img reveal reveal-2"><img src="../Stay/images/kyoto/hero.jpg" alt="Interior of a restored Maana machiya home" loading="lazy" /></div>
     </div>
   </div>
 </section>
