@@ -101,6 +101,17 @@
   .hero__eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(250, 245, 234, 0.85); display: block; margin-bottom: 26px; }
   .hero__title { font-size: clamp(46px, 7vw, 100px); letter-spacing: 0.01em; }
   .hero__title span { display: block; }
+  .hero__title em {
+    display: inline-block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.55em;
+    letter-spacing: 0.04em;
+    color: rgba(250, 245, 234, 0.82);
+    margin-left: 0.18em;
+    vertical-align: 0.18em;
+  }
   .hero__kanji { font-family: var(--jp); font-weight: 300; font-size: clamp(15px, 1.6vw, 19px); letter-spacing: 0.42em; color: rgba(250, 245, 234, 0.82); margin-top: 20px; }
   .hero__meta { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250, 245, 234, 0.75); margin-top: 30px; }
   .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
@@ -497,8 +508,8 @@
   <div class="hero__content">
     <div class="container">
       <span class="hero__eyebrow">Exhibition + Workshop · Maana Atelier, Kyoto</span>
-      <h1 class="hero__title"><span>SLOW FABRIC</span><span>Indigo Exhibition</span></h1>
-      <p class="hero__kanji">藍染展 居場所 IBASHO</p>
+      <h1 class="hero__title"><span>Indigo <em>with</em></span><span>SLOW FABRIC</span></h1>
+      <p class="hero__kanji">Exhibition · IBASHO · 藍染展 居場所</p>
       <p class="hero__meta">August 1 to 13, 2026 · Free exhibition + bookable workshops</p>
       <div class="hero__ctas">
         <a class="btn btn--indigo" href="https://app.acuityscheduling.com/schedule/0a5bcc4d?appointmentTypeIds%5B%5D=65676906" target="_blank" rel="noopener">Book the workshop</a>
@@ -539,10 +550,9 @@
     <div class="ibasho__grid reveal">
       <div class="ibasho__kanji" lang="ja">居場所</div>
       <div class="ibasho__body">
-        <span class="eyebrow">The exhibition</span>
-        <h2>A place to belong</h2>
-        <p class="body-copy">For the first time in Kyoto, indigo artists Yusuke Miura (三浦裕介) and Takuma Shimada (島田拓真) of SLOW FABRIC will exhibit their work at Maana Atelier. Grounded in the concept of 居場所 Ibasho (a place to belong), we hope that the passage of time etched into the fabric will act as a clue to reflect on our connections with others, and deepen self-exploration. Alongside the gallery, we invite you to experience indigo dye and the art of shibori in a workshop led by the artists.</p>
-        <p class="jp-copy ibasho__jp" lang="ja">滋賀を拠点に活動する藍染スタジオSLOW FABRIC。絞りの技法を用いた新たな表現を探究し、布に残る痕跡や時を感じられる作品を制作しています。この度、京都では初となる展示をMaana Atelierにて開催します。期間中には、絞り染めのワークショップを実施。自分だけの東袋を制作しながら、藍染の魅力を体験できます。</p>
+        <span class="eyebrow">Exhibition <span class="eyebrow__sep">·</span> IBASHO</span>
+        <p class="body-copy">For the first time in Kyoto, indigo artists Yusuke Miura (三浦裕介) and Takuma Shimada (島田拓真) will exhibit their work at Maana Atelier. Alongside the gallery, we invite you to experience indigo with the guidance of the artists using shibori techniques.</p>
+        <p class="jp-copy ibasho__jp" lang="ja">京都では初となる、SLOW FABRICの藍染作家・三浦裕介と島田拓真による展示をMaana Atelierにて開催します。会期中は、作家の手ほどきのもと、絞り染めの技法で天然藍を体験できるワークショップも開催します。</p>
       </div>
     </div>
   </div>
