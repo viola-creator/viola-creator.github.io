@@ -300,8 +300,10 @@
 
   /* ---------- Workshop info ---------- */
   .workshop { background: var(--paper); }
-  .workshop__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 90px); align-items: center; margin-bottom: clamp(48px, 6vw, 76px); }
-  .workshop__lede { margin-bottom: clamp(32px, 4vw, 48px); max-width: 60ch; }
+  /* Equal columns so illustration container and specs box align to the same width */
+  .workshop__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: center; margin-bottom: clamp(48px, 6vw, 76px); }
+  .workshop__head { margin-bottom: clamp(24px, 3.5vw, 40px); }
+  .workshop__head .eyebrow { margin: 0; }
   .workshop__specs { border-top: 1px solid var(--rule); }
   .workshop__spec { display: flex; justify-content: space-between; gap: 24px; padding: 15px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
   .workshop__spec .k { color: var(--ink-mute); letter-spacing: 0.08em; }
@@ -313,7 +315,7 @@
   }
   .workshop__illustration img {
     display: block;
-    max-width: min(80%, 320px);
+    max-width: min(62%, 260px);
     width: 100%;
     height: auto;
   }
@@ -327,13 +329,28 @@
   }
   .workshop__sched-title { font-family: var(--serif); font-weight: 300; font-size: 28px; margin-bottom: 8px; }
   .workshop__sched-sub { font-size: 13px; color: var(--ink-mute); margin-bottom: 30px; max-width: 52ch; }
-  .sched { border-top: 1px solid var(--rule); max-width: 760px; }
-  .sched__row { display: grid; grid-template-columns: 96px 1fr auto; gap: 18px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--rule); }
+  /* 4-column grid so date · day · note · time all align across rows.
+     display:contents on the meta wrapper lifts day & note into grid cells. */
+  .sched { border-top: 1px solid var(--rule); max-width: 780px; }
+  .sched__row {
+    display: grid;
+    grid-template-columns: 96px 130px 1fr auto;
+    gap: 22px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
   .sched__date { font-family: var(--serif); font-weight: 300; font-size: 23px; line-height: 1; }
-  .sched__meta { display: flex; align-items: baseline; gap: 16px; }
-  .sched__day { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); }
+  .sched__meta { display: contents; }
+  .sched__day { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
   .sched__note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--ink-mute); }
-  .sched__times { font-size: 13.5px; color: var(--ink-soft); text-align: right; letter-spacing: 0.04em; }
+  .sched__times {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    text-align: right;
+    letter-spacing: 0.04em;
+    grid-column: 4;
+  }
   .workshop__cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: clamp(36px, 5vw, 52px); }
   .workshop__cta-note { font-size: 13px; color: var(--ink-mute); }
 
@@ -445,8 +462,10 @@
       margin-top: 0;
     }
     .exhibition__tama { grid-template-columns: 1fr; gap: 26px; }
-    .sched__row { grid-template-columns: 78px 1fr auto; gap: 12px; }
-    .sched__meta { flex-direction: column; gap: 3px; }
+    /* Mobile schedule: date · meta · times (day + note stack inside meta) */
+    .sched__row { grid-template-columns: 68px 1fr auto; gap: 14px; }
+    .sched__meta { display: flex; flex-direction: column; gap: 3px; }
+    .sched__times { grid-column: auto; }
     .newsletter__form { flex-direction: column; gap: 10px; }
     .float-cta { display: block; }
     .site-nav__links .site-nav__link { display: none; }
@@ -591,9 +610,8 @@
 <section class="workshop">
   <div class="container">
 
-    <!-- Lede sits above the grid so the visual moment (illustration + specs) reads clean -->
-    <div class="reveal">
-      <p class="body-copy workshop__lede">You will take home an azuma bag dyed by your own hands, and raise a glass of sake with the artists to finish. Sessions run through the exhibition, mornings on weekends, mornings and afternoons on weekdays.</p>
+    <div class="reveal workshop__head">
+      <span class="eyebrow">The take-home</span>
     </div>
 
     <div class="workshop__grid">
