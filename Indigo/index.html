@@ -269,7 +269,15 @@
   .artists__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(36px, 6vw, 90px); align-items: start; }
   .artists__portrait { aspect-ratio: 4 / 5; }
   .artists__body { padding-top: clamp(8px, 3vw, 48px); }
-  .artists__body h2 { margin-bottom: 30px; max-width: 18ch; }
+  .artists__body h2 { margin-bottom: 8px; max-width: 18ch; }
+  .artists__names-jp {
+    font-family: var(--jp);
+    font-weight: 300;
+    font-size: clamp(15px, 1.5vw, 19px);
+    letter-spacing: 0.14em;
+    color: var(--ink-mute);
+    margin: 0 0 30px;
+  }
   .artists__body .body-copy + .body-copy { margin-top: 20px; }
   .artists__second { width: min(62%, 340px); margin: clamp(40px, 5vw, 64px) 0 0 auto; aspect-ratio: 4 / 3; }
   .artists__tag { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin-top: 12px; text-align: right; }
@@ -533,7 +541,7 @@
       <div class="ibasho__body">
         <span class="eyebrow">The exhibition</span>
         <h2>A place to belong</h2>
-        <p class="body-copy">For the first time in Kyoto, indigo artists Yusuke Miura and Takuma Shimada of SLOW FABRIC will exhibit their work at Maana Atelier. Grounded in the concept of 居場所 Ibasho, a place to belong, we hope that the passage of time etched into the fabric will act as a clue to reflect on our connections with others, and deepen self-exploration.</p>
+        <p class="body-copy">For the first time in Kyoto, indigo artists Yusuke Miura (三浦裕介) and Takuma Shimada (島田拓真) of SLOW FABRIC will exhibit their work at Maana Atelier. Grounded in the concept of 居場所 Ibasho, a place to belong, we hope that the passage of time etched into the fabric will act as a clue to reflect on our connections with others, and deepen self-exploration.</p>
         <p class="jp-copy ibasho__jp" lang="ja">滋賀を拠点に活動する藍染スタジオSLOW FABRIC。絞りの技法を用いた新たな表現を探究し、布に残る痕跡や時を感じられる作品を制作しています。この度、京都では初となる展示をMaana Atelierにて開催します。</p>
       </div>
     </div>
@@ -561,6 +569,7 @@
       <div class="artists__body reveal reveal-2">
         <span class="eyebrow">The artists</span>
         <h2>Yusuke Miura and Takuma Shimada</h2>
+        <p class="artists__names-jp" lang="ja">三浦裕介 と 島田拓真</p>
         <p class="body-copy">SLOW FABRIC is an indigo dye studio based in Shiga. Working with natural indigo and the traditional resist technique of shibori, Miura and Shimada explore new expression in an old craft: cloth that is bound, stitched, dipped and opened, carrying the traces of every hand that shaped it.</p>
         <p class="body-copy">Each piece in the exhibition holds time the way indigo holds light, deepening slowly, never quite finished. This is their first exhibition in Kyoto.</p>
         <div class="artists__second"><img src="images/artist-2.jpg" alt="Working on textiles by the studio window" loading="lazy" /></div>
