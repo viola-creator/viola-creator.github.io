@@ -104,7 +104,7 @@
   }
   .site-nav__logo {
     display: inline-flex; align-items: center;
-    height: 22px;
+    height: 18px;
   }
   .site-nav__logo img {
     height: 100%; width: auto;
@@ -475,11 +475,31 @@
     gap: clamp(14px, 1.6vw, 22px);
     transition: transform .7s var(--ease-out);
     will-change: transform;
+    /* Let the browser handle vertical scroll but reserve horizontal gestures for our swipe handler.
+       user-select: none prevents mouse-drag from selecting figcaption text. */
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
   }
-  /* Show 3 items plus a peek of the 4th, so users know there's more. */
+  /* Show 3 items plus a peek of the 4th, so users know there's more.
+     Breakpoints must mirror visiblePerPage() in the carousel JS:
+     ≤560px → 1 item, ≤900px → 2 items, else 3. */
   .carousel__item {
     flex: 0 0 calc((100% - 3 * clamp(14px, 1.6vw, 22px)) / 3.35);
     margin: 0;
+  }
+  @media (max-width: 900px) {
+    /* 2 items plus a peek of the 3rd */
+    .carousel__item {
+      flex: 0 0 calc((100% - 2 * clamp(14px, 1.6vw, 22px)) / 2.2);
+    }
+  }
+  @media (max-width: 560px) {
+    /* 1 big item plus a peek of the next */
+    .carousel__item {
+      flex: 0 0 calc((100% - clamp(14px, 1.6vw, 22px)) / 1.15);
+    }
+    .carousel__cap .name { font-size: 16px; }
   }
   .carousel__item-img {
     aspect-ratio: 4/5;
@@ -1135,10 +1155,12 @@
 
   /* ============== RESPONSIVE ============== */
   @media (max-width: 800px) {
-    .site-nav { padding: 18px 20px; }
-    .site-nav__links { gap: 14px; }
+    /* Nav: keep it as a single tight row on mobile, matching Stay/Book/Experiences/Indigo. */
+    .site-nav { padding: 16px 18px; gap: 12px; }
+    .site-nav__logo { height: 13px; }
+    .site-nav__links { gap: 12px; }
     .site-nav__link, .site-nav__cta { font-size: 10px; letter-spacing: 0.16em; }
-    .site-nav__cta { padding: 9px 14px; }
+    .site-nav__cta { padding: 8px 12px; }
 
     .hero-flow { height: 100vh; }
     .hero-flow__title-initial h1 { font-size: clamp(46px, 12vw, 78px); }
@@ -1613,15 +1635,46 @@
     function update() {
       const maxPage = pageCount() - 1;
       if (page > maxPage) page = maxPage;
-      track.style.transform = `translateX(-${page * getPageShift()}px)`;
+      /* Clamp so the last page aligns flush with the track's end
+         instead of overshooting and leaving a blank gap. */
+      const viewportW = track.parentElement.getBoundingClientRect().width;
+      const maxOffset = Math.max(0, track.scrollWidth - viewportW);
+      track.style.transform = `translateX(-${Math.min(page * getPageShift(), maxOffset)}px)`;
       prev.disabled = page === 0;
       next.disabled = page === maxPage;
       counter.textContent = (page + 1) + ' / ' + pageCount();
     }
 
-    prev.addEventListener('click', () => { page = Math.max(0, page - 1); update(); });
-    next.addEventListener('click', () => { page = Math.min(pageCount() - 1, page + 1); update(); });
+    function goPrev() { page = Math.max(0, page - 1); update(); }
+    function goNext() { page = Math.min(pageCount() - 1, page + 1); update(); }
+    prev.addEventListener('click', goPrev);
+    next.addEventListener('click', goNext);
     window.addEventListener('resize', () => { update(); });
+
+    /* Swipe / drag support — track the horizontal delta between start and
+       end, then advance a page if it exceeded the threshold. */
+    let sx = 0, cx = 0, touching = false;
+    const SWIPE = 40; // pixels
+    track.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; cx = sx; touching = true; }, { passive: true });
+    track.addEventListener('touchmove',  (e) => { if (touching) cx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   () => {
+      if (!touching) return;
+      touching = false;
+      const d = cx - sx;
+      if (d > SWIPE) goPrev();
+      else if (d < -SWIPE) goNext();
+    });
+    /* Mouse drag on desktop too (nice-to-have) */
+    track.addEventListener('mousedown', (e) => { sx = e.clientX; cx = sx; touching = true; e.preventDefault(); });
+    window.addEventListener('mousemove', (e) => { if (touching) cx = e.clientX; });
+    window.addEventListener('mouseup', () => {
+      if (!touching) return;
+      touching = false;
+      const d = cx - sx;
+      if (d > SWIPE) goPrev();
+      else if (d < -SWIPE) goNext();
+    });
+
     update();
   })();
 
@@ -1656,15 +1709,44 @@
     function update() {
       const maxPage = pageCount() - 1;
       if (page > maxPage) page = maxPage;
-      track.style.transform = `translateX(-${page * getPageShift()}px)`;
+      /* Clamp so the last page aligns flush with the track's end
+         instead of overshooting and leaving a blank gap. */
+      const viewportW = track.parentElement.getBoundingClientRect().width;
+      const maxOffset = Math.max(0, track.scrollWidth - viewportW);
+      track.style.transform = `translateX(-${Math.min(page * getPageShift(), maxOffset)}px)`;
       prev.disabled = page === 0;
       next.disabled = page === maxPage;
       counter.textContent = (page + 1) + ' / ' + pageCount();
     }
 
-    prev.addEventListener('click', () => { page = Math.max(0, page - 1); update(); });
-    next.addEventListener('click', () => { page = Math.min(pageCount() - 1, page + 1); update(); });
+    function goPrev() { page = Math.max(0, page - 1); update(); }
+    function goNext() { page = Math.min(pageCount() - 1, page + 1); update(); }
+    prev.addEventListener('click', goPrev);
+    next.addEventListener('click', goNext);
     window.addEventListener('resize', () => { update(); });
+
+    /* Swipe / drag support */
+    let sx = 0, cx = 0, touching = false;
+    const SWIPE = 40;
+    track.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; cx = sx; touching = true; }, { passive: true });
+    track.addEventListener('touchmove',  (e) => { if (touching) cx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   () => {
+      if (!touching) return;
+      touching = false;
+      const d = cx - sx;
+      if (d > SWIPE) goPrev();
+      else if (d < -SWIPE) goNext();
+    });
+    track.addEventListener('mousedown', (e) => { sx = e.clientX; cx = sx; touching = true; e.preventDefault(); });
+    window.addEventListener('mousemove', (e) => { if (touching) cx = e.clientX; });
+    window.addEventListener('mouseup', () => {
+      if (!touching) return;
+      touching = false;
+      const d = cx - sx;
+      if (d > SWIPE) goPrev();
+      else if (d < -SWIPE) goNext();
+    });
+
     update();
   })();
 </script>
