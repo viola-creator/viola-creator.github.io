@@ -158,7 +158,7 @@
     content: '';
     position: absolute; inset: 0;
     background: rgba(20,16,12,1);
-    opacity: calc(0.42 * (1 - var(--p)));
+    opacity: 0.42; /* was calc(0.42 * (1 - var(--p))) — --p undefined, made opacity fall back to 1 (solid black over video) */
     pointer-events: none;
   }
   /* Title overlay — centred on the video, no scroll animation */
@@ -563,15 +563,13 @@
   /* Hover pauses the drift and locks zoom in */
   .artist__hero:hover img { animation-play-state: paused; }
 
-  /* Mini-workshop hover: image zooms + card lifts slightly */
-  .mini-workshop {
-    transition: transform .45s var(--ease-out);
-  }
-  .mini-workshop:hover { transform: translateY(-4px); }
-  .mini-workshop__thumb img { transition: transform 1.4s var(--ease-out); }
-  .mini-workshop:hover .mini-workshop__thumb img { transform: scale(1.08); }
-  .mini-workshop__cap .name { transition: color .3s; }
-  .mini-workshop:hover .mini-workshop__cap .name { color: var(--terracotta-soft); }
+  /* Other experiences card hover: title tints, image zooms slightly */
+  .exp-card { transition: transform .45s var(--ease-out); }
+  .exp-card:hover { transform: translateY(-4px); }
+  .exp-card .photo img { transition: transform 1.4s var(--ease-out); }
+  .exp-card:hover .photo img { transform: scale(1.06); }
+  .exp-card .title { transition: color .25s; }
+  .exp-card:hover .title { color: var(--terracotta); }
 
   /* Favourites cards — image zooms, caption lifts a touch */
   .fav { transition: transform .4s var(--ease-out); }
@@ -916,59 +914,45 @@
     margin-bottom: 22px;
     display: block;
   }
-  .atelier__related-grid {
+  /* Other experiences grid — matches the pattern used on workshop pages */
+  .exp-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;                   /* very close together */
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(14px, 1.6vw, 22px);
   }
-  .mini-workshop {
-    position: relative;
-    display: block;
+  .exp-card {
+    text-align: left;
+    display: flex; flex-direction: column;
+  }
+  .exp-card .photo {
     aspect-ratio: 3/4;
     overflow: hidden;
-    background: var(--ink);
-    color: #fff;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    background: var(--cream);
   }
-  .mini-workshop__thumb {
-    position: absolute; inset: 0;
-    overflow: hidden;
-  }
-  .mini-workshop__thumb img {
+  .exp-card .photo img {
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 1.4s var(--ease-out);
   }
-  .mini-workshop:hover .mini-workshop__thumb img { transform: scale(1.05); }
-  .mini-workshop::after {
-    content: '';
-    position: absolute; left: 0; right: 0; bottom: 0; height: 60%;
-    background: linear-gradient(180deg, transparent 0%, rgba(20,16,12,0.78) 100%);
-    pointer-events: none;
+  .exp-card .venue {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
   }
-  .mini-workshop__cap {
-    position: absolute;
-    left: 0; right: 0; bottom: 0;
-    z-index: 2;
-    padding: 20px 18px;
-  }
-  .mini-workshop__cap .name {
+  .exp-card .title {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(20px, 1.7vw, 24px);
-    color: #fff;
-    display: block;
+    font-size: clamp(20px, 1.8vw, 26px);
     line-height: 1.15;
-    text-shadow: 0 2px 14px rgba(0,0,0,0.4);
+    color: var(--ink);
   }
-  .mini-workshop__cap .sub {
-    font-family: var(--sans);
-    font-size: 14px;
-    color: rgba(255,255,255,0.86);
-    line-height: 1.45;
-    display: block;
-    margin-top: 6px;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.5);
-  }
+  @media (max-width: 1100px) { .exp-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 700px)  { .exp-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 420px)  { .exp-grid { grid-template-columns: 1fr; } }
 
   /* ============== SEARCH MOMENT ============== */
   .search {
@@ -1183,10 +1167,6 @@
     .atelier__feature-img { aspect-ratio: 4/3; }
     .atelier__badge { padding: 12px 14px; max-width: 180px; }
     .atelier__badge .pct { font-size: 22px; }
-    .atelier__related-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
-    .mini-workshop__cap { padding: 14px 12px; }
-    .mini-workshop__cap .name { font-size: 17px; }
-    .mini-workshop__cap .sub { font-size: 10px; }
     .visit__map { min-height: 280px; aspect-ratio: 4/3; }
   }
 </style>
@@ -1452,49 +1432,39 @@
       </div>
     </div>
 
-    <!-- Related workshops — bigger overlay cards -->
+    <!-- Other experiences — 5-up grid, matches the workshop pages pattern -->
     <div class="atelier__related">
-      <span class="atelier__related-head">Also food and table</span>
-      <div class="atelier__related-grid">
+      <span class="atelier__related-head">Other experiences</span>
+      <div class="exp-grid">
 
-        <a class="mini-workshop" href="#">
-          <div class="mini-workshop__thumb">
-            <img src="../Experiences/botanical-teas/images/hero.jpeg" alt="" />
-          </div>
-          <div class="mini-workshop__cap">
-            <span class="name">Botanical Teas</span>
-            <span class="sub">Blend a personal tea with seasonal Kyoto botanicals.</span>
-          </div>
+        <a class="exp-card" href="../Experiences/earthen-wall/index.html">
+          <div class="photo"><img src="../Experiences/_partials/images/showcase-earthen-wall.jpg" alt="" loading="lazy" /></div>
+          <div class="venue">Maana Atelier</div>
+          <div class="title">Earthen Wall</div>
         </a>
 
-        <a class="mini-workshop" href="#">
-          <div class="mini-workshop__thumb">
-            <img src="../Experiences/_partials/images/showcase-tea-ceremony-morning.jpg" alt="" />
-          </div>
-          <div class="mini-workshop__cap">
-            <span class="name">Morning Tea Ceremony</span>
-            <span class="sub">Asa-chaji, with a Zen monk's breakfast.</span>
-          </div>
+        <a class="exp-card" href="../Experiences/tea-dye/index.html">
+          <div class="photo"><img src="../Experiences/_partials/images/showcase-tea-dye.jpg" alt="" loading="lazy" /></div>
+          <div class="venue">Maana Atelier</div>
+          <div class="title">Tea Dye</div>
         </a>
 
-        <a class="mini-workshop" href="#">
-          <div class="mini-workshop__thumb">
-            <img src="../Experiences/_partials/images/showcase-tea-ceremony-night.jpeg" alt="" />
-          </div>
-          <div class="mini-workshop__cap">
-            <span class="name">Night Tea Ceremony</span>
-            <span class="sub">Yo-chaji, by candlelight. Seasonal, limited seats.</span>
-          </div>
+        <a class="exp-card" href="../Experiences/botanical-teas/index.html">
+          <div class="photo"><img src="../Experiences/_partials/images/showcase-botanical-tea.jpg" alt="" loading="lazy" /></div>
+          <div class="venue">Maana Atelier</div>
+          <div class="title">Botanical Teas</div>
         </a>
 
-        <a class="mini-workshop" href="#">
-          <div class="mini-workshop__thumb">
-            <img src="../Experiences/koji-fermentation/images/process.jpg" alt="" />
-          </div>
-          <div class="mini-workshop__cap">
-            <span class="name">Koji Fermentation</span>
-            <span class="sub">The full afternoon, hands-on.</span>
-          </div>
+        <a class="exp-card" href="https://www.maana.jp/experiences/tea-ceremony" target="_blank" rel="noopener">
+          <div class="photo"><img src="../Experiences/_partials/images/showcase-tea-ceremony-morning.jpg" alt="" loading="lazy" /></div>
+          <div class="venue">Private Tea House</div>
+          <div class="title">Morning Tea Ceremony</div>
+        </a>
+
+        <a class="exp-card" href="https://www.maana.jp/experiences/tea-ceremony-night" target="_blank" rel="noopener">
+          <div class="photo"><img src="../Experiences/_partials/images/showcase-tea-ceremony-night.jpeg" alt="" loading="lazy" /></div>
+          <div class="venue">Private Tea House</div>
+          <div class="title">Night Tea Ceremony</div>
         </a>
 
       </div>
