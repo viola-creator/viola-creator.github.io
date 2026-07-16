@@ -529,34 +529,68 @@
     display: block;
   }
 
-  /* Highlights — standard ecommerce grid: 4 across on desktop, square tiles */
-  #favsCarousel .carousel__viewport { overflow: visible; }
-  #favsCarousel .carousel__track {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(28px, 2.6vw, 40px) clamp(16px, 1.6vw, 24px);
-    transform: none !important;
-    touch-action: auto;
-    user-select: auto;
-    -webkit-user-select: auto;
-  }
-  #favsCarousel .carousel__item {
-    flex: initial;
-    width: 100%;
-  }
-  #favsCarousel .carousel__item-img {
-    aspect-ratio: 1 / 1;
-  }
-  #favsCarousel .carousel__cap { margin-top: 10px; }
-  #favsCarousel .carousel__cap .name { font-size: 13px; }
-  #favsCarousel .carousel__cap .desc { font-size: 12px; margin-top: 2px; }
-  @media (max-width: 900px) {
-    #favsCarousel .carousel__track { grid-template-columns: repeat(3, 1fr); }
-  }
+  /* Highlights — mobile only: swap the carousel for a standard 2-col ecommerce grid.
+     Desktop and tablet keep the original arrow carousel. */
   @media (max-width: 560px) {
-    #favsCarousel .carousel__track { grid-template-columns: repeat(2, 1fr); gap: 24px 14px; }
+    #favsCarousel .carousel__head { display: none; }
+    #favsCarousel .carousel__viewport { overflow: visible; }
+    #favsCarousel .carousel__track {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 14px;
+      transform: none !important;
+      touch-action: auto;
+      user-select: auto;
+      -webkit-user-select: auto;
+    }
+    #favsCarousel .carousel__item { flex: initial; width: 100%; }
+    #favsCarousel .carousel__item-img { aspect-ratio: 1 / 1; }
+    #favsCarousel .carousel__cap { margin-top: 8px; }
     #favsCarousel .carousel__cap .name { font-size: 13px; }
+    #favsCarousel .carousel__cap .desc { font-size: 12px; margin-top: 2px; }
   }
+
+  /* Lightbox — click a Highlights image to enlarge */
+  #favsCarousel .carousel__item-img { cursor: zoom-in; }
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center; justify-content: center;
+    padding: 60px 24px 40px;
+  }
+  .lightbox.is-open { display: flex; }
+  .lightbox__inner {
+    position: relative;
+    max-width: 90vw;
+    display: flex; flex-direction: column;
+    align-items: center;
+  }
+  .lightbox__img {
+    max-width: 90vw;
+    max-height: 78vh;
+    object-fit: contain;
+    display: block;
+  }
+  .lightbox__cap {
+    margin-top: 14px;
+    color: rgba(255,255,255,0.92);
+    text-align: center;
+    font-family: var(--sans);
+  }
+  .lightbox__cap .name { display: block; font-size: 15px; font-weight: 500; letter-spacing: 0.01em; }
+  .lightbox__cap .desc { display: block; font-size: 13px; opacity: 0.72; margin-top: 3px; }
+  .lightbox__close {
+    position: fixed;
+    top: 20px; right: 24px;
+    width: 40px; height: 40px;
+    background: transparent; border: 0;
+    color: #fff; font-size: 30px; line-height: 1; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: opacity .2s;
+  }
+  .lightbox__close:hover { opacity: 0.7; }
 
   /* Sign-off after artist body — sans-serif, no italic, to match Bauhaus mode */
   .artist__signoff {
@@ -1356,7 +1390,15 @@
       </div>
     </div>
 
-    <div class="favs__carousel-wrap carousel is-expanded" id="favsCarousel">
+    <div class="favs__carousel-wrap carousel" id="favsCarousel">
+      <div class="carousel__head">
+        <span class="carousel__label">A rotating selection</span>
+        <div class="carousel__controls">
+          <span class="carousel__counter" id="favsCounter">1 / 3</span>
+          <button class="carousel__btn" id="favsPrev" aria-label="Previous">←</button>
+          <button class="carousel__btn" id="favsNext" aria-label="Next">→</button>
+        </div>
+      </div>
       <div class="carousel__viewport">
         <div class="carousel__track" id="favsTrack">
 
@@ -1769,7 +1811,59 @@
 
     update();
   })();
+
+  /* =============================================================
+     Highlights — click image to enlarge (lightbox).
+     Suppresses clicks that came from a real mouse-drag on the carousel.
+     ============================================================= */
+  (function() {
+    const lb = document.getElementById('lightbox');
+    if (!lb) return;
+    const lbImg = lb.querySelector('.lightbox__img');
+    const lbCap = lb.querySelector('.lightbox__cap');
+    const lbClose = lb.querySelector('.lightbox__close');
+
+    function open(src, alt, name, desc) {
+      lbImg.src = src;
+      lbImg.alt = alt || '';
+      lbCap.innerHTML =
+        (name ? '<span class="name">' + name + '</span>' : '') +
+        (desc ? '<span class="desc">' + desc + '</span>' : '');
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    lbClose.addEventListener('click', close);
+    lb.addEventListener('click', (e) => { if (e.target === lb || e.target.classList.contains('lightbox__inner')) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    document.querySelectorAll('#favsCarousel .carousel__item').forEach((item) => {
+      const img = item.querySelector('img');
+      const cap = item.querySelector('.carousel__cap');
+      const name = cap && cap.querySelector('.name') ? cap.querySelector('.name').textContent : '';
+      const desc = cap && cap.querySelector('.desc') ? cap.querySelector('.desc').textContent : '';
+      let downX = 0, downY = 0;
+      item.addEventListener('pointerdown', (e) => { downX = e.clientX; downY = e.clientY; });
+      item.addEventListener('click', (e) => {
+        /* If pointerdown was far from click position, this was a drag — skip. */
+        if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
+        open(img.getAttribute('src'), img.getAttribute('alt'), name, desc);
+      });
+    });
+  })();
 </script>
+
+<!-- Lightbox modal for Highlights image click-to-enlarge -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image">
+  <button class="lightbox__close" aria-label="Close">×</button>
+  <div class="lightbox__inner">
+    <img class="lightbox__img" src="" alt="" />
+    <div class="lightbox__cap"></div>
+  </div>
+</div>
 
 </body>
 </html>
