@@ -529,6 +529,35 @@
     display: block;
   }
 
+  /* Highlights — standard ecommerce grid: 4 across on desktop, square tiles */
+  #favsCarousel .carousel__viewport { overflow: visible; }
+  #favsCarousel .carousel__track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(28px, 2.6vw, 40px) clamp(16px, 1.6vw, 24px);
+    transform: none !important;
+    touch-action: auto;
+    user-select: auto;
+    -webkit-user-select: auto;
+  }
+  #favsCarousel .carousel__item {
+    flex: initial;
+    width: 100%;
+  }
+  #favsCarousel .carousel__item-img {
+    aspect-ratio: 1 / 1;
+  }
+  #favsCarousel .carousel__cap { margin-top: 10px; }
+  #favsCarousel .carousel__cap .name { font-size: 13px; }
+  #favsCarousel .carousel__cap .desc { font-size: 12px; margin-top: 2px; }
+  @media (max-width: 900px) {
+    #favsCarousel .carousel__track { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    #favsCarousel .carousel__track { grid-template-columns: repeat(2, 1fr); gap: 24px 14px; }
+    #favsCarousel .carousel__cap .name { font-size: 13px; }
+  }
+
   /* Sign-off after artist body — sans-serif, no italic, to match Bauhaus mode */
   .artist__signoff {
     text-align: center;
@@ -1327,15 +1356,7 @@
       </div>
     </div>
 
-    <div class="favs__carousel-wrap carousel" id="favsCarousel">
-      <div class="carousel__head">
-        <span class="carousel__label">A rotating selection</span>
-        <div class="carousel__controls">
-          <span class="carousel__counter" id="favsCounter">1 / 3</span>
-          <button class="carousel__btn" id="favsPrev" aria-label="Previous">←</button>
-          <button class="carousel__btn" id="favsNext" aria-label="Next">→</button>
-        </div>
-      </div>
+    <div class="favs__carousel-wrap carousel is-expanded" id="favsCarousel">
       <div class="carousel__viewport">
         <div class="carousel__track" id="favsTrack">
 
@@ -1665,6 +1686,8 @@
     const prev = document.getElementById('favsPrev');
     const next = document.getElementById('favsNext');
     const counter = document.getElementById('favsCounter');
+    const expand = document.getElementById('favsExpand');
+    const wrap = document.getElementById('favsCarousel');
     if (!track || !prev || !next) return;
 
     const items = track.children.length;
@@ -1704,10 +1727,28 @@
     next.addEventListener('click', goNext);
     window.addEventListener('resize', () => { update(); });
 
-    /* Swipe / drag support */
+    /* Expand toggle — switches the carousel to a full grid of every item */
+    if (expand && wrap) {
+      expand.addEventListener('click', () => {
+        const open = wrap.classList.toggle('is-expanded');
+        expand.setAttribute('aria-expanded', open ? 'true' : 'false');
+        expand.setAttribute('aria-label', open ? 'Collapse' : 'Show all');
+        expand.setAttribute('title', open ? 'Collapse' : 'Show all');
+        if (open) {
+          /* clear the translateX so nothing is offset in grid mode */
+          track.style.transform = '';
+        } else {
+          page = 0;
+          update();
+        }
+      });
+    }
+
+    /* Swipe / drag support — no-op when expanded (grid handles vertical scroll) */
     let sx = 0, cx = 0, touching = false;
     const SWIPE = 40;
-    track.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; cx = sx; touching = true; }, { passive: true });
+    const isExpanded = () => wrap && wrap.classList.contains('is-expanded');
+    track.addEventListener('touchstart', (e) => { if (isExpanded()) return; sx = e.touches[0].clientX; cx = sx; touching = true; }, { passive: true });
     track.addEventListener('touchmove',  (e) => { if (touching) cx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend',   () => {
       if (!touching) return;
@@ -1716,7 +1757,7 @@
       if (d > SWIPE) goPrev();
       else if (d < -SWIPE) goNext();
     });
-    track.addEventListener('mousedown', (e) => { sx = e.clientX; cx = sx; touching = true; e.preventDefault(); });
+    track.addEventListener('mousedown', (e) => { if (isExpanded()) return; sx = e.clientX; cx = sx; touching = true; e.preventDefault(); });
     window.addEventListener('mousemove', (e) => { if (touching) cx = e.clientX; });
     window.addEventListener('mouseup', () => {
       if (!touching) return;
