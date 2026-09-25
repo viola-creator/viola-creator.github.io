@@ -1632,7 +1632,12 @@
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.18, rootMargin: '0px 0px -10% 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+  /* threshold was 0.18 — a section much taller than the viewport (like the
+     atelier section on narrow phones, where the experiences grid becomes a
+     single column ~4000px tall) can never have 18% of itself on screen, so
+     it stayed at opacity 0 forever. threshold 0 + the -10% bottom rootMargin
+     keeps the same "reveal as it enters the lower screen" feel at any height. */
   revealEls.forEach((el) => obs.observe(el));
 
   /* Hero scroll animation disabled — video plays in a static 100vh hero. */

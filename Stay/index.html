@@ -382,9 +382,9 @@
     font-family: var(--serif);
     font-weight: 400;
     font-style: normal;
-    font-size: clamp(22px, 2.1vw, 28px);
+    font-size: clamp(26px, 2.6vw, 34px);
     line-height: 1.1;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     color: #fff;
     text-shadow: 0 2px 16px rgba(0,0,0,0.45);
   }
@@ -395,22 +395,22 @@
   }
   .prop__overlay .name-line .loc {
     font-family: var(--sans);
-    font-size: clamp(12px, 0.95vw, 14px);
-    letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.88);
+    font-size: clamp(13px, 1vw, 15px);
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 400;
     text-transform: none;
     vertical-align: 0.08em;
   }
   .prop__overlay .stat-line {
     display: flex; flex-wrap: wrap;
-    gap: 4px 10px;
+    gap: 4px 12px;
     font-family: var(--sans);
-    font-size: 10px;
-    letter-spacing: 0.2em;
+    font-size: 12px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.92);
+    color: rgba(255, 255, 255, 0.95);
     text-shadow: 0 1px 8px rgba(0,0,0,0.45);
   }
   .prop__overlay .stat-line .sep {
@@ -419,10 +419,28 @@
 
   /* Body content (below the image — compact, comparison-friendly) */
   .prop__body {
-    padding: 18px 22px 20px;
+    padding: 22px 24px 24px;
     display: flex; flex-direction: column;
-    gap: 12px;
+    gap: 18px;
     flex: 1;
+  }
+
+  /* Tag chips — replace the old descriptive paragraph + best-for line.
+     Standard readable size, calm cream pill on paper background. */
+  .prop__tags {
+    display: flex; flex-wrap: wrap;
+    gap: 8px;
+  }
+  .prop__tags span {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    background: var(--cream);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-weight: 500;
+    line-height: 1.2;
   }
   /* Legacy classes — kept hidden in case any sub-element still references them */
   .prop__title, .prop__name, .prop__neighborhood { display: none; }
@@ -483,15 +501,15 @@
     display: inline-flex; align-items: center; gap: 10px;
     font-family: var(--sans);
     font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 0.28em;
+    font-size: 12px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink);
     border-bottom: 1px solid var(--ink);
     padding-bottom: 4px;
     transition: color .25s, border-color .25s, letter-spacing .25s;
   }
-  .prop__cta:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.3em; }
+  .prop__cta:hover { color: var(--terracotta); border-color: var(--terracotta); letter-spacing: 0.26em; }
   .prop__cta.is-disabled {
     color: var(--ink-mute); border-color: var(--ink-mute);
     cursor: not-allowed;
@@ -555,10 +573,13 @@
     opacity: 0; transform: translateY(30px);
     transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
   }
-  .stagger.is-visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
-  .stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
-  .stagger.is-visible > *:nth-child(3) { transition-delay: 0.30s; opacity: 1; transform: translateY(0); }
-  .stagger.is-visible > *:nth-child(4) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > * { opacity: 1; transform: translateY(0); }
+  .stagger.is-visible > *:nth-child(1) { transition-delay: 0s; }
+  .stagger.is-visible > *:nth-child(2) { transition-delay: 0.10s; }
+  .stagger.is-visible > *:nth-child(3) { transition-delay: 0.20s; }
+  .stagger.is-visible > *:nth-child(4) { transition-delay: 0.30s; }
+  .stagger.is-visible > *:nth-child(5) { transition-delay: 0.40s; }
+  .stagger.is-visible > *:nth-child(6) { transition-delay: 0.50s; }
 
   /* ============== FOOTER ============== */
   .site-footer {
@@ -636,7 +657,7 @@
           <img class="prop__img" src="images/kyoto/card.jpg" alt="Inside Maana Kyoto" />
           <div class="prop__overlay">
             <h2 class="name-line">
-              Maana Kyoto<span class="sep">·</span><span class="loc">Shimogyo Ward, near Kyoto Station</span>
+              Maana Kyoto<span class="sep">·</span><span class="loc">near Kyoto Station</span>
             </h2>
             <div class="stat-line">
               <span>89 m²</span><span class="sep">·</span>
@@ -646,11 +667,11 @@
           </div>
         </div>
         <div class="prop__body">
-          <div class="prop__signature">
-            <p class="body">The original Maana machiya. Restored by master architect Uoya Shigenori, with original wood beams and clay walls exposed.</p>
-          </div>
-          <div class="prop__bestfor">
-            <strong>Best for</strong> first-time visitors who want the foundational Maana experience, cozy, timeless, unforced.
+          <div class="prop__tags">
+            <span>Cozy</span>
+            <span>Timeless</span>
+            <span>Original machiya</span>
+            <span>Family friendly</span>
           </div>
           <div class="prop__cta-row">
             <a class="prop__cta" href="kyoto.html">View property →</a>
@@ -666,7 +687,7 @@
           <img class="prop__img" src="images/kamo/hero.PNG" alt="Inside Maana Kamo" />
           <div class="prop__overlay">
             <h2 class="name-line">
-              Maana Kamo<span class="sep">·</span><span class="loc">Higashiyama Ward, near Kamogawa</span>
+              Maana Kamo<span class="sep">·</span><span class="loc">near Kamogawa</span>
             </h2>
             <div class="stat-line">
               <span>83 m²</span><span class="sep">·</span>
@@ -676,11 +697,11 @@
           </div>
         </div>
         <div class="prop__body">
-          <div class="prop__signature">
-            <p class="body">A house designed around the bathtub. An oversized onsen-style soaking tub anchors the home, with the urushi-lacquered kitchen and shadow-lit living shaped around it.</p>
-          </div>
-          <div class="prop__bestfor">
-            <strong>Best for</strong> design lovers and slow travelers who want dramatic light, sleek lines, and a long soak.
+          <div class="prop__tags">
+            <span>Design-forward</span>
+            <span>Onsen tub</span>
+            <span>Slow travel</span>
+            <span>Family friendly</span>
           </div>
           <div class="prop__cta-row">
             <a class="prop__cta" href="kamo.html">View property →</a>
@@ -689,48 +710,93 @@
         </div>
       </article>
 
-      <!-- ===== MAANA KIYOMIZU — same card + 3-suite preview strip ===== -->
+      <!-- ===== MAANA KIYOMIZU · SUITE 1 ===== -->
       <article class="prop">
-        <a class="prop__link" href="kiyomizu.html" aria-label="View Maana Kiyomizu">View Maana Kiyomizu</a>
+        <a class="prop__link" href="kiyomizu-1.html" aria-label="View Kiyomizu Suite 1">View Kiyomizu Suite 1</a>
         <div class="prop__img-wrap">
-          <img class="prop__img" src="images/kiyomizu/suite1/hero.jpg" alt="Maana Kiyomizu, near Kiyomizu-dera" />
+          <img class="prop__img" src="images/kiyomizu/suite1/hero.jpg" alt="Kiyomizu Suite 1" />
           <div class="prop__overlay">
             <h2 class="name-line">
-              Maana Kiyomizu<span class="sep">·</span><span class="loc">Higashiyama Ward, near Kiyomizu-dera</span>
+              Kiyomizu Suite 1<span class="sep">·</span><span class="loc">near Kiyomizu-dera</span>
             </h2>
             <div class="stat-line">
-              <span>3 Suite Machiyas</span><span class="sep">·</span>
-              <span>23 to 63 m²</span><span class="sep">·</span>
-              <span>Sleeps 2 to 4 per suite</span>
+              <span>23 m²</span><span class="sep">·</span>
+              <span>1 Bedroom</span><span class="sep">·</span>
+              <span>Sleeps 2</span>
             </div>
           </div>
         </div>
         <div class="prop__body">
-          <div class="prop__signature">
-            <p class="body">Three individual machiya suites, side by side with our Maana Living shop and <em>Kissa Kishin</em> café. Daily breakfast steps away.</p>
-          </div>
-          <div class="prop__bestfor">
-            <strong>Best for</strong> guests who want a small, light-filled retreat next door to coffee, breakfast, and a walk to Kiyomizu-dera.
+          <div class="prop__tags">
+            <span>Intimate</span>
+            <span>Deep soaking tub</span>
+            <span>For couples</span>
+            <span>Shrine views</span>
           </div>
           <div class="prop__cta-row">
-            <a class="prop__cta" href="kiyomizu.html">View property →</a>
-            <span class="prop__more"><a href="kiyomizu.html#suites">See suites</a></span>
+            <a class="prop__cta" href="kiyomizu-1.html">View suite →</a>
+            <span class="prop__more"><a href="kiyomizu-1.html#book">See availability</a></span>
           </div>
         </div>
-        <!-- 3-suite preview strip → deep-links into Kiyomizu page sections -->
-        <div class="prop__suites-strip">
-          <a class="thumb" href="kiyomizu.html#suite1">
-            <img src="images/kiyomizu/suite1/hero.jpg" alt="Suite 1" />
-            <span class="label">Suite 1</span>
-          </a>
-          <a class="thumb" href="kiyomizu.html#suite2">
-            <img src="images/kiyomizu/suite2/hero.jpg" alt="Suite 2" />
-            <span class="label">Suite 2</span>
-          </a>
-          <a class="thumb" href="kiyomizu.html#suite3">
-            <img src="images/kiyomizu/suite3/hero.jpg" alt="Suite 3" />
-            <span class="label">Suite 3</span>
-          </a>
+      </article>
+
+      <!-- ===== MAANA KIYOMIZU · SUITE 2 ===== -->
+      <article class="prop">
+        <a class="prop__link" href="kiyomizu-2.html" aria-label="View Kiyomizu Suite 2">View Kiyomizu Suite 2</a>
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/kiyomizu/suite2/hero.jpg" alt="Kiyomizu Suite 2" />
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Kiyomizu Suite 2<span class="sep">·</span><span class="loc">near Kiyomizu-dera</span>
+            </h2>
+            <div class="stat-line">
+              <span>63 m²</span><span class="sep">·</span>
+              <span>2 Bedrooms</span><span class="sep">·</span>
+              <span>Sleeps 4</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__tags">
+            <span>Spacious</span>
+            <span>Family friendly</span>
+            <span>Modern tokonoma</span>
+            <span>Shigaraki tub</span>
+          </div>
+          <div class="prop__cta-row">
+            <a class="prop__cta" href="kiyomizu-2.html">View suite →</a>
+            <span class="prop__more"><a href="kiyomizu-2.html#book">See availability</a></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== MAANA KIYOMIZU · SUITE 3 ===== -->
+      <article class="prop">
+        <a class="prop__link" href="kiyomizu-3.html" aria-label="View Kiyomizu Suite 3">View Kiyomizu Suite 3</a>
+        <div class="prop__img-wrap">
+          <img class="prop__img" src="images/kiyomizu/suite3/hero.jpg" alt="Kiyomizu Suite 3" />
+          <div class="prop__overlay">
+            <h2 class="name-line">
+              Kiyomizu Suite 3<span class="sep">·</span><span class="loc">near Kiyomizu-dera</span>
+            </h2>
+            <div class="stat-line">
+              <span>60 m²</span><span class="sep">·</span>
+              <span>2 Bedrooms</span><span class="sep">·</span>
+              <span>Sleeps 3</span>
+            </div>
+          </div>
+        </div>
+        <div class="prop__body">
+          <div class="prop__tags">
+            <span>Cozy</span>
+            <span>Reading nook</span>
+            <span>Small groups</span>
+            <span>Walk-in shower</span>
+          </div>
+          <div class="prop__cta-row">
+            <a class="prop__cta" href="kiyomizu-3.html">View suite →</a>
+            <span class="prop__more"><a href="kiyomizu-3.html#book">See availability</a></span>
+          </div>
         </div>
       </article>
 
@@ -741,7 +807,7 @@
           <span class="prop__status">Opening · December 2026</span>
           <div class="prop__overlay">
             <h2 class="name-line">
-              Maana Annex<span class="sep">·</span><span class="loc">Kyoto, location revealed soon</span>
+              Maana Annex<span class="sep">·</span><span class="loc">location revealed soon</span>
             </h2>
             <div class="stat-line">
               <span>New Build</span><span class="sep">·</span>
@@ -751,11 +817,11 @@
           </div>
         </div>
         <div class="prop__body">
-          <div class="prop__signature">
-            <p class="body">Eight years of conversations with friends in Copenhagen about how well-made things age. Our first new-build, designed with Norm Architects and Keiji Ashizawa (KAD), built with recycled tsuchikabe.</p>
-          </div>
-          <div class="prop__bestfor">
-            <strong>Best for</strong> guests who want to be among the first to stay in Maana's newest chapter.
+          <div class="prop__tags">
+            <span>New build</span>
+            <span>Nordic + Japanese</span>
+            <span>Recycled tsuchikabe</span>
+            <span>Opens Dec 2026</span>
           </div>
           <div class="prop__cta-row">
             <span class="prop__cta is-disabled">Opening December →</span>

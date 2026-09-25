@@ -321,6 +321,39 @@
   }
   .story p:last-child { margin-bottom: 0; }
 
+  /* ============== STORY (EDITORIAL, magazine spread) ============== */
+  .story-ed {
+    padding: clamp(64px, 8vw, 120px) 0;
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .story-ed__inner {
+    display: grid;
+    grid-template-columns: 1fr 28px 1.3fr;
+    gap: clamp(24px, 3.4vw, 56px);
+    align-items: start;
+    padding: 0 clamp(28px, 7vw, 140px);
+  }
+  .story-ed__left { display: flex; flex-direction: column; gap: clamp(28px, 3vw, 44px); }
+  .story-ed__photo { overflow: hidden; background: var(--cream); }
+  .story-ed__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .story-ed__photo--left { aspect-ratio: 4/5; }
+  .story-ed__body { font-family: var(--sans); font-size: 15px; line-height: 1.75; color: var(--ink-soft); max-width: 44ch; }
+  .story-ed__body p { margin: 0 0 1.1em; }
+  .story-ed__body p:last-child { margin-bottom: 0; }
+  .story-ed__body .eyebrow { display: block; font-family: var(--sans); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 18px; font-weight: 500; }
+  .story-ed__body h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.05; margin: 0 0 24px; color: var(--ink); letter-spacing: -0.005em; }
+  .story-ed__rotate { display: flex; align-items: flex-start; justify-content: center; padding-top: 24px; height: 100%; }
+  .story-ed__rotate span { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--sans); font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .story-ed__right { align-self: stretch; display: flex; }
+  .story-ed__photo--right { aspect-ratio: 3/4; width: 100%; min-height: 560px; }
+  @media (max-width: 900px) {
+    .story-ed__inner { grid-template-columns: 1fr; gap: 24px; }
+    .story-ed__rotate { display: none; }
+    .story-ed__photo--right { min-height: 0; aspect-ratio: 4/5; }
+    .story-ed__body { max-width: 100%; }
+  }
+
   /* ============== DESIGN HIGHLIGHTS ============== */
   .design {
     background: var(--paper);
@@ -1094,21 +1127,6 @@
   </div>
 </section>
 
-<!-- ============== STICKY SUB-NAV (scroll to section + book cta) ============== -->
-<nav class="subnav">
-  <div class="container">
-    <div class="subnav__inner">
-      <div class="subnav__links">
-        <a class="subnav__link" href="#story">About</a>
-        <a class="subnav__link" href="#design">Design</a>
-        <a class="subnav__link" href="#amenities">Amenities</a>
-        <a class="subnav__link" href="#location">Location</a>
-        <a class="subnav__link" href="#others">Other homes</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
 <!-- ============== QUICK-LOOK BAR ============== -->
 <section class="quicklook">
   <div class="container">
@@ -1137,18 +1155,29 @@
   </div>
 </section>
 
-<!-- ============== STORY ============== -->
-<section class="story reveal" id="story">
-  <div class="container-narrow">
-    <div class="section-head">
-      <div>
+<!-- ============== STORY (editorial spread) ============== -->
+<section class="story-ed reveal" id="story">
+  <div class="story-ed__inner">
+    <div class="story-ed__left">
+      <div class="story-ed__photo story-ed__photo--left">
+        <img src="images/kyoto/detail1.jpg" alt="Original wood beams and clay walls at Maana Kyoto" />
+      </div>
+      <div class="story-ed__body">
         <span class="eyebrow">About the home</span>
-        <h2>The original Maana</h2>
+        <h2>The original Maana.</h2>
+        <p>The streetscapes of Kyoto first caught our attention — its never-ending layers of surprise had us in love. This city awakens the senses and leads you to a journey within.</p>
+        <p>Our first restored home. Built with Kyoto architect Uoya Shigenori, an expert in machiya restoration, capturing the house's original character — not change for the sake of change, but a quiet evolution.</p>
+        <p>Original wood beams and clay walls exposed. A skylight and open staircase flood the home with natural light. The centerpiece: a commissioned hikizome dye work by Nakajima Takeshi.</p>
       </div>
     </div>
-    <p>The streetscapes and landscapes of Kyoto first caught our attention, but it is the city's never-ending layers of surprises that had us completely in love. Something about this city awakens your senses and leads you to a journey within.</p>
-    <p>Maana Kyoto was the first home we restored. We worked with Kyoto architect Uoya Shigenori, an expert in machiya restoration, to capture the house's original character — not to change for the sake of change, but to evolve it into a comfortable home with modern luxuries.</p>
-    <p>The original wood beams and parts of the clay wall construction are exposed to showcase the traditional craft of these houses. A skylight and open staircase flood the home with natural light. The centerpiece is a commissioned hikizome dye work by local fabric-dye artist Nakajima Takeshi.</p>
+    <div class="story-ed__rotate">
+      <span>The Story · 物語</span>
+    </div>
+    <div class="story-ed__right">
+      <div class="story-ed__photo story-ed__photo--right">
+        <img src="images/kyoto/vibe.jpg" alt="Inside Maana Kyoto" />
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1472,13 +1501,13 @@
         </div>
       </a>
 
-      <a class="other" href="kiyomizu.html">
+      <a class="other" href="kiyomizu-1.html">
         <div class="other__img">
-          <img src="images/kiyomizu/suite1/hero.jpg" alt="Maana Kiyomizu" />
+          <img src="images/kiyomizu/suite1/hero.jpg" alt="Maana Kiyomizu suites" />
         </div>
         <div class="other__cap">
           <span class="name">Maana Kiyomizu</span>
-          <p class="sig">Three machiya suites, next door to Kissa Kishin café.</p>
+          <p class="sig">Three individual machiya suites, next door to Kissa Kishin café.</p>
         </div>
       </a>
 
