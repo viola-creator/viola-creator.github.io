@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
     --cream: #f1e9d8;
@@ -792,6 +793,35 @@
     }
     .site-nav__item.is-open .site-nav__dropdown { opacity: 1; visibility: visible; transform: none; }
     .site-nav__dropdown a .name { font-size: 18px; }
+  }
+
+  /* ============== NAV / DROPDOWN FONT OVERRIDE ============== */
+  .site-nav__link,
+  .site-nav__cta,
+  .site-nav__dropdown-head,
+  .site-nav__dropdown a,
+  .site-nav__dropdown a .name,
+  .site-nav__dropdown a .sub {
+    font-family: 'Montserrat', 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    letter-spacing: 0.14em;
+  }
+  .site-nav__link, .site-nav__cta { white-space: nowrap; }
+  .site-nav__dropdown a .name { letter-spacing: 0.08em; font-weight: 500; text-transform: none; }
+  .site-nav__dropdown-head { font-size: 10px !important; letter-spacing: 0.22em !important; }
+  @media (max-width: 800px) {
+    .site-nav__link,
+    .site-nav__cta,
+    .site-nav__dropdown-head,
+    .site-nav__dropdown a,
+    .site-nav__dropdown a .name,
+    .site-nav__dropdown a .sub {
+      font-size: 10px !important;
+      letter-spacing: 0.1em;
+    }
+    .site-nav__cta { padding: 8px 10px !important; }
+    .site-nav__links { gap: 10px !important; }
+    .site-nav__item .caret { font-size: 7px !important; margin-left: 3px; }
   }
 </style>
 </head>
