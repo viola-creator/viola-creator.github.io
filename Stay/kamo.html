@@ -1086,14 +1086,17 @@
 
   /* ============== NAV DROPDOWN ============== */
   .site-nav__item { position: relative; display: inline-flex; align-items: center; }
-  .site-nav__item .caret { font-size: 7px; margin-left: 4px; opacity: 0.6; transition: transform .25s ease; display: inline-block; }
+  .site-nav__item .caret { font-size: 8px; margin-left: 5px; opacity: 0.7; transition: transform .25s ease; display: inline-block; }
   .site-nav__item.is-open .caret { transform: rotate(180deg); }
   .site-nav__dropdown {
-    position: absolute; top: calc(100% + 14px); left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    min-width: 280px; background: var(--paper, #faf5ea); color: var(--ink, #1a1714);
-    padding: 18px 0; box-shadow: 0 20px 60px rgba(20, 16, 12, 0.18);
-    border: 1px solid rgba(20, 16, 12, 0.06);
+    position: absolute; top: 100%; left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    min-width: 300px;
+    background: var(--ink, #1a1714);
+    color: rgba(245, 240, 235, 0.9);
+    padding: 14px 0;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    border-top: 1px solid rgba(245, 240, 235, 0.08);
     opacity: 0; visibility: hidden;
     transition: opacity .22s ease, transform .22s ease, visibility .22s;
     z-index: 100;
@@ -1107,39 +1110,45 @@
   .site-nav__item.is-open .site-nav__dropdown {
     opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
   }
-  .site-nav__dropdown-head {
-    display: block; font-family: var(--sans, Inter, sans-serif);
-    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--ink-mute, #8b8074); font-weight: 500;
-    padding: 10px 24px 6px; margin-top: 4px;
-  }
-  .site-nav__dropdown-head:first-child { margin-top: 0; }
   .site-nav__dropdown a {
-    display: flex; flex-direction: column; gap: 2px;
-    padding: 10px 24px; color: var(--ink, #1a1714);
+    display: flex; flex-direction: column; gap: 3px;
+    padding: 12px 28px;
+    color: rgba(245, 240, 235, 0.92);
     transition: background .18s, color .18s;
     text-transform: none; letter-spacing: 0;
   }
-  .site-nav__dropdown a:hover { background: var(--cream, #f1e9d8); color: var(--terracotta, #b3744a); }
-  .site-nav__dropdown a .name { font-family: var(--serif, Georgia, serif); font-size: 17px; line-height: 1.2; letter-spacing: 0; }
-  .site-nav__dropdown a .sub { font-family: var(--sans, Inter, sans-serif); font-size: 11px; letter-spacing: 0.08em; color: var(--ink-mute, #8b8074); line-height: 1.3; }
-  .site-nav__dropdown a.is-coming .name { color: var(--ink-mute, #8b8074); font-style: italic; }
+  .site-nav__dropdown a:hover {
+    background: rgba(245, 240, 235, 0.06);
+    color: var(--paper, #faf5ea);
+  }
+  .site-nav__dropdown a .name {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 20px; line-height: 1.2; letter-spacing: 0;
+    color: inherit;
+  }
+  .site-nav__dropdown a .sub {
+    font-family: var(--sans, Inter, sans-serif);
+    font-size: 12px; letter-spacing: 0.08em;
+    color: rgba(245, 240, 235, 0.55);
+    line-height: 1.3;
+  }
+  .site-nav__dropdown a.is-coming .name { color: rgba(245, 240, 235, 0.5); font-style: italic; }
   .site-nav__dropdown a.is-coming { cursor: default; }
-  .site-nav__dropdown a.is-coming:hover { background: transparent; color: var(--ink-mute, #8b8074); }
+  .site-nav__dropdown a.is-coming:hover { background: transparent; color: rgba(245, 240, 235, 0.5); }
   @media (max-width: 800px) {
-    .site-nav__item .caret { font-size: 8px; }
+    .site-nav__item .caret { font-size: 9px; }
     .site-nav__dropdown {
       position: fixed; left: 0; right: 0; top: auto;
       transform: none; min-width: 0;
-      box-shadow: 0 20px 40px rgba(20,16,12,0.3);
-      max-height: 70vh; overflow-y: auto; padding: 14px 0;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      max-height: 70vh; overflow-y: auto; padding: 10px 0;
     }
     .site-nav__item.has-dropdown:hover .site-nav__dropdown,
     .site-nav__item.has-dropdown:focus-within .site-nav__dropdown {
       opacity: 0; visibility: hidden; transform: none;
     }
     .site-nav__item.is-open .site-nav__dropdown { opacity: 1; visibility: visible; transform: none; }
-    .site-nav__dropdown a .name { font-size: 16px; }
+    .site-nav__dropdown a .name { font-size: 18px; }
   }
 </style>
 </head>
@@ -1156,14 +1165,12 @@
         Stay <span class="caret" aria-hidden="true">&#9662;</span>
       </a>
       <div class="site-nav__dropdown">
-        <span class="site-nav__dropdown-head">Our Homes</span>
-        <a href="/Stay/kyoto.html"><span class="name">Maana Kyoto</span><span class="sub">Original machiya &middot; Near Kyoto Station</span></a>
-        <a href="/Stay/kamo.html"><span class="name">Maana Kamo</span><span class="sub">Design-forward &middot; Near Kamogawa</span></a>
-        <span class="site-nav__dropdown-head">Kiyomizu Suites</span>
-        <a href="/Stay/kiyomizu-1.html"><span class="name">Suite 1</span><span class="sub">Studio &middot; Sleeps 2</span></a>
-        <a href="/Stay/kiyomizu-2.html"><span class="name">Suite 2</span><span class="sub">Largest &middot; Sleeps 4</span></a>
-        <a href="/Stay/kiyomizu-3.html"><span class="name">Suite 3</span><span class="sub">Two bedrooms &middot; Sleeps 3</span></a>
-        <a href="#" class="is-coming"><span class="name">Maana Annex</span><span class="sub">Opening Dec 2026</span></a>
+        <a href="/Stay/kyoto.html"><span class="name">Maana Kyoto</span></a>
+        <a href="/Stay/kamo.html"><span class="name">Maana Kamo</span></a>
+        <a href="/Stay/kiyomizu-1.html"><span class="name">Suite 1</span></a>
+        <a href="/Stay/kiyomizu-2.html"><span class="name">Suite 2</span></a>
+        <a href="/Stay/kiyomizu-3.html"><span class="name">Suite 3</span></a>
+        <a href="#" class="is-coming"><span class="name">Maana Annex</span></a>
       </div>
     </div>
     <div class="site-nav__item has-dropdown" data-nav="experiences">
@@ -1171,15 +1178,13 @@
         Experiences <span class="caret" aria-hidden="true">&#9662;</span>
       </a>
       <div class="site-nav__dropdown">
-        <span class="site-nav__dropdown-head">Workshops</span>
-        <a href="/Experiences/tea-dye/"><span class="name">Tea Dye</span><span class="sub">Maana Atelier</span></a>
-        <a href="/Experiences/botanical-teas/"><span class="name">Botanical Teas</span><span class="sub">Maana Atelier</span></a>
-        <a href="/Experiences/earthen-wall/"><span class="name">Earthen Wall</span><span class="sub">Maana Atelier</span></a>
-        <a href="/Experiences/koji-fermentation/"><span class="name">Koji Fermentation</span><span class="sub">Maana Atelier</span></a>
-        <a href="/indigo/"><span class="name">Indigo Dye</span><span class="sub">Maana Atelier &middot; SLOW FABRIC</span></a>
-        <span class="site-nav__dropdown-head">Tea Ceremony</span>
-        <a href="/Experiences/morning-tea/"><span class="name">Morning Tea Ceremony</span><span class="sub">Private Tea House</span></a>
-        <a href="/Experiences/night-tea/"><span class="name">Night Tea Ceremony</span><span class="sub">Private Tea House</span></a>
+        <a href="/Experiences/tea-dye/"><span class="name">Tea Dye</span></a>
+        <a href="/Experiences/botanical-teas/"><span class="name">Botanical Teas</span></a>
+        <a href="/Experiences/earthen-wall/"><span class="name">Earthen Wall</span></a>
+        <a href="/Experiences/koji-fermentation/"><span class="name">Koji Fermentation</span></a>
+        <a href="/indigo/"><span class="name">Indigo Dye</span></a>
+        <a href="/Experiences/morning-tea/"><span class="name">Morning Tea Ceremony</span></a>
+        <a href="/Experiences/night-tea/"><span class="name">Night Tea Ceremony</span></a>
       </div>
     </div>
     <a class="site-nav__link" href="../Shop/index.html">Shop</a>
@@ -1513,28 +1518,28 @@
         <img src="../Experiences/koji-fermentation/images/hero.jpeg" alt="" />
         <div class="workshop-card__cap">
           <span class="name">Koji Fermentation</span>
-          <span class="sub">An afternoon · 2 jars to take home</span>
+          
         </div>
       </a>
       <a class="workshop-card" href="../Experiences/tea-dye/index.html">
         <img src="../Experiences/tea-dye/images/hero.jpeg" alt="" />
         <div class="workshop-card__cap">
           <span class="name">Tea Dye</span>
-          <span class="sub">Hand-dyed bags with natural tea pigments</span>
+          
         </div>
       </a>
       <a class="workshop-card" href="../Experiences/botanical-teas/index.html">
         <img src="../Experiences/botanical-teas/images/hero.jpeg" alt="" />
         <div class="workshop-card__cap">
           <span class="name">Botanical Teas</span>
-          <span class="sub">Blend your own from seasonal Kyoto botanicals</span>
+          
         </div>
       </a>
       <a class="workshop-card" href="../Experiences/earthen-wall/index.html">
         <img src="../Experiences/earthen-wall/images/hero.jpeg" alt="" />
         <div class="workshop-card__cap">
           <span class="name">Earthen Wall</span>
-          <span class="sub">Make a small panel from Kyoto clay</span>
+          
         </div>
       </a>
     </div>
