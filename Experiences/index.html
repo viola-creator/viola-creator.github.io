@@ -791,6 +791,22 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
     .site-nav__links { gap: 10px !important; }
     .site-nav__item .caret { font-size: 7px !important; margin-left: 3px; }
   }
+
+/* Guest reviews and Atelier press */
+.review-banner{background:#f0e7d8;border-bottom:1px solid var(--rule);padding:28px 0}
+.review-banner__inner{display:grid;grid-template-columns:240px minmax(0,1fr) auto;gap:40px;align-items:center}
+.review-banner__rating{font-size:13px}.review-banner__stars{color:var(--terracotta);font-size:18px;letter-spacing:1px}
+.review-banner__count,.review-banner__author{font-style:normal;display:block;font-size:11px;color:var(--ink-mute);margin-top:4px}
+.review-banner blockquote{margin:0}.review-banner__quote{font:400 clamp(21px,2.2vw,28px)/1.25 var(--serif);margin:0}
+.review-banner__dots{display:flex;gap:8px;margin-top:10px}.review-banner__dot{border:0;border-radius:50%;width:7px;height:7px;padding:0;background:var(--rule)}.review-banner__dot[aria-pressed="true"]{background:var(--ink-soft)}
+.review-banner__cta{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;background:var(--terracotta);color:var(--paper);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.atelier-press{padding:clamp(56px,7vw,100px) 0}.atelier-press h2{font-size:clamp(32px,3.8vw,48px);margin-top:12px;margin-bottom:30px}
+.atelier-press__head,.atelier-press__row{display:grid;grid-template-columns:1fr 2.5fr 70px;gap:24px;padding:22px 24px;border-bottom:1px solid var(--rule);align-items:center;font-size:14px}
+.atelier-press__head{background:#f0e7d8;color:var(--ink-mute);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.atelier-press__row:hover,.atelier-press__row:focus-visible{background:var(--cream)}.atelier-press__year{text-align:right}
+@media(max-width:900px){.review-banner__inner{grid-template-columns:1fr 2fr;gap:20px}.review-banner__cta{grid-column:1/-1;justify-self:start}}
+@media(max-width:600px){.review-banner__inner{grid-template-columns:1fr;gap:18px}.review-banner__cta{width:100%}.atelier-press__head{display:none}.atelier-press__row{grid-template-columns:1fr auto;gap:8px;padding:20px 0}.atelier-press__piece{grid-column:1/-1;grid-row:2}.atelier-press__year{grid-column:2;grid-row:1}}
+
 </style>
 </head>
 <body>
@@ -832,6 +848,17 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
     <a class="site-nav__cta" href="../Book/index.html">Book Now</a>
   </div>
 </nav>
+
+<section class="review-banner" aria-label="Maana Atelier guest reviews">
+ <div class="container review-banner__inner">
+  <a class="review-banner__rating" href="https://www.google.com/maps/search/?api=1&amp;query=Maana+Atelier+Kyoto" target="_blank" rel="noopener"><span class="review-banner__stars" aria-label="5 stars">★★★★★</span> 5.0 on Google<span class="review-banner__count">123 reviews of Maana Atelier</span></a>
+  <div class="review-banner__reviews"><blockquote class="review-banner__slide"><p class="review-banner__quote">“One of the most unique experiences I had in Japan.”</p><cite class="review-banner__author">S S, Google review</cite></blockquote>
+<blockquote class="review-banner__slide" hidden><p class="review-banner__quote">“The Botanical Tea Workshop was inspiring.”</p><cite class="review-banner__author">Sherry Chan, Google review</cite></blockquote>
+<blockquote class="review-banner__slide" hidden><p class="review-banner__quote">“One of the highlights of my stay in Kyoto.”</p><cite class="review-banner__author">Laura George, Google review</cite></blockquote><div class="review-banner__dots" aria-label="Choose a guest review"><button type="button" class="review-banner__dot" aria-label="Show review 1" aria-pressed="true"></button><button type="button" class="review-banner__dot" aria-label="Show review 2" aria-pressed="false"></button><button type="button" class="review-banner__dot" aria-label="Show review 3" aria-pressed="false"></button></div></div>
+  <a class="review-banner__cta" href="https://www.maana.jp/experiences/calendar">See the calendar →</a>
+ </div>
+</section>
+
 
 
 <!-- ========== SEASONAL FEATURE ========== -->
@@ -1143,8 +1170,13 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
     <span class="lang-en">Whether you're staying with us or joining for the day, each experience runs at the pace of the season — with a 7-day flexible cancellation.</span>
     <span class="lang-jp">Maana にご宿泊の方も、日帰りでお越しの方も。それぞれの体験は季節のリズムで進みます。開催日の7日前まで柔軟にキャンセル可能です。</span>
   </p>
-  <a class="btn btn--ghost-light" href="#" data-coming="Calendar"><span class="lang-en">See the calendar</span><span class="lang-jp">カレンダーを見る</span> <span class="arrow">→</span></a>
 </section>
+
+<section class="atelier-press" aria-labelledby="atelier-press-title"><div class="container"><span class="eyebrow">In the press</span><h2 id="atelier-press-title">Maana Atelier</h2><div class="atelier-press__head" aria-hidden="true"><span>Outlet</span><span>Piece</span><span class="atelier-press__year">Year</span></div><a class="atelier-press__row" href="https://www.standard.co.uk/lifestyle/travel/best-japan-hotels-wellness-six-senses-kyoto-b1225486.html" target="_blank" rel="noopener"><span>Evening Standard</span><span class="atelier-press__piece">Best hotels in Japan</span><span class="atelier-press__year">2025</span></a>
+<a class="atelier-press__row" href="https://design-anthology.com/story/kyoto-maana-atelier" target="_blank" rel="noopener"><span>Design Anthology</span><span class="atelier-press__piece">Inside Maana Atelier</span><span class="atelier-press__year">2025</span></a>
+<a class="atelier-press__row" href="https://www.thisispaper.com/mag/maana-atelier-sahena-design-maana-homes" target="_blank" rel="noopener"><span>Thisispaper</span><span class="atelier-press__piece">Maana Atelier by Sahena Design for Maana Homes</span><span class="atelier-press__year">2026</span></a>
+<a class="atelier-press__row" href="https://www.imagicasa.be/en/story/a-gateway-to-japanese-craft-and-heritage" target="_blank" rel="noopener"><span>Imagicasa</span><span class="atelier-press__piece">A gateway to Japanese craft and heritage</span><span class="atelier-press__year">2025</span></a>
+<a class="atelier-press__row" href="https://travel-buddies.com/textiles-learn-indigo-dye-from-kyoto/" target="_blank" rel="noopener"><span>Travel Buddies</span><span class="atelier-press__piece">Learn indigo dyeing in Kyoto</span><span class="atelier-press__year">2025</span></a></div></section>
 
 <!-- ========== FOOTER ========== -->
 <footer class="site">
@@ -1156,6 +1188,24 @@ footer.site .ft-rights { font-size: 11px; letter-spacing: 0.16em; text-transform
 </footer>
 
 <script>
+
+/* Rotate existing guest review excerpts, with manual selection and pause. */
+(function(){
+ const banner=document.querySelector('.review-banner');
+ const slides=[...banner.querySelectorAll('.review-banner__slide')];
+ const dots=[...banner.querySelectorAll('.review-banner__dot')];
+ const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+ let current=0, timer;
+ function show(i){current=i;slides.forEach((s,n)=>s.hidden=n!==i);dots.forEach((d,n)=>d.setAttribute('aria-pressed',String(n===i)));}
+ function stop(){clearInterval(timer);}
+ function start(){stop();if(!reduceMotion.matches&&!document.hidden)timer=setInterval(()=>show((current+1)%slides.length),6000);}
+ dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);stop();}));
+ banner.addEventListener('mouseenter',stop);banner.addEventListener('mouseleave',start);
+ banner.addEventListener('focusin',stop);banner.addEventListener('focusout',e=>{if(!banner.contains(e.relatedTarget))start();});
+ document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+ reduceMotion.addEventListener('change',start);start();
+})();
+
 /* Reveal-on-scroll */
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
