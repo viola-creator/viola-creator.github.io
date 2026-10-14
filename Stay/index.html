@@ -250,7 +250,7 @@
   .prop__body, .prop__suites-strip, .prop__suites-panel { position: relative; }
   .prop__cta-row, .prop__suites-strip a, .prop__more a, .prop__suites-panel a { position: relative; z-index: 5; }
   /* Coming-soon card has no full-card link, but still feels like a card */
-  .prop--coming { cursor: default; }
+  .prop--coming { cursor: pointer; }
 
   /* Kiyomizu suite strip — three thumbnails beneath the body so visitors
      see at a glance that there are three individual suites. */
@@ -907,6 +907,7 @@
 
       <!-- ===== MAANA ANNEX — first new-build, opening January 2027 ===== -->
       <article class="prop prop--coming">
+        <a class="prop__link" href="https://www.maana.jp/annex" aria-label="Explore Maana Annex">Explore Maana Annex</a>
         <div class="prop__img-wrap">
           <img class="prop__img" src="images/annex/hero.jpg" alt="Maana Annex, opening January 2027" />
           <span class="prop__status">Opening · January 2027</span>
