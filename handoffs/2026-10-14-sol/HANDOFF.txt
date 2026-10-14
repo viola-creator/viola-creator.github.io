@@ -1,0 +1,75 @@
+MAANA deployment handoff | 14 October 2026
+Design snapshot: 9d553687b8cfbf9b28d90b1cd6bd2ad9c2f65809
+Repository: https://github.com/viola-creator/viola-creator.github.io
+
+SCOPE
+1. Global top navigation.
+2. Stay listing, Kyoto, Kamo, Kiyomizu overview and Suites 1-3.
+3. Cafe page.
+4. Book Now page.
+5. On https://www.maana.jp/experiences ONLY: review banner below the top nav and Atelier press list at the bottom. Global navigation applies here as it does elsewhere.
+
+These are static design references for Sol to port into the production Next.js app. Do not deploy the entire sandbox as the production site.
+
+FILES
+Stay/index.html; Stay/kyoto.html; Stay/kamo.html; Stay/kiyomizu.html; Stay/kiyomizu-1.html; Stay/kiyomizu-2.html; Stay/kiyomizu-3.html; Stay/images/ (tracked, optimized assets).
+Cafe/index.html and Cafe/images/.
+Book/index.html and Book/images/.
+assets/navigation.css: shared compact mobile navigation rules, supplemental to each page's inline navigation styles.
+Logo med.png: shared brand asset.
+handoffs/2026-10-14-sol/navigation-reference.html: desktop dropdown content and link hierarchy.
+handoffs/2026-10-14-sol/experiences-additions.html, experiences-additions.css, review-banner.js: isolated additions for production Experiences. No full-page replacement.
+
+TOP NAV
+Stay dropdown: Kyoto, Kamo, Suites 1-3, Annex.
+Experiences dropdown: existing workshop and tea ceremony destinations.
+Cafe, Shop and Book Now visible as primary destinations. Mobile navigation and dropdown behavior are demonstrated in the mockups.
+Map all sandbox URLs (/Stay/, /Experiences/, /Cafe/, /Shop/, /Book/ and relative .html links) to production routes. Keep existing production workshop destinations. Fix the prototype's /indigo/ case to the real production route. Do not deploy a literal sandbox route map.
+Annex goes to https://www.maana.jp/annex.
+
+STAY
+Listing: smaller property tags, press-logo marquee, whole Annex card clickable, single View action, only New Build in Annex image metadata.
+Annex opening: January 2027.
+Property subnavigation/breadcrumb bar removed.
+Updated property copy and images are authoritative in this snapshot. Kiyomizu suite imagery varies by section, with no cafe exterior photos on Suites 1-3.
+No POJ / Pieces of Japan references on Suites 1-3. Kissa Kishin references replaced by cafe on these pages, the overview, Kyoto and Kamo.
+Keep the compact floating booking shortcut; remove Summer offer / Stay 3, Pay 2.
+Stay CTAs go to https://maanahomes.airhost.co/en in a new tab. The floating shortcut currently scrolls to the local booking section, whose CTA opens Airhost.
+Use existing production route structure where possible, including /kiyomizu/suites/suite-one, suite-two and suite-three. Kiyomizu overview is /kiyomizu; Kyoto and Kamo are /kyoto and /kamo.
+Press logos come from the existing production homepage and link to /press. Motion pauses on hover/focus or with the toggle; reduced-motion setting disables animation.
+
+CAFE
+Magazine-style editorial layout and smaller headline, with subtle reveals, image hover, link movement and reading progress. Respect reduced motion.
+Use existing production /dine or establish /cafe consistently with navigation; /Cafe/ is the sandbox path.
+Copy and photography remain a design draft. Final menu, opening hours and reservation details are still placeholders. Do not infer operational details from the sample copy.
+
+BOOK NOW
+Replace the old date-search prototype with three prominent category cards.
+Stay opens https://maanahomes.airhost.co/en in a NEW TAB.
+Experiences reveals its calendar panel and scrolls to it; URL hash #experiences supports direct entry and back navigation.
+Retreats reveals its panel and scrolls to it; URL hash #retreats supports direct entry and back navigation.
+Stay property cards have More Info only, with no repeated Book Now buttons.
+Experiences shows an EMPTY October 2026 calendar mockup instead of individual classes. Correct Sunday-first grid; month arrows demonstrate navigation. No API, availability or checkout is implemented in this mockup. For a functional production calendar, reuse the existing production calendar integration; do not interpret an empty mockup as zero sessions or real availability.
+Retreat cards: one More Info button each to /retreats/pottery, /retreats/culinary and /retreats/home-design. No email links. Explore retreats goes to https://www.maana.jp/retreats.
+Old Book/availability.html is excluded from this delivery.
+
+EXPERIENCES: ONLY TWO LOCAL CONTENT ADDITIONS
+1. .review-banner: immediately below top nav; Google rating/count, five supplied review excerpts, one quote at a time, dots, See the calendar CTA to https://www.maana.jp/experiences/calendar. Quote rotation every six seconds, paused for hover/focus and reduced motion. Port the behavior into a component with proper cleanup rather than pasting global listeners into React.
+Mockup rating/count are static (5.0 / 123). Confirm current values for launch or source them from the production data source; this package does not implement a Google reviews feed.
+2. .atelier-press: bottom of main content before existing footer; seven fully linked press rows. Preserve outlet, title, year and URL from the extracted HTML.
+CSS depends on brand tokens plus existing .container/.eyebrow typography: map these to production design tokens. Base page cream #FAF5EA; darker cream #F1E9D8; terracotta #B3744A. The banner/press heading background in the Experiences mockup is #F0E7D8.
+Leave the rest of the production Experiences page, individual workshop pages, schedules, checkout and integrations unchanged. Do not copy the full Experiences/index.html, placeholder sections or seasonal content from the sandbox.
+
+EXCLUDED
+Shop redesign, Indigo changes, individual experience/workshop copy/layout changes, the standalone Annex site, UTM tracking, the old availability/date-search mockup, unrelated local work, and the production maana-web repository.
+
+PREVIEWS
+https://viola-creator.github.io/Stay/
+https://viola-creator.github.io/Cafe/
+https://viola-creator.github.io/Book/
+https://viola-creator.github.io/Book/#experiences
+https://viola-creator.github.io/Book/#retreats
+https://viola-creator.github.io/Experiences/ (reference ONLY the review banner and press list)
+
+VALIDATION FOR STAGING
+Review desktop/tablet/mobile navigation and route mapping; property images and copy; Annex full-card link; all Airhost links open a new tab; category scroll/deep links; calendar treatment; retreat detail destinations; review controls; seven press links; reduced-motion behavior. Check mobile layouts and keyboard access. Stage in the existing production branch/PR workflow for review before release.

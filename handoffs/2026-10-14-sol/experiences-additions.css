@@ -1,0 +1,13 @@
+.review-banner{background:#f0e7d8;border-bottom:1px solid var(--rule);padding:28px 0}
+.review-banner__inner{display:grid;grid-template-columns:240px minmax(0,1fr) auto;gap:40px;align-items:center}
+.review-banner__rating{font-size:13px}.review-banner__stars{color:var(--terracotta);font-size:18px;letter-spacing:1px}
+.review-banner__count,.review-banner__author{font-style:normal;display:block;font-size:11px;color:var(--ink-mute);margin-top:4px}
+.review-banner__reviews{min-height:86px}.review-banner blockquote{margin:0}.review-banner__quote{font:400 clamp(21px,2.2vw,28px)/1.25 var(--serif);margin:0}
+.review-banner__dots{display:flex;gap:8px;margin-top:10px}.review-banner__dot{border:0;border-radius:50%;width:7px;height:7px;padding:0;background:var(--rule)}.review-banner__dot[aria-pressed="true"]{background:var(--ink-soft)}
+.review-banner__cta{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;background:var(--terracotta);color:var(--paper);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.atelier-press{padding:clamp(56px,7vw,100px) 0}.atelier-press h2{font-size:clamp(32px,3.8vw,48px);margin-top:12px;margin-bottom:30px}
+.atelier-press__head,.atelier-press__row{display:grid;grid-template-columns:1fr 2.5fr 70px;gap:24px;padding:22px 24px;border-bottom:1px solid var(--rule);align-items:center;font-size:14px}
+.atelier-press__head{background:#f0e7d8;color:var(--ink-mute);font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.atelier-press__row:hover,.atelier-press__row:focus-visible{background:var(--cream)}.atelier-press__year{text-align:right}
+@media(max-width:900px){.review-banner__inner{grid-template-columns:1fr 2fr;gap:20px}.review-banner__cta{grid-column:1/-1;justify-self:start}}
+@media(max-width:600px){.review-banner__inner{grid-template-columns:1fr;gap:18px}.review-banner__cta{width:100%}.atelier-press__head{display:none}.atelier-press__row{grid-template-columns:1fr auto;gap:8px;padding:20px 0}.atelier-press__piece{grid-column:1/-1;grid-row:2}.atelier-press__year{grid-column:2;grid-row:1}}
