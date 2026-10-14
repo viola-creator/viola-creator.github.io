@@ -1,5 +1,6 @@
 MAANA deployment handoff | 14 October 2026
-Design snapshot: 9d553687b8cfbf9b28d90b1cd6bd2ad9c2f65809
+Original page design snapshot: 9d553687b8cfbf9b28d90b1cd6bd2ad9c2f65809
+Mobile navigation update: included in this handoff commit; use the latest handoff package.
 Repository: https://github.com/viola-creator/viola-creator.github.io
 
 SCOPE
@@ -15,7 +16,7 @@ FILES
 Stay/index.html; Stay/kyoto.html; Stay/kamo.html; Stay/kiyomizu.html; Stay/kiyomizu-1.html; Stay/kiyomizu-2.html; Stay/kiyomizu-3.html; Stay/images/ (tracked, optimized assets).
 Cafe/index.html and Cafe/images/.
 Book/index.html and Book/images/.
-assets/navigation.css: shared compact mobile navigation rules, supplemental to each page's inline navigation styles.
+assets/navigation.css + assets/navigation.js: shared mobile hamburger navigation. Script initializes both static nav and asynchronously loaded workshop nav.
 Logo med.png: shared brand asset.
 handoffs/2026-10-14-sol/navigation-reference.html: desktop dropdown content and link hierarchy.
 handoffs/2026-10-14-sol/experiences-additions.html, experiences-additions.css, review-banner.js: isolated additions for production Experiences. No full-page replacement.
@@ -23,7 +24,7 @@ handoffs/2026-10-14-sol/experiences-additions.html, experiences-additions.css, r
 TOP NAV
 Stay dropdown: Kyoto, Kamo, Suites 1-3, Annex.
 Experiences dropdown: existing workshop and tea ceremony destinations.
-Cafe, Shop and Book Now visible as primary destinations. Mobile navigation and dropdown behavior are demonstrated in the mockups.
+Cafe, Shop and Book Now visible as primary destinations. At widths of 800px and below, use a logo plus hamburger; tapping opens a vertical menu with nested Stay/Experiences links. Include overview links in expanded groups, Escape/outside-click closing, accessible button states and keyboard focus. Desktop navigation remains unchanged. Navigation updates on workshop pages are global-nav changes only; individual workshop content remains outside scope.
 Map all sandbox URLs (/Stay/, /Experiences/, /Cafe/, /Shop/, /Book/ and relative .html links) to production routes. Keep existing production workshop destinations. Fix the prototype's /indigo/ case to the real production route. Do not deploy a literal sandbox route map.
 Annex goes to https://www.maana.jp/annex.
 

@@ -1,8 +1,26 @@
-/* Shared compact navigation keeps all primary destinations visible. */
-@media(max-width:600px){
-.site-nav{flex-wrap:wrap!important;justify-content:center!important;gap:16px!important;padding:16px 14px!important;height:auto!important;width:100%!important}
-.site-nav__logo{height:13px!important}.site-nav__logo img{height:100%!important;width:auto!important}
-.site-nav__links{width:100%!important;justify-content:center!important;gap:clamp(9px,2.6vw,16px)!important;flex-wrap:wrap!important}
-.site-nav__link,.site-nav__cta{font-size:9px!important;letter-spacing:.07em!important}.site-nav__cta{padding:9px 11px!important}
-.site-nav__item.has-dropdown{position:static!important}.site-nav__dropdown{left:0!important;right:0!important;top:100%!important;transform:none!important}
+/* Shared hamburger navigation for phone and tablet layouts. */
+.site-nav__menu-toggle{display:none}
+.site-nav .site-nav__dropdown a.site-nav__overview{display:none!important}
+@media(max-width:800px){
+ .site-nav.site-nav--mobile-ready .site-nav__dropdown a.site-nav__overview{display:block!important}
+ .site-nav.site-nav--mobile-ready{position:sticky!important;top:0!important;z-index:100!important;display:flex!important;flex-wrap:nowrap!important;justify-content:space-between!important;align-items:center!important;gap:20px!important;padding:18px 22px!important;height:68px!important;width:100%!important;box-sizing:border-box}
+ .site-nav--mobile-ready .site-nav__logo{height:14px!important}
+ .site-nav--mobile-ready .site-nav__logo img{height:100%!important;width:auto!important}
+ .site-nav__menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;padding:8px;border:0;background:none;color:#faf5ea;cursor:pointer;flex-shrink:0}
+ .site-nav__menu-toggle span{display:block;height:1px;width:24px;background:currentColor;transition:transform .2s,opacity .2s}
+ .is-menu-open .site-nav__menu-toggle span:first-child{transform:translateY(6px) rotate(45deg)}
+ .is-menu-open .site-nav__menu-toggle span:nth-child(2){opacity:0}
+ .is-menu-open .site-nav__menu-toggle span:last-child{transform:translateY(-6px) rotate(-45deg)}
+ .site-nav__menu-toggle:focus-visible{outline:1px solid #faf5ea;outline-offset:2px}
+ .site-nav.site-nav--mobile-ready .site-nav__links{display:none!important;position:absolute!important;top:100%!important;left:0!important;right:0!important;width:auto!important;max-height:calc(100dvh - 68px);overflow-y:auto;overscroll-behavior:contain;background:#1a1714;padding:14px 22px 28px!important;box-sizing:border-box;border-top:1px solid #423b34;box-shadow:0 20px 30px rgba(0,0,0,.16)}
+ .site-nav.site-nav--mobile-ready.is-menu-open .site-nav__links{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important}
+ .site-nav--mobile-ready .site-nav__item{display:block!important;position:static!important;width:100%}
+ .site-nav.site-nav--mobile-ready .site-nav__link{display:flex!important;align-items:center;justify-content:space-between;font-size:14px!important;letter-spacing:.12em!important;padding:17px 0!important;color:#faf5ea!important;border-bottom:1px solid #423b34;text-decoration:none}
+ .site-nav--mobile-ready .site-nav__item .caret{font-size:10px!important}
+ .site-nav.site-nav--mobile-ready .site-nav__dropdown{display:none!important;position:static!important;opacity:0!important;visibility:hidden!important;transform:none!important;min-width:0!important;width:100%!important;max-height:none!important;background:transparent!important;box-shadow:none!important;border:0!important;padding:8px 0 12px 16px!important;box-sizing:border-box}
+ .site-nav.site-nav--mobile-ready .site-nav__item.is-open .site-nav__dropdown{display:block!important;opacity:1!important;visibility:visible!important}
+ .site-nav.site-nav--mobile-ready .site-nav__dropdown a{display:block!important;font-size:13px!important;letter-spacing:.03em!important;padding:11px 0!important}
+ .site-nav.site-nav--mobile-ready .site-nav__dropdown a .name{font-size:13px!important}
+ .site-nav.site-nav--mobile-ready .site-nav__cta{display:block!important;text-align:center;font-size:11px!important;letter-spacing:.14em!important;padding:16px!important;margin-top:22px!important;width:auto!important}
 }
+@media(prefers-reduced-motion:reduce){.site-nav__menu-toggle span{transition:none}}
