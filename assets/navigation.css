@@ -1,0 +1,8 @@
+/* Shared compact navigation keeps all primary destinations visible. */
+@media(max-width:600px){
+.site-nav{flex-wrap:wrap!important;justify-content:center!important;gap:16px!important;padding:16px 14px!important;height:auto!important;width:100%!important}
+.site-nav__logo{height:13px!important}.site-nav__logo img{height:100%!important;width:auto!important}
+.site-nav__links{width:100%!important;justify-content:center!important;gap:clamp(9px,2.6vw,16px)!important;flex-wrap:wrap!important}
+.site-nav__link,.site-nav__cta{font-size:9px!important;letter-spacing:.07em!important}.site-nav__cta{padding:9px 11px!important}
+.site-nav__item.has-dropdown{position:static!important}.site-nav__dropdown{left:0!important;right:0!important;top:100%!important;transform:none!important}
+}
